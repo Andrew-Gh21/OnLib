@@ -1,7 +1,11 @@
-#include <iostream>
+#include <QtWidgets>
+#include "LoginWindow.h"
 
-int main()
+int main(int argc, char* argv[])
 {
+    QApplication app(argc, argv);
 
-	return 0;
+    LoginWindow window;
+
+    return app.exec();
 }
