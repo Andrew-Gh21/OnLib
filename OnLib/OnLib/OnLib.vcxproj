@@ -171,19 +171,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LoginWindow.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="OnLib.cpp" />
-    <ClCompile Include="LoginWindow.cpp" />
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="LoginWindow.h" />
-  </ItemGroup>
-  <ItemGroup>
     <QtMoc Include="MainWindow.h" />
+    <QtMoc Include="LoginWindow.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="LoginWindow.ui" />
     <QtUic Include="MainWindow.ui" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

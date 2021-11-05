@@ -14,4 +14,3 @@ public:
 	User(std::string, std::string);
 	~User()=default;
 };
-

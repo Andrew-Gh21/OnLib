@@ -1,48 +1,21 @@
 #include "LoginWindow.h"
 #include "MainWindow.h"
 
-LoginWindow::LoginWindow(QWidget* parent)
-    : QWidget(parent)
+LoginWindow::LoginWindow(QWidget *parent)
+	: QWidget(parent)
 {
-    username = new QLineEdit;
-    password = new QLineEdit;
-    confirmPassword = new QLineEdit;
-    
-     mainLayout = new QFormLayout;
+	//ui.setupUi(this);
 
-    mainLayout->addRow(tr("&Username:"), username);
-    username->setMaximumWidth(200);
+    window = new QWidget();
+    ui.setupUi(window);
 
-    mainLayout->addRow(tr("&Password:"), password);
-    password->setMaximumWidth(200);
+    ui.confirmPasswordLabel->hide();
+    ui.confirmPassword->hide();
+    ui.backToLoginButton->hide();
 
-
-    mainLayout->addRow(tr("&Confirm Password:"), confirmPassword);
-    confirmPassword->setMaximumWidth(200);
-    confirmPassword->hide();
-    mainLayout->labelForField(confirmPassword)->hide();
-    
-
-    loginButton = new QPushButton("Log in", this);
-    loginButton->setText("Log in");
-    loginButton->setMaximumWidth(200);
-    mainLayout->addWidget(loginButton);
-
-    signupButton = new QPushButton("Sign up", this);
-    signupButton->setText("Sign up");
-    signupButton->setMaximumWidth(200);
-    mainLayout->addWidget(signupButton);
-
-    QWidget* window = new QWidget();
-    mainLayout->setFormAlignment(Qt::AlignCenter);
-    window->setLayout(mainLayout);
-    window->setFixedSize(500, 400);
-    window->setWindowTitle("Online library");
-
-
-    connect(loginButton, &QPushButton::released, this, &LoginWindow::HandleLoginButton);
-    connect(signupButton, &QPushButton::released, this, &LoginWindow::HandleSignUpButton);
-
+    connect(ui.loginButton, &QPushButton::released, this, &LoginWindow::HandleLoginButton);
+    connect(ui.signupButton, &QPushButton::released, this, &LoginWindow::HandleSignUpButton);
+    connect(ui.backToLoginButton, &QPushButton::released, this, &LoginWindow::HandleBackToLoginButton);
 
     window->show();
 }
@@ -51,24 +24,37 @@ void LoginWindow::HandleLoginButton()
 {
     //User user(username->text().toStdString(), password->text().toStdString());
 
-    if (username->text().size()>4 && password->text().size()>4)
+    if (ui.username->text().size() > 4 && ui.password->text().size() > 4)
     {
         MainWindow* mainWindow = new MainWindow;
         mainWindow->show();
+        window->hide();
     }
     else
     {
 
     }
-
-
-
 }
 
 void LoginWindow::HandleSignUpButton()
 {
-    loginButton->hide();
-    confirmPassword->show();
-    mainLayout->labelForField(confirmPassword)->show();
+    ui.loginButton->hide();
+    ui.confirmPassword->show();
+    ui.backToLoginButton->show();
+    ui.mainLayout->labelForField(ui.confirmPassword)->show();
+}
 
+void LoginWindow::HandleBackToLoginButton()
+{
+    ui.confirmPassword->hide();
+    ui.loginButton->show();
+    ui.backToLoginButton->hide();
+    ui.confirmPasswordLabel->hide();
+    ui.username->clear();
+    ui.password->clear();
+    ui.confirmPassword->clear();
+}
+
+LoginWindow::~LoginWindow()
+{
 }

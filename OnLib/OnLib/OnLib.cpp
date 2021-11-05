@@ -8,6 +8,5 @@ int main(int argc, char* argv[])
 
     LoginWindow window;
 
-
     return app.exec();
 }
