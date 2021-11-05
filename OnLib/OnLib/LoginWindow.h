@@ -3,6 +3,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QFormLayout>
+#include "User.h"
 
 class QLineEdit;
 
@@ -16,7 +17,10 @@ private:
 	QLineEdit* confirmPassword;
 	QPushButton* loginButton;
 	QPushButton* signupButton;
+	QFormLayout* mainLayout;
 
 public:
 	LoginWindow(QWidget* parent = nullptr);
+	void HandleLoginButton();
+	void HandleSignUpButton();
 };
