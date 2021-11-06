@@ -1,9 +1,11 @@
 #pragma once
-#include <string>
 #include <iostream>
 #include <sstream>
+#include <string>
+#include <unordered_map>
+#include <mutex>
 
-enum LogSeverity
+enum class LogSeverity
 {
 	Trace,
 	Debug,
@@ -23,11 +25,15 @@ struct LogMessage
 
 class ILogger
 {
-private:
-	static LogSeverity priority;
+protected:
+	LogSeverity priority;
+	std::unordered_map<LogSeverity, std::string> severityToString;
 
 public:
-	virtual void setPriority(LogSeverity newPriority)=0;
+
+	ILogger();
+
+	virtual void setPriority(LogSeverity newPriority) = 0;
 
 	virtual void Log(const LogMessage& msg, LogSeverity sevrity) = 0;
 };
@@ -35,6 +41,6 @@ public:
 template<class T>
 inline LogMessage& operator<<(LogMessage& msg, const T& param)
 {
-	msg.message << param;
+	msg.message << param <<" ";
 	return msg;
 }

@@ -18,9 +18,18 @@
     <ClCompile Include="OnLib.Logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OStreamLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ILogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ILogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OStreamLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
