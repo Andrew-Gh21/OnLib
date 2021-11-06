@@ -9,7 +9,6 @@ LoginWindow::LoginWindow(QWidget* parent)
 {
     ui->setupUi(this);
 
-
     ui->confirmPasswordLabel->hide();
     ui->confirmPasswordLineEdit->hide();
     ui->backToLoginButton->hide();
@@ -24,8 +23,6 @@ LoginWindow::LoginWindow(QWidget* parent)
 
     connect(this, SIGNAL(loginButtonClicked(std::string)), mainWindow, SLOT(loginButtonClicked(std::string)));
     this->show();
-
-
 
 }
 
@@ -64,7 +61,7 @@ void LoginWindow::HandleSignUpButton()
     {
         if (ui->passwordLineEdit->text() == ui->confirmPasswordLineEdit->text())
         {
-            QRegularExpression reg("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
+           /* QRegularExpression reg("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
             QValidator* validator = new QRegularExpressionValidator(reg, this);
             
             if (reg.match(ui->passwordLineEdit->text()).hasMatch())
@@ -72,8 +69,7 @@ void LoginWindow::HandleSignUpButton()
                 mock.AddUser(User(ui->usernameLineEdit->text().toStdString(), ui->passwordLineEdit->text().toStdString()));
                 QMessageBox::information(this, "Register", "Account created succesfully");
                 HandleBackToLoginButton();
-            }
-
+            }*/
         }
         else
         {

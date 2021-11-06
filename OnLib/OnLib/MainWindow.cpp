@@ -1,20 +1,21 @@
 #include "MainWindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent)
-	: QMainWindow(parent),
-	ui(new Ui::MainWindow)
+	: QMainWindow(parent) //, ui(new Ui::MainWindow)
 {
-	ui->setupUi(this);
-	ui->helloLineEdit->setText(QString::fromStdString(username));
+	ui.setupUi(this);
+
+	MainWindow* mainWindow = new MainWindow;
+
+	//connect(ui->searchGenreButton, &QPushButton::released, this, &MainWindow::HandleSearchGenreButton);
+}
+
+void MainWindow::HandleSearchGenreButton()
+{
+    
 }
 
 MainWindow::~MainWindow()
 {
-}
-
-void MainWindow::loginButtonClicked(std::string val)
-{
-	this->username = val;
-	ui->helloLineEdit->setText(QString::fromStdString("Hello "+ username));
-	
 }

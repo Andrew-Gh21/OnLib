@@ -26,9 +26,6 @@
     <ClCompile Include="User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LoginWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -38,12 +35,15 @@
     <ClCompile Include="MockBooksAndUsers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="MainWindow.h">
+    <QtMoc Include="LoginWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="LoginWindow.h">
+    <QtMoc Include="MainWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -59,10 +59,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="MainWindow.ui">
+    <QtUic Include="LoginWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="LoginWindow.ui">
+    <QtUic Include="MainWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
