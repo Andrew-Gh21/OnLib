@@ -1,20 +1,31 @@
 #pragma once
 
-#include <QWidget>
+#include <QMainwindow>
 #include "ui_LoginWindow.h"
+#include"MockBooksAndUsers.h"
+#include"MainWindow.h"
 
-class LoginWindow : public QWidget
+namespace Ui {
+	class LoginWindow;
+}
+
+class LoginWindow : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	LoginWindow(QWidget *parent = Q_NULLPTR);
+	explicit LoginWindow(QWidget *parent = Q_NULLPTR);
 	void HandleLoginButton();
 	void HandleSignUpButton();
 	void HandleBackToLoginButton();
 	~LoginWindow();
 
+
+signals:
+	void loginButtonClicked(std::string val);
+
 private:
-	Ui::LoginWindow ui;
-	QWidget* window;
+	Ui::LoginWindow *ui;
+	MainWindow* mainWindow;
+	MockBooksAndUsers mock;
 };
