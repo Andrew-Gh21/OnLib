@@ -17,6 +17,7 @@ public:
 	explicit LoginWindow(QWidget *parent = Q_NULLPTR);
 	void HandleLoginButton();
 	void HandleSignUpButton();
+	void HandleRegisterButton();
 	void HandleBackToLoginButton();
 	~LoginWindow();
 

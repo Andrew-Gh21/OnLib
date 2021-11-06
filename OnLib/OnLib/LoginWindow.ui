@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>676</width>
+    <width>669</width>
     <height>469</height>
    </rect>
   </property>
@@ -108,6 +108,32 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="registerButton">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>330</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Register now</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelRegisterButton">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>310</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Don't have an accout yet?</string>
+   </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

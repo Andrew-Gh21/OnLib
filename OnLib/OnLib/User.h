@@ -1,5 +1,7 @@
 #pragma once
 #include<string>
+#include"Book.h"
+#include<set>
 class User
 {
 private:
