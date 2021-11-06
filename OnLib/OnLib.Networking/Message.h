@@ -45,6 +45,12 @@ namespace net
 		/// <returns>The message without the extracted data</returns>
 		friend Message& operator >> (Message& message, Data& data);
 	};
+
+	struct OwnedMessage
+	{
+		std::shared_ptr<ClientConnection> remote;
+		Message message;
+	};
 }
 
 std::size_t net::Message::GetSize() const noexcept
@@ -78,7 +84,7 @@ template<typename Data>
 net::Message& net::operator>>(Message& message, Data& data)
 {
 	static_assert(std::is_standard_layout<Data>::value, 
-		"Unable to serialize such complicated class. Please use standard layout classes.");
+		"Unable to deserialize such complicated class. Please use standard layout classes.");
 	 
 	auto dataBegin = message.body.size() - sizeof(Data);
 	std::memcpy(&data, message.body.data() + dataBegin, sizeof(Data));
