@@ -6,7 +6,7 @@ class OStreamLogger : public ILogger
 {
 private:
     std::ostream& stream;
-
+   
 public:
     OStreamLogger(std::ostream& stream);
 

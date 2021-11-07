@@ -1,9 +1,11 @@
 #pragma once
 #include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <mutex>
 #include <sstream>
 #include <string>
 #include <unordered_map>
-#include <mutex>
 
 enum class LogSeverity
 {
@@ -12,7 +14,7 @@ enum class LogSeverity
 	Info,
 	Warn,
 	Error,
-	Crtitical
+	Crititical
 };
 
 struct LogMessage
@@ -20,6 +22,14 @@ struct LogMessage
 	std::stringstream message;
 	template<class T>
 	friend LogMessage& operator << (LogMessage& msg, const T& param);
+	void getTime()
+	{
+		std::time_t currentTime = std::time(0);
+		std::tm* timestamp = std::localtime(&currentTime);
+		char buffer[40];
+		strftime(buffer, 40, "%d/%m/%g %T", timestamp);
+		message << buffer<< " ";
+	}
 };
 
 
@@ -27,6 +37,7 @@ class ILogger
 {
 protected:
 	LogSeverity priority;
+	std::string fileName;
 	std::unordered_map<LogSeverity, std::string> severityToString;
 
 public:
@@ -41,6 +52,6 @@ public:
 template<class T>
 inline LogMessage& operator<<(LogMessage& msg, const T& param)
 {
-	msg.message << param <<" ";
+	msg.message << param;
 	return msg;
 }

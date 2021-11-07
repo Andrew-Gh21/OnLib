@@ -12,5 +12,19 @@ void OStreamLogger::setPriority(LogSeverity newPriority)
 
 void OStreamLogger::Log(const LogMessage& msg, LogSeverity severity)
 {
-	stream << severityToString[severity] << msg.message.str()<<"\n";
+	LogMessage b;
+	b.getTime();
+
+	if (typeid(stream).name() == "St14basic_ofstreamIcSt11char_traitsIcEE")
+	{
+		stream << b.message.str() << std::setw(12) << severityToString[severity] << " :: " << msg.message.str() << "\n\n";
+	}
+	else
+	{
+		static std::mutex logMutex;
+		logMutex.lock();
+		stream << b.message.str() << std::setw(12) << severityToString[severity] << " :: " << msg.message.str() << "\n\n";
+		logMutex.unlock();
+	}
+	
 }

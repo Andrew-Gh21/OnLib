@@ -2,10 +2,12 @@
 
 ILogger::ILogger()
 {
-	severityToString[LogSeverity::Trace] = "[Trace]\t";
-	severityToString[LogSeverity::Debug]= "[Debug]\t";
-	severityToString[LogSeverity::Info]= "[Info]\t";
-	severityToString[LogSeverity::Warn]= "[Warn]\t";
-	severityToString[LogSeverity::Error]= "[Error]\t";
-	severityToString[LogSeverity::Crtitical]= "[Crtitical]\t";
+	severityToString[LogSeverity::Trace] = "[Trace]";
+	severityToString[LogSeverity::Debug]= "[Debug]";
+	severityToString[LogSeverity::Info]= "[Info]";
+	severityToString[LogSeverity::Warn]= "[Warn]";
+	severityToString[LogSeverity::Error]= "[Error]";
+	severityToString[LogSeverity::Crititical]= "[Crititical]";
+
+	fileName = "log.txt";
 }

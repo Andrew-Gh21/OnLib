@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	ui.setupUi(this);
 
-	MainWindow* mainWindow = new MainWindow;
+	//MainWindow* mainWindow = new MainWindow;
 
 	//connect(ui->searchGenreButton, &QPushButton::released, this, &MainWindow::HandleSearchGenreButton);
 }
