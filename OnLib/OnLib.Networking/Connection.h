@@ -1,8 +1,10 @@
 #pragma once
 
+#define ASIO_STANDALONE
+#include "asio.hpp"
+
 #include <memory>
 #include <functional>
-#include "asio.hpp"
 #include "BlockingQueue.h"
 #include "Message.h"
 
