@@ -14,7 +14,7 @@ class LoginWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	explicit LoginWindow(QWidget *parent = Q_NULLPTR);
+	explicit LoginWindow(QWidget* parent = Q_NULLPTR);
 	void HandleLoginButton();
 	void HandleSignUpButton();
 	void HandleRegisterButton();
@@ -26,7 +26,7 @@ signals:
 	void loginButtonClicked(std::string val);
 
 private:
-	Ui::LoginWindow *ui;
+	Ui::LoginWindow* ui;
 	MainWindow* mainWindow;
 	MockBooksAndUsers mock;
 };

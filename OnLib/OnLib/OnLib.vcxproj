@@ -179,8 +179,8 @@
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="LoginWindow.h" />
     <ClInclude Include="Book.h" />
+    <QtMoc Include="LoginWindow.h" />
     <QtMoc Include="MainWindow.h" />
     <ClInclude Include="MockBooksAndUsers.h" />
     <ClInclude Include="User.h" />

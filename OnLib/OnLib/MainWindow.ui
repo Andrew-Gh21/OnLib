@@ -6,145 +6,22 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1025</width>
-    <height>599</height>
+    <width>991</width>
+    <height>557</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QComboBox" name="searchBox">
+   <widget class="QLineEdit" name="helloLineEdit">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>110</y>
-      <width>221</width>
+      <x>220</x>
+      <y>120</y>
+      <width>401</width>
       <height>24</height>
      </rect>
-    </property>
-    <property name="editable">
-     <bool>false</bool>
-    </property>
-    <property name="currentText">
-     <string>SF</string>
-    </property>
-    <item>
-     <property name="text">
-      <string>SF</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Action</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Adventure</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Mystery</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>New Item</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Horror</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>History</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Romance</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Fantasy</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Historical</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Classics</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QLabel" name="labelSearchBox">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>110</y>
-      <width>51</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Genre:</string>
-    </property>
-   </widget>
-   <widget class="QScrollArea" name="scrolBookslArea">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>150</y>
-      <width>921</width>
-      <height>371</height>
-     </rect>
-    </property>
-    <property name="widgetResizable">
-     <bool>true</bool>
-    </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>919</width>
-       <height>369</height>
-      </rect>
-     </property>
-     <widget class="QScrollBar" name="verticalScrollBar">
-      <property name="geometry">
-       <rect>
-        <x>900</x>
-        <y>0</y>
-        <width>16</width>
-        <height>371</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-    </widget>
-   </widget>
-   <widget class="QPushButton" name="searchGenreButton">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>110</y>
-      <width>80</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Search</string>
     </property>
    </widget>
   </widget>
@@ -153,7 +30,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1025</width>
+     <width>991</width>
      <height>25</height>
     </rect>
    </property>
