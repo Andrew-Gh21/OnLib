@@ -19,14 +19,14 @@ namespace net
 		BlockingQueue(const BlockingQueue<T>& other) = delete;
 		virtual ~BlockingQueue() { Clear(); }
 
-		const T& Front() const;
-		const T& Back() const;
+		const T& Front();
+		const T& Back();
 		T PopFront();
 		T PopBack();
 		void PushFront(const T& item);
 		void PushBack(const T& item);
-		bool Empty() const;
-		std::size_t Size() const;
+		bool Empty();
+		std::size_t Size();
 		void Clear();
 		void Wait();
 
@@ -43,14 +43,14 @@ namespace net
 #pragma region Methods implementation
 
 template<typename T>
-inline const T& net::BlockingQueue<T>::Front() const
+inline const T& net::BlockingQueue<T>::Front()
 {
 	std::scoped_lock lock(muxQueue);
 	return deque.front();
 }
 
 template<typename T>
-inline const T& net::BlockingQueue<T>::Back() const
+inline const T& net::BlockingQueue<T>::Back()
 {
 	std::scoped_lock lock(muxQueue);
 	return deque.back();
@@ -97,14 +97,14 @@ inline void net::BlockingQueue<T>::PushBack(const T& item)
 }
 
 template<typename T>
-inline bool net::BlockingQueue<T>::Empty() const
+inline bool net::BlockingQueue<T>::Empty()
 {
 	std::scoped_lock lock(muxQueue);
 	return deque.empty();
 }
 
 template<typename T>
-inline std::size_t net::BlockingQueue<T>::Size() const
+inline std::size_t net::BlockingQueue<T>::Size()
 {
 	std::scoped_lock lock(muxQueue);
 	return deque.size();

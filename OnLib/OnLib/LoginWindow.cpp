@@ -21,7 +21,7 @@ LoginWindow::LoginWindow(QWidget* parent)
     connect(ui->backToLoginButton, &QPushButton::released, this, &LoginWindow::HandleBackToLoginButton);
     connect(ui->registerButton, &QPushButton::released, this, &LoginWindow::HandleRegisterButton);
 
-    connect(this, SIGNAL(loginButtonClicked(std::string)), mainWindow, SLOT(loginButtonClicked(std::string)));
+    //connect(this, SIGNAL(loginButtonClicked(std::string)), mainWindow, SLOT(loginButtonClicked(std::string)));
     this->show();
 
 }
@@ -40,7 +40,7 @@ void LoginWindow::HandleLoginButton()
         {
 
             this->hide();
-            emit loginButtonClicked(ui->usernameLineEdit->text().toStdString());
+            //emit loginButtonClicked(ui->usernameLineEdit->text().toStdString());
             mainWindow->show();
             succesfullyLogin = true;
 
@@ -61,15 +61,15 @@ void LoginWindow::HandleSignUpButton()
     {
         if (ui->passwordLineEdit->text() == ui->confirmPasswordLineEdit->text())
         {
-           /* QRegularExpression reg("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
-            QValidator* validator = new QRegularExpressionValidator(reg, this);
-            
-            if (reg.match(ui->passwordLineEdit->text()).hasMatch())
-            {
-                mock.AddUser(User(ui->usernameLineEdit->text().toStdString(), ui->passwordLineEdit->text().toStdString()));
-                QMessageBox::information(this, "Register", "Account created succesfully");
-                HandleBackToLoginButton();
-            }*/
+            /* QRegularExpression reg("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
+             QValidator* validator = new QRegularExpressionValidator(reg, this);
+
+             if (reg.match(ui->passwordLineEdit->text()).hasMatch())
+             {
+                 mock.AddUser(User(ui->usernameLineEdit->text().toStdString(), ui->passwordLineEdit->text().toStdString()));
+                 QMessageBox::information(this, "Register", "Account created succesfully");
+                 HandleBackToLoginButton();
+             }*/
         }
         else
         {
@@ -89,9 +89,10 @@ void LoginWindow::HandleRegisterButton()
     ui->backToLoginButton->show();
     ui->usernameLineEdit->clear();
     ui->passwordLineEdit->clear();
-    ui->mainLayout->labelForField(ui->confirmPasswordLineEdit)->show();
-    ui->registerButton->hide();  
-    ui->labelRegisterButton->hide();
+    ui->confirmPasswordLineEdit->show();
+    ui->confirmPasswordLabel->show();
+    ui->registerButton->hide();
+    ui->registerButtonLabel->hide();
     ui->signupButton->show();
 }
 
@@ -106,7 +107,7 @@ void LoginWindow::HandleBackToLoginButton()
     ui->confirmPasswordLineEdit->clear();
     ui->signupButton->hide();
     ui->registerButton->show();
-    ui->labelRegisterButton->show();
+    ui->registerButtonLabel->show();
 }
 
 LoginWindow::~LoginWindow()
