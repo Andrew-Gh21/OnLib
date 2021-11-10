@@ -24,12 +24,18 @@
     <ClCompile Include="ILogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MultiLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ILogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OStreamLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

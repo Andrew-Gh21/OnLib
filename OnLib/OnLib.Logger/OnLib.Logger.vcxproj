@@ -20,11 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ILogger.cpp" />
+    <ClCompile Include="MultiLogger.cpp" />
     <ClCompile Include="OnLib.Logger.cpp" />
     <ClCompile Include="OStreamLogger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ILogger.h" />
+    <ClInclude Include="MultiLogger.h" />
     <ClInclude Include="OStreamLogger.h" />
   </ItemGroup>
   <ItemGroup>

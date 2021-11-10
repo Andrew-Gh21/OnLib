@@ -8,6 +8,4 @@ ILogger::ILogger()
 	severityToString[LogSeverity::Warn]= "[Warn]";
 	severityToString[LogSeverity::Error]= "[Error]";
 	severityToString[LogSeverity::Crititical]= "[Crititical]";
-
-	fileName = "log.txt";
 }

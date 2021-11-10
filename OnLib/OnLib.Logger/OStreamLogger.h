@@ -10,7 +10,8 @@ private:
 public:
     OStreamLogger(std::ostream& stream);
 
-    void setPriority(LogSeverity newPriority)override;
+    void SetPriority(LogSeverity newPriority)override;
 
     void Log(const LogMessage& msg, LogSeverity sevrity)override;
+
 };
