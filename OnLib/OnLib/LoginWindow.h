@@ -4,6 +4,7 @@
 #include "ui_LoginWindow.h"
 #include"MockBooksAndUsers.h"
 #include"MainWindow.h"
+#include"User.h"
 
 namespace Ui {
 	class LoginWindow;
@@ -22,7 +23,7 @@ public:
 	~LoginWindow();
 
 signals:
-	void loginButtonClicked(std::string val);
+	void LoginButtonClicked(User user);
 
 private:
 	Ui::LoginWindow* ui;

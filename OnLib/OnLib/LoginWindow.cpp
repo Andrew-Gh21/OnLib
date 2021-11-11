@@ -21,7 +21,7 @@ LoginWindow::LoginWindow(QWidget* parent)
     connect(ui->backToLoginButton, &QPushButton::released, this, &LoginWindow::HandleBackToLoginButton);
     connect(ui->registerButton, &QPushButton::released, this, &LoginWindow::HandleRegisterButton);
 
-    //connect(this, SIGNAL(loginButtonClicked(std::string)), mainWindow, SLOT(loginButtonClicked(std::string)));
+    connect(this, SIGNAL(LoginButtonClicked(User)), mainWindow, SLOT(LoginButtonClicked(User)));
     this->show();
 
 }
@@ -38,9 +38,8 @@ void LoginWindow::HandleLoginButton()
     {
         if (ui->usernameLineEdit->text().toStdString() == it.GetUsername() && ui->passwordLineEdit->text().toStdString() == it.GetPassword())
         {
-
             this->hide();
-            //emit loginButtonClicked(ui->usernameLineEdit->text().toStdString());
+            emit LoginButtonClicked(it);
             mainWindow->showMaximized();
             succesfullyLogin = true;
         }
@@ -66,6 +65,10 @@ void LoginWindow::HandleSignUpButton()
                  QMessageBox::information(this, "Register", "Account created succesfully");
                  HandleBackToLoginButton();
              }*/
+
+            mock.AddUser(User(ui->usernameLineEdit->text().toStdString(), ui->passwordLineEdit->text().toStdString()));
+            QMessageBox::information(this, "Register", "Account created succesfully");
+            HandleBackToLoginButton();
         }
         else
         {
