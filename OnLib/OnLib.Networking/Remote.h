@@ -11,6 +11,8 @@ namespace net
 	/// </summary>
 	class Client
 	{
+	protected:
+		using LogFunction = std::function<void(LogMessageType, const std::string& message)>;
 		using Server = std::unique_ptr<ServerConnection>;
 
 	public:
@@ -28,6 +30,7 @@ namespace net
 		asio::ip::tcp::socket socket;
 		Server connection;
 		BlockingQueue<OwnedMessage> messagesIn;
+		LogFunction log;
 	};
 
 	/// <summary>
@@ -35,6 +38,8 @@ namespace net
 	/// </summary>
 	class Server
 	{
+	protected:
+		using LogFunction = std::function<void(LogMessageType, const std::string& message)>;
 		using Client = std::shared_ptr<ClientConnection>;
 
 	public:
@@ -90,5 +95,6 @@ namespace net
 		std::deque<Client> clients;
 		asio::ip::tcp::acceptor acceptor;
 		uint32_t clientsIdCounter;
+		LogFunction log;
 	};
 }

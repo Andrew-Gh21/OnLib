@@ -34,6 +34,9 @@ namespace net
 		/// <param name="data">Data to be inserted</param>
 		/// <returns>Modified message</returns>
 		friend Message& operator << (Message& message, const Data& data);
+
+		template<typename VectorData>
+		friend Message& operator << (Message& message, const std::vector<VectorData>& data);
 		
 		template<typename Data>
 		/// <summary>
@@ -44,6 +47,9 @@ namespace net
 		/// <param name="data">Extraction destination</param>
 		/// <returns>The message without the extracted data</returns>
 		friend Message& operator >> (Message& message, Data& data);
+
+		template<typename VectorData>
+		friend Message& operator >> (Message& message, std::vector<VectorData>& data);
 	};
 
 	class ClientConnection;
@@ -53,4 +59,65 @@ namespace net
 		std::shared_ptr<ClientConnection> remote;
 		Message message;
 	};
+
+	template<typename Data>
+	Message& operator<<(Message& message, const Data& data)
+	{
+		static_assert(std::is_standard_layout<Data>::value,
+			"Unable to serialize such complicated class. Please use standard layout classes.");
+
+		auto messageInitialSize = message.body.size();
+		message.body.resize(messageInitialSize + sizeof(Data));
+
+		// Insert new data at the end of the vector by copying the bytes in the body
+		std::memcpy(message.body.data() + messageInitialSize, &data, sizeof(Data));
+		message.header.messageSize = message.GetSize();
+
+		return message;
+	}
+
+	template<typename Data>
+	Message& operator>>(Message& message, Data& data)
+	{
+		static_assert(std::is_standard_layout<Data>::value,
+			"Unable to deserialize such complicated class. Please use standard layout classes.");
+
+		auto dataBegin = message.body.size() - sizeof(Data);
+		std::memcpy(&data, message.body.data() + dataBegin, sizeof(Data));
+		message.body.resize(dataBegin);
+
+		message.header.messageSize = message.GetSize();
+		return message;
+	}
+
+	template<typename VectorData>
+	Message& operator<<(Message& message, const std::vector<VectorData>& data)
+	{
+		message << data.data();
+		message << data.size();
+
+		return message;
+	}
+
+	template<typename VectorData>
+	Message& operator>>(Message& message, std::vector<VectorData>& data)
+	{
+		std::size_t size;
+		message >> size;
+
+		VectorData* vecData = new VectorData[size];
+		message >> vecData;
+
+		data = std::vector<VectorData>(vecData, vecData + size);
+		delete[] vecData;
+
+		return message;
+	}
+
+	template<>
+	Message& operator<<(Message& message, const std::string& data);
+
+	template<>
+	Message& operator>>(Message& message, std::string& data);
 }
+

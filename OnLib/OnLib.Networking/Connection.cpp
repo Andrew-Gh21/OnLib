@@ -53,7 +53,7 @@ namespace net
 				}
 				else
 				{
-					asioResult(error, "Could not start read header routine. Connection closed!");
+					log(LogMessageType::Error, "Could not start read header routine. Connection closed!");
 					socket.close();
 				}
 			}
@@ -71,7 +71,7 @@ namespace net
 				}
 				else
 				{
-					asioResult(error, "Could not start read body routine. Connection closed!");
+					log(LogMessageType::Error, "Could not start read body routine. Connection closed!");
 					socket.close();
 				}
 			}
@@ -101,7 +101,7 @@ namespace net
 				}
 				else
 				{
-					asioResult(error, "Could not start write header routine. Connection closed!");
+					log(LogMessageType::Error, "Could not start write header routine. Connection closed!");
 					socket.close();
 				}
 
@@ -124,7 +124,7 @@ namespace net
 				}
 				else
 				{
-					asioResult(error, "Could not start write body routine. Connection closed!");
+					log(LogMessageType::Error, "Could not start write body routine. Connection closed!");
 					socket.close();
 				}
 
@@ -135,8 +135,8 @@ namespace net
 
 #pragma region SERVER Connection implementation
 
-	ServerConnection::ServerConnection(asio::io_context& context, asio::ip::tcp::socket socket, BlockingQueue<OwnedMessage>& in)
-		: Connection(context, std::move(socket), in)
+	ServerConnection::ServerConnection(LogFunction& f, asio::io_context& context, asio::ip::tcp::socket socket, BlockingQueue<OwnedMessage>& in)
+		: Connection(f, context, std::move(socket), in)
 	{
 
 	}
@@ -158,7 +158,7 @@ namespace net
 				}
 				else
 				{
-					asioResult(error, "Could not connect to server!");
+					log(LogMessageType::Error, "Could not connect to server!");
 				}
 			});
 	}
@@ -174,7 +174,7 @@ namespace net
 				}
 				else
 				{
-					asioResult(error, "Could not write validation.");
+					log(LogMessageType::Error, "Could not write validation.");
 					socket.close();
 				}
 			});
@@ -192,7 +192,7 @@ namespace net
 				}
 				else
 				{
-					asioResult(error, "Could not read validation");
+					log(LogMessageType::Error, "Could not read validation");
 					socket.close();
 				}
 			});
@@ -202,8 +202,8 @@ namespace net
 
 #pragma region Client connection implementation
 
-	ClientConnection::ClientConnection(asio::io_context& context, asio::ip::tcp::socket socket, BlockingQueue<OwnedMessage>& in)
-		: Connection(context, std::move(socket), in)
+	ClientConnection::ClientConnection(LogFunction& l, asio::io_context& context, asio::ip::tcp::socket socket, BlockingQueue<OwnedMessage>& in)
+		: Connection(l, context, std::move(socket), in)
 	{
 		handshakeOut = uint64_t(std::chrono::system_clock::now().time_since_epoch().count());
 		handshakeCheck = Hash(handshakeOut);
@@ -233,7 +233,7 @@ namespace net
 				if (error)
 				{
 					socket.close();
-					asioResult(error, "Could not write validation");
+					log(LogMessageType::Error, "Could not write validation");
 				}
 			});
 	}
@@ -247,20 +247,20 @@ namespace net
 				{
 					if (handshakeIn == handshakeCheck)
 					{
-						asioResult(error, "Client validated!");
+						log(LogMessageType::Info, "Client validated!");
 						remote->OnClientValidated(this->shared_from_this());
 
 						ReadHeader();
 					}
 					else
 					{
-						asioResult(error, "Client validation failed");
+						log(LogMessageType::Error, "Client validation failed");
 						socket.close();
 					}
 				}
 				else
 				{
-					asioResult(error, "Could not read validation");
+					log(LogMessageType::Error, "Could not read validation");
 					socket.close();
 				}
 			});

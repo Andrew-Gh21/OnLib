@@ -9,6 +9,7 @@ namespace net
 		try
 		{
 			WaitForConnection();
+			log(LogMessageType::Info, "Server started");
 			runningThread = std::thread([this]() {context.run(); });
 		}
 		catch (std::exception& e)
@@ -87,23 +88,23 @@ namespace net
 				if (!ec)
 				{
 					Client newConnection =
-						std::make_shared<ClientConnection>(context, std::move(socket), messagesIn);
+						std::make_shared<ClientConnection>(log, context, std::move(socket), messagesIn);
 
 					if (OnClientConnect(newConnection))
 					{
 						clients.push_back(std::move(newConnection));
 						clients.back()->ConnectToClient(this, clientsIdCounter++);
 
-						// CONNECTION APPROVED
+						log(LogMessageType::Info, "Client connected!");
 					}
 					else
 					{
-						// CONNECTION DENIED
+						log(LogMessageType::Warning, "Client's connection refused!");
 					}
 				}
 				else
 				{
-					// ERROR
+					log(LogMessageType::Error, "Error on client connection!");
 				}
 
 				WaitForConnection();
@@ -122,7 +123,7 @@ namespace net
 			asio::ip::tcp::resolver resolver(context);
 			asio::ip::tcp::resolver::results_type endpoints = resolver.resolve(host, std::to_string(port));
 
-			connection = std::make_unique<ServerConnection>(context, asio::ip::tcp::socket(context), messagesIn);
+			connection = std::make_unique<ServerConnection>(log, context, asio::ip::tcp::socket(context), messagesIn);
 			connection->ConnectToServer(endpoints);
 			runningThread = std::thread([this]() { context.run(); });
 		}

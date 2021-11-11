@@ -7,6 +7,7 @@
 #include <functional>
 #include "BlockingQueue.h"
 #include "Message.h"
+#include "LogMessageType.h"
 
 namespace net
 {
@@ -17,9 +18,11 @@ namespace net
 	/// </summary>
 	class Connection
 	{
+	protected:
+		using LogFunction = std::function<void(LogMessageType, const std::string& message)>;
 	public:
-		Connection(asio::io_context& context, asio::ip::tcp::socket socket, BlockingQueue<OwnedMessage>& in) :
-			context(context), socket(std::move(socket)), messagesIn(in) {}
+		Connection(LogFunction& f, asio::io_context& context, asio::ip::tcp::socket socket, BlockingQueue<OwnedMessage>& in) :
+			log(f), context(context), socket(std::move(socket)), messagesIn(in) {}
 		virtual ~Connection() {};
 
 		void Disconnect();
@@ -32,7 +35,7 @@ namespace net
 		/// <returns></returns>
 		void Send(const Message& message);
 
-		void SetResultHandler(const std::function<void(std::error_code, const std::string& message)>& handler) { asioResult = handler; }
+		void SetResultHandler(LogFunction& handler) { log = handler; }
 
 	protected:
 		/// <summary>
@@ -70,7 +73,7 @@ namespace net
 		virtual uint64_t Hash(uint64_t input);
 
 	protected:
-		std::function<void(std::error_code, const std::string& message)> asioResult;
+		std::function<void(LogMessageType, const std::string& message)>& log;
 		Message temporary;
 		asio::ip::tcp::socket socket;
 		asio::io_context& context;
@@ -84,7 +87,7 @@ namespace net
 	class ServerConnection : public Connection
 	{
 	public:
-		ServerConnection(asio::io_context& context, asio::ip::tcp::socket socket, BlockingQueue<OwnedMessage>& in);
+		ServerConnection(LogFunction& log, asio::io_context& context, asio::ip::tcp::socket socket, BlockingQueue<OwnedMessage>& in);
 
 		void ConnectToServer(const asio::ip::tcp::resolver::results_type& endpoints);
 
@@ -97,7 +100,7 @@ namespace net
 	class ClientConnection : public Connection, public std::enable_shared_from_this<ClientConnection>
 	{
 	public:
-		ClientConnection(asio::io_context& context, asio::ip::tcp::socket socket, BlockingQueue<OwnedMessage>& in);
+		ClientConnection(LogFunction& log, asio::io_context& context, asio::ip::tcp::socket socket, BlockingQueue<OwnedMessage>& in);
 		void ConnectToClient(Server* remote, uint32_t id);
 
 	protected:
