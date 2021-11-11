@@ -1,0 +1,6 @@
+[submodule "Include/Asio"]
+	path = Include/Asio
+	url = https://github.com/chriskohlhoff/asio.git
+[submodule "Include/SqliteModern"]
+	path = Include/SqliteModern
+	url = https://github.com/SqliteModernCpp/sqlite_modern_cpp.git
