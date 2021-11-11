@@ -3,14 +3,18 @@
 #include <QMainWindow>
 #include "ui_MainWindow.h"
 
+namespace Ui {
+	class LoginWindow;
+}
+
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	MainWindow(QWidget *parent = Q_NULLPTR);
+	explicit MainWindow(QWidget *parent = Q_NULLPTR);
 	~MainWindow();
 
 private:
-	Ui::MainWindow ui;
+	Ui::MainWindow *ui;
 };

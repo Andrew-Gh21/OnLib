@@ -41,18 +41,14 @@ void LoginWindow::HandleLoginButton()
 
             this->hide();
             //emit loginButtonClicked(ui->usernameLineEdit->text().toStdString());
-            mainWindow->show();
+            mainWindow->showMaximized();
             succesfullyLogin = true;
-
-
         }
     }
     if (succesfullyLogin == false)
     {
         QMessageBox::warning(this, "Login", "Username and password doesen't match.");
-
     }
-
 }
 
 void LoginWindow::HandleSignUpButton()

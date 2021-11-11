@@ -21,7 +21,6 @@ public:
 	void HandleBackToLoginButton();
 	~LoginWindow();
 
-
 signals:
 	void loginButtonClicked(std::string val);
 

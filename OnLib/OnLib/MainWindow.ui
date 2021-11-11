@@ -6,31 +6,22 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>991</width>
-    <height>557</height>
+    <width>1130</width>
+    <height>607</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLineEdit" name="helloLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>120</y>
-      <width>401</width>
-      <height>24</height>
-     </rect>
-    </property>
-   </widget>
+   <layout class="QFormLayout" name="formLayout"/>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>991</width>
+     <width>1130</width>
      <height>25</height>
     </rect>
    </property>
@@ -42,8 +33,74 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actiononlibicon"/>
+   <addaction name="actionSearch"/>
+   <addaction name="actionMyList"/>
+   <addaction name="actionBorrowedBooks"/>
+   <addaction name="actionBorrowBook"/>
+   <addaction name="actionReturnBook"/>
+   <addaction name="actionReadBook"/>
+   <addaction name="actionLogOut"/>
+   <addaction name="actionDeleteAccount"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionMyList">
+   <property name="text">
+    <string>My List</string>
+   </property>
+  </action>
+  <action name="actiononlibicon">
+   <property name="icon">
+    <iconset>
+     <normaloff>C:/Users/Nico/Desktop/online-library.png</normaloff>C:/Users/Nico/Desktop/online-library.png</iconset>
+   </property>
+   <property name="text">
+    <string>onlibicon</string>
+   </property>
+   <property name="toolTip">
+    <string>QAction</string>
+   </property>
+  </action>
+  <action name="actionSearch">
+   <property name="icon">
+    <iconset theme="Search"/>
+   </property>
+   <property name="text">
+    <string>Search</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WidgetWithChildrenShortcut</enum>
+   </property>
+  </action>
+  <action name="actionLogOut">
+   <property name="text">
+    <string>Log out</string>
+   </property>
+  </action>
+  <action name="actionDeleteAccount">
+   <property name="text">
+    <string>Delete account</string>
+   </property>
+  </action>
+  <action name="actionBorrowedBooks">
+   <property name="text">
+    <string>Borrowed books</string>
+   </property>
+  </action>
+  <action name="actionBorrowBook">
+   <property name="text">
+    <string>Borrow a book</string>
+   </property>
+  </action>
+  <action name="actionReturnBook">
+   <property name="text">
+    <string>Return book</string>
+   </property>
+  </action>
+  <action name="actionReadBook">
+   <property name="text">
+    <string>Read a book</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
