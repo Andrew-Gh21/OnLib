@@ -10,18 +10,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 	connect(ui->actionLogOut, SIGNAL(triggered()), this, SLOT(HandleLogOutButton()));
 	connect(ui->actionDeleteAccount, SIGNAL(triggered()), this, SLOT(HandleDeleteAccountButton()));
-
 }
 
 void MainWindow::LoginButtonClicked(User user)
 {
 	this->user = user;
-}
-
-
-
-MainWindow::~MainWindow()
-{
 }
 
 void MainWindow::HandleLogOutButton()
@@ -40,7 +33,6 @@ void MainWindow::HandleLogOutButton()
 		window->show();
 		break;
 	}
-
 }
 
 void MainWindow::HandleDeleteAccountButton()
@@ -68,5 +60,9 @@ void MainWindow::HandleDeleteAccountButton()
 			msgBox.exec();
 		}
 	}
+}
 
+MainWindow::~MainWindow()
+{
+	delete ui;
 }

@@ -1,8 +1,8 @@
 #include "LoginWindow.h"
 #include "MainWindow.h"
-#include"User.h"
-#include"MockBooksAndUsers.h"
-#include<QMessageBox>
+#include "User.h"
+#include "MockBooksAndUsers.h"
+#include <QMessageBox>
 
 LoginWindow::LoginWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::LoginWindow)
@@ -23,7 +23,6 @@ LoginWindow::LoginWindow(QWidget* parent)
 
     connect(this, SIGNAL(LoginButtonClicked(User)), mainWindow, SLOT(LoginButtonClicked(User)));
     this->show();
-
 }
 
 void LoginWindow::HandleLoginButton()
