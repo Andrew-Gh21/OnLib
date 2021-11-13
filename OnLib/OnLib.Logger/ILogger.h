@@ -25,7 +25,8 @@ struct LogMessage
 	void GetTime()
 	{
 		std::time_t currentTime = std::time(0);
-		std::tm* timestamp = std::localtime(&currentTime);
+		std::tm* timestamp;
+		localtime_s(timestamp, &currentTime);
 		char buffer[40];
 		strftime(buffer, 40, "%d/%m/%g %T", timestamp);
 		message << buffer<< " ";

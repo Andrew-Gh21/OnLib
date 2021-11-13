@@ -1,20 +1,16 @@
 #include "RemoteServer.h"
 #include <string>
 #include <iostream>
+#include "User.h"
 
 int main()
 {
-	std::string test = "asdasdasdas";
-	std::string out;
-	std::vector<int> vecTest = { 1, 2, 3, 4 };
-	std::vector<int> outVect;
 	net::Message msg;
+	data::User user{ 1,"test", "pass" };
+	data::User result;
 
-	msg << test;
-	msg << vecTest;
-
-	msg >> outVect;
-	msg >> out;
+	user.Serialize(msg);
+	result.Deserialize(msg);
 
 	RemoteServer server(6000);
 	server.Start();
