@@ -172,6 +172,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Book.cpp" />
+    <ClCompile Include="BorrowBook.cpp" />
     <ClCompile Include="LoginWindow.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="MockBooksAndUsers.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="Book.h" />
     <QtMoc Include="LoginWindow.h" />
     <QtMoc Include="MainWindow.h" />
+    <ClInclude Include="BorrowBook.h" />
     <ClInclude Include="MockBooksAndUsers.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />

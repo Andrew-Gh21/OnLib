@@ -12,5 +12,6 @@ public:
 	void AddBook(Book book);
 	MockBooksAndUsers();
 	 std::vector<User> GetUsers();
+	 std::vector<Book> GetBooks();
 };
 

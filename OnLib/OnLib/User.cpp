@@ -20,6 +20,12 @@ void User::SetPassword(std::string password)
 	this->m_password = password;
 }
 
+unsigned int User::GetBorrowLimit()
+{
+	return borrowLimit;
+}
+
 User::User(std::string username, std::string password):m_username(username),m_password(password)
 {
+	borrowLimit = 3;
 }

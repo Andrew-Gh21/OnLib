@@ -3,6 +3,7 @@
 #include <QMainWindow>
 #include "ui_MainWindow.h"
 #include "User.h"
+#include"MockBooksAndUsers.h"
 
 namespace Ui {
 	class LoginWindow;
@@ -21,6 +22,8 @@ private slots:
 	void HandleDeleteAccountButton();
 
 private:
+	void AddBooksToScrollArea();
 	Ui::MainWindow *ui;
+	MockBooksAndUsers mock;
 	User user;
 };
