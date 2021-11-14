@@ -3,6 +3,7 @@
 #include "LoginWindow.h"
 #include "BorrowBook.h"
 #include <QtWidgets>
+#include<QPixmap>
 
 MainWindow::MainWindow(QWidget* parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow)
@@ -42,6 +43,7 @@ void MainWindow::AddBooksToScrollArea()
 	QVBoxLayout* vboxSubComedy;
 	QVBoxLayout* vboxSubRomance;
 	QVBoxLayout* vboxSubDrama;
+
 
 
 	QLabel* label;

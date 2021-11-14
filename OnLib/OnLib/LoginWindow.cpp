@@ -3,6 +3,8 @@
 #include "User.h"
 #include "MockBooksAndUsers.h"
 #include <QMessageBox>
+#include<QRegularExpressionValidator>
+#include <QPixmap>
 
 LoginWindow::LoginWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::LoginWindow)
@@ -23,6 +25,10 @@ LoginWindow::LoginWindow(QWidget* parent)
 
     connect(this, SIGNAL(LoginButtonClicked(User)), mainWindow, SLOT(LoginButtonClicked(User)));
     this->show();
+
+
+    QPixmap pix("../login.png");
+    ui->labelImage->setPixmap(pix);
 }
 
 void LoginWindow::HandleLoginButton()
@@ -51,27 +57,47 @@ void LoginWindow::HandleLoginButton()
 
 void LoginWindow::HandleSignUpButton()
 {
+    bool uniqueUsername = true;
     if (ui->usernameLineEdit->text().size() >= 5 && ui->passwordLineEdit->text().size() >= 5 && ui->confirmPasswordLineEdit->text().size() >= 5)
     {
-        if (ui->passwordLineEdit->text() == ui->confirmPasswordLineEdit->text())
+        for (auto it : mock.GetUsers())
         {
-            /* QRegularExpression reg("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
-             QValidator* validator = new QRegularExpressionValidator(reg, this);
+            if (it.GetUsername() == ui->usernameLineEdit->text().toStdString())
+            {
+                uniqueUsername = false;
+                break;
+            }
+        }
 
-             if (reg.match(ui->passwordLineEdit->text()).hasMatch())
-             {
-                 mock.AddUser(User(ui->usernameLineEdit->text().toStdString(), ui->passwordLineEdit->text().toStdString()));
-                 QMessageBox::information(this, "Register", "Account created succesfully");
-                 HandleBackToLoginButton();
-             }*/
+        if (uniqueUsername == true)
+        {
+            if (ui->passwordLineEdit->text() == ui->confirmPasswordLineEdit->text())
+            {
+                 QRegularExpression reg("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
+                 QValidator* validator = new QRegularExpressionValidator(reg, this);
 
-            mock.AddUser(User(ui->usernameLineEdit->text().toStdString(), ui->passwordLineEdit->text().toStdString()));
-            QMessageBox::information(this, "Register", "Account created succesfully");
-            HandleBackToLoginButton();
+                 if (reg.match(ui->passwordLineEdit->text()).hasMatch())
+                 {
+                     mock.AddUser(User(ui->usernameLineEdit->text().toStdString(), ui->passwordLineEdit->text().toStdString()));
+                     QMessageBox::information(this, "Register", "Account created succesfully");
+                     HandleBackToLoginButton();
+                 }
+                 else
+                 {
+                     QMessageBox::warning(this, "Register", "Password must be min 8 char length, min 1 big letter and 1 number");
+                 }
+
+
+            }
+            else
+            {
+                QMessageBox::warning(this, "Register", "Passwords don't match");
+            }
         }
         else
         {
-            QMessageBox::warning(this, "Register", "Passwords don't match");
+            QMessageBox::warning(this, "Register", "Username already used.");
+
         }
     }
     else
