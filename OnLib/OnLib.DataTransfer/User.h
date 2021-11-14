@@ -10,9 +10,8 @@ namespace data
 		std::string name;
 		std::string password;
 
-		void Serialize(net::Message& msg);
-
-		void Deserialize(net::Message& msg);
+		static void Serialize(net::Message& msg, User user);
+		static void Deserialize(net::Message& msg, User user);
 	};
-}
+};
 

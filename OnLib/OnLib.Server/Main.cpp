@@ -9,8 +9,8 @@ int main()
 	data::User user{ 1,"test", "pass" };
 	data::User result;
 
-	user.Serialize(msg);
-	result.Deserialize(msg);
+	data::User::Serialize(msg,user);
+	data::User::Deserialize(msg, result);
 
 	RemoteServer server(6000);
 	server.Start();

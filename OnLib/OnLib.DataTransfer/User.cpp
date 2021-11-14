@@ -1,11 +1,11 @@
 #include "User.h"
 
-void data::User::Serialize(net::Message& msg)
+void data::User::Serialize(net::Message& msg, User user)
 {
-	msg << id << name << password;
+	msg << user.id << user.name << user.password;
 }
 
-void data::User::Deserialize(net::Message& msg)
+void data::User::Deserialize(net::Message& msg, User user)
 {
-	msg >> password >> name >> id;
+	msg >> user.password >> user.name >> user.id;
 }
