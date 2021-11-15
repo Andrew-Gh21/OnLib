@@ -4,7 +4,8 @@
 #include "ui_LoginWindow.h"
 #include"MockBooksAndUsers.h"
 #include"MainWindow.h"
-#include"User.h"
+
+#include "../OnLib.DataTransfer/User.h"
 
 namespace Ui {
 	class LoginWindow;
@@ -14,6 +15,9 @@ class LoginWindow : public QMainWindow
 {
 	Q_OBJECT
 
+signals:
+	void LoginButtonClicked(data::User user);
+
 public:
 	explicit LoginWindow(QWidget* parent = Q_NULLPTR);
 	void HandleLoginButton();
@@ -21,9 +25,6 @@ public:
 	void HandleRegisterButton();
 	void HandleBackToLoginButton();
 	~LoginWindow();
-
-signals:
-	void LoginButtonClicked(User user);
 
 private:
 	Ui::LoginWindow* ui;

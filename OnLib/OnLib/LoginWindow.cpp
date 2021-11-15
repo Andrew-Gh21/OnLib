@@ -23,7 +23,7 @@ LoginWindow::LoginWindow(QWidget* parent)
     connect(ui->backToLoginButton, &QPushButton::released, this, &LoginWindow::HandleBackToLoginButton);
     connect(ui->registerButton, &QPushButton::released, this, &LoginWindow::HandleRegisterButton);
 
-    connect(this, SIGNAL(LoginButtonClicked(User)), mainWindow, SLOT(LoginButtonClicked(User)));
+    //connect(this, SIGNAL(LoginButtonClicked(User)), mainWindow, SLOT(LoginButtonClicked(User)));
     this->show();
 
 
@@ -38,7 +38,9 @@ void LoginWindow::HandleLoginButton()
     //auto attr_iter = std::find_if(mock.GetUsers().begin(), 
     //    mock.GetUsers().end(), 
     //    std::bind(attributeFinder, ui.usernameLineEdit->text().toStdString()));
-    bool succesfullyLogin = false;
+    emit LoginButtonClicked({0, ui->usernameLineEdit->text().toStdString() , ui->passwordLineEdit->text().toStdString() });
+    return;
+    /*bool succesfullyLogin = false;
     for (auto it : mock.GetUsers())
     {
         if (ui->usernameLineEdit->text().toStdString() == it.GetUsername() && ui->passwordLineEdit->text().toStdString() == it.GetPassword())
@@ -52,7 +54,7 @@ void LoginWindow::HandleLoginButton()
     if (succesfullyLogin == false)
     {
         QMessageBox::warning(this, "Login", "Username and password doesen't match.");
-    }
+    }*/
 }
 
 void LoginWindow::HandleSignUpButton()

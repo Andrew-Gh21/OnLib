@@ -41,6 +41,9 @@
     <ClCompile Include="BorrowBook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RemoteClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User.h">
@@ -67,6 +70,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="MainWindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="RemoteClient.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
