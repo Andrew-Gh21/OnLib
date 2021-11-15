@@ -93,7 +93,14 @@ namespace net
 	template<typename VectorData>
 	Message& operator<<(Message& message, const std::vector<VectorData>& data)
 	{
-		message << data.data();
+		auto vectorByteSize = data.size() * sizeof(VectorData);
+		auto messageInitialSize = message.body.size();
+
+		message.body.resize(messageInitialSize + vectorByteSize);
+
+		std::memcpy(message.body.data() + messageInitialSize, data.data(), vectorByteSize);
+		message.header.messageSize = message.GetSize();
+
 		message << data.size();
 
 		return message;
@@ -102,14 +109,21 @@ namespace net
 	template<typename VectorData>
 	Message& operator>>(Message& message, std::vector<VectorData>& data)
 	{
-		std::size_t size;
-		message >> size;
+		std::size_t vectSize;
+		message >> vectSize;
 
-		VectorData* vecData = new VectorData[size];
-		message >> vecData;
+		auto vectorByteSize = vectSize * sizeof(VectorData);
 
-		data = std::vector<VectorData>(vecData, vecData + size);
-		delete[] vecData;
+		VectorData* buffer = new VectorData[vectSize];
+
+		auto dataBegin = message.body.size() - vectorByteSize;
+		std::memcpy(buffer, message.body.data() + dataBegin, vectorByteSize);
+		message.body.resize(dataBegin);
+
+		message.header.messageSize = message.GetSize();
+
+		data = std::vector<VectorData>(buffer, vectSize);
+		delete[] buffer;
 
 		return message;
 	}

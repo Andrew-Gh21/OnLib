@@ -25,10 +25,9 @@ namespace net
 	{
 		asio::post(context, [this, message]()
 			{
-				messagesOut.PushBack(message);
-
 				// Prevent providing another WriteHeader workload when one is still active
 				bool idle = messagesOut.Empty();
+				messagesOut.PushBack(message);
 				if (idle)
 					WriteHeader();
 			});

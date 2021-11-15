@@ -103,6 +103,8 @@ namespace net
 		ClientConnection(LogFunction& log, asio::io_context& context, asio::ip::tcp::socket socket, BlockingQueue<OwnedMessage>& in);
 		void ConnectToClient(Server* remote, uint32_t id);
 
+		int GetId() const noexcept { return id; }
+
 	protected:
 		void WriteValidation() override;
 		void ReadValidation(Server* remote);

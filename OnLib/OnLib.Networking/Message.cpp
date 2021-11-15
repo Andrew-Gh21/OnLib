@@ -4,7 +4,7 @@ namespace net
 {
 	std::size_t Message::GetSize() const noexcept
 	{
-		return sizeof(MessageHeader) + body.size();
+		return body.size();
 	}
 
 	std::ostream& operator<<(std::ostream& out, const Message& message)
@@ -14,24 +14,43 @@ namespace net
 	}
 
 	template<>
-	Message& operator<<(Message& message, const std::string& data)
+	Message& operator<<(Message& message, const std::string& string)
 	{
-		message << data.c_str();
-		message << data.size();
+		// Push string data
+		auto stringByteSize = string.size() * sizeof(char);
+		auto messageInitialSize = message.body.size();
+
+		message.body.resize(messageInitialSize + stringByteSize);
+
+		std::memcpy(message.body.data() + messageInitialSize, string.data(), stringByteSize);
+		message.header.messageSize = message.GetSize();
+
+		// Push string size
+		message << string.size();
 
 		return message;
 	}
 
 	template<>
-	Message& operator>>(Message& message, std::string& data)
+	Message& operator>>(Message& message, std::string& string)
 	{
-		std::size_t stringSize;
-		message >> stringSize;
+		// Pull string size
+		std::size_t strSize;
+		message >> strSize;
 
-		char* characters = new char[stringSize];
-		message >> characters;
+		// Pull string data
+		auto stringByteSize = strSize * sizeof(char);
 
-		data = std::string(characters, characters + stringSize);
+		char* charBuffer = new char[strSize];
+
+		auto dataBegin = message.body.size() - stringByteSize;
+		std::memcpy(charBuffer, message.body.data() + dataBegin, stringByteSize);
+		message.body.resize(dataBegin);
+
+		message.header.messageSize = message.GetSize();
+		
+		string = std::string(charBuffer, strSize);
+		delete[] charBuffer;
 
 		return message;
 	}
