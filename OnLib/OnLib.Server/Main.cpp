@@ -1,18 +1,17 @@
 #include "RemoteServer.h"
 #include <string>
 #include <iostream>
-#include "User.h"
+#include "OStreamLogger.h"
 
 int main()
 {
-	net::Message msg;
-	data::User user{ 1,"test", "pass" };
-	data::User result;
+	ILogger* logger = new OStreamLogger(std::cout);
+	MultiLogger multiLogger;
+	multiLogger.AddLogger(logger);
 
-	data::User::Serialize(msg,user);
-	data::User::Deserialize(msg, result);
+	sqlite::database db("database.db");
 
-	RemoteServer server(6000);
+	RemoteServer server(6000, multiLogger, db);
 	server.Start();
 
 	while (true)
