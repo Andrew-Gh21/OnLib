@@ -35,5 +35,8 @@
     <ClInclude Include="ServerResponse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Errors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

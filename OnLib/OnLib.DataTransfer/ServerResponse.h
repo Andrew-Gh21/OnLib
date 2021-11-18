@@ -4,5 +4,9 @@
 
 enum class ServerResponse : uint16_t
 {
-	ValidationSuccessfull = 1
+	ValidationSuccessfull = 1,
+	SuccesfullLogin,
+	InvalidLoggin,
+	SuccesfullRegister,
+	InvalidRegister
 };

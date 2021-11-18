@@ -172,6 +172,7 @@
   <ItemGroup>
     <ClInclude Include="Book.h" />
     <ClInclude Include="ClientRequest.h" />
+    <ClInclude Include="Errors.h" />
     <ClInclude Include="ServerResponse.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
