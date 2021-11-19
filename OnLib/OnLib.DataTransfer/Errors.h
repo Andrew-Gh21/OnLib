@@ -13,8 +13,7 @@ namespace data
 	enum class RegisterErrors : uint8_t
 	{
 		UsernameAlreadyExists = 1,
-		UserDoesNotMeetValidationCriteria,
-		PasswordConfirmationDoesNotMatch,
-		PasswordDoesNotMeetValidationCriteria
+		InvalidUsername,
+		InvalidPassword
 	};
 }

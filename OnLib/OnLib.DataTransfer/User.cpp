@@ -12,3 +12,10 @@ data::User data::User::Deserialize(net::Message& msg)
 
 	return u;
 }
+
+bool data::User::operator!=(User user)
+{
+	if (id != user.id)
+		return true;
+	return false;
+}
