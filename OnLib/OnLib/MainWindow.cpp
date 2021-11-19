@@ -44,8 +44,6 @@ void MainWindow::AddBooksToScrollArea()
 	QVBoxLayout* vboxSubRomance;
 	QVBoxLayout* vboxSubDrama;
 
-
-
 	QLabel* label;
 
 	for (auto it : mock.GetBooks())
@@ -61,7 +59,7 @@ void MainWindow::AddBooksToScrollArea()
 			label = new QLabel(QString::fromStdString(it.GetAuthor()));
 			vboxSubSF->addWidget(label);
 			hboxMainSF->addWidget(wgtSubSF);
-			ui->scrollAreaSF->setWidget(wgtMainSF);
+			ui->sfGenreScrollArea->setWidget(wgtMainSF);
 			break;
 		case TypeOfBook::Action:
 			wgtSubAction = new QWidget();
@@ -71,7 +69,7 @@ void MainWindow::AddBooksToScrollArea()
 			label = new QLabel(QString::fromStdString(it.GetAuthor()));
 			vboxSubAction->addWidget(label);
 			hboxMainAction->addWidget(wgtSubAction);
-			ui->scrollAreaAction->setWidget(wgtMainAction);
+			ui->actionGenreScrollArea->setWidget(wgtMainAction);
 			break;
 		case TypeOfBook::Comedy:
 			wgtSubComedy = new QWidget();
@@ -81,7 +79,7 @@ void MainWindow::AddBooksToScrollArea()
 			label = new QLabel(QString::fromStdString(it.GetAuthor()));
 			vboxSubComedy->addWidget(label);
 			hboxMainComedy->addWidget(wgtSubComedy);
-			ui->scrollAreaComedy->setWidget(wgtMainComedy);
+			ui->comedyGenreScrollArea->setWidget(wgtMainComedy);
 			break;
 		case TypeOfBook::Romance:
 			wgtSubRomance = new QWidget();
@@ -91,7 +89,7 @@ void MainWindow::AddBooksToScrollArea()
 			label = new QLabel(QString::fromStdString(it.GetAuthor()));
 			vboxSubRomance->addWidget(label);
 			hboxMainRomance->addWidget(wgtSubRomance);
-			ui->scrollAreaRomance->setWidget(wgtMainRomance);
+			ui->romanceGenreScrollArea->setWidget(wgtMainRomance);
 			break;
 		case TypeOfBook::Drama:
 			wgtSubDrama = new QWidget();
@@ -101,7 +99,7 @@ void MainWindow::AddBooksToScrollArea()
 			label = new QLabel(QString::fromStdString(it.GetAuthor()));
 			vboxSubDrama->addWidget(label);
 			hboxMainDrama->addWidget(wgtSubDrama);
-			ui->scrollAreaDrama->setWidget(wgtMainDrama);
+			ui->dramaGenreScrollArea->setWidget(wgtMainDrama);
 			break;
 		default:
 			break;

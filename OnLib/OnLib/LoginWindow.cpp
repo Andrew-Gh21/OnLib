@@ -16,7 +16,10 @@ LoginWindow::LoginWindow(QWidget* parent)
     ui->backToLoginButton->hide();
     ui->signupButton->hide();
 
+    QGuiApplication::setWindowIcon(QIcon("D/facultate/SMC//Proiect/OnLib/OnLib/online-library.png"));
+
     mainWindow = new MainWindow;
+    mainWindow->showMaximized();
 
     connect(ui->loginButton, &QPushButton::released, this, &LoginWindow::HandleLoginButton);
     connect(ui->signupButton, &QPushButton::released, this, &LoginWindow::HandleSignUpButton);

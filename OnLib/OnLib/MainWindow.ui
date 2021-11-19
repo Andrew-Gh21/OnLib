@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1093</width>
-    <height>642</height>
+    <width>1122</width>
+    <height>609</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,8 +29,40 @@
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
-    <item>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="1" column="0">
+     <spacer name="horizontalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>0</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="1">
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>0</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
        <number>0</number>
@@ -45,275 +77,325 @@
        <attribute name="title">
         <string>Home</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="1" column="2">
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>5</width>
-            <height>5</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="3" column="0" colspan="5">
-         <widget class="QScrollArea" name="scrollArea_2">
-          <property name="layoutDirection">
-           <enum>Qt::LeftToRight</enum>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::NoFrame</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Sunken</enum>
-          </property>
-          <property name="verticalScrollBarPolicy">
-           <enum>Qt::ScrollBarAlwaysOff</enum>
-          </property>
-          <property name="widgetResizable">
-           <bool>false</bool>
-          </property>
-          <widget class="QWidget" name="booksScrollArea">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>1045</width>
-             <height>430</height>
-            </rect>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>1045</width>
-             <height>0</height>
-            </size>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout">
-            <item>
-             <layout class="QGridLayout" name="gridLayout">
-              <property name="sizeConstraint">
-               <enum>QLayout::SetDefaultConstraint</enum>
-              </property>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0" rowspan="2" colspan="2">
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="1" column="0">
+           <widget class="QScrollArea" name="scrollArea_2">
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+            <widget class="QWidget" name="scrollAreaWidgetContents_9">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>1046</width>
+               <height>822</height>
+              </rect>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_4">
               <item row="0" column="0">
-               <widget class="QLabel" name="actionGnereLabel">
-                <property name="text">
-                 <string>Recommended books</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QScrollArea" name="scrollAreaSF">
-                <property name="widgetResizable">
-                 <bool>true</bool>
-                </property>
-                <widget class="QWidget" name="scrollAreaWidgetContents_3">
-                 <property name="geometry">
-                  <rect>
-                   <x>0</x>
-                   <y>0</y>
-                   <width>1019</width>
-                   <height>37</height>
-                  </rect>
-                 </property>
-                </widget>
-               </widget>
-              </item>
-              <item row="5" column="0">
-               <widget class="QLabel" name="label">
-                <property name="text">
-                 <string>Action</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QScrollArea" name="scrollAreaRecommendedBooks">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="widgetResizable">
-                 <bool>true</bool>
-                </property>
-                <widget class="QWidget" name="scrollAreaWidgetContents_2">
-                 <property name="geometry">
-                  <rect>
-                   <x>0</x>
-                   <y>0</y>
-                   <width>1019</width>
-                   <height>37</height>
-                  </rect>
-                 </property>
-                </widget>
-               </widget>
-              </item>
-              <item row="6" column="0">
-               <widget class="QScrollArea" name="scrollAreaAction">
-                <property name="widgetResizable">
-                 <bool>true</bool>
-                </property>
-                <widget class="QWidget" name="scrollAreaWidgetContents_4">
-                 <property name="geometry">
-                  <rect>
-                   <x>0</x>
-                   <y>0</y>
-                   <width>1019</width>
-                   <height>37</height>
-                  </rect>
-                 </property>
-                </widget>
-               </widget>
-              </item>
-              <item row="9" column="0">
-               <widget class="QLabel" name="label_3">
-                <property name="text">
-                 <string>Romance</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="0">
-               <widget class="QLabel" name="label_2">
-                <property name="text">
-                 <string>Comedy</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="sfLabel">
-                <property name="text">
-                 <string>SF</string>
-                </property>
-               </widget>
-              </item>
-              <item row="11" column="0">
-               <widget class="QLabel" name="label_4">
-                <property name="text">
-                 <string>Drama</string>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="0">
-               <widget class="QScrollArea" name="scrollAreaComedy">
-                <property name="widgetResizable">
-                 <bool>true</bool>
-                </property>
-                <widget class="QWidget" name="scrollAreaWidgetContents_5">
-                 <property name="geometry">
-                  <rect>
-                   <x>0</x>
-                   <y>0</y>
-                   <width>1019</width>
-                   <height>37</height>
-                  </rect>
-                 </property>
-                </widget>
-               </widget>
-              </item>
-              <item row="10" column="0">
-               <widget class="QScrollArea" name="scrollAreaRomance">
-                <property name="widgetResizable">
-                 <bool>true</bool>
-                </property>
-                <widget class="QWidget" name="scrollAreaWidgetContents_6">
-                 <property name="geometry">
-                  <rect>
-                   <x>0</x>
-                   <y>0</y>
-                   <width>1019</width>
-                   <height>37</height>
-                  </rect>
-                 </property>
-                </widget>
-               </widget>
-              </item>
-              <item row="12" column="0">
-               <widget class="QScrollArea" name="scrollAreaDrama">
-                <property name="widgetResizable">
-                 <bool>true</bool>
-                </property>
-                <widget class="QWidget" name="scrollAreaWidgetContents_7">
-                 <property name="geometry">
-                  <rect>
-                   <x>0</x>
-                   <y>0</y>
-                   <width>1019</width>
-                   <height>37</height>
-                  </rect>
-                 </property>
-                </widget>
-               </widget>
+               <layout class="QVBoxLayout" name="verticalLayout">
+                <item>
+                 <widget class="QLabel" name="recommendedBooksLabel">
+                  <property name="text">
+                   <string>Recommended books</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="recommendedBoksScrollArea">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>200</height>
+                   </size>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Plain</enum>
+                  </property>
+                  <property name="verticalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAsNeeded</enum>
+                  </property>
+                  <property name="horizontalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAsNeeded</enum>
+                  </property>
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="wgtMainRecommended">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>1020</width>
+                     <height>83</height>
+                    </rect>
+                   </property>
+                  </widget>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="actionGenreLabel">
+                  <property name="text">
+                   <string>Action</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="actionGenreScrollArea">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::StrongFocus</enum>
+                  </property>
+                  <property name="acceptDrops">
+                   <bool>false</bool>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Plain</enum>
+                  </property>
+                  <property name="lineWidth">
+                   <number>1</number>
+                  </property>
+                  <property name="verticalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAsNeeded</enum>
+                  </property>
+                  <property name="horizontalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAsNeeded</enum>
+                  </property>
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="wgtMainAction">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>1020</width>
+                     <height>83</height>
+                    </rect>
+                   </property>
+                  </widget>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="sfGenreLabel">
+                  <property name="text">
+                   <string>SF</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="sfGenreScrollArea">
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Plain</enum>
+                  </property>
+                  <property name="verticalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAsNeeded</enum>
+                  </property>
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="wgtMainnSF">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>1020</width>
+                     <height>83</height>
+                    </rect>
+                   </property>
+                  </widget>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="comedyGnreLabel">
+                  <property name="text">
+                   <string>Comedy</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="comedyGenreScrollArea">
+                  <property name="frameShadow">
+                   <enum>QFrame::Plain</enum>
+                  </property>
+                  <property name="verticalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAsNeeded</enum>
+                  </property>
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="wgtMainComedy">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>1020</width>
+                     <height>83</height>
+                    </rect>
+                   </property>
+                  </widget>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="romanceGenreLabel">
+                  <property name="text">
+                   <string>Romance</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="romanceGenreScrollArea">
+                  <property name="frameShadow">
+                   <enum>QFrame::Plain</enum>
+                  </property>
+                  <property name="verticalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAsNeeded</enum>
+                  </property>
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="wgtMainRomance">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>1020</width>
+                     <height>83</height>
+                    </rect>
+                   </property>
+                  </widget>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="dramaGenreScrollArea_2">
+                  <property name="text">
+                   <string>Drama</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="dramaGenreScrollArea">
+                  <property name="verticalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAsNeeded</enum>
+                  </property>
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="wgtMainDrama">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>1020</width>
+                     <height>83</height>
+                    </rect>
+                   </property>
+                  </widget>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label">
+                  <property name="text">
+                   <string>TextLabel</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="scrollArea_3">
+                  <property name="verticalScrollBarPolicy">
+                   <enum>Qt::ScrollBarAsNeeded</enum>
+                  </property>
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="scrollAreaWidgetContents_3">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>1020</width>
+                     <height>83</height>
+                    </rect>
+                   </property>
+                  </widget>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
+            </widget>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="gridLayout_6">
+            <item row="0" column="0">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>400</width>
+                <height>22</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="searchLineEdit"/>
+            </item>
+            <item row="0" column="2">
+             <widget class="QPushButton" name="searchBooksButton">
+              <property name="text">
+               <string>Search</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Expanding</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>300</width>
+                <height>22</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
-          </widget>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QLineEdit" name="searchLineEdit"/>
-        </item>
-        <item row="0" column="4">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="3">
-         <widget class="QPushButton" name="searchBooksButton">
-          <property name="text">
-           <string>Search</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="searchLabel">
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2">
-         <spacer name="verticalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>0</height>
-           </size>
-          </property>
-         </spacer>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -326,8 +408,8 @@
          <rect>
           <x>-1</x>
           <y>-6</y>
-          <width>1071</width>
-          <height>481</height>
+          <width>1081</width>
+          <height>561</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -350,10 +432,11 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>1069</width>
-           <height>479</height>
+           <width>1079</width>
+           <height>559</height>
           </rect>
          </property>
+         <layout class="QGridLayout" name="gridLayout_5"/>
         </widget>
        </widget>
       </widget>
@@ -398,7 +481,7 @@
   <action name="actionLibraryIcon">
    <property name="icon">
     <iconset>
-     <normaloff>C:/Users/Nico/Desktop/online-library.png</normaloff>C:/Users/Nico/Desktop/online-library.png</iconset>
+     <normaloff>../online-library.png</normaloff>../online-library.png</iconset>
    </property>
    <property name="text">
     <string>Online library</string>
