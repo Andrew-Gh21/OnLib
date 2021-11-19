@@ -11,7 +11,7 @@ namespace net
 	/// </summary>
 	class Client
 	{
-	protected:
+	public:
 		using LogFunction = std::function<void(LogMessageType, const std::string& message)>;
 		using Server = std::unique_ptr<ServerConnection>;
 
@@ -38,7 +38,7 @@ namespace net
 	/// </summary>
 	class Server
 	{
-	protected:
+	public:
 		using LogFunction = std::function<void(LogMessageType, const std::string& message)>;
 		using Client = std::shared_ptr<ClientConnection>;
 

@@ -15,5 +15,7 @@ namespace data
 
 		static void Serialize(net::Message& msg, User user);
 		static User Deserialize(net::Message& msg);
+
+		bool operator!=(User user);
 	};
 };

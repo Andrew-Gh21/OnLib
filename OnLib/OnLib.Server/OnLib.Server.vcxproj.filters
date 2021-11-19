@@ -21,9 +21,15 @@
     <ClCompile Include="RemoteServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AccountsManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RemoteServer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountsManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
