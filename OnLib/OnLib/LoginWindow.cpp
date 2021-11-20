@@ -11,6 +11,10 @@ LoginWindow::LoginWindow(QWidget* parent)
 {
     ui->setupUi(this);
 
+    QIcon icon("../online-library.png");
+    LoginWindow::setWindowIcon(icon);
+    LoginWindow::setWindowTitle("Online library - Account");
+
     ui->confirmPasswordLabel->hide();
     ui->confirmPasswordLineEdit->hide();
     ui->backToLoginButton->hide();

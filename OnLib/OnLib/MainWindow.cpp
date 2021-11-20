@@ -10,15 +10,20 @@ MainWindow::MainWindow(QWidget* parent)
 {
 	ui->setupUi(this);
 
+	QIcon icon("../online-library.png");
+	MainWindow::setWindowIcon(icon);
+	MainWindow::setWindowTitle("Online library");
+
 	ui->searchBooksButton->hide();
 	ui->searchLineEdit->hide();
+	ui->backToMenuButton->hide();
+	ui->searchBooksScrollArea->hide();
 
 	connect(ui->actionLogOut, SIGNAL(triggered()), this, SLOT(HandleLogOutButton()));
 	connect(ui->actionDeleteAccount, SIGNAL(triggered()), this, SLOT(HandleDeleteAccountButton()));
+	connect(ui->actionSearchIcon, SIGNAL(triggered()), this, SLOT(HandleSearchIconButton()));
 
 	//BorrowBook bb(User user(), Book book);
-
-	connect(ui->actionSearchIcon, SIGNAL(triggered()), this, SLOT(HandleSearchIconButton()));
 
 	AddBooksToScrollArea();
 }
@@ -164,8 +169,30 @@ void MainWindow::HandleDeleteAccountButton()
 
 void MainWindow::HandleSearchIconButton()
 {
+	ui->backToMenuButton->show();
 	ui->searchLineEdit->show();
 	ui->searchBooksButton->show();
+
+	ui->recommendedBooksScrollArea->hide();
+	ui->recommendedBooksLabel->hide();
+
+	ui->actionGenreScrollArea->hide();
+	ui->actionGenreLabel->hide();
+
+	ui->sfGenreScrollArea->hide();
+	ui->sfGenreLabel->hide();
+
+	ui->comedyGenreScrollArea->hide();
+	ui->comedyGenreLabel->hide();
+
+	ui->romanceGenreScrollArea->hide();
+	ui->romanceGenreLabel->hide();
+
+	ui->dramaGenreScrollArea->hide();
+	ui->dramaGenreLabel->hide();
+
+	ui->searchBooksScrollArea->show();
+	ui->actionSearchIcon->setVisible(false);
 }
 
 MainWindow::~MainWindow()

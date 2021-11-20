@@ -22,6 +22,7 @@ private slots:
 	void HandleDeleteAccountButton();
 	void HandleSearchIconButton();
 
+
 private:
 	void AddBooksToScrollArea();
 	Ui::MainWindow *ui;
