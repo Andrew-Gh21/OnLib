@@ -10,10 +10,15 @@ MainWindow::MainWindow(QWidget* parent)
 {
 	ui->setupUi(this);
 
+	ui->searchBooksButton->hide();
+	ui->searchLineEdit->hide();
+
 	connect(ui->actionLogOut, SIGNAL(triggered()), this, SLOT(HandleLogOutButton()));
 	connect(ui->actionDeleteAccount, SIGNAL(triggered()), this, SLOT(HandleDeleteAccountButton()));
 
 	//BorrowBook bb(User user(), Book book);
+
+	connect(ui->actionSearchIcon, SIGNAL(triggered()), this, SLOT(HandleSearchIconButton()));
 
 	AddBooksToScrollArea();
 }
@@ -155,6 +160,12 @@ void MainWindow::HandleDeleteAccountButton()
 			msgBox.exec();
 		}
 	}
+}
+
+void MainWindow::HandleSearchIconButton()
+{
+	ui->searchLineEdit->show();
+	ui->searchBooksButton->show();
 }
 
 MainWindow::~MainWindow()

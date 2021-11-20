@@ -20,6 +20,7 @@ private slots:
 	void LoginButtonClicked(User user);
 	void HandleLogOutButton();
 	void HandleDeleteAccountButton();
+	void HandleSearchIconButton();
 
 private:
 	void AddBooksToScrollArea();
