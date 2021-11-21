@@ -1,7 +1,6 @@
 #include "MainWindow.h"
 #include<iostream>
 #include "LoginWindow.h"
-#include "BorrowBook.h"
 #include <QtWidgets>
 #include<QPixmap>
 #include "Book.h"
@@ -24,6 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
 	connect(ui->actionLogOut, SIGNAL(triggered()), this, SLOT(HandleLogOutButton()));
 	connect(ui->actionDeleteAccount, SIGNAL(triggered()), this, SLOT(HandleDeleteAccountButton()));
 	connect(ui->actionSearchIcon, SIGNAL(triggered()), this, SLOT(HandleSearchIconButton()));
+	connect(ui->searchBooksButton, &QPushButton::released, this, [=]() { HandleSearchBooksButton(ui->searchLineEdit->text().toStdString()); });
 
 	//BorrowBook bb(User user(), Book book);
 
@@ -207,6 +207,31 @@ void MainWindow::HandleAddToMyListButton(Book book)
 
 }
 
+void MainWindow::HandleReturnBookButton(Book book)
+{
+	//QMessageBox msgBox;
+	//msgBox.setWindowTitle("Return book confirmation");
+	//msgBox.setText(QString::fromStdString("Hello, " + user.GetUsername() + ", are you sure you want to return " + book.GetName())+"?");
+	//msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+	//msgBox.setDefaultButton(QMessageBox::No);
+
+	//int result = msgBox.exec();
+	//switch (result) {
+	//case QMessageBox::Yes:
+	//	for (auto it : user.GetBorrowedBooks())
+	//	{
+	//		if (it.GetBook().GetName() == book.GetName() && it.GetBook().GetAuthor() == book.GetAuthor())
+	//		{
+	//			user.RemoveBorrowedBook(book);
+	//			user.IncrementBorrowLimit();
+	//			break;
+	//		}
+	//	}
+	//	break;
+	//}
+
+}
+
 void MainWindow::LoginButtonClicked(User user)
 {
 	this->user = user;
@@ -283,6 +308,14 @@ void MainWindow::HandleSearchIconButton()
 
 	ui->searchBooksScrollArea->show();
 	ui->actionSearchIcon->setVisible(false);
+}
+
+void MainWindow::HandleSearchBooksButton(std::string s)
+{
+	QMessageBox msgBox;
+	msgBox.setWindowTitle("Search");
+	msgBox.setText(QString::fromStdString("You searched "+s));
+	msgBox.exec();
 }
 
 MainWindow::~MainWindow()

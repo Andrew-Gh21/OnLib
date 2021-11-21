@@ -23,6 +23,8 @@ private slots:
 	void HandleLogOutButton();
 	void HandleDeleteAccountButton();
 	void HandleSearchIconButton();
+	void HandleSearchBooksButton(std::string s);
+	void HandleReturnBookButton(Book book);
 
 
 private:

@@ -20,10 +20,10 @@ public:
 	void SetDescription(std::string description);
 	void SetAuthor(std::string author);
 	void SetType(TypeOfBook type);
-	TypeOfBook GetType();
-	std::string GetName();
-	std::string GetAuthor();
-	std::string GetDescription();
+	TypeOfBook GetType()const;
+	std::string GetName() const;
+	std::string GetAuthor()const;
+	std::string GetDescription()const;
 	Book() = default;
 	Book(std::string, std::string, std::string,TypeOfBook);
 	~Book() = default;

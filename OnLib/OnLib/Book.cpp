@@ -20,22 +20,22 @@ void Book::SetType(TypeOfBook type)
 	this->type = type;
 }
 
-TypeOfBook Book::GetType()
+TypeOfBook Book::GetType() const
 {
 	return type;
 }
 
-std::string Book::GetName()
+std::string Book::GetName() const
 {
 	return m_name;
 }
 
-std::string Book::GetAuthor()
+std::string Book::GetAuthor() const
 {
 	return m_author;
 }
 
-std::string Book::GetDescription()
+std::string Book::GetDescription() const
 {
 	return m_description;
 }

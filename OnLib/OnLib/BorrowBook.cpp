@@ -1,5 +1,6 @@
 #include "BorrowBook.h"
 
+
 BorrowBook::BorrowBook(User user, Book book):book(book),user(user)
 {
 	//time_t now = time(0);

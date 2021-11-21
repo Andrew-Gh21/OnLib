@@ -25,6 +25,11 @@ void User::DecrementBorrowLimit()
 	borrowLimit--;
 }
 
+void User::IncrementBorrowLimit()
+{
+	borrowLimit++;
+}
+
 unsigned int User::GetBorrowLimit()
 {
 	return borrowLimit;

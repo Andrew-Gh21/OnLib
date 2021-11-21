@@ -32,7 +32,11 @@ MockBooksAndUsers::MockBooksAndUsers()
     books.push_back(Book("name5", "author5", "desc5",TypeOfBook::Romance));
     books.push_back(Book("name6", "author6", "desc6",TypeOfBook::SF));
     books.push_back(Book("name7", "author7", "desc7",TypeOfBook::SF));
-    books.push_back(Book("name8", "author8", "desc8",TypeOfBook::Action));
+    books.push_back(Book("name8", "author8", "desc8",TypeOfBook::SF));
+    books.push_back(Book("name9", "author9", "desc9",TypeOfBook::Action));
+    books.push_back(Book("name10", "author10", "desc10",TypeOfBook::Action));
+    books.push_back(Book("name11", "author11", "desc11",TypeOfBook::Action));
+    books.push_back(Book("name12", "author12", "desc12",TypeOfBook::Action));
 }
 
 

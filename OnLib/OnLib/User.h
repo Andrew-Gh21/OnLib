@@ -16,6 +16,7 @@ public:
 	void SetUsername(std::string username);
 	void SetPassword(std::string password);
 	void DecrementBorrowLimit();
+	void IncrementBorrowLimit();
 	unsigned int GetBorrowLimit();
 	User()=default;
 	User(std::string, std::string);
