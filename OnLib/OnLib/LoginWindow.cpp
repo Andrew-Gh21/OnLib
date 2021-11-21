@@ -34,6 +34,10 @@ LoginWindow::LoginWindow(QWidget* parent)
 
     QPixmap pix("../login.png");
     ui->labelImage->setPixmap(pix);
+
+
+
+
 }
 
 void LoginWindow::HandleLoginButton()

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>991</width>
+    <width>987</width>
     <height>609</height>
    </rect>
   </property>
@@ -30,22 +30,6 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="1" column="0">
-     <spacer name="horizontalSpacer_4">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Fixed</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>0</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
     <item row="1" column="1">
      <spacer name="horizontalSpacer_3">
       <property name="orientation">
@@ -62,7 +46,23 @@
       </property>
      </spacer>
     </item>
-    <item row="0" column="0">
+    <item row="1" column="0">
+     <spacer name="horizontalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>0</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="0" column="2">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
        <number>0</number>
@@ -92,9 +92,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-393</y>
-               <width>917</width>
-               <height>799</height>
+               <y>-1029</y>
+               <width>914</width>
+               <height>1459</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_4">
@@ -117,6 +117,12 @@
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>200</height>
+                   </size>
                   </property>
                   <property name="maximumSize">
                    <size>
@@ -144,8 +150,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>891</width>
-                     <height>83</height>
+                     <width>892</width>
+                     <height>198</height>
                     </rect>
                    </property>
                   </widget>
@@ -162,6 +168,12 @@
                  <widget class="QScrollArea" name="actionGenreScrollArea">
                   <property name="enabled">
                    <bool>true</bool>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>200</height>
+                   </size>
                   </property>
                   <property name="focusPolicy">
                    <enum>Qt::StrongFocus</enum>
@@ -192,8 +204,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>891</width>
-                     <height>83</height>
+                     <width>892</width>
+                     <height>198</height>
                     </rect>
                    </property>
                   </widget>
@@ -208,6 +220,12 @@
                 </item>
                 <item>
                  <widget class="QScrollArea" name="sfGenreScrollArea">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>200</height>
+                   </size>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::StyledPanel</enum>
                   </property>
@@ -225,8 +243,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>891</width>
-                     <height>83</height>
+                     <width>892</width>
+                     <height>198</height>
                     </rect>
                    </property>
                   </widget>
@@ -241,6 +259,12 @@
                 </item>
                 <item>
                  <widget class="QScrollArea" name="comedyGenreScrollArea">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>200</height>
+                   </size>
+                  </property>
                   <property name="frameShadow">
                    <enum>QFrame::Plain</enum>
                   </property>
@@ -255,8 +279,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>891</width>
-                     <height>83</height>
+                     <width>892</width>
+                     <height>198</height>
                     </rect>
                    </property>
                   </widget>
@@ -271,6 +295,12 @@
                 </item>
                 <item>
                  <widget class="QScrollArea" name="romanceGenreScrollArea">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>200</height>
+                   </size>
+                  </property>
                   <property name="frameShadow">
                    <enum>QFrame::Plain</enum>
                   </property>
@@ -285,8 +315,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>891</width>
-                     <height>83</height>
+                     <width>892</width>
+                     <height>198</height>
                     </rect>
                    </property>
                   </widget>
@@ -301,6 +331,12 @@
                 </item>
                 <item>
                  <widget class="QScrollArea" name="dramaGenreScrollArea">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>200</height>
+                   </size>
+                  </property>
                   <property name="verticalScrollBarPolicy">
                    <enum>Qt::ScrollBarAsNeeded</enum>
                   </property>
@@ -312,8 +348,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>891</width>
-                     <height>83</height>
+                     <width>892</width>
+                     <height>198</height>
                     </rect>
                    </property>
                   </widget>
@@ -332,8 +368,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>891</width>
-                     <height>83</height>
+                     <width>892</width>
+                     <height>69</height>
                     </rect>
                    </property>
                   </widget>

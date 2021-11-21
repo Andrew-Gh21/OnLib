@@ -4,6 +4,7 @@
 #include "ui_MainWindow.h"
 #include "User.h"
 #include"MockBooksAndUsers.h"
+#include "Book.h"
 
 namespace Ui {
 	class LoginWindow;
@@ -17,6 +18,7 @@ public:
 	explicit MainWindow(QWidget *parent = Q_NULLPTR);
 	~MainWindow();
 private slots:
+	void HandleAddToMyListButton(Book book);
 	void LoginButtonClicked(User user);
 	void HandleLogOutButton();
 	void HandleDeleteAccountButton();
