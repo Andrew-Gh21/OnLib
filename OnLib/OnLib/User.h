@@ -3,6 +3,7 @@
 #include"Book.h"
 #include<set>
 #include<cstdint>
+#include<vector>
 class User
 {
 private:
@@ -14,6 +15,7 @@ public:
 	std::string GetPassword();
 	void SetUsername(std::string username);
 	void SetPassword(std::string password);
+	void DecrementBorrowLimit();
 	unsigned int GetBorrowLimit();
 	User()=default;
 	User(std::string, std::string);
