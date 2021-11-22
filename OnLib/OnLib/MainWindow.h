@@ -30,6 +30,7 @@ private slots:
 
 private:
 	void AddBooksToScrollArea();
+	void AddBooksToMyList();
 	Ui::MainWindow *ui;
 	MockBooksAndUsers mock;
 	User user;

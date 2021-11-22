@@ -1,7 +1,7 @@
 #include "BorrowBook.h"
 
 
-BorrowBook::BorrowBook(User user, Book book):book(book),user(user)
+BorrowBook::BorrowBook(Book book):book(book)
 {
 	//time_t now = time(0);
 	//borrowDate = gmtime(&now);
@@ -10,10 +10,6 @@ BorrowBook::BorrowBook(User user, Book book):book(book),user(user)
 	//returnDate->tm_mday += 14;
 }
 
-void BorrowBook::SetUser(User user)
-{
-	this->user = user;
-}
 
 void BorrowBook::SetBook(Book book)
 {
@@ -23,11 +19,6 @@ void BorrowBook::SetBook(Book book)
 void BorrowBook::SetReturnDate(tm* time)
 {
 	returnDate = time;
-}
-
-User BorrowBook::GetUser()
-{
-	return user;
 }
 
 Book BorrowBook::GetBook()

@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget* parent)
 {
 	ui->setupUi(this);
 
-	QIcon icon("../online-library.png");
+	QIcon icon("Images/online-library.png");
 	MainWindow::setWindowIcon(icon);
 	MainWindow::setWindowTitle("Online library");
 
@@ -29,7 +29,13 @@ MainWindow::MainWindow(QWidget* parent)
 	//BorrowBook bb(User user(), Book book);
 
 	AddBooksToScrollArea();
+
+
+
+	
 }
+
+
 
 void MainWindow::AddBooksToScrollArea()
 {
@@ -58,7 +64,7 @@ void MainWindow::AddBooksToScrollArea()
 	QVBoxLayout* vboxSubDrama;
 
 	QPushButton* button;
-	QPixmap pix("../defaultImage.png");
+	QPixmap pix("Images/defaultImage.png");
 
 	QLabel* label;
 
@@ -168,14 +174,50 @@ void MainWindow::AddBooksToScrollArea()
 	}
 }
 
+void MainWindow::AddBooksToMyList()
+{
+
+	QWidget* wgtMainMyList = new QWidget();
+	QHBoxLayout* hboxMainMyList = new QHBoxLayout(wgtMainMyList);
+	QWidget* wgtSubMyList;
+	QVBoxLayout* vboxSubMyList;
+	QPushButton* button;
+	QPixmap pix("Images/defaultImage.png");
+	QLabel* label;
+
+	for (auto it : user.GetBorrowedBooks())
+	{
+			wgtSubMyList = new QWidget();
+			vboxSubMyList = new QVBoxLayout(wgtSubMyList);
+			label = new QLabel();
+			label->setMaximumHeight(100);
+			label->setPixmap(pix.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+			vboxSubMyList->addWidget(label);
+			label = new QLabel(QString::fromStdString(it.GetBook().GetName()));
+			vboxSubMyList->addWidget(label);
+			label = new QLabel(QString::fromStdString(it.GetBook().GetAuthor()));
+			vboxSubMyList->addWidget(label);
+			button = new QPushButton(this);
+			button->setText("Return book");
+			Book bk = it.GetBook();
+			connect(button, &QPushButton::released, this, [=]() { HandleReturnBookButton(bk); });
+			vboxSubMyList->addWidget(button);
+			button->show();
+			hboxMainMyList->addWidget(wgtSubMyList);
+	}
+	ui->myListScrollArea->setWidget(wgtMainMyList);
+
+
+}
+
 void MainWindow::HandleAddToMyListButton(Book book)
 {
 	QMessageBox msgBox;
-	msgBox.setWindowTitle("Added book");
-	msgBox.setText(QString::fromStdString("Book  " + book.GetName() + " added to your list"));
-	msgBox.exec();
+	//msgBox.setWindowTitle("Added book");
+	//msgBox.setText(QString::fromStdString("Book  " + book.GetName() + " added to your list"));
+	//msgBox.exec();
 
-	/*if (user.GetBorrowLimit() > 0)
+	if (user.GetBorrowLimit() > 0)
 	{
 		bool foundedBook = false;
 		for (auto it : user.GetBorrowedBooks())
@@ -191,8 +233,8 @@ void MainWindow::HandleAddToMyListButton(Book book)
 		}
 		if(foundedBook==false)
 		{
-			BorrowBook borrowBook(user, book);
-			user.AddBookToBorrowedBooks(borrowBook);
+			BorrowBook borrowBook(book);
+			user.AddBorrowBook(borrowBook);
 			msgBox.setWindowTitle("Added book");
 			msgBox.setText(QString::fromStdString("Book  " + borrowBook.GetBook().GetName()) + " added to your list");
 			msgBox.exec();
@@ -204,32 +246,34 @@ void MainWindow::HandleAddToMyListButton(Book book)
 		msgBox.setWindowTitle("Failed adding book");
 		msgBox.setText(QString::fromStdString("You can't borrow any books, first you have to return a book."));
 		msgBox.exec();
-	}*/
+	}
+	AddBooksToMyList();
 
 }
 
 void MainWindow::HandleReturnBookButton(Book book)
 {
-	//QMessageBox msgBox;
-	//msgBox.setWindowTitle("Return book confirmation");
-	//msgBox.setText(QString::fromStdString("Hello, " + user.GetUsername() + ", are you sure you want to return " + book.GetName())+"?");
-	//msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-	//msgBox.setDefaultButton(QMessageBox::No);
+	QMessageBox msgBox;
+	msgBox.setWindowTitle("Return book confirmation");
+	msgBox.setText(QString::fromStdString("Hello, " + user.GetUsername() + ", are you sure you want to return " + book.GetName())+"?");
+	msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+	msgBox.setDefaultButton(QMessageBox::No);
 
-	//int result = msgBox.exec();
-	//switch (result) {
-	//case QMessageBox::Yes:
-	//	for (auto it : user.GetBorrowedBooks())
-	//	{
-	//		if (it.GetBook().GetName() == book.GetName() && it.GetBook().GetAuthor() == book.GetAuthor())
-	//		{
-	//			user.RemoveBorrowedBook(book);
-	//			user.IncrementBorrowLimit();
-	//			break;
-	//		}
-	//	}
-	//	break;
-	//}
+	int result = msgBox.exec();
+	switch (result) {
+	case QMessageBox::Yes:
+		for (auto it : user.GetBorrowedBooks())
+		{
+			if (it.GetBook().GetName() == book.GetName() && it.GetBook().GetAuthor() == book.GetAuthor())
+			{
+				user.RemoveBorrowedBook(book);
+				user.IncrementBorrowLimit();
+				break;
+			}
+		}
+		AddBooksToMyList();
+		break;
+	}
 
 }
 

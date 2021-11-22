@@ -35,7 +35,7 @@ LoginWindow::LoginWindow(QWidget* parent)
 {
     ui->setupUi(this);
 
-    QIcon icon("../online-library.png");
+    QIcon icon("Images/online-library.png");
     LoginWindow::setWindowIcon(icon);
     LoginWindow::setWindowTitle("Online library - Account");
 
@@ -56,7 +56,7 @@ LoginWindow::LoginWindow(QWidget* parent)
     //this->show();
 
 
-    QPixmap pix("../login.png");
+    QPixmap pix("Images/login.png");
     ui->labelImage->setPixmap(pix);
 }
 
