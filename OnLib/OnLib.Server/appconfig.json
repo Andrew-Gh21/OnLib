@@ -1,0 +1,5 @@
+{
+  "server_port": 6000,
+  "database": "database.db",
+  "log_file": "log.txt"
+}

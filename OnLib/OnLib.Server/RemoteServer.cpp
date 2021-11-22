@@ -42,19 +42,23 @@ void RemoteServer::OnClientDisconnect(Client client)
 
 void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 {
-	std::cout << message;
-	auto request = static_cast<ClientRequest>(message.header.messageType);
-	data::User userData;
+	auto request = static_cast<ClientRequest>(message.header.messageType);;
 
 	switch (request)
 	{
 	case ClientRequest::Login:
-		userData = data::User::Deserialize(message);
+	{
+		data::User userData = data::User::Deserialize(message);
 		SendLoginResponse(client, userData);
 		break;
+	}
+		
 	case ClientRequest::Register:
-		userData = data::User::Deserialize(message);
+	{
+		data::User userData = data::User::Deserialize(message);
+		SendRegisterResponse(client, userData);
 		break;
+	}
 	default:
 		log(LogMessageType::Warning, "User " + std::to_string(client->GetId()) + " sent an invalid message. Disconnecting!");
 		client->Disconnect();

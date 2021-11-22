@@ -178,6 +178,9 @@
     <ClInclude Include="AccountsManager.h" />
     <ClInclude Include="RemoteServer.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="appconfig.json" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

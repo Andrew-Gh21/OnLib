@@ -18,6 +18,12 @@ public:
 	RemoteServer(uint16_t port, const MultiLogger& logger, const sqlite::database& db);
     void OnClientValidated(Client client) override;
 
+	RemoteServer(const RemoteServer& other) = delete;
+	RemoteServer(RemoteServer&& other) = default;
+
+	RemoteServer& operator=(const RemoteServer& other) = delete;
+	RemoteServer& operator=(RemoteServer&& other) = default;
+
 protected:
 	bool OnClientConnect(Client client) override;
 	void OnClientDisconnect(Client client) override;
