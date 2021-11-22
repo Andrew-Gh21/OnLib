@@ -92,9 +92,9 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1029</y>
-               <width>914</width>
-               <height>1459</height>
+               <y>0</y>
+               <width>906</width>
+               <height>1489</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_4">
@@ -150,7 +150,7 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>892</width>
+                     <width>880</width>
                      <height>198</height>
                     </rect>
                    </property>
@@ -204,7 +204,7 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>892</width>
+                     <width>880</width>
                      <height>198</height>
                     </rect>
                    </property>
@@ -243,7 +243,7 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>892</width>
+                     <width>880</width>
                      <height>198</height>
                     </rect>
                    </property>
@@ -279,7 +279,7 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>892</width>
+                     <width>880</width>
                      <height>198</height>
                     </rect>
                    </property>
@@ -315,7 +315,7 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>892</width>
+                     <width>880</width>
                      <height>198</height>
                     </rect>
                    </property>
@@ -348,7 +348,7 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>892</width>
+                     <width>880</width>
                      <height>198</height>
                     </rect>
                    </property>
@@ -368,8 +368,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>892</width>
-                     <height>69</height>
+                     <width>880</width>
+                     <height>83</height>
                     </rect>
                    </property>
                   </widget>
@@ -490,6 +490,9 @@
    <property name="movable">
     <bool>false</bool>
    </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
@@ -522,6 +525,9 @@
    <addaction name="actionSearchIcon"/>
   </widget>
   <action name="actionLibraryIcon">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset>
      <normaloff>../online-library.png</normaloff>../online-library.png</iconset>
@@ -530,7 +536,10 @@
     <string>Online library</string>
    </property>
    <property name="toolTip">
-    <string>QAction</string>
+    <string>Online library</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionLogOut">
@@ -546,13 +555,13 @@
   <action name="actionSearchIcon">
    <property name="icon">
     <iconset>
-     <normaloff>../search1.png</normaloff>../search1.png</iconset>
+     <normaloff>../search.png</normaloff>../search.png</iconset>
    </property>
    <property name="text">
     <string>Search</string>
    </property>
    <property name="toolTip">
-    <string>QAction</string>
+    <string>Search</string>
    </property>
   </action>
  </widget>

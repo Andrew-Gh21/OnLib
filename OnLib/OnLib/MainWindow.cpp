@@ -1,8 +1,8 @@
 #include "MainWindow.h"
-#include<iostream>
+#include <iostream>
 #include "LoginWindow.h"
 #include <QtWidgets>
-#include<QPixmap>
+#include <QPixmap>
 #include "Book.h"
 
 
@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget* parent)
 	connect(ui->actionLogOut, SIGNAL(triggered()), this, SLOT(HandleLogOutButton()));
 	connect(ui->actionDeleteAccount, SIGNAL(triggered()), this, SLOT(HandleDeleteAccountButton()));
 	connect(ui->actionSearchIcon, SIGNAL(triggered()), this, SLOT(HandleSearchIconButton()));
+	connect(ui->backToMenuButton, &QPushButton::released, this, &MainWindow::HandleBackToMenuButton);
 	connect(ui->searchBooksButton, &QPushButton::released, this, [=]() { HandleSearchBooksButton(ui->searchLineEdit->text().toStdString()); });
 
 	//BorrowBook bb(User user(), Book book);
@@ -308,6 +309,36 @@ void MainWindow::HandleSearchIconButton()
 
 	ui->searchBooksScrollArea->show();
 	ui->actionSearchIcon->setVisible(false);
+}
+
+void MainWindow::HandleBackToMenuButton()
+{
+	ui->backToMenuButton->hide();
+	ui->searchLineEdit->hide();
+	ui->searchBooksButton->hide();
+
+	ui->recommendedBooksScrollArea->show();
+	ui->recommendedBooksLabel->show();
+
+	ui->actionGenreScrollArea->show();
+	ui->actionGenreLabel->show();
+
+	ui->sfGenreScrollArea->show();
+	ui->sfGenreLabel->show();
+
+	ui->comedyGenreScrollArea->show();
+	ui->comedyGenreLabel->show();
+
+	ui->romanceGenreScrollArea->show();
+	ui->romanceGenreLabel->show();
+
+	ui->dramaGenreScrollArea->show();
+	ui->dramaGenreLabel->show();
+
+	ui->searchBooksScrollArea->hide();
+	ui->backToMenuButton->hide();
+
+	ui->actionSearchIcon->setVisible(true);
 }
 
 void MainWindow::HandleSearchBooksButton(std::string s)

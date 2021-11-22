@@ -3,7 +3,7 @@
 #include <QMainWindow>
 #include "ui_MainWindow.h"
 #include "User.h"
-#include"MockBooksAndUsers.h"
+#include "MockBooksAndUsers.h"
 #include "Book.h"
 
 namespace Ui {
@@ -23,6 +23,7 @@ private slots:
 	void HandleLogOutButton();
 	void HandleDeleteAccountButton();
 	void HandleSearchIconButton();
+	void HandleBackToMenuButton();
 	void HandleSearchBooksButton(std::string s);
 	void HandleReturnBookButton(Book book);
 
