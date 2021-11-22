@@ -6,6 +6,30 @@
 #include<QRegularExpressionValidator>
 #include <QPixmap>
 
+#include <iostream>
+
+void LoginWindow::OnLoginFailure(const std::vector<data::LogginErrors>& errors)
+{
+    for (auto error : errors)
+        std::cout << static_cast<uint8_t>(error);
+}
+
+void LoginWindow::OnLoginSucces()
+{
+    std::cout << "Login successfull";
+}
+
+void LoginWindow::OnRegisterSuccess()
+{
+    std::cout << "Register successfull";
+}
+
+void LoginWindow::OnRegisterFailure(const std::vector<data::RegisterErrors>& errors)
+{
+    for (auto error : errors)
+        std::cout << static_cast<uint8_t>(error);
+}
+
 LoginWindow::LoginWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::LoginWindow)
 {
@@ -29,41 +53,16 @@ LoginWindow::LoginWindow(QWidget* parent)
     connect(ui->registerButton, &QPushButton::released, this, &LoginWindow::HandleRegisterButton);
 
     //connect(this, SIGNAL(LoginButtonClicked(User)), mainWindow, SLOT(LoginButtonClicked(User)));
-    this->show();
+    //this->show();
 
 
     QPixmap pix("../login.png");
     ui->labelImage->setPixmap(pix);
-
-
-
-
 }
 
 void LoginWindow::HandleLoginButton()
 {
-    //auto attributeFinder = [](User user, const std::string& name)->bool {return user.GetUsername() == name; };
-
-    //auto attr_iter = std::find_if(mock.GetUsers().begin(), 
-    //    mock.GetUsers().end(), 
-    //    std::bind(attributeFinder, ui.usernameLineEdit->text().toStdString()));
     emit LoginButtonClicked({0, ui->usernameLineEdit->text().toStdString() , ui->passwordLineEdit->text().toStdString() });
-    return;
-    /*bool succesfullyLogin = false;
-    for (auto it : mock.GetUsers())
-    {
-        if (ui->usernameLineEdit->text().toStdString() == it.GetUsername() && ui->passwordLineEdit->text().toStdString() == it.GetPassword())
-        {
-            this->hide();
-            emit LoginButtonClicked(it);
-            mainWindow->showMaximized();
-            succesfullyLogin = true;
-        }
-    }
-    if (succesfullyLogin == false)
-    {
-        QMessageBox::warning(this, "Login", "Username and password doesen't match.");
-    }*/
 }
 
 void LoginWindow::HandleSignUpButton()

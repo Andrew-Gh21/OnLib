@@ -7,6 +7,9 @@
 
 #include "ClientRequest.h"
 #include "ServerResponse.h"
+#include "User.h"
+#include "Errors.h"
+#include "AccountsManager.h"
 
 class RemoteServer :
     public net::Server
@@ -21,7 +24,11 @@ protected:
 	void OnMessageRecieved(Client client, net::Message& message) override;
 
 private:
+	void SendLoginResponse(Client client, data::User data);
+	void SendRegisterResponse(Client client, data::User data);
+private:
 	MultiLogger logger;
+	AccountsManager accountsManager;
 	sqlite::database database;
 };
 

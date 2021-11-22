@@ -1,6 +1,6 @@
 #include "AccountsManager.h"
 
-bool AccountsManager::ValidateLogin(RemoteServer::Client client, data::User input, std::vector<data::LogginErrors>& errors)
+bool AccountsManager::ValidateLogin(std::shared_ptr<net::ClientConnection> client, data::User input, std::vector<data::LogginErrors>& errors)
 {
 	if (std::regex_match(input.name, std::regex("/^|\s+/")))
 	{
@@ -18,7 +18,7 @@ bool AccountsManager::ValidateLogin(RemoteServer::Client client, data::User inpu
 	return errors.empty();
 }
 
-bool AccountsManager::ValidateRegister(RemoteServer::Client client, data::User input, std::vector<data::RegisterErrors>& errors)
+bool AccountsManager::ValidateRegister(std::shared_ptr<net::ClientConnection> client, data::User input, std::vector<data::RegisterErrors>& errors)
 {
 	if (std::regex_match(input.name,std::regex("/^|\s+/")))
 	{

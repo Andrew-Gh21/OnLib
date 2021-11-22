@@ -122,7 +122,8 @@ namespace net
 
 		message.header.messageSize = message.GetSize();
 
-		data = std::vector<VectorData>(buffer, vectSize);
+		std::copy(buffer, buffer + vectSize, std::back_inserter(data));
+		//data = std::vector<VectorData>(buffer, vectSize);
 		delete[] buffer;
 
 		return message;
