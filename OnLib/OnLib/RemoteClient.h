@@ -16,7 +16,8 @@ public:
 	~RemoteClient();
 
 public slots:
-	void OnLoginRequest(const data::User & user);
+	void OnLoginRequest(const data::User& user);
+	void OnRegisterRequest(const data::User& user);
 
 signals:
 	void LoginSuccessfull();

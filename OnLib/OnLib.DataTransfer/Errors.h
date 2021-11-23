@@ -14,6 +14,8 @@ namespace data
 	{
 		UsernameAlreadyExists = 1,
 		InvalidUsername,
-		InvalidPassword
+		InvalidPassword,
+		PassConfirmMismatch,
+		EmptyField
 	};
 }

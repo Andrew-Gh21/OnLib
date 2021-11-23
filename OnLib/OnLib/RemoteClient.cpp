@@ -27,6 +27,14 @@ void RemoteClient::OnLoginRequest(const data::User& user)
 	Send(msg);
 }
 
+void RemoteClient::OnRegisterRequest(const data::User& user)
+{
+	net::Message msg;
+	msg.header.messageType = static_cast<uint16_t>(ClientRequest::Register);
+	data::User::Serialize(msg, user);
+	Send(msg);
+}
+
 RemoteClient::~RemoteClient()
 {
 	if (processingThread.joinable())

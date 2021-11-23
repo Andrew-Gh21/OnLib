@@ -40,6 +40,7 @@ int main()
 	multiLogger.AddLogger(fileLogger);
 
 	sqlite::database db(databasePath);
+
 	RemoteServer server(port, multiLogger, db);
 	server.Start();
 
@@ -47,4 +48,6 @@ int main()
 	{
 		server.ProcessMessages(-1, true);
 	}
+
+	return 0;
 }

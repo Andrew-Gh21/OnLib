@@ -27,6 +27,7 @@ public:
 
 signals:
 	void LoginButtonClicked(data::User user);
+	void RegisterButtonClicked(data::User user);
 
 public slots:
 	void OnLoginFailure(const std::vector<data::LogginErrors>& errors);
@@ -37,5 +38,7 @@ public slots:
 private:
 	Ui::LoginWindow* ui;
 	MainWindow* mainWindow;
+	static std::unordered_map<data::LogginErrors, std::string> loginErrors;
+	static std::unordered_map<data::RegisterErrors, std::string> registerErrors;
 	MockBooksAndUsers mock;
 };

@@ -5,29 +5,54 @@
 #include <QMessageBox>
 #include<QRegularExpressionValidator>
 #include <QPixmap>
-
+#include <sstream>
 #include <iostream>
+
+std::unordered_map<data::LogginErrors, std::string> LoginWindow::loginErrors
+{
+    {data::LogginErrors::InvalidPassword, "Password is invalid"},
+    {data::LogginErrors::InvalidUser, "Username is invalid"},
+    {data::LogginErrors::UserAlreadyConnected, "This account is already logged in"}
+};
+
+std::unordered_map<data::RegisterErrors, std::string> LoginWindow::registerErrors
+{
+    {data::RegisterErrors::InvalidUsername, "Username must have at least 5 characters"},
+    {data::RegisterErrors::InvalidPassword, "Password must be min 8 char length, min 1 big letter and 1 number"},
+    {data::RegisterErrors::UsernameAlreadyExists, "Username taken. Please choose another one"},
+    {data::RegisterErrors::EmptyField, "Please fill all the fields before registering"},
+    {data::RegisterErrors::PassConfirmMismatch, "Password confirmation is not the same as the password"}
+};
+
 
 void LoginWindow::OnLoginFailure(const std::vector<data::LogginErrors>& errors)
 {
+    std::stringstream errorsStream;
     for (auto error : errors)
-        std::cout << static_cast<uint8_t>(error);
+        errorsStream << loginErrors[error] << '\n';
+
+    QMessageBox::warning(this, "Login Error", QString::fromStdString(errorsStream.str()));
 }
 
 void LoginWindow::OnLoginSucces()
 {
-    std::cout << "Login successfull";
+    mainWindow->show();
+    this->close();
 }
 
 void LoginWindow::OnRegisterSuccess()
 {
-    std::cout << "Register successfull";
+    QMessageBox::information(this, "Register Successfull", "You have successfully registered.");
+    HandleBackToLoginButton();
 }
 
 void LoginWindow::OnRegisterFailure(const std::vector<data::RegisterErrors>& errors)
 {
+    std::stringstream errorsStream;
     for (auto error : errors)
-        std::cout << static_cast<uint8_t>(error);
+        errorsStream << registerErrors[error] << '\n';
+
+    QMessageBox::warning(this, "Login Error", QString::fromStdString(errorsStream.str()));
 }
 
 LoginWindow::LoginWindow(QWidget* parent)
@@ -52,68 +77,51 @@ LoginWindow::LoginWindow(QWidget* parent)
     connect(ui->backToLoginButton, &QPushButton::released, this, &LoginWindow::HandleBackToLoginButton);
     connect(ui->registerButton, &QPushButton::released, this, &LoginWindow::HandleRegisterButton);
 
-    //connect(this, SIGNAL(LoginButtonClicked(User)), mainWindow, SLOT(LoginButtonClicked(User)));
-    //this->show();
-
-
     QPixmap pix("Images/login.png");
     ui->labelImage->setPixmap(pix);
 }
 
 void LoginWindow::HandleLoginButton()
 {
-    emit LoginButtonClicked({0, ui->usernameLineEdit->text().toStdString() , ui->passwordLineEdit->text().toStdString() });
+    std::string user = ui->usernameLineEdit->text().toStdString();
+    std::string pass = ui->passwordLineEdit->text().toStdString();
+
+    if (user.empty() || pass.empty())
+    {
+        QMessageBox::warning(this, "Failure", "Please complete all the fields!");
+        return;
+    }
+
+    data::User dataUser{ uint64_t(0), user, pass };
+
+    emit LoginButtonClicked(dataUser);
 }
 
 void LoginWindow::HandleSignUpButton()
 {
-    bool uniqueUsername = true;
-    if (ui->usernameLineEdit->text().size() >= 5 && ui->passwordLineEdit->text().size() >= 5 && ui->confirmPasswordLineEdit->text().size() >= 5)
-    {
-        for (auto it : mock.GetUsers())
-        {
-            if (it.GetUsername() == ui->usernameLineEdit->text().toStdString())
-            {
-                uniqueUsername = false;
-                break;
-            }
-        }
+    std::string user = ui->usernameLineEdit->text().toStdString();
+    std::string pass = ui->passwordLineEdit->text().toStdString();
+    std::string confirm = ui->confirmPasswordLineEdit->text().toStdString();
 
-        if (uniqueUsername == true)
-        {
-            if (ui->passwordLineEdit->text() == ui->confirmPasswordLineEdit->text())
-            {
-                 QRegularExpression reg("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
-                 QValidator* validator = new QRegularExpressionValidator(reg, this);
+    std::vector<data::RegisterErrors> errors;
 
-                 if (reg.match(ui->passwordLineEdit->text()).hasMatch())
-                 {
-                     mock.AddUser(User(ui->usernameLineEdit->text().toStdString(), ui->passwordLineEdit->text().toStdString()));
-                     QMessageBox::information(this, "Register", "Account created succesfully");
-                     HandleBackToLoginButton();
-                 }
-                 else
-                 {
-                     QMessageBox::warning(this, "Register", "Password must be min 8 char length, min 1 big letter and 1 number");
-                 }
+    if (user.size() < 5)
+        errors.push_back(data::RegisterErrors::InvalidUsername);
 
+    if (pass != confirm)
+        errors.push_back(data::RegisterErrors::PassConfirmMismatch);
 
-            }
-            else
-            {
-                QMessageBox::warning(this, "Register", "Passwords don't match");
-            }
-        }
-        else
-        {
-            QMessageBox::warning(this, "Register", "Username already used.");
+    if (user.empty() || pass.empty() || confirm.empty())
+        errors.push_back(data::RegisterErrors::EmptyField);
 
-        }
-    }
+    if (QRegularExpression reg("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$");
+        !reg.match(QString::fromStdString(pass)).hasMatch())
+        errors.push_back(data::RegisterErrors::InvalidPassword);
+
+    if (errors.empty())
+        emit RegisterButtonClicked({ uint64_t(0), user, pass });
     else
-    {
-        QMessageBox::warning(this, "Register", "Username and password length have to be min 5 char");
-    }
+        OnRegisterFailure(errors);
 }
 
 void LoginWindow::HandleRegisterButton()

@@ -29,9 +29,10 @@ bool AccountsManager::ValidateRegister(std::shared_ptr<net::ClientConnection> cl
 		errors.push_back(data::RegisterErrors::InvalidPassword);
 	}
 
-	uint8_t count;
-	database << "select count(*)from user"
-				"where name = ? " << input.name >> count;
+	int count;
+	database << "select count(*)from user where name = ? " 
+		<< input.name >> count;
+
 	if (count == 1)
 	{
 		errors.push_back(data::RegisterErrors::UsernameAlreadyExists);
