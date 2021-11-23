@@ -2,20 +2,25 @@
 
 bool AccountsManager::ValidateLogin(std::shared_ptr<net::ClientConnection> client, data::User input, std::vector<data::LogginErrors>& errors)
 {
-	std::string password;
-	database << "select password from users where name = ?" << input.name >> password;
+	std::optional<std::string> optionalPassword;
+	database << "select password from user where name = ?"
+		<< input.name
+		>> [&optionalPassword](std::optional<std::string>pass)
+	{
+		optionalPassword = pass;
+	};
 
-	if (std::regex_match(password, std::regex("/^|\s+/")))
+	if (!optionalPassword.has_value())
 	{
 		errors.push_back(data::LogginErrors::InvalidUser);
 	}
 	
-	if (password != input.password)
+	if (optionalPassword.has_value() && optionalPassword.value() != input.password)
 	{
 		errors.push_back(data::LogginErrors::InvalidPassword);
 	}
 
-	if (users[client->GetId()] != input)
+	if (users.find(client->GetId()) != users.end())
 	{
 		errors.push_back(data::LogginErrors::UserAlreadyConnected);
 	}
