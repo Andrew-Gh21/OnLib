@@ -5,7 +5,6 @@
 #include <QPixmap>
 #include "Book.h"
 
-
 MainWindow::MainWindow(QWidget* parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -29,13 +28,7 @@ MainWindow::MainWindow(QWidget* parent)
 	//BorrowBook bb(User user(), Book book);
 
 	AddBooksToScrollArea();
-
-
-
-	
 }
-
-
 
 void MainWindow::AddBooksToScrollArea()
 {
@@ -78,7 +71,7 @@ void MainWindow::AddBooksToScrollArea()
 			vboxSubSF = new QVBoxLayout(wgtSubSF);
 			label = new QLabel();
 			label->setMaximumHeight(100);
-			label->setPixmap(pix.scaled(100,100,Qt::KeepAspectRatio,Qt::SmoothTransformation));
+			label->setPixmap(pix.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 			vboxSubSF->addWidget(label);
 			label = new QLabel(QString::fromStdString(it.GetName()));
 			vboxSubSF->addWidget(label);
@@ -92,6 +85,7 @@ void MainWindow::AddBooksToScrollArea()
 			hboxMainSF->addWidget(wgtSubSF);
 			ui->sfGenreScrollArea->setWidget(wgtMainSF);
 			break;
+
 		case TypeOfBook::Action:
 			wgtSubAction = new QWidget();
 			vboxSubAction = new QVBoxLayout(wgtSubAction);
@@ -106,11 +100,12 @@ void MainWindow::AddBooksToScrollArea()
 			button = new QPushButton(this);
 			button->setText("Borrow book");
 			connect(button, &QPushButton::released, this, [=]() { HandleAddToMyListButton(it); });
-			vboxSubAction->addWidget(button); 
+			vboxSubAction->addWidget(button);
 			button->show();
 			hboxMainAction->addWidget(wgtSubAction);
 			ui->actionGenreScrollArea->setWidget(wgtMainAction);
 			break;
+
 		case TypeOfBook::Comedy:
 			wgtSubComedy = new QWidget();
 			vboxSubComedy = new QVBoxLayout(wgtSubComedy);
@@ -130,6 +125,7 @@ void MainWindow::AddBooksToScrollArea()
 			hboxMainComedy->addWidget(wgtSubComedy);
 			ui->comedyGenreScrollArea->setWidget(wgtMainComedy);
 			break;
+
 		case TypeOfBook::Romance:
 			wgtSubRomance = new QWidget();
 			vboxSubRomance = new QVBoxLayout(wgtSubRomance);
@@ -149,6 +145,7 @@ void MainWindow::AddBooksToScrollArea()
 			hboxMainRomance->addWidget(wgtSubRomance);
 			ui->romanceGenreScrollArea->setWidget(wgtMainRomance);
 			break;
+
 		case TypeOfBook::Drama:
 			wgtSubDrama = new QWidget();
 			vboxSubDrama = new QVBoxLayout(wgtSubDrama);
@@ -168,6 +165,7 @@ void MainWindow::AddBooksToScrollArea()
 			hboxMainDrama->addWidget(wgtSubDrama);
 			ui->dramaGenreScrollArea->setWidget(wgtMainDrama);
 			break;
+
 		default:
 			break;
 		}
@@ -187,23 +185,23 @@ void MainWindow::AddBooksToMyList()
 
 	for (auto it : user.GetBorrowedBooks())
 	{
-			wgtSubMyList = new QWidget();
-			vboxSubMyList = new QVBoxLayout(wgtSubMyList);
-			label = new QLabel();
-			label->setMaximumHeight(100);
-			label->setPixmap(pix.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-			vboxSubMyList->addWidget(label);
-			label = new QLabel(QString::fromStdString(it.GetBook().GetName()));
-			vboxSubMyList->addWidget(label);
-			label = new QLabel(QString::fromStdString(it.GetBook().GetAuthor()));
-			vboxSubMyList->addWidget(label);
-			button = new QPushButton(this);
-			button->setText("Return book");
-			Book bk = it.GetBook();
-			connect(button, &QPushButton::released, this, [=]() { HandleReturnBookButton(bk); });
-			vboxSubMyList->addWidget(button);
-			button->show();
-			hboxMainMyList->addWidget(wgtSubMyList);
+		wgtSubMyList = new QWidget();
+		vboxSubMyList = new QVBoxLayout(wgtSubMyList);
+		label = new QLabel();
+		label->setMaximumHeight(100);
+		label->setPixmap(pix.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+		vboxSubMyList->addWidget(label);
+		label = new QLabel(QString::fromStdString(it.GetBook().GetName()));
+		vboxSubMyList->addWidget(label);
+		label = new QLabel(QString::fromStdString(it.GetBook().GetAuthor()));
+		vboxSubMyList->addWidget(label);
+		button = new QPushButton(this);
+		button->setText("Return book");
+		Book bk = it.GetBook();
+		connect(button, &QPushButton::released, this, [=]() { HandleReturnBookButton(bk); });
+		vboxSubMyList->addWidget(button);
+		button->show();
+		hboxMainMyList->addWidget(wgtSubMyList);
 	}
 	ui->myListScrollArea->setWidget(wgtMainMyList);
 
@@ -231,7 +229,7 @@ void MainWindow::HandleAddToMyListButton(Book book)
 				break;
 			}
 		}
-		if(foundedBook==false)
+		if (foundedBook == false)
 		{
 			BorrowBook borrowBook(book);
 			user.AddBorrowBook(borrowBook);
@@ -248,14 +246,13 @@ void MainWindow::HandleAddToMyListButton(Book book)
 		msgBox.exec();
 	}
 	AddBooksToMyList();
-
 }
 
 void MainWindow::HandleReturnBookButton(Book book)
 {
 	QMessageBox msgBox;
 	msgBox.setWindowTitle("Return book confirmation");
-	msgBox.setText(QString::fromStdString("Hello, " + user.GetUsername() + ", are you sure you want to return " + book.GetName())+"?");
+	msgBox.setText(QString::fromStdString("Hello, " + user.GetUsername() + ", are you sure you want to return " + book.GetName()) + "?");
 	msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
 	msgBox.setDefaultButton(QMessageBox::No);
 
@@ -389,7 +386,7 @@ void MainWindow::HandleSearchBooksButton(std::string s)
 {
 	QMessageBox msgBox;
 	msgBox.setWindowTitle("Search");
-	msgBox.setText(QString::fromStdString("You searched "+s));
+	msgBox.setText(QString::fromStdString("You searched " + s));
 	msgBox.exec();
 }
 

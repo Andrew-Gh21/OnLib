@@ -31,4 +31,3 @@ private:
 private:
 	std::thread processingThread;
 };
-

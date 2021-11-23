@@ -1,5 +1,4 @@
 #include "RemoteClient.h"
-#include <QtWidgets>
 #include "LoginWindow.h"
 #include "MainWindow.h"
 

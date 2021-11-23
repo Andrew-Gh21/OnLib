@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>987</width>
-    <height>609</height>
+    <width>1246</width>
+    <height>740</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,26 +30,10 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="1" column="0">
-     <spacer name="horizontalSpacer_4">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Fixed</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>0</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="2">
+    <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="documentMode">
        <bool>false</bool>
@@ -76,8 +60,8 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-1262</y>
-               <width>914</width>
+               <y>0</y>
+               <width>1179</width>
                <height>1759</height>
               </rect>
              </property>
@@ -134,7 +118,7 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>892</width>
+                     <width>1157</width>
                      <height>248</height>
                     </rect>
                    </property>
@@ -188,7 +172,7 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>892</width>
+                     <width>1157</width>
                      <height>248</height>
                     </rect>
                    </property>
@@ -227,7 +211,7 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>892</width>
+                     <width>1157</width>
                      <height>248</height>
                     </rect>
                    </property>
@@ -263,7 +247,7 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>892</width>
+                     <width>1157</width>
                      <height>248</height>
                     </rect>
                    </property>
@@ -299,7 +283,7 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>892</width>
+                     <width>1157</width>
                      <height>248</height>
                     </rect>
                    </property>
@@ -332,7 +316,7 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>892</width>
+                     <width>1157</width>
                      <height>248</height>
                     </rect>
                    </property>
@@ -352,7 +336,7 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>892</width>
+                     <width>1157</width>
                      <height>69</height>
                     </rect>
                    </property>
@@ -426,79 +410,91 @@
        <attribute name="title">
         <string>My List</string>
        </attribute>
-       <widget class="QScrollArea" name="scrollArea">
-        <property name="geometry">
-         <rect>
-          <x>-1</x>
-          <y>-6</y>
-          <width>1081</width>
-          <height>561</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="verticalScrollBarPolicy">
-         <enum>Qt::ScrollBarAsNeeded</enum>
-        </property>
-        <property name="sizeAdjustPolicy">
-         <enum>QAbstractScrollArea::AdjustIgnored</enum>
-        </property>
-        <property name="widgetResizable">
-         <bool>true</bool>
-        </property>
-        <widget class="QWidget" name="scrollAreaWidgetContents">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>1079</width>
-           <height>559</height>
-          </rect>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_5">
-          <item row="0" column="0">
-           <layout class="QVBoxLayout" name="verticalLayout_3">
-            <item>
-             <spacer name="horizontalSpacer_5">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QScrollArea" name="myListScrollArea">
-              <property name="widgetResizable">
-               <bool>true</bool>
-              </property>
-              <widget class="QWidget" name="scrollAreaWidgetContents_2">
-               <property name="geometry">
-                <rect>
-                 <x>0</x>
-                 <y>0</y>
-                 <width>1057</width>
-                 <height>511</height>
-                </rect>
-               </property>
-              </widget>
-             </widget>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
+         <widget class="QScrollArea" name="scrollArea">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAsNeeded</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustIgnored</enum>
+          </property>
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>1196</width>
+             <height>593</height>
+            </rect>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="0" column="0">
+             <layout class="QVBoxLayout" name="verticalLayout_3">
+              <item>
+               <spacer name="horizontalSpacer_5">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QScrollArea" name="myListScrollArea">
+                <property name="widgetResizable">
+                 <bool>true</bool>
+                </property>
+                <widget class="QWidget" name="scrollAreaWidgetContents_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>0</y>
+                   <width>1174</width>
+                   <height>545</height>
+                  </rect>
+                 </property>
+                </widget>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
-          </item>
-         </layout>
-        </widget>
-       </widget>
+          </widget>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
+    </item>
+    <item row="1" column="0">
+     <spacer name="horizontalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>0</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
     </item>
     <item row="1" column="1">
      <spacer name="horizontalSpacer_3">
@@ -565,7 +561,7 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>../online-library.png</normaloff>../online-library.png</iconset>
+     <normaloff>Images/online-library.png</normaloff>Images/online-library.png</iconset>
    </property>
    <property name="text">
     <string>Online library</string>
@@ -590,7 +586,7 @@
   <action name="actionSearchIcon">
    <property name="icon">
     <iconset>
-     <normaloff>Images/search.png</normaloff>../search.png</iconset>
+     <normaloff>Images/search.png</normaloff>Images/search.png</iconset>
    </property>
    <property name="text">
     <string>Search</string>
