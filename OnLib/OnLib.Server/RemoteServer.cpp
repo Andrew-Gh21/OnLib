@@ -96,7 +96,7 @@ void RemoteServer::SendRegisterResponse(Client client, data::User data)
 	response.header.messageType = static_cast<uint8_t>(registerSuccessfull ?
 		ServerResponse::SuccesfullRegister : ServerResponse::InvalidRegister);
 
-	if (registerSuccessfull)
+	if (!registerSuccessfull)
 		response << errors;
 
 	MessageClient(client, response);

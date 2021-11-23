@@ -52,7 +52,7 @@ void LoginWindow::OnRegisterFailure(const std::vector<data::RegisterErrors>& err
     for (auto error : errors)
         errorsStream << registerErrors[error] << '\n';
 
-    QMessageBox::warning(this, "Login Error", QString::fromStdString(errorsStream.str()));
+    QMessageBox::warning(this, "Register Error", QString::fromStdString(errorsStream.str()));
 }
 
 LoginWindow::LoginWindow(QWidget* parent)
