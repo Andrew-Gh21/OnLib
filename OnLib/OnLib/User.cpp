@@ -1,16 +1,16 @@
 #include "User.h"
 
-std::string User::GetUsername()
+std::string User::GetUsername() const
 {
 	return m_username;
 }
 
-std::string User::GetPassword()
+std::string User::GetPassword() const
 {
 	return m_password;
 }
 
-std::vector<BorrowBook> User::GetBorrowedBooks()
+std::vector<BorrowBook> User::GetBorrowedBooks() const
 {
 	return m_borrowedBooks;
 }
@@ -58,7 +58,7 @@ void User::RemoveBorrowedBook(Book book)
 	}
 }
 
-unsigned int User::GetBorrowLimit()
+unsigned int User::GetBorrowLimit() const
 {
 	return borrowLimit;
 }

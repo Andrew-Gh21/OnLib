@@ -9,22 +9,22 @@ BorrowBook::BorrowBook(Book book) : book(book)
 	//returnDate->tm_mday += 14;
 }
 
-Book BorrowBook::GetBook()
+Book BorrowBook::GetBook() const
 {
 	return book;
 }
 
-tm* BorrowBook::GetBorrowDate()
+tm* BorrowBook::GetBorrowDate() const
 {
 	return borrowDate;
 }
 
-tm* BorrowBook::GetReturnDate()
+tm* BorrowBook::GetReturnDate() const
 {
 	return returnDate;
 }
 
-void BorrowBook::SetBook(Book book)
+void BorrowBook::SetBook(const Book &book)
 {
 	this->book = book;
 }

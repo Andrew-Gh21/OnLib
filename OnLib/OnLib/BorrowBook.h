@@ -13,11 +13,11 @@ private:
 public:
 	BorrowBook(Book book);
 	
-	Book GetBook();
-	tm* GetBorrowDate();
-	tm* GetReturnDate();
+	Book GetBook()const;
+	tm* GetBorrowDate()const;
+	tm* GetReturnDate()const;
 
-	void SetBook(Book book);
+	void SetBook(const Book &book);
 	void SetReturnDate(tm* time);
 
 	~BorrowBook() = default;

@@ -30,27 +30,27 @@ std::string Book::GetDescription() const
 	return m_description;
 }
 
-void Book::SetName(std::string name)
+void Book::SetName(const std::string &name)
 {
 	this->m_name = name;
 }
 
-void Book::SetDescription(std::string description)
+void Book::SetDescription(const std::string &description)
 {
 	this->m_description = description;
 }
 
-void Book::SetAuthor(std::string author)
+void Book::SetAuthor(const std::string &author)
 {
 	this->m_author = author;
 }
 
-void Book::SetISBN(std::string ISBN)
+void Book::SetISBN(const std::string &ISBN)
 {
 	this->m_ISBN = ISBN;
 }
 
-void Book::SetType(TypeOfBook type)
+void Book::SetType(const TypeOfBook &type)
 {
 	this->type = type;
 }

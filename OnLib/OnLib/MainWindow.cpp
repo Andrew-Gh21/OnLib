@@ -380,14 +380,44 @@ void MainWindow::HandleBackToMenuButton()
 	ui->backToMenuButton->hide();
 
 	ui->actionSearchIcon->setVisible(true);
+
+	ui->searchLineEdit->setText("");
+	HandleSearchBooksButton("");
 }
 
 void MainWindow::HandleSearchBooksButton(std::string s)
 {
-	QMessageBox msgBox;
-	msgBox.setWindowTitle("Search");
-	msgBox.setText(QString::fromStdString("You searched " + s));
-	msgBox.exec();
+
+	QWidget* wgtMainMyList = new QWidget();
+	QHBoxLayout* hboxMainMyList = new QHBoxLayout(wgtMainMyList);
+	QWidget* wgtSubMyList;
+	QVBoxLayout* vboxSubMyList;
+	QPixmap pix("Images/defaultImage.png");
+	QLabel* label;
+	
+	if (s != "")
+	{
+		for (auto it : mock.GetBooks())
+		{
+			if (it.GetName().find(s) != std::string::npos || it.GetAuthor().find(s) != std::string::npos)
+			{
+				wgtSubMyList = new QWidget();
+				vboxSubMyList = new QVBoxLayout(wgtSubMyList);
+				label = new QLabel();
+				label->setMaximumHeight(100);
+				label->setPixmap(pix.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+				vboxSubMyList->addWidget(label);
+				label = new QLabel(QString::fromStdString(it.GetName()));
+				vboxSubMyList->addWidget(label);
+				label = new QLabel(QString::fromStdString(it.GetAuthor()));
+				vboxSubMyList->addWidget(label);
+				hboxMainMyList->addWidget(wgtSubMyList);
+			}
+		}
+	}
+		ui->searchBooksScrollArea->setWidget(wgtMainMyList);
+	
+
 }
 
 MainWindow::~MainWindow()

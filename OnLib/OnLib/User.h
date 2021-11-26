@@ -16,16 +16,16 @@ private:
 	unsigned int borrowLimit = 5;
 
 public:
-	std::string GetUsername();
-	std::string GetPassword();
-	std::vector<BorrowBook> GetBorrowedBooks();
+	std::string GetUsername()const;
+	std::string GetPassword()const;
+	std::vector<BorrowBook> GetBorrowedBooks()const;
 	void AddBorrowBook(const BorrowBook& book);
 	void SetUsername(const std::string& username);
 	void SetPassword(const std::string& password);
 	void DecrementBorrowLimit();
 	void IncrementBorrowLimit();
 	void RemoveBorrowedBook(Book book);
-	unsigned int GetBorrowLimit();
+	unsigned int GetBorrowLimit()const;
 	User() = default;
 	User(std::string, std::string);
 	~User() = default;

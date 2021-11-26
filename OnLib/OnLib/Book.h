@@ -29,11 +29,11 @@ public:
 	std::string GetDescription() const;
 	TypeOfBook GetType() const;
 
-	void SetName(std::string name);
-	void SetAuthor(std::string author);
-	void SetISBN(std::string ISBN);
-	void SetDescription(std::string description);
-	void SetType(TypeOfBook type);
+	void SetName(const std::string& name);
+	void SetAuthor(const std::string &author);
+	void SetISBN(const std::string &ISBN);
+	void SetDescription(const std::string &description);
+	void SetType(const TypeOfBook &type);
 	
 	~Book() = default;
 };
