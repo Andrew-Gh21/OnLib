@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget* parent)
 	ui->backToMenuButton->hide();
 	ui->searchBooksScrollArea->hide();
 
+	ui->mainToolBar->setFixedHeight(70);
+
 	connect(ui->actionLogOut, SIGNAL(triggered()), this, SLOT(HandleLogOutButton()));
 	connect(ui->actionDeleteAccount, SIGNAL(triggered()), this, SLOT(HandleDeleteAccountButton()));
 	connect(ui->actionSearchIcon, SIGNAL(triggered()), this, SLOT(HandleSearchIconButton()));
@@ -174,7 +176,6 @@ void MainWindow::AddBooksToScrollArea()
 
 void MainWindow::AddBooksToMyList()
 {
-
 	QWidget* wgtMainMyList = new QWidget();
 	QHBoxLayout* hboxMainMyList = new QHBoxLayout(wgtMainMyList);
 	QWidget* wgtSubMyList;
@@ -204,8 +205,6 @@ void MainWindow::AddBooksToMyList()
 		hboxMainMyList->addWidget(wgtSubMyList);
 	}
 	ui->myListScrollArea->setWidget(wgtMainMyList);
-
-
 }
 
 void MainWindow::HandleAddToMyListButton(Book book)
@@ -271,7 +270,6 @@ void MainWindow::HandleReturnBookButton(Book book)
 		AddBooksToMyList();
 		break;
 	}
-
 }
 
 void MainWindow::LoginButtonClicked(User user)
@@ -326,6 +324,8 @@ void MainWindow::HandleDeleteAccountButton()
 
 void MainWindow::HandleSearchIconButton()
 {
+	ui->tabWidget->setCurrentIndex(0);
+
 	ui->backToMenuButton->show();
 	ui->searchLineEdit->show();
 	ui->searchBooksButton->show();
@@ -394,7 +394,7 @@ void MainWindow::HandleSearchBooksButton(std::string s)
 	QVBoxLayout* vboxSubMyList;
 	QPixmap pix("Images/defaultImage.png");
 	QLabel* label;
-	
+
 	if (s != "")
 	{
 		for (auto it : mock.GetBooks())
@@ -415,9 +415,7 @@ void MainWindow::HandleSearchBooksButton(std::string s)
 			}
 		}
 	}
-		ui->searchBooksScrollArea->setWidget(wgtMainMyList);
-	
-
+	ui->searchBooksScrollArea->setWidget(wgtMainMyList);
 }
 
 MainWindow::~MainWindow()

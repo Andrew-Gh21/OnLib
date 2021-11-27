@@ -7,7 +7,7 @@
 #include "Book.h"
 
 namespace Ui {
-	class LoginWindow;
+	class MainWindow;
 }
 
 class MainWindow : public QMainWindow
@@ -15,7 +15,7 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	explicit MainWindow(QWidget *parent = Q_NULLPTR);
+	explicit MainWindow(QWidget* parent = Q_NULLPTR);
 	~MainWindow();
 private slots:
 	void HandleAddToMyListButton(Book book);
@@ -27,11 +27,10 @@ private slots:
 	void HandleSearchBooksButton(std::string s);
 	void HandleReturnBookButton(Book book);
 
-
 private:
 	void AddBooksToScrollArea();
 	void AddBooksToMyList();
-	Ui::MainWindow *ui;
+	Ui::MainWindow* ui;
 	MockBooksAndUsers mock;
 	User user;
 };
