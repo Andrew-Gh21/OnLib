@@ -26,6 +26,7 @@ private slots:
 	void HandleBackToMenuButton();
 	void HandleSearchBooksButton(std::string s);
 	void HandleReturnBookButton(Book book);
+	void HandleExtendDateButton(BorrowBook book);
 
 private:
 	void AddBooksToScrollArea();

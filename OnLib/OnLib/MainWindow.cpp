@@ -202,6 +202,11 @@ void MainWindow::AddBooksToMyList()
 		connect(button, &QPushButton::released, this, [=]() { HandleReturnBookButton(bk); });
 		vboxSubMyList->addWidget(button);
 		button->show();
+		button = new QPushButton(this);
+		button->setText("Extend return date");
+		connect(button, &QPushButton::released, this, [=]() { HandleExtendDateButton(it); });
+		vboxSubMyList->addWidget(button);
+		button->show();
 		hboxMainMyList->addWidget(wgtSubMyList);
 	}
 	ui->myListScrollArea->setWidget(wgtMainMyList);
@@ -270,6 +275,10 @@ void MainWindow::HandleReturnBookButton(Book book)
 		AddBooksToMyList();
 		break;
 	}
+}
+void MainWindow::HandleExtendDateButton(BorrowBook book)
+{
+	book.ExtendReturnDate();
 }
 
 void MainWindow::LoginButtonClicked(User user)

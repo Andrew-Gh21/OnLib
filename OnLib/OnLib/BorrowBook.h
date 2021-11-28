@@ -1,24 +1,26 @@
 #pragma once
 
 #include "Book.h"
-#include <time.h>
+#include <ctime>
 
 class BorrowBook
 {
 private:
 	Book book;
-	tm* borrowDate;
-	tm* returnDate;
+	std::tm borrowDate;
+	std::tm returnDate;
 
 public:
 	BorrowBook(Book book);
 	
 	Book GetBook()const;
-	tm* GetBorrowDate()const;
-	tm* GetReturnDate()const;
+	std::tm GetBorrowDate() const;
+	std::tm GetReturnDate() const;
+	
+
+	void ExtendReturnDate();
 
 	void SetBook(const Book &book);
-	void SetReturnDate(tm* time);
 
 	~BorrowBook() = default;
 };
