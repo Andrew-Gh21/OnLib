@@ -160,6 +160,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AccountsManager.cpp" />
+    <ClCompile Include="BooksManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="RemoteServer.cpp" />
   </ItemGroup>
@@ -176,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccountsManager.h" />
+    <ClInclude Include="BooksManager.h" />
     <ClInclude Include="RemoteServer.h" />
   </ItemGroup>
   <ItemGroup>
