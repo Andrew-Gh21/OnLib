@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget* parent)
 
 void MainWindow::AddBooksToScrollArea()
 {
-	QWidget* wgtMainSF = new QWidget();
+	/*QWidget* wgtMainSF = new QWidget();
 	QWidget* wgtMainAction = new QWidget();
 	QWidget* wgtMainComedy = new QWidget();
 	QWidget* wgtMainRomance = new QWidget();
@@ -171,7 +171,7 @@ void MainWindow::AddBooksToScrollArea()
 		default:
 			break;
 		}
-	}
+	}*/
 }
 
 void MainWindow::AddBooksToMyList()

@@ -44,6 +44,12 @@
     <ClCompile Include="RemoteClient.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BookSection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BookPreview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User.h">
@@ -69,12 +75,24 @@
     <QtMoc Include="RemoteClient.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="BookSection.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="BookPreview.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="LoginWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="MainWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="BookSection.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="BookPreview.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
