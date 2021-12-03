@@ -6,12 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>675</width>
-    <height>478</height>
+    <width>809</width>
+    <height>527</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>LoginWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
@@ -66,6 +69,58 @@
     </item>
     <item row="1" column="3">
      <layout class="QGridLayout" name="gridLayout">
+      <item row="2" column="1" colspan="2">
+       <widget class="QLineEdit" name="confirmPasswordLineEdit">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="maxLength">
+         <number>20</number>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="2">
+       <widget class="QLabel" name="registerButtonLabel">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Don't have an account yet?</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1" colspan="2">
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>300</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
       <item row="6" column="2">
        <spacer name="verticalSpacer">
         <property name="orientation">
@@ -79,28 +134,37 @@
         </property>
        </spacer>
       </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="usernameLabel">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+      <item row="1" column="0">
+       <widget class="QLabel" name="passwordLabel">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>12</pointsize>
+         </font>
         </property>
         <property name="text">
-         <string>Username:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QPushButton" name="backToLoginButton">
-        <property name="text">
-         <string>Back</string>
+         <string>Password:</string>
         </property>
        </widget>
       </item>
       <item row="8" column="2">
        <widget class="QPushButton" name="registerButton">
+        <property name="minimumSize">
+         <size>
+          <width>158</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">min-width: 9em;
+padding: 6px;
+color: black;</string>
+        </property>
         <property name="text">
          <string>Register now</string>
         </property>
@@ -108,13 +172,77 @@
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="confirmPasswordLabel">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Confirm password:</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1" colspan="2">
-       <widget class="QLineEdit" name="confirmPasswordLineEdit">
+      <item row="3" column="1" colspan="2">
+       <widget class="QPushButton" name="loginButton">
+        <property name="minimumSize">
+         <size>
+          <width>158</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">min-width: 9em;
+padding: 6px;
+color: black;</string>
+        </property>
+        <property name="text">
+         <string>Log in</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" colspan="2">
+       <widget class="QLineEdit" name="usernameLineEdit">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="maxLength">
+         <number>20</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" colspan="2">
+       <widget class="QLineEdit" name="passwordLineEdit">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="maxLength">
          <number>20</number>
         </property>
@@ -123,17 +251,22 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="passwordLabel">
-        <property name="text">
-         <string>Password:</string>
+      <item row="0" column="0">
+       <widget class="QLabel" name="usernameLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-       </widget>
-      </item>
-      <item row="3" column="1" colspan="2">
-       <widget class="QPushButton" name="loginButton">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
-         <string>Log in</string>
+         <string>Username:</string>
         </property>
        </widget>
       </item>
@@ -150,52 +283,51 @@
         </property>
        </spacer>
       </item>
-      <item row="7" column="2">
-       <widget class="QLabel" name="registerButtonLabel">
-        <property name="text">
-         <string>Don't have an account yet?</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1" colspan="2">
-       <widget class="QLineEdit" name="usernameLineEdit">
-        <property name="maxLength">
-         <number>20</number>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1" colspan="2">
-       <widget class="QLineEdit" name="passwordLineEdit">
-        <property name="maxLength">
-         <number>20</number>
-        </property>
-        <property name="echoMode">
-         <enum>QLineEdit::Password</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1" colspan="2">
+      <item row="4" column="2">
        <widget class="QPushButton" name="signupButton">
+        <property name="minimumSize">
+         <size>
+          <width>158</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">min-width: 9em;
+padding: 6px;
+color: black;</string>
+        </property>
         <property name="text">
          <string>Sign up</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="1" colspan="2">
-       <spacer name="horizontalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
+      <item row="4" column="1">
+       <widget class="QPushButton" name="backToLoginButton">
+        <property name="minimumSize">
          <size>
-          <width>300</width>
-          <height>20</height>
+          <width>158</width>
+          <height>30</height>
          </size>
         </property>
-       </spacer>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">min-width: 9em;
+padding: 6px;
+color: black;</string>
+        </property>
+        <property name="text">
+         <string>Back</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

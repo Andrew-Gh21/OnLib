@@ -64,21 +64,24 @@ LoginWindow::LoginWindow(QWidget* parent)
     LoginWindow::setWindowIcon(icon);
     LoginWindow::setWindowTitle("Online library - Account");
 
+    this->centralWidget()->setStyleSheet("background-image:url(Images/login_background.jpg); background-position: center;");
+    this->setFixedSize(900, 600);
+
     ui->confirmPasswordLabel->hide();
     ui->confirmPasswordLineEdit->hide();
     ui->backToLoginButton->hide();
     ui->signupButton->hide();
 
     mainWindow = new MainWindow;
-    mainWindow->showMaximized();
+    //mainWindow->showMaximized();
 
     connect(ui->loginButton, &QPushButton::released, this, &LoginWindow::HandleLoginButton);
     connect(ui->signupButton, &QPushButton::released, this, &LoginWindow::HandleSignUpButton);
     connect(ui->backToLoginButton, &QPushButton::released, this, &LoginWindow::HandleBackToLoginButton);
     connect(ui->registerButton, &QPushButton::released, this, &LoginWindow::HandleRegisterButton);
 
-    QPixmap pix("Images/login.png");
-    ui->labelImage->setPixmap(pix);
+    //QPixmap pix("Images/login.png");
+    //ui->labelImage->setPixmap(pix);
 }
 
 void LoginWindow::HandleLoginButton()
