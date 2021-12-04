@@ -135,217 +135,13 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>1005</width>
-               <height>1789</height>
+               <width>1029</width>
+               <height>560</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_4">
               <item row="0" column="0">
                <layout class="QVBoxLayout" name="verticalLayout">
-                <item>
-                 <widget class="QLabel" name="recommendedBooksLabel">
-                  <property name="text">
-                   <string>Recommended books</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QScrollArea" name="recommendedBooksScrollArea">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>250</height>
-                   </size>
-                  </property>
-                  <property name="widgetResizable">
-                   <bool>true</bool>
-                  </property>
-                  <widget class="QWidget" name="scrollAreaWidgetContents_4">
-                   <property name="geometry">
-                    <rect>
-                     <x>0</x>
-                     <y>0</y>
-                     <width>979</width>
-                     <height>248</height>
-                    </rect>
-                   </property>
-                  </widget>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="actionGenreLabel">
-                  <property name="text">
-                   <string>Action</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QScrollArea" name="actionGenreScrollArea">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>250</height>
-                   </size>
-                  </property>
-                  <property name="widgetResizable">
-                   <bool>true</bool>
-                  </property>
-                  <widget class="QWidget" name="scrollAreaWidgetContents_5">
-                   <property name="geometry">
-                    <rect>
-                     <x>0</x>
-                     <y>0</y>
-                     <width>979</width>
-                     <height>248</height>
-                    </rect>
-                   </property>
-                  </widget>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="sfGenreLabel">
-                  <property name="text">
-                   <string>SF</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QScrollArea" name="sfGenreScrollArea">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>250</height>
-                   </size>
-                  </property>
-                  <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Plain</enum>
-                  </property>
-                  <property name="verticalScrollBarPolicy">
-                   <enum>Qt::ScrollBarAsNeeded</enum>
-                  </property>
-                  <property name="widgetResizable">
-                   <bool>true</bool>
-                  </property>
-                  <widget class="QWidget" name="wgtMainnSF">
-                   <property name="geometry">
-                    <rect>
-                     <x>0</x>
-                     <y>0</y>
-                     <width>979</width>
-                     <height>248</height>
-                    </rect>
-                   </property>
-                  </widget>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="comedyGenreLabel">
-                  <property name="text">
-                   <string>Comedy</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QScrollArea" name="comedyGenreScrollArea">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>250</height>
-                   </size>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Plain</enum>
-                  </property>
-                  <property name="verticalScrollBarPolicy">
-                   <enum>Qt::ScrollBarAsNeeded</enum>
-                  </property>
-                  <property name="widgetResizable">
-                   <bool>true</bool>
-                  </property>
-                  <widget class="QWidget" name="wgtMainComedy">
-                   <property name="geometry">
-                    <rect>
-                     <x>0</x>
-                     <y>0</y>
-                     <width>979</width>
-                     <height>248</height>
-                    </rect>
-                   </property>
-                  </widget>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="romanceGenreLabel">
-                  <property name="text">
-                   <string>Romance</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QScrollArea" name="romanceGenreScrollArea">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>250</height>
-                   </size>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Plain</enum>
-                  </property>
-                  <property name="verticalScrollBarPolicy">
-                   <enum>Qt::ScrollBarAsNeeded</enum>
-                  </property>
-                  <property name="widgetResizable">
-                   <bool>true</bool>
-                  </property>
-                  <widget class="QWidget" name="wgtMainRomance">
-                   <property name="geometry">
-                    <rect>
-                     <x>0</x>
-                     <y>0</y>
-                     <width>979</width>
-                     <height>248</height>
-                    </rect>
-                   </property>
-                  </widget>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="dramaGenreLabel">
-                  <property name="text">
-                   <string>Drama</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QScrollArea" name="dramaGenreScrollArea">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>250</height>
-                   </size>
-                  </property>
-                  <property name="verticalScrollBarPolicy">
-                   <enum>Qt::ScrollBarAsNeeded</enum>
-                  </property>
-                  <property name="widgetResizable">
-                   <bool>true</bool>
-                  </property>
-                  <widget class="QWidget" name="wgtMainDrama">
-                   <property name="geometry">
-                    <rect>
-                     <x>0</x>
-                     <y>0</y>
-                     <width>979</width>
-                     <height>248</height>
-                    </rect>
-                   </property>
-                  </widget>
-                 </widget>
-                </item>
                 <item>
                  <widget class="QScrollArea" name="searchBooksScrollArea">
                   <property name="verticalScrollBarPolicy">
@@ -359,8 +155,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>979</width>
-                     <height>83</height>
+                     <width>1007</width>
+                     <height>538</height>
                     </rect>
                    </property>
                   </widget>
@@ -403,8 +199,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1022</width>
-             <height>579</height>
+             <width>98</width>
+             <height>117</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">
@@ -433,8 +229,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>996</width>
-                   <height>526</height>
+                   <width>98</width>
+                   <height>28</height>
                   </rect>
                  </property>
                 </widget>

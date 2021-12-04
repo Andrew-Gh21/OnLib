@@ -26,6 +26,7 @@ int main(int argc, char* argv[])
     makeConnections(client, window, mainWindow);
     
     window.show();
+    mainWindow.show();
 
     return app.exec();
 }

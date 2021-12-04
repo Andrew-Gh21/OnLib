@@ -23,22 +23,10 @@
     <ClCompile Include="OnLib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="User.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Book.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MockBooksAndUsers.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LoginWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MainWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BorrowBook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RemoteClient.cpp">
@@ -50,20 +38,6 @@
     <ClCompile Include="BookPreview.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="User.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Book.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MockBooksAndUsers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BorrowBook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="LoginWindow.h">

@@ -185,27 +185,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Book.cpp" />
     <ClCompile Include="BookPreview.cpp" />
     <ClCompile Include="BookSection.cpp" />
-    <ClCompile Include="BorrowBook.cpp" />
     <ClCompile Include="LoginWindow.cpp" />
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="MockBooksAndUsers.cpp" />
     <ClCompile Include="OnLib.cpp" />
     <ClCompile Include="RemoteClient.cpp" />
-    <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Book.h" />
     <QtMoc Include="LoginWindow.h" />
     <QtMoc Include="MainWindow.h" />
     <QtMoc Include="BookSection.h" />
     <QtMoc Include="BookPreview.h" />
-    <ClInclude Include="BorrowBook.h" />
-    <ClInclude Include="MockBooksAndUsers.h" />
     <QtMoc Include="RemoteClient.h" />
-    <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="BookPreview.ui" />

@@ -2,7 +2,6 @@
 
 #include <QMainwindow>
 #include "ui_LoginWindow.h"
-#include"MockBooksAndUsers.h"
 #include"MainWindow.h"
 
 #include "../OnLib.DataTransfer/User.h"
@@ -40,5 +39,4 @@ private:
 	MainWindow* mainWindow;
 	static std::unordered_map<data::LogginErrors, std::string> loginErrors;
 	static std::unordered_map<data::RegisterErrors, std::string> registerErrors;
-	MockBooksAndUsers mock;
 };

@@ -1,7 +1,5 @@
 #include "LoginWindow.h"
 #include "MainWindow.h"
-#include "User.h"
-#include "MockBooksAndUsers.h"
 #include <QMessageBox>
 #include<QRegularExpressionValidator>
 #include <QPixmap>
