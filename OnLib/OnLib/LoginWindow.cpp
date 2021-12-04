@@ -6,11 +6,11 @@
 #include <sstream>
 #include <iostream>
 
-std::unordered_map<data::LogginErrors, std::string> LoginWindow::loginErrors
+std::unordered_map<data::LoginErrors, std::string> LoginWindow::loginErrors
 {
-    {data::LogginErrors::InvalidPassword, "Password is invalid"},
-    {data::LogginErrors::InvalidUser, "Username is invalid"},
-    {data::LogginErrors::UserAlreadyConnected, "This account is already logged in"}
+    {data::LoginErrors::InvalidPassword, "Password is invalid"},
+    {data::LoginErrors::InvalidUser, "Username is invalid"},
+    {data::LoginErrors::UserAlreadyConnected, "This account is already logged in"}
 };
 
 std::unordered_map<data::RegisterErrors, std::string> LoginWindow::registerErrors
@@ -23,7 +23,7 @@ std::unordered_map<data::RegisterErrors, std::string> LoginWindow::registerError
 };
 
 
-void LoginWindow::OnLoginFailure(const std::vector<data::LogginErrors>& errors)
+void LoginWindow::OnLoginFailure(const std::vector<data::LoginErrors>& errors)
 {
     std::stringstream errorsStream;
     for (auto error : errors)

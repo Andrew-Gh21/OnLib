@@ -22,7 +22,7 @@ public slots:
 
 signals:
 	void LoginSuccessfull();
-	void LoginInvalid(const std::vector<data::LogginErrors>& errors);
+	void LoginInvalid(const std::vector<data::LoginErrors>& errors);
 	void RegisterSuccesfull();
 	void RegisterInvalid(const std::vector<data::RegisterErrors>& errors);
 	void DisplayBooksRecieved(const std::vector<data::Book>& books);

@@ -29,7 +29,7 @@ signals:
 	void RegisterButtonClicked(data::User user);
 
 public slots:
-	void OnLoginFailure(const std::vector<data::LogginErrors>& errors);
+	void OnLoginFailure(const std::vector<data::LoginErrors>& errors);
 	void OnLoginSucces();
 	void OnRegisterSuccess();
 	void OnRegisterFailure(const std::vector<data::RegisterErrors>& errors);
@@ -37,6 +37,6 @@ public slots:
 private:
 	Ui::LoginWindow* ui;
 	MainWindow* mainWindow;
-	static std::unordered_map<data::LogginErrors, std::string> loginErrors;
+	static std::unordered_map<data::LoginErrors, std::string> loginErrors;
 	static std::unordered_map<data::RegisterErrors, std::string> registerErrors;
 };

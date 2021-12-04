@@ -30,9 +30,9 @@ MainWindow::MainWindow(QWidget* parent)
 
 	std::vector<data::Book> vec =
 	{
-		{0,0,0,0,0,"abc","abc","abc",1,"abc"}
+		{0,"abc","abc","abc",data::BookCategory::SF,{},{"A","B"},3}
 	};
-	vec[0].category = data::BookCategory::SF;
+	vec[0].mainCategory = data::BookCategory::SF;
 
 	AddBooksToSection(vec);
 
@@ -154,7 +154,7 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 
 	for (const auto& book : books)
 	{
-		BookSection* section = categories[book.category];
+		BookSection* section = categories[book.mainCategory];
 		BookPreview* bookPreview = new BookPreview(book, section);
 		section->AddBook(bookPreview);
 	}

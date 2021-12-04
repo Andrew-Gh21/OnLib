@@ -17,7 +17,7 @@ private:
 
 public:
 	AccountsManager(sqlite::database& db) :database(db) {};
-	bool ValidateLogin(std::shared_ptr<net::ClientConnection> client, data::User input, std::vector<data::LogginErrors>& errors);
+	bool ValidateLogin(std::shared_ptr<net::ClientConnection> client, data::User input, std::vector<data::LoginErrors>& errors);
 	bool ValidateRegister(std::shared_ptr<net::ClientConnection> client, data::User input,std::vector<data::RegisterErrors>&errors);
 	void Login(uint64_t clientId, data::User user);
 	void Logout(uint64_t clientId);

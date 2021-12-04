@@ -2,12 +2,17 @@
 
 #include <cstdint>
 
-enum class ServerResponse : uint16_t
+
+namespace data
 {
-	ValidationSuccessfull = 1,
-	SuccesfullLogin,
-	InvalidLoggin,
-	SuccesfullRegister,
-	InvalidRegister,
-	DisplayBooksRecieved
-};
+	enum class ServerResponse : uint16_t
+	{
+		ValidationSuccessfull = 1,
+		SuccesfullLogin,
+		InvalidLogin,
+		SuccesfullRegister,
+		InvalidRegister,
+		DisplayBooksRecieved
+	};
+	
+}
