@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget* parent)
 
 	for (const auto& [section, widget] : categories)
 	{
-		ui->verticalLayout->addWidget(widget);
+		ui->genreVerticalLayout->addWidget(widget);
 	}
 
 	std::vector<data::Book> vec =
@@ -36,24 +36,13 @@ MainWindow::MainWindow(QWidget* parent)
 
 	AddBooksToSection(vec);
 
-	ui->searchBooksButton->hide();
-	ui->searchLineEdit->hide();
-	ui->backToMenuButton->hide();
-	ui->searchBooksScrollArea->hide();
-	
-	ui->mainToolBar->setFixedHeight(70);
-
+	ui->iconToolBar->setFixedHeight(70);
 
 	connect(ui->actionLogOut, SIGNAL(triggered()), this, SLOT(HandleLogOutButton()));
 	connect(ui->actionDeleteAccount, SIGNAL(triggered()), this, SLOT(HandleDeleteAccountButton()));
 	connect(ui->actionSearchIcon, SIGNAL(triggered()), this, SLOT(HandleSearchIconButton()));
-	connect(ui->backToMenuButton, &QPushButton::released, this, &MainWindow::HandleBackToMenuButton);
-	connect(ui->searchBooksButton, &QPushButton::released, this, [=]() { HandleSearchBooksButton(ui->searchLineEdit->text().toStdString()); });
-
-
-
-
-
+	//connect(ui->backToMenuButton, &QPushButton::released, this, &MainWindow::HandleBackToMenuButton);
+	//connect(ui->searchBooksButton, &QPushButton::released, this, [=]() { HandleSearchBooksButton(ui->searchLineEdit->text().toStdString()); });
 }
 
 
@@ -104,28 +93,11 @@ void MainWindow::HandleDeleteAccountButton()
 
 void MainWindow::HandleSearchIconButton()
 {
-	ui->tabWidget->setCurrentIndex(0);
-
-	ui->backToMenuButton->show();
-	ui->searchLineEdit->show();
-	ui->searchBooksButton->show();
-
-
-
-
-	ui->searchBooksScrollArea->show();
 	ui->actionSearchIcon->setVisible(false);
 }
 
 void MainWindow::HandleBackToMenuButton()
 {
-	ui->backToMenuButton->hide();
-	ui->searchLineEdit->hide();
-	ui->searchBooksButton->hide();
-
-	ui->searchBooksScrollArea->hide();
-	ui->backToMenuButton->hide();
-
 	ui->actionSearchIcon->setVisible(true);
 
 	ui->searchLineEdit->setText("");
@@ -146,7 +118,7 @@ void MainWindow::HandleSearchBooksButton(std::string s)
 	{
 		
 	}
-	ui->searchBooksScrollArea->setWidget(wgtMainMyList);
+	//ui->searchBooksScrollArea->setWidget(wgtMainMyList);
 }
 
 void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
