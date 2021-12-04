@@ -2,12 +2,23 @@
 #include <string>
 #include <iostream>
 #include "OStreamLogger.h"
+#include <filesystem>
 #include "../../Include/Json/json11.cpp"
 
 #include <fstream>
 
+void CreateBasicConfig()
+{
+	std::ofstream file("appconfig.json");
+	file << "{\"server_port\": 6000,\"database\" : \"database.db\",\"log_file\" : \"log.txt\"}";
+	file.close();
+}
+
 std::string ReadAppConfig()
 {
+	if (!std::filesystem::exists("appconfig.json"))
+		CreateBasicConfig();
+
 	std::ifstream cfg("appconfig.json");
 	std::stringstream buffer;
 	buffer << cfg.rdbuf();
@@ -29,7 +40,7 @@ json11::Json GetAppConfig()
 int main()
 {
 	json11::Json appConfig = GetAppConfig();
-	std::ofstream logFile(appConfig["log_file"].string_value());
+	std::ofstream logFile(appConfig["log_file"].string_value(), std::fstream::app);
 	std::string databasePath = appConfig["database"].string_value();
 	uint16_t port = appConfig["server_port"].int_value();
 
