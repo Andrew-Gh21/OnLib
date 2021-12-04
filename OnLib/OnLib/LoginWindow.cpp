@@ -71,7 +71,7 @@ LoginWindow::LoginWindow(QWidget* parent)
     ui->signupButton->hide();
 
     mainWindow = new MainWindow;
-    //mainWindow->showMaximized();
+    mainWindow->showMaximized();
 
     connect(ui->loginButton, &QPushButton::released, this, &LoginWindow::HandleLoginButton);
     connect(ui->signupButton, &QPushButton::released, this, &LoginWindow::HandleSignUpButton);

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1079</width>
-    <height>740</height>
+    <width>925</width>
+    <height>607</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -73,6 +73,11 @@
            <layout class="QGridLayout" name="gridLayout_6">
             <item row="0" column="3">
              <widget class="QPushButton" name="backToMenuButton">
+              <property name="styleSheet">
+               <string notr="true">min-width: 7em;
+padding: 6px;
+color: black;</string>
+              </property>
               <property name="text">
                <string>Back</string>
               </property>
@@ -80,6 +85,11 @@
             </item>
             <item row="0" column="2">
              <widget class="QPushButton" name="searchBooksButton">
+              <property name="styleSheet">
+               <string notr="true">min-width: 7em;
+padding: 6px;
+color: black;</string>
+              </property>
               <property name="text">
                <string>Search</string>
               </property>
@@ -118,7 +128,19 @@
              </spacer>
             </item>
             <item row="0" column="1">
-             <widget class="QLineEdit" name="searchLineEdit"/>
+             <widget class="QLineEdit" name="searchLineEdit">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -135,8 +157,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>1029</width>
-               <height>560</height>
+               <width>868</width>
+               <height>377</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_4">
@@ -144,6 +166,9 @@
                <layout class="QVBoxLayout" name="verticalLayout">
                 <item>
                  <widget class="QScrollArea" name="searchBooksScrollArea">
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
+                  </property>
                   <property name="verticalScrollBarPolicy">
                    <enum>Qt::ScrollBarAsNeeded</enum>
                   </property>
@@ -155,8 +180,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>1007</width>
-                     <height>538</height>
+                     <width>844</width>
+                     <height>353</height>
                     </rect>
                    </property>
                   </widget>
@@ -199,8 +224,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>117</height>
+             <width>868</width>
+             <height>416</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">
@@ -229,8 +254,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>98</width>
-                   <height>28</height>
+                   <width>842</width>
+                   <height>363</height>
                   </rect>
                  </property>
                 </widget>
@@ -294,7 +319,7 @@
     </size>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonIconOnly</enum>
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -305,6 +330,14 @@
    <addaction name="actionLibraryIcon"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
+   <property name="font">
+    <font>
+     <family>Nirmala UI</family>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
@@ -346,6 +379,14 @@
    </property>
    <property name="toolTip">
     <string>Online library</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>Russo One</family>
+     <pointsize>10</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
