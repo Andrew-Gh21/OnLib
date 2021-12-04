@@ -1,6 +1,6 @@
 #include "AccountsManager.h"
 
-bool AccountsManager::ValidateLogin(std::shared_ptr<net::ClientConnection> client, data::User input, std::vector<data::LogginErrors>& errors)
+bool AccountsManager::ValidateLogin(std::shared_ptr<net::ClientConnection> client, data::User input, std::vector<data::LoginErrors>& errors)
 {
 	std::optional<std::string> optionalPassword;
 	database << "select password from user where name = ?"
@@ -12,17 +12,17 @@ bool AccountsManager::ValidateLogin(std::shared_ptr<net::ClientConnection> clien
 
 	if (!optionalPassword.has_value())
 	{
-		errors.push_back(data::LogginErrors::InvalidUser);
+		errors.push_back(data::LoginErrors::InvalidUser);
 	}
 	
 	if (optionalPassword.has_value() && optionalPassword.value() != input.password)
 	{
-		errors.push_back(data::LogginErrors::InvalidPassword);
+		errors.push_back(data::LoginErrors::InvalidPassword);
 	}
 
 	if (users.find(client->GetId()) != users.end())
 	{
-		errors.push_back(data::LogginErrors::UserAlreadyConnected);
+		errors.push_back(data::LoginErrors::UserAlreadyConnected);
 	}
 
 	return errors.empty();

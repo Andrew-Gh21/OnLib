@@ -1,10 +1,13 @@
 #pragma once
 
 #include <cstdint>
-
-enum class ClientRequest : uint16_t
+namespace data
 {
-	Login = 1,
-	Register,
-	RequestDisplayBooks
-};
+	enum class ClientRequest : uint16_t
+	{
+		Login = 1,
+		Register,
+		RequestDisplayBooks
+	};
+}
+

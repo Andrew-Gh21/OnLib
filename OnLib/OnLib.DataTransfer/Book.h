@@ -8,21 +8,17 @@ namespace data
 	struct Book
 	{
 		uint64_t id;
-		uint64_t bookId;
-		uint64_t bestBookId;
-		uint64_t workId;
-		uint32_t booksCount;
 		std::string isbn;
-		std::string isbn13;
-		std::string authors;
-		int32_t originalPublicationYear;
-		std::string originalTitle;
-		BookCategory category;
+		std::string title;
+		std::string coverUrl;
+		BookCategory mainCategory;
+		std::vector<BookCategory> otherCategories;
+		std::vector<std::string>authors;
+		float rating;
 
-		Book() :id(), bookId(), bestBookId(), workId(), booksCount(), isbn(), isbn13(), authors(), originalPublicationYear(), originalTitle() {}
-		Book(uint64_t id,uint64_t bookId,uint64_t bestBookId,uint64_t workId,uint32_t booksCount,const std::string& isbn,const std::string& isbn13,const std::string& authors,int32_t originalPublicationYear,const std::string& originalTitle) :id(id), bookId(bookId), bestBookId(bestBookId), workId(workId), booksCount(booksCount), isbn(isbn), isbn13(isbn13), authors(authors), originalPublicationYear(originalPublicationYear), originalTitle(originalTitle) {}
-
+		Book() :id(), isbn(), title(), coverUrl(), mainCategory(), otherCategories(), authors(), rating() {}
+		Book(uint64_t id, const std::string& isbn, const std::string& title, const std::string& coverUrl, BookCategory mainCategory, const std::vector<BookCategory>& otherCategories, const std::vector<std::string>& authors, float rating) :id(id), isbn(isbn), title(title), coverUrl(coverUrl), mainCategory(mainCategory), otherCategories(otherCategories), authors(authors), rating(rating) {}
 		static void Serialize(net::Message& msg, Book book);
 		static Book Deserialize(net::Message& msg);
 	};
-};
+}

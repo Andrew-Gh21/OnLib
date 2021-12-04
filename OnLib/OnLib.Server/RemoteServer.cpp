@@ -23,7 +23,7 @@ RemoteServer::RemoteServer(uint16_t port, const MultiLogger& logger, const sqlit
 void RemoteServer::OnClientValidated(Client client)
 {
 	net::Message msg;
-	msg.header.messageType = static_cast<uint16_t>(ServerResponse::ValidationSuccessfull);
+	msg.header.messageType = static_cast<uint16_t>(data::ServerResponse::ValidationSuccessfull);
 	client->Send(msg);
 }
 
@@ -42,28 +42,28 @@ void RemoteServer::OnClientDisconnect(Client client)
 
 void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 {
-	auto request = static_cast<ClientRequest>(message.header.messageType);;
+	auto request = static_cast<data::ClientRequest>(message.header.messageType);;
 
 	switch (request)
 	{
-	case ClientRequest::Login:
+	case data::ClientRequest::Login:
 	{
 		data::User userData = data::User::Deserialize(message);
 		SendLoginResponse(client, userData);
 		break;
 	}
 		
-	case ClientRequest::Register:
+	case data::ClientRequest::Register:
 	{
 		data::User userData = data::User::Deserialize(message);
 		SendRegisterResponse(client, userData);
 		break;
 	}
-	case ClientRequest::RequestDisplayBooks:
+	case data::ClientRequest::RequestDisplayBooks:
 	{
 		std::vector<data::Book> displayBooks; // = booksManager.GetDisplayBooks()
 		net::Message response;
-		response.header.messageType = static_cast<int32_t>(ServerResponse::DisplayBooksRecieved);
+		response.header.messageType = static_cast<int32_t>(data::ServerResponse::DisplayBooksRecieved);
 		// response << displayBooks;
 		MessageClient(client, response);
 		break;
@@ -78,11 +78,11 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 void RemoteServer::SendLoginResponse(Client client, data::User data)
 {
 	net::Message response;
-	std::vector<data::LogginErrors> errors;
+	std::vector<data::LoginErrors> errors;
 
 	bool logInSuccesfull = accountsManager.ValidateLogin(client, data, errors);
 	response.header.messageType = static_cast<uint8_t>(logInSuccesfull ? 
-		ServerResponse::SuccesfullLogin : ServerResponse::InvalidLoggin);
+		data::ServerResponse::SuccesfullLogin : data::ServerResponse::InvalidLogin);
 
 	if (logInSuccesfull)
 	{
@@ -103,7 +103,7 @@ void RemoteServer::SendRegisterResponse(Client client, data::User data)
 
 	bool registerSuccessfull = accountsManager.ValidateRegister(client, data, errors);
 	response.header.messageType = static_cast<uint8_t>(registerSuccessfull ?
-		ServerResponse::SuccesfullRegister : ServerResponse::InvalidRegister);
+		data::ServerResponse::SuccesfullRegister : data::ServerResponse::InvalidRegister);
 
 	if (!registerSuccessfull)
 		response << errors;

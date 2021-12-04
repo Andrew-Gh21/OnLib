@@ -3,7 +3,7 @@
 
 namespace data
 {
-	enum class LogginErrors : uint8_t
+	enum class LoginErrors : uint8_t
 	{
 		InvalidUser = 1,
 		InvalidPassword,

@@ -22,7 +22,7 @@ RemoteClient::RemoteClient(QObject* parent) :
 void RemoteClient::OnLoginRequest(const data::User& user)
 {
 	net::Message msg;
-	msg.header.messageType = static_cast<uint16_t>(ClientRequest::Login);
+	msg.header.messageType = static_cast<uint16_t>(data::ClientRequest::Login);
 	data::User::Serialize(msg, user);
 	Send(msg);
 }
@@ -30,7 +30,7 @@ void RemoteClient::OnLoginRequest(const data::User& user)
 void RemoteClient::OnRegisterRequest(const data::User& user)
 {
 	net::Message msg;
-	msg.header.messageType = static_cast<uint16_t>(ClientRequest::Register);
+	msg.header.messageType = static_cast<uint16_t>(data::ClientRequest::Register);
 	data::User::Serialize(msg, user);
 	Send(msg);
 }
@@ -43,38 +43,38 @@ RemoteClient::~RemoteClient()
 
 void RemoteClient::OnMessageRecieved(net::Message& msg)
 {
-	ServerResponse response = static_cast<ServerResponse>(msg.header.messageType);
+	data::ServerResponse response = static_cast<data::ServerResponse>(msg.header.messageType);
 
 	switch (response)
 	{
-	case ServerResponse::ValidationSuccessfull:
+	case data::ServerResponse::ValidationSuccessfull:
 		break;
-	case ServerResponse::SuccesfullLogin:
+	case data::ServerResponse::SuccesfullLogin:
 	{
 		net::Message requestBooksMessage;
-		requestBooksMessage.header.messageType = static_cast<int32_t>(ClientRequest::RequestDisplayBooks);
+		requestBooksMessage.header.messageType = static_cast<int32_t>(data::ClientRequest::RequestDisplayBooks);
 		Send(requestBooksMessage);
 		emit LoginSuccessfull();
 		break;
 	}
-	case ServerResponse::InvalidLoggin:
+	case data::ServerResponse::InvalidLogin:
 	{
-		std::vector<data::LogginErrors> errors;
+		std::vector<data::LoginErrors> errors;
 		msg >> errors;
 		emit LoginInvalid(errors);
 		break;
 	}
-	case ServerResponse::SuccesfullRegister:
+	case data::ServerResponse::SuccesfullRegister:
 		emit RegisterSuccesfull();
 		break;
-	case ServerResponse::InvalidRegister:
+	case data::ServerResponse::InvalidRegister:
 	{
 		std::vector<data::RegisterErrors> errors;
 		msg >> errors;
 		emit RegisterInvalid(errors);
 		break;
 	}
-	case ServerResponse::DisplayBooksRecieved:
+	case data::ServerResponse::DisplayBooksRecieved:
 	{
 		std::vector<data::Book> books; // TODO
 		emit DisplayBooksRecieved(books);
