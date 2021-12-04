@@ -16,4 +16,5 @@ public:
 
 private:
 	Ui::BookSection ui;
+	QHBoxLayout* layout;
 };

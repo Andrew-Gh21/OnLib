@@ -98,11 +98,11 @@
     <LibraryPath>../x64/Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <QtModules>widgets;</QtModules>
+    <QtModules>network;widgets;</QtModules>
     <QtInstall>6.2</QtInstall>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <QtModules>widgets;</QtModules>
+    <QtModules>network;widgets;</QtModules>
     <QtInstall>6.2</QtInstall>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
