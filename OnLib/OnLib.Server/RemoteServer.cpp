@@ -2,7 +2,7 @@
 #include <iostream>
 
 RemoteServer::RemoteServer(uint16_t port, const MultiLogger& logger, const sqlite::database& db) :
-	net::Server(port), logger(logger), database(db), accountsManager(database)
+	net::Server(port), logger(logger), database(db), accountsManager(database), booksManager(database)
 {
 	log = [&logger](LogMessageType type, const std::string& msg)
 	{
@@ -57,6 +57,15 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 	{
 		data::User userData = data::User::Deserialize(message);
 		SendRegisterResponse(client, userData);
+		break;
+	}
+	case ClientRequest::RequestDisplayBooks:
+	{
+		std::vector<data::Book> displayBooks; // = booksManager.GetDisplayBooks()
+		net::Message response;
+		response.header.messageType = static_cast<int32_t>(ServerResponse::DisplayBooksRecieved);
+		// response << displayBooks;
+		MessageClient(client, response);
 		break;
 	}
 	default:

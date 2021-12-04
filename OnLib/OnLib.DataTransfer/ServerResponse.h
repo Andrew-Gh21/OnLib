@@ -8,5 +8,6 @@ enum class ServerResponse : uint16_t
 	SuccesfullLogin,
 	InvalidLoggin,
 	SuccesfullRegister,
-	InvalidRegister
+	InvalidRegister,
+	DisplayBooksRecieved
 };

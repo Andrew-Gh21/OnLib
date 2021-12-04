@@ -12,6 +12,7 @@ void makeConnections(RemoteClient& client, LoginWindow& window, MainWindow& main
     QObject::connect(&client, &RemoteClient::RegisterInvalid, &window, &LoginWindow::OnRegisterFailure);
     QObject::connect(&client, &RemoteClient::RegisterSuccesfull, &window, &LoginWindow::OnRegisterSuccess);
     // Client <-> Main
+    QObject::connect(&client, &RemoteClient::DisplayBooksRecieved, &mainWindow, &MainWindow::AddBooksToSection);
 }
 
 int main(int argc, char* argv[])

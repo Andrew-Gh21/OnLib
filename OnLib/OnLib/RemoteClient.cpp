@@ -50,8 +50,13 @@ void RemoteClient::OnMessageRecieved(net::Message& msg)
 	case ServerResponse::ValidationSuccessfull:
 		break;
 	case ServerResponse::SuccesfullLogin:
+	{
+		net::Message requestBooksMessage;
+		requestBooksMessage.header.messageType = static_cast<int32_t>(ClientRequest::RequestDisplayBooks);
+		Send(requestBooksMessage);
 		emit LoginSuccessfull();
 		break;
+	}
 	case ServerResponse::InvalidLoggin:
 	{
 		std::vector<data::LogginErrors> errors;
@@ -67,6 +72,12 @@ void RemoteClient::OnMessageRecieved(net::Message& msg)
 		std::vector<data::RegisterErrors> errors;
 		msg >> errors;
 		emit RegisterInvalid(errors);
+		break;
+	}
+	case ServerResponse::DisplayBooksRecieved:
+	{
+		std::vector<data::Book> books; // TODO
+		emit DisplayBooksRecieved(books);
 		break;
 	}
 	default:

@@ -10,6 +10,7 @@
 #include "User.h"
 #include "Errors.h"
 #include "AccountsManager.h"
+#include "BooksManager.h"
 
 class RemoteServer :
     public net::Server
@@ -35,6 +36,7 @@ private:
 private:
 	MultiLogger logger;
 	AccountsManager accountsManager;
+	BooksManager booksManager;
 	sqlite::database database;
 };
 

@@ -6,6 +6,7 @@
 #include <qobject.h>
 #include <vector>
 #include "ClientRequest.h"
+#include <Book.h>
 
 class RemoteClient : public QObject, public net::Client
 {
@@ -24,6 +25,7 @@ signals:
 	void LoginInvalid(const std::vector<data::LogginErrors>& errors);
 	void RegisterSuccesfull();
 	void RegisterInvalid(const std::vector<data::RegisterErrors>& errors);
+	void DisplayBooksRecieved(const std::vector<data::Book>& books);
 
 private:
 	void OnMessageRecieved(net::Message& msg);

@@ -17,13 +17,16 @@ class MainWindow : public QMainWindow
 public:
 	explicit MainWindow(QWidget* parent = Q_NULLPTR);
 	~MainWindow();
+
+public slots:
+	void AddBooksToSection(const std::vector<data::Book>& books);
+
 private slots:
 	void HandleLogOutButton();
 	void HandleDeleteAccountButton();
 	void HandleSearchIconButton();
 	void HandleBackToMenuButton();
 	void HandleSearchBooksButton(std::string s);
-	void AddBooksToSection(const std::vector<data::Book>& books);
 
 private:
 	std::unordered_map<data::BookCategory, BookSection*> categories;
