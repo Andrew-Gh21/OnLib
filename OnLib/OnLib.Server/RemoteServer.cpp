@@ -48,14 +48,16 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 	{
 	case data::ClientRequest::Login:
 	{
-		data::User userData = data::User::Deserialize(message);
+		data::User userData;
+		net::Deserialize(message, userData);
 		SendLoginResponse(client, userData);
 		break;
 	}
 		
 	case data::ClientRequest::Register:
 	{
-		data::User userData = data::User::Deserialize(message);
+		data::User userData;
+		net::Deserialize(message, userData);
 		SendRegisterResponse(client, userData);
 		break;
 	}
@@ -90,7 +92,7 @@ void RemoteServer::SendLoginResponse(Client client, data::User data)
 	}
 	else
 	{
-		response << errors;
+		net::Serialize(response, std::cbegin(errors), std::cend(errors));
 	}
 
 	MessageClient(client, response);
@@ -106,7 +108,7 @@ void RemoteServer::SendRegisterResponse(Client client, data::User data)
 		data::ServerResponse::SuccesfullRegister : data::ServerResponse::InvalidRegister);
 
 	if (!registerSuccessfull)
-		response << errors;
+		net::Serialize(response, std::cbegin(errors), std::cend(errors));
 
 	MessageClient(client, response);
 }

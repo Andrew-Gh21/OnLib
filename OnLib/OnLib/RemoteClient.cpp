@@ -23,7 +23,7 @@ void RemoteClient::OnLoginRequest(const data::User& user)
 {
 	net::Message msg;
 	msg.header.messageType = static_cast<uint16_t>(data::ClientRequest::Login);
-	data::User::Serialize(msg, user);
+	net::Serialize(msg, user);
 	Send(msg);
 }
 
@@ -31,7 +31,7 @@ void RemoteClient::OnRegisterRequest(const data::User& user)
 {
 	net::Message msg;
 	msg.header.messageType = static_cast<uint16_t>(data::ClientRequest::Register);
-	data::User::Serialize(msg, user);
+	net::Serialize(msg, user);
 	Send(msg);
 }
 
@@ -60,7 +60,7 @@ void RemoteClient::OnMessageRecieved(net::Message& msg)
 	case data::ServerResponse::InvalidLogin:
 	{
 		std::vector<data::LoginErrors> errors;
-		msg >> errors;
+		net::Deserialize(msg, errors, true);
 		emit LoginInvalid(errors);
 		break;
 	}
@@ -70,7 +70,7 @@ void RemoteClient::OnMessageRecieved(net::Message& msg)
 	case data::ServerResponse::InvalidRegister:
 	{
 		std::vector<data::RegisterErrors> errors;
-		msg >> errors;
+		net::Deserialize(msg, errors, true);
 		emit RegisterInvalid(errors);
 		break;
 	}

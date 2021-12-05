@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <vector>
 #include <ostream>
+#include <type_traits>
 
 namespace net
 {
@@ -35,9 +36,6 @@ namespace net
 		/// <returns>Modified message</returns>
 		friend Message& operator << (Message& message, const Data& data);
 
-		template<typename VectorData>
-		friend Message& operator << (Message& message, const std::vector<VectorData>& data);
-		
 		template<typename Data>
 		/// <summary>
 		/// Extract data from message(FIFO)
@@ -47,9 +45,6 @@ namespace net
 		/// <param name="data">Extraction destination</param>
 		/// <returns>The message without the extracted data</returns>
 		friend Message& operator >> (Message& message, Data& data);
-
-		template<typename VectorData>
-		friend Message& operator >> (Message& message, std::vector<VectorData>& data);
 	};
 
 	class ClientConnection;
@@ -90,49 +85,76 @@ namespace net
 		return message;
 	}
 
-	template<typename VectorData>
-	Message& operator<<(Message& message, const std::vector<VectorData>& data)
+	template<typename T, bool = std::is_enum<T>::value>
+	struct safe_underlying_type
 	{
-		auto vectorByteSize = data.size() * sizeof(VectorData);
-		auto messageInitialSize = message.body.size();
+		using type = typename std::underlying_type<T>::type;
+	};
 
-		message.body.resize(messageInitialSize + vectorByteSize);
+	template<typename T>
+	struct safe_underlying_type<T, false>
+	{
+		using type = T;
+	};
 
-		std::memcpy(message.body.data() + messageInitialSize, data.data(), vectorByteSize);
-		message.header.messageSize = message.GetSize();
 
-		message << data.size();
-
-		return message;
+	template<class T>
+	void Serialize(Message& message, const T& data)
+	{
+		if (std::is_enum<T>::value)
+		{
+			using enumUType = typename safe_underlying_type<T>::type;
+			enumUType value = static_cast<enumUType>(data);
+			message << value;
+			return;
+		}
+		message << data;
 	}
 
-	template<typename VectorData>
-	Message& operator>>(Message& message, std::vector<VectorData>& data)
+	template<class T>
+	void Deserialize(Message& message, T& data)
 	{
-		std::size_t vectSize;
-		message >> vectSize;
+		if (std::is_enum<T>::value)
+		{
+			using enumUType = typename safe_underlying_type<T>::type;
+			enumUType value;
+			message >> value;
+			data = static_cast<T>(value);
+			return;
+		}
+		message >> data;
+	}
 
-		auto vectorByteSize = vectSize * sizeof(VectorData);
+	template<typename SizeType = std::size_t, class InputIt>
+	void Serialize(Message& message, InputIt begin, InputIt end)
+	{
+		SizeType size = std::distance(begin, end);
 
-		VectorData* buffer = new VectorData[vectSize];
+		for (InputIt it = begin; it != end; ++it)
+		{
+			Serialize(message, *it);
+		}
 
-		auto dataBegin = message.body.size() - vectorByteSize;
-		std::memcpy(buffer, message.body.data() + dataBegin, vectorByteSize);
-		message.body.resize(dataBegin);
+		Serialize(message, size);
+	}
 
-		message.header.messageSize = message.GetSize();
+	template<typename SizeType = std::size_t, typename Container>
+	void Deserialize(Message& message, Container& container, bool keepOrder)
+	{
+		using value_type = typename Container::value_type;
 
-		std::copy(buffer, buffer + vectSize, std::back_inserter(data));
-		//data = std::vector<VectorData>(buffer, vectSize);
+		SizeType size;
+		Deserialize(message, size);
+		value_type* buffer = new value_type[size];
+
+		for (SizeType index = 0; index < size; index++)
+		{
+			SizeType insertIndex = keepOrder ? size - index - 1 : index;
+			Deserialize(message, buffer[insertIndex]);
+		}
+
+		std::copy(buffer, buffer + size, std::back_inserter(container));
 		delete[] buffer;
-
-		return message;
 	}
-
-	template<>
-	Message& operator<<(Message& message, const std::string& data);
-
-	template<>
-	Message& operator>>(Message& message, std::string& data);
 }
 
