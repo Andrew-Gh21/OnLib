@@ -13,8 +13,10 @@ class BooksManager
 {
 private:
 	sqlite::database& database;
+	void GetAuthorsAndOtherCategories(const std::vector<data::Book>& books);
 
 public:
 	BooksManager(sqlite::database& db) :database(db) {};
+	std::vector<data::Book> GetNewestFiveBooksFromEachCategory();
 };
 
