@@ -6,6 +6,16 @@
 
 namespace data
 {
+	struct LendBook
+	{
+		uint64_t bookId;
+		std::string lendDate;
+		std::string returnDate;
+
+		LendBook() : bookId(), lendDate(), returnDate() {}
+		LendBook(uint64_t bookId, std::string lendDate, std::string returnDate) : bookId(bookId), lendDate(lendDate), returnDate(returnDate) {}
+	};
+
 	struct Book
 	{
 		uint64_t id;

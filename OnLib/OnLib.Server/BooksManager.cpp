@@ -59,3 +59,24 @@ std::vector<data::Book> BooksManager::GetNewestFiveBooksFromEachCategory()
 
 	return *optionalTopFiveBooks;
 }
+
+std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
+{
+	std::optional<std::vector<data::LendBook>> optionalLendedBooks;
+	database << "select * from user_book where user_id=?" << userId;
+	[&optionalLendedBooks](uint64_t userId , uint64_t bookId, std::string lendDate, std::string returnDate)
+	{
+		optionalLendedBooks->push_back(data::LendBook(bookId, lendDate, returnDate));
+	};
+	if (optionalLendedBooks.has_value())
+	{
+		return *optionalLendedBooks;
+	}
+}
+
+void BooksManager::AddLendedBookToUser(uint64_t bookId, uint64_t userId)
+{
+	
+	database << "insert into user_book values (?,?,?,?)"
+		<< userId << bookId << new std::string() << new std::string();
+}

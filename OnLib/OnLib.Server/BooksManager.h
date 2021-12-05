@@ -18,5 +18,7 @@ private:
 public:
 	BooksManager(sqlite::database& db) :database(db) {};
 	std::vector<data::Book> GetNewestFiveBooksFromEachCategory();
+	std::vector<data::LendBook>GetLendedBooks(uint64_t bookId);
+	void AddLendedBookToUser(uint64_t bookId, uint64_t userId);
 };
 
