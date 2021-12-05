@@ -27,8 +27,9 @@ private slots:
 	void HandleSearchIconButton();
 	void HandleBackToMenuButton();
 	void HandleSearchBooksButton(std::string s);
-
+	
 private:
 	std::unordered_map<data::BookCategory, BookSection*> categories;
 	Ui::MainWindow* ui;
+	QPixmap DownloadImageFrom(const QString& url);
 };
