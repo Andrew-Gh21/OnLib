@@ -29,6 +29,13 @@ MainWindow::MainWindow(QWidget* parent)
 		ui->genreVerticalLayout->addWidget(widget);
 	}
 
+	std::vector<data::Book> vec =
+	{
+		{0,"abc","abc","abc",data::BookCategory::SF,{},{"A","B"},3}
+	};
+
+	AddBooksToSection(vec);
+
 	ui->iconToolBar->setFixedHeight(70);
 
 	connect(ui->actionLogOut, SIGNAL(triggered()), this, SLOT(HandleLogOutButton()));
