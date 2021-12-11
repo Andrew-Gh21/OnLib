@@ -25,7 +25,9 @@ std::vector<data::Book> BooksManager::GetNewestFiveBooksFromEachCategory()
 
 	for (auto& book : books)
 	{
-		// Fill authors, categories, rating
+		GetAuthors(book);
+		GetCategories(book);
+		GetRating(book);
 	}
 
 	return books;
@@ -63,6 +65,36 @@ void BooksManager::GetAuthors(data::Book& book)
 	auto output = [&book](std::string name)
 	{
 		book.authors.push_back(name);
+	};
+
+	database << query << book.id
+		>> output;
+}
+
+void BooksManager::GetCategories(data::Book& book)
+{
+	constexpr static const char* query = 
+		"select category_id from book_category  ";
+		"where book_id = ? AND category_id NOT IN (?)";
+
+	auto output = [&book](uint64_t categoryId)
+	{
+		book.otherCategories.push_back(static_cast<data::BookCategory>(categoryId - 1));
+	};
+
+	database << query << book.id << static_cast<uint64_t>(book.mainCategory)
+		>> output;
+}
+
+void BooksManager::GetRating(data::Book& book)
+{
+	constexpr static const char* query = 
+		"select AVG(rating) from book_rating "
+		"where book_id = ?";
+
+	auto output = [&book](float rating)
+	{
+		book.rating=rating;
 	};
 
 	database << query << book.id

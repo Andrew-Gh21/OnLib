@@ -1,7 +1,7 @@
 #pragma once
 namespace data
 {
-    enum class BookCategory
+    enum class BookCategory : uint64_t
     {
         SF,
         Romantic,
