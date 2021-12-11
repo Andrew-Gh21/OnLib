@@ -1,4 +1,3 @@
-
 #include "MainWindow.h"
 #include <iostream>
 #include "LoginWindow.h"
@@ -43,9 +42,8 @@ MainWindow::MainWindow(QWidget* parent)
 	connect(ui->actionLogOut, SIGNAL(triggered()), this, SLOT(HandleLogOutButton()));
 	connect(ui->actionDeleteAccount, SIGNAL(triggered()), this, SLOT(HandleDeleteAccountButton()));
 	connect(ui->actionSearchIcon, SIGNAL(triggered()), this, SLOT(HandleSearchIconButton()));
-	//connect(ui->backToMenuButton, &QPushButton::released, this, &MainWindow::HandleBackToMenuButton);
-	//connect(ui->searchBooksButton, &QPushButton::released, this, [=]() { HandleSearchBooksButton(ui->searchLineEdit->text().toStdString()); });
-
+	connect(ui->actionHome, SIGNAL(triggered()), this, SLOT(HandleHomeButton()));
+	connect(ui->actionMyList, SIGNAL(triggered()), this, SLOT(HandleMyListButton()));
 }
 
 
@@ -96,6 +94,7 @@ void MainWindow::HandleDeleteAccountButton()
 
 void MainWindow::HandleSearchIconButton()
 {
+	ui->stackedWidget->setCurrentIndex(1);
 	ui->actionSearchIcon->setVisible(false);
 }
 
@@ -105,6 +104,18 @@ void MainWindow::HandleBackToMenuButton()
 
 	ui->searchLineEdit->setText("");
 	HandleSearchBooksButton("");
+}
+
+void MainWindow::HandleHomeButton()
+{
+	ui->stackedWidget->setCurrentIndex(0);
+	ui->actionSearchIcon->setVisible(true);
+}
+
+void MainWindow::HandleMyListButton()
+{
+	ui->stackedWidget->setCurrentIndex(2);
+	ui->actionSearchIcon->setVisible(true);
 }
 
 void MainWindow::HandleSearchBooksButton(std::string s)
@@ -139,18 +150,14 @@ QPixmap MainWindow::DownloadImageFrom(const QString& url)
 	return pm;
 }
 
-
-
 void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 {
-
 	for (const auto& book : books)
 	{
 		BookSection* section = categories[book.mainCategory];
 		BookPreview* bookPreview = new BookPreview(book, section);
 		section->AddBook(bookPreview);
 	}
-
 }
 
 MainWindow::~MainWindow()

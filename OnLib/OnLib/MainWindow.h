@@ -26,6 +26,8 @@ private slots:
 	void HandleDeleteAccountButton();
 	void HandleSearchIconButton();
 	void HandleBackToMenuButton();
+	void HandleHomeButton();
+	void HandleMyListButton();
 	void HandleSearchBooksButton(std::string s);
 	
 private:

@@ -234,8 +234,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>975</width>
-             <height>509</height>
+             <width>105</width>
+             <height>105</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_8">
@@ -252,8 +252,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>953</width>
-                 <height>487</height>
+                 <width>83</width>
+                 <height>83</height>
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_10">
@@ -332,7 +332,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionHome"/>
-   <addaction name="actionMy_List"/>
+   <addaction name="actionMyList"/>
   </widget>
   <widget class="QToolBar" name="toolBar2">
    <property name="font">
@@ -415,7 +415,7 @@
     <string>Home</string>
    </property>
   </action>
-  <action name="actionMy_List">
+  <action name="actionMyList">
    <property name="text">
     <string>My List</string>
    </property>
