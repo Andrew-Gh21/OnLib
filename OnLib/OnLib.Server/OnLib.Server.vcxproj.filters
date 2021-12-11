@@ -43,5 +43,13 @@
     <None Include="appconfig.json">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="database.db">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

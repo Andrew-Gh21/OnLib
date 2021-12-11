@@ -17,6 +17,7 @@ RemoteServer::RemoteServer(uint16_t port, const MultiLogger& logger, const sqlit
 		message << msg;
 
 		logger.Send(message, convertor[type]);
+
 	};
 }
 
@@ -63,10 +64,10 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 	}
 	case data::ClientRequest::RequestDisplayBooks:
 	{
-		std::vector<data::Book> displayBooks; // = booksManager.GetDisplayBooks()
+		std::vector<data::Book> displayBooks = booksManager.GetNewestFiveBooksFromEachCategory();
 		net::Message response;
-		response.header.messageType = static_cast<int32_t>(data::ServerResponse::DisplayBooksRecieved);
-		// response << displayBooks;
+		response.header.messageType = static_cast<uint16_t>(data::ServerResponse::DisplayBooksRecieved);
+		response << displayBooks;
 		MessageClient(client, response);
 		break;
 	}

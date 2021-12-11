@@ -182,6 +182,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="appconfig.json" />
+    <None Include="database.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

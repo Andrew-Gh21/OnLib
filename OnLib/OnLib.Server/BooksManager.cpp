@@ -39,25 +39,32 @@ void BooksManager::GetAuthorsAndOtherCategories(const std::vector<data::Book>& b
 
 std::vector<data::Book> BooksManager::GetNewestFiveBooksFromEachCategory()
 {
-	std::optional<std::vector<data::Book>> optionalTopFiveBooks;
-	database << "select b.id, b.isbn, b.title, b.cover_url, b.added_date, c.name, r.rating from book b inner join category c on c.id = b.main_category_id  inner join book_rating r on r.book_id = b.id group by c.name order by added_date desc limit 5";
-	//   select b.id, b.isbn, b.title, b.cover_url, b.added_date, c.name, r.rating from book b
-	//   inner join category c on c.id = b.main_category_id
-	//   inner join book_rating r on r.book_id = b.id
-	//	 group by c.name
-	//	 order by added_date desc
-	//	 limit 5
-	[&optionalTopFiveBooks](uint64_t id,std::string isbn,std::string title,std::string coverUrl,data::BookCategory mainCategory,float rating)
+	constexpr static const char* query =
+		"SELECT b.id, b.isbn, b.title, b.cover_url, b.added_date, c.id as category_id FROM book as b "
+		"INNER JOIN category c ON b.main_category_id = c.id "
+		"WHERE b.id in( "
+		"	SELECT b1.id FROM book as b1 "
+		"	WHERE b.main_category_id = b1.main_category_id "
+		"	ORDER BY added_date LIMIT 0, 5)";
+
+	std::vector<data::Book> books;
+
+	auto output = [&books](uint64_t id, std::string isbn, std::string title,
+		std::string coverUrl, std::string addedDate, uint64_t categoryId) 
 	{
-		optionalTopFiveBooks->push_back(data::Book(id,isbn,title,coverUrl,mainCategory,rating));
+		data::Book book(id, isbn, title, coverUrl, static_cast<data::BookCategory>(categoryId - 1), 0);
+		books.push_back(std::move(book));
 	};
 
-	if (optionalTopFiveBooks.has_value())
+	database << query 
+		>> output;
+
+	for (auto& book : books)
 	{
-		GetAuthorsAndOtherCategories(*optionalTopFiveBooks);
+		// Fill authors, categories, rating
 	}
 
-	return *optionalTopFiveBooks;
+	return books;
 }
 
 std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
@@ -78,5 +85,5 @@ void BooksManager::AddLendedBookToUser(uint64_t bookId, uint64_t userId)
 {
 	
 	database << "insert into user_book values (?,?,?,?)"
-		<< userId << bookId << new std::string() << new std::string();
+		<< userId << bookId << std::string() << std::string();
 }

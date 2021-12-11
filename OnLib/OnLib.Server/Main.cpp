@@ -39,19 +39,6 @@ json11::Json GetAppConfig()
 
 int main()
 {
-	net::Message test;
-	std::vector<data::User> testUsers{ {0, "Stefan", "pass"}, {1, "stefan2", "pass2"} };
-	std::vector<data::User> resultUsers;
-
-	std::vector<data::LoginErrors> testErrors{ data::LoginErrors::InvalidPassword, data::LoginErrors::InvalidUser };
-	std::vector<data::LoginErrors> result;
-
-	net::Serialize(test, std::cbegin(testErrors), std::cend(testErrors));
-	net::Deserialize(test, result, true);
-
-	net::Serialize(test, std::cbegin(testUsers), std::cend(testUsers));
-	net::Deserialize(test, resultUsers, true);
-
 	json11::Json appConfig = GetAppConfig();
 	std::ofstream logFile(appConfig["log_file"].string_value(), std::fstream::app);
 	std::string databasePath = appConfig["database"].string_value();

@@ -52,9 +52,9 @@ void RemoteClient::OnMessageRecieved(net::Message& msg)
 	case data::ServerResponse::SuccesfullLogin:
 	{
 		net::Message requestBooksMessage;
+		emit LoginSuccessfull();
 		requestBooksMessage.header.messageType = static_cast<int32_t>(data::ClientRequest::RequestDisplayBooks);
 		Send(requestBooksMessage);
-		emit LoginSuccessfull();
 		break;
 	}
 	case data::ServerResponse::InvalidLogin:
