@@ -187,6 +187,7 @@
   <ItemGroup>
     <ClCompile Include="BookPreview.cpp" />
     <ClCompile Include="BookSection.cpp" />
+    <ClCompile Include="FileDownloader.cpp" />
     <ClCompile Include="LoginWindow.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="OnLib.cpp" />
@@ -212,6 +213,9 @@
     <ProjectReference Include="..\OnLib.Networking\OnLib.Networking.vcxproj">
       <Project>{244ac26f-c00b-43c8-a88c-6f08212bb1cc}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="FileDownloader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

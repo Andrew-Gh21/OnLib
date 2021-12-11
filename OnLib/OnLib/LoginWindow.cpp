@@ -34,7 +34,7 @@ void LoginWindow::OnLoginFailure(const std::vector<data::LoginErrors>& errors)
 
 void LoginWindow::OnLoginSucces()
 {
-    mainWindow->show();
+    static_cast<MainWindow*>(parent())->showMaximized();
     this->close();
 }
 
@@ -69,9 +69,6 @@ LoginWindow::LoginWindow(QWidget* parent)
     ui->confirmPasswordLineEdit->hide();
     ui->backToLoginButton->hide();
     ui->signupButton->hide();
-
-    mainWindow = new MainWindow;
-    mainWindow->showMaximized();
 
     connect(ui->loginButton, &QPushButton::released, this, &LoginWindow::HandleLoginButton);
     connect(ui->signupButton, &QPushButton::released, this, &LoginWindow::HandleSignUpButton);

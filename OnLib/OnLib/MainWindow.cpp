@@ -6,6 +6,7 @@
 #include "Book.h"
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include "FileDownloader.h"
 
 MainWindow::MainWindow(QWidget* parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow)
@@ -191,6 +192,12 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 	{
 		BookSection* section = categories[book.mainCategory];
 		BookPreview* bookPreview = new BookPreview(book, section);
+		
+		FileDownloader* coverDownloader = new FileDownloader(book.coverUrl, this);
+		connect(coverDownloader, &FileDownloader::DownloadFinished, [coverDownloader, bookPreview]() {
+			bookPreview->BookCoverRecieved(coverDownloader->GetData());
+			});
+
 		section->AddBook(bookPreview);
 	}
 }

@@ -13,6 +13,8 @@ public:
 	BookPreview(const data::Book& book, QWidget *parent = Q_NULLPTR);
 	~BookPreview();
 
+	void BookCoverRecieved(QByteArray data);
+
 private:
 	Ui::BookPreview ui;
 };

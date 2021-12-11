@@ -38,6 +38,9 @@
     <ClCompile Include="BookPreview.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FileDownloader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="LoginWindow.h">
@@ -53,6 +56,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="BookPreview.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="FileDownloader.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

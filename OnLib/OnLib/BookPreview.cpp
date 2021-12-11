@@ -15,3 +15,10 @@ BookPreview::BookPreview(const data::Book& book, QWidget *parent)
 BookPreview::~BookPreview()
 {
 }
+
+void BookPreview::BookCoverRecieved(QByteArray data)
+{
+	QPixmap cover;
+	cover.loadFromData(data);
+	ui.cover->setPixmap(cover);
+}

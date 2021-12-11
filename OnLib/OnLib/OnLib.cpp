@@ -18,16 +18,15 @@ void makeConnections(RemoteClient& client, LoginWindow& window, MainWindow& main
 int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
-    LoginWindow window;
-    MainWindow mainWindow;
+    MainWindow* mainWindow = new MainWindow;
+    LoginWindow* window = new LoginWindow(mainWindow);
 
     RemoteClient client(nullptr);
     client.Connect("127.0.0.1", 6000);
     
-    makeConnections(client, window, mainWindow);
+    makeConnections(client, *window, *mainWindow);
     
-    window.show();
-    //mainWindow.show();
+    window->show();
 
     return app.exec();
 }
