@@ -58,8 +58,8 @@ void BooksManager::AddLendedBookToUser(uint64_t bookId, uint64_t userId)
 void BooksManager::GetAuthors(data::Book& book)
 {
 	constexpr static const char* query =
-		"select a.name from author "
-		"inner join book_author ba on a.id=ba.author_id "
+		"select a.name from author as a "
+		"inner join book_author ba on a.id = ba.author_id "
 		"where ba.book_id = ?";
 
 	auto output = [&book](std::string name)
@@ -73,8 +73,8 @@ void BooksManager::GetAuthors(data::Book& book)
 
 void BooksManager::GetCategories(data::Book& book)
 {
-	constexpr static const char* query = 
-		"select category_id from book_category  ";
+	constexpr static const char* query =
+		"select category_id from book_category "
 		"where book_id = ? AND category_id NOT IN (?)";
 
 	auto output = [&book](uint64_t categoryId)
