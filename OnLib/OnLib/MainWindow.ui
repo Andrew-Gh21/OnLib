@@ -42,7 +42,7 @@
        <enum>QFrame::NoFrame</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="homePage">
        <layout class="QGridLayout" name="gridLayout">
@@ -95,7 +95,7 @@
            <layout class="QGridLayout" name="gridLayout_6">
             <item row="1" column="1">
              <layout class="QGridLayout" name="searchPageGridLayout">
-              <item row="1" column="0" colspan="4">
+              <item row="0" column="0" colspan="2">
                <widget class="QScrollArea" name="scrollArea">
                 <property name="widgetResizable">
                  <bool>true</bool>
@@ -105,79 +105,12 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>931</width>
-                   <height>446</height>
+                   <width>942</width>
+                   <height>483</height>
                   </rect>
                  </property>
                 </widget>
                </widget>
-              </item>
-              <item row="0" column="0">
-               <spacer name="horizontalSpacer2">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeType">
-                 <enum>QSizePolicy::Fixed</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>200</width>
-                  <height>0</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLineEdit" name="searchLineEdit">
-                <property name="minimumSize">
-                 <size>
-                  <width>300</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>300</width>
-                  <height>30</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QPushButton" name="pushButton">
-                <property name="minimumSize">
-                 <size>
-                  <width>100</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>30</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Search</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="3">
-               <spacer name="horizontalSpacer3">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeType">
-                 <enum>QSizePolicy::Fixed</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>300</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
               </item>
              </layout>
             </item>
@@ -234,8 +167,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>975</width>
-             <height>509</height>
+             <width>105</width>
+             <height>105</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_8">
@@ -252,8 +185,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>953</width>
-                 <height>487</height>
+                 <width>83</width>
+                 <height>83</height>
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_10">
@@ -332,7 +265,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionHome"/>
-   <addaction name="actionMy_List"/>
+   <addaction name="actionMyList"/>
   </widget>
   <widget class="QToolBar" name="toolBar2">
    <property name="font">
@@ -345,6 +278,9 @@
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
    <property name="movable">
     <bool>false</bool>
@@ -415,7 +351,7 @@
     <string>Home</string>
    </property>
   </action>
-  <action name="actionMy_List">
+  <action name="actionMyList">
    <property name="text">
     <string>My List</string>
    </property>

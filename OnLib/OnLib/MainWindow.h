@@ -26,10 +26,16 @@ private slots:
 	void HandleDeleteAccountButton();
 	void HandleSearchIconButton();
 	void HandleBackToMenuButton();
+	void HandleHomeButton();
+	void HandleMyListButton();
 	void HandleSearchBooksButton(std::string s);
 	
 private:
 	std::unordered_map<data::BookCategory, BookSection*> categories;
 	Ui::MainWindow* ui;
 	QPixmap DownloadImageFrom(const QString& url);
+	QAction* searchButtonWidgetAction;
+	QAction* searchLineEditWidgetAction;
+	QPushButton* searchButton;
+	QLineEdit* searchLineEdit;
 };
