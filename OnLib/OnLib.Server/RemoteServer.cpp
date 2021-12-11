@@ -67,7 +67,7 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 		std::vector<data::Book> displayBooks = booksManager.GetNewestFiveBooksFromEachCategory();
 		net::Message response;
 		response.header.messageType = static_cast<uint16_t>(data::ServerResponse::DisplayBooksRecieved);
-		response << displayBooks;
+		net::Serialize(response, std::cbegin(displayBooks), std::cend(displayBooks));
 		MessageClient(client, response);
 		break;
 	}
