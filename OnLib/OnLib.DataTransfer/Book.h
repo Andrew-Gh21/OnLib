@@ -26,40 +26,13 @@ namespace data
 		std::vector<BookCategory> otherCategories;
 		std::vector<std::string>authors;
 		float rating;
-		std::unordered_map<data::BookCategory, std::string> bookCategory;
 
 		Book();
 		Book(uint64_t id, const std::string& isbn, const std::string& title, const std::string& coverUrl, BookCategory mainCategory, const std::vector<BookCategory>& otherCategories, const std::vector<std::string>& authors, float rating);
 		Book(uint64_t id, const std::string& isbn, const std::string& title, const std::string& coverUrl, BookCategory mainCategory, float rating);
-		void InitCategories();
 
 	};
 
-	inline std::string ParseCategoryToString(Book& book)
-	{
-		return book.bookCategory[book.mainCategory];
-	}
-	inline data::BookCategory ParseCategoryType(const std::string& category)
-	{
-		if (category == "SF")
-		{
-			return BookCategory::SF;
-		}
-		if (category == "Romantic")
-		{
-			return BookCategory::Romantic;
-		}
-		if (category == "Action")
-		{
-			return BookCategory::Action;
-		}
-		if (category == "Comedy")
-		{
-			return BookCategory::Comedy;
-		}
-		throw std::exception{ "Unknown product type" };
-
-	}
 }
 
 namespace net
