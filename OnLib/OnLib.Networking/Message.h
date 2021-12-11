@@ -145,6 +145,10 @@ namespace net
 
 		SizeType size;
 		Deserialize(message, size);
+
+		if (size == 0)
+			return;
+
 		value_type* buffer = new value_type[size];
 
 		for (SizeType index = 0; index < size; index++)

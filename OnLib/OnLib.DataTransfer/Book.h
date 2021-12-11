@@ -104,5 +104,6 @@ namespace net
 		Deserialize(message, book.coverUrl, true);
 		Deserialize(message, book.title, true);
 		Deserialize(message, book.isbn, true);
+		Deserialize(message, book.id);
 	}
 }

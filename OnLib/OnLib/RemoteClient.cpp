@@ -77,6 +77,7 @@ void RemoteClient::OnMessageRecieved(net::Message& msg)
 	case data::ServerResponse::DisplayBooksRecieved:
 	{
 		std::vector<data::Book> books; // TODO
+		net::Deserialize(msg, books, true);
 		emit DisplayBooksRecieved(books);
 		break;
 	}

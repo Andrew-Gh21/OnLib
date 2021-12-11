@@ -43,7 +43,7 @@ void RemoteServer::OnClientDisconnect(Client client)
 
 void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 {
-	auto request = static_cast<data::ClientRequest>(message.header.messageType);;
+	auto request = static_cast<data::ClientRequest>(message.header.messageType);
 
 	switch (request)
 	{
