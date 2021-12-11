@@ -45,14 +45,14 @@ MainWindow::MainWindow(QWidget* parent)
 	connect(ui->actionMyList, SIGNAL(triggered()), this, SLOT(HandleMyListButton()));
 
 	searchButton = new QPushButton("Search");
-	searchButton->setFixedSize(60, 30);
 	searchButtonWidgetAction = ui->toolBar2->addWidget(searchButton);
 	searchButtonWidgetAction->setVisible(false);
 
 	searchLineEdit = new QLineEdit();
-	searchLineEdit->setFixedSize(300, 30);
 	searchLineEditWidgetAction = ui->toolBar2->addWidget(searchLineEdit);
 	searchLineEditWidgetAction->setVisible(false);
+
+	StyleSheets();
 
 	connect(ui->actionSearchIcon, SIGNAL(triggered()), this, SLOT(HandleSearchIconButton()));
 }
@@ -149,9 +149,33 @@ void MainWindow::HandleSearchBooksButton(std::string s)
 
 	if (s != "")
 	{
-		
+
 	}
 	//ui->searchBooksScrollArea->setWidget(wgtMainMyList);
+}
+
+void MainWindow::StyleSheets()
+{
+	searchButton->setFixedSize(60, 30);
+	searchLineEdit->setFixedSize(300, 30);
+
+	searchLineEdit->setStyleSheet("color: black;"
+		"background-color: white;"
+		"selection-color: white;"
+		"border: 2px solid gray;"
+		"selection-background-color: black;"
+		"border-top-left-radius: 7px;"
+		"border-top-right-radius: 7px;"
+		"border-bottom-left-radius: 7px;"
+		"border-bottom-right-radius: 7px;");
+
+	searchButton->setStyleSheet("color: black;"
+		"background-color: white;"
+		"border: 2px solid gray;"
+		"border-top-left-radius: 7px;"
+		"border-top-right-radius: 7px;"
+		"border-bottom-left-radius: 7px;"
+		"border-bottom-right-radius: 7px;");
 }
 
 QPixmap MainWindow::DownloadImageFrom(const QString& url)

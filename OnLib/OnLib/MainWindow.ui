@@ -59,8 +59,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>982</width>
-             <height>509</height>
+             <width>57</width>
+             <height>24</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_3">
@@ -89,7 +89,7 @@
              <x>0</x>
              <y>0</y>
              <width>975</width>
-             <height>509</height>
+             <height>519</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_6">
@@ -106,7 +106,7 @@
                    <x>0</x>
                    <y>0</y>
                    <width>942</width>
-                   <height>483</height>
+                   <height>493</height>
                   </rect>
                  </property>
                 </widget>
@@ -167,8 +167,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>105</width>
-             <height>105</height>
+             <width>107</width>
+             <height>107</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_8">
@@ -185,8 +185,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>83</width>
-                 <height>83</height>
+                 <width>85</width>
+                 <height>85</height>
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_10">
@@ -215,6 +215,9 @@
    </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">spacing: 10px;</string>
    </property>
    <property name="movable">
     <bool>false</bool>
@@ -249,6 +252,9 @@
    <property name="layoutDirection">
     <enum>Qt::LeftToRight</enum>
    </property>
+   <property name="styleSheet">
+    <string notr="true">spacing: 10px;</string>
+   </property>
    <property name="movable">
     <bool>false</bool>
    </property>
@@ -280,7 +286,7 @@
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">spacing: 10px;</string>
    </property>
    <property name="movable">
     <bool>false</bool>
