@@ -30,6 +30,13 @@ MainWindow::MainWindow(QWidget* parent)
 		ui->genreVerticalLayout->addWidget(widget);
 	}
 
+	std::vector<data::Book> vec =
+	{
+
+	};
+
+	AddBooksToSection(vec);
+
 	ui->iconToolBar->setFixedHeight(70);
 
 	connect(ui->actionLogOut, SIGNAL(triggered()), this, SLOT(HandleLogOutButton()));
@@ -146,6 +153,7 @@ void MainWindow::HandleSearchBooksButton(std::string s)
 	}
 	//ui->searchBooksScrollArea->setWidget(wgtMainMyList);
 }
+
 
 void MainWindow::StyleSheets()
 {

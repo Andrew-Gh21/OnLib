@@ -14,6 +14,7 @@ public:
 
 	void AddBook(BookPreview* book);
 
+
 private:
 	Ui::BookSection ui;
 	QWidget* widget;

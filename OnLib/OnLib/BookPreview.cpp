@@ -10,6 +10,8 @@ BookPreview::BookPreview(const data::Book& book, QWidget *parent)
 	ui.setupUi(this);
 	ui.title->setText(QString::fromStdString(book.title));
 	ui.authors->setText(QString::fromStdString(authorsStream.str()));
+	this->setMinimumSize(this->sizeHint());
+	this->adjustSize();
 }
 
 BookPreview::~BookPreview()
@@ -20,5 +22,5 @@ void BookPreview::BookCoverRecieved(QByteArray data)
 {
 	QPixmap cover;
 	cover.loadFromData(data);
-	ui.cover->setPixmap(cover);
+	ui.cover->setPixmap(cover.scaled(ui.cover->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
