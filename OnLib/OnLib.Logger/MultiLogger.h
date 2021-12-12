@@ -1,10 +1,11 @@
 #pragma once
 #include "ILogger.h"
+#include <memory>
 
 class MultiLogger
 {
 private:
-	std::vector<ILogger*> Loggers;
+	std::vector<std::shared_ptr<ILogger>> loggers;
 
 public:
 	MultiLogger() = default;
@@ -13,6 +14,6 @@ public:
 
 	void Send(const LogMessage& msg , LogSeverity severity)const;
 
-	void AddLogger(ILogger* logger);
+	void AddLogger(std::shared_ptr<ILogger> logger);
 };
 

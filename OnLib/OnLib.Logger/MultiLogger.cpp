@@ -2,13 +2,13 @@
 
 void MultiLogger::Send(const LogMessage& msg, LogSeverity severity)const
 {
-	for (auto element : Loggers)
+	for (const auto& element : loggers)
 	{
 		element->Log(msg,severity);
 	}
 }
 
-void MultiLogger::AddLogger(ILogger* logger)
+void MultiLogger::AddLogger(std::shared_ptr<ILogger> logger)
 {
-	Loggers.push_back(logger);
+	loggers.push_back(logger);
 }

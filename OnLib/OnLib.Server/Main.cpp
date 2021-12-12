@@ -44,8 +44,8 @@ int main()
 	std::string databasePath = appConfig["database"].string_value();
 	uint16_t port = appConfig["server_port"].int_value();
 
-	ILogger* consoleLogger = new OStreamLogger(std::cout);
-	ILogger* fileLogger = new OStreamLogger(logFile);
+	std::shared_ptr<ILogger> consoleLogger = std::make_shared<OStreamLogger>(std::cout);
+	std::shared_ptr<ILogger> fileLogger = std::make_shared<OStreamLogger>(logFile);
 	MultiLogger multiLogger;
 	multiLogger.AddLogger(consoleLogger);
 	multiLogger.AddLogger(fileLogger);

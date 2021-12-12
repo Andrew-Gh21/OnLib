@@ -22,14 +22,14 @@ struct LogMessage
 	std::stringstream message;
 	template<class T>
 	friend LogMessage& operator << (LogMessage& msg, const T& param);
-	void GetTime()
+	static std::string GetTime()
 	{
 		std::time_t currentTime = std::time(0);
 		std::tm* timestamp=new std::tm;
 		localtime_s(timestamp, &currentTime);
 		char buffer[40];
 		strftime(buffer, 40, "%d/%m/%g %T", timestamp);
-		message << buffer<< " ";
+		return std::string(buffer);
 	}
 };
 
@@ -38,13 +38,13 @@ class ILogger
 {
 protected:
 	LogSeverity priority;
-	std::unordered_map<LogSeverity, std::string> severityToString;
+	static std::unordered_map<LogSeverity, std::string> severityToString;
 
 public:
 
 	ILogger();
 
-	virtual void SetPriority(LogSeverity newPriority) = 0;
+	void SetPriority(LogSeverity newPriority);
 
 	virtual void Log(const LogMessage& msg, LogSeverity sevrity) = 0;
 };

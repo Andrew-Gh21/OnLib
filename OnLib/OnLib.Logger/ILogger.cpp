@@ -1,11 +1,21 @@
 #include "ILogger.h"
 
+std::unordered_map<LogSeverity, std::string> ILogger::severityToString =
+{
+	{LogSeverity::Trace,"[Trace]"},
+	{LogSeverity::Debug,"[Debug]"},
+	{LogSeverity::Info,"[Info]"},
+	{LogSeverity::Warn,"[Warn]"},
+	{LogSeverity::Error,"[Error]"},
+	{LogSeverity::Crititical,"[Crititical]"}
+};
+
 ILogger::ILogger()
 {
-	severityToString[LogSeverity::Trace] = "[Trace]";
-	severityToString[LogSeverity::Debug]= "[Debug]";
-	severityToString[LogSeverity::Info]= "[Info]";
-	severityToString[LogSeverity::Warn]= "[Warn]";
-	severityToString[LogSeverity::Error]= "[Error]";
-	severityToString[LogSeverity::Crititical]= "[Crititical]";
+	priority = LogSeverity::Trace;
+}
+
+void ILogger::SetPriority(LogSeverity newPriority)
+{
+	priority = newPriority;
 }
