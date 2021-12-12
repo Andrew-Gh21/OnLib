@@ -10,6 +10,8 @@ BookPreview::BookPreview(const data::Book& book, QWidget *parent)
 	ui.setupUi(this);
 	ui.title->setText(QString::fromStdString(book.title));
 	ui.authors->setText(QString::fromStdString(authorsStream.str()));
+	ui.lendButton->setText("Borrow book");
+
 	this->setMinimumSize(this->sizeHint());
 	this->adjustSize();
 }

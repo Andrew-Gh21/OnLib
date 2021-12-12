@@ -30,12 +30,6 @@ MainWindow::MainWindow(QWidget* parent)
 		ui->genreVerticalLayout->addWidget(widget);
 	}
 
-	std::vector<data::Book> vec =
-	{
-
-	};
-
-	AddBooksToSection(vec);
 
 	ui->iconToolBar->setFixedHeight(70);
 
@@ -55,6 +49,9 @@ MainWindow::MainWindow(QWidget* parent)
 	StyleSheets();
 
 	connect(ui->actionSearchIcon, SIGNAL(triggered()), this, SLOT(HandleSearchIconButton()));
+
+	this->setMinimumHeight(600);
+	this->setMinimumWidth(700);
 }
 
 void MainWindow::HandleLogOutButton()
@@ -80,7 +77,6 @@ void MainWindow::HandleDeleteAccountButton()
 	bool ok;
 	if (QInputDialog::getText(this, "Confirm password", "Password:", QLineEdit::Password, "", &ok) == QString::fromStdString("password"))
 	{
-		//delete user...
 		if (ok)
 		{
 			this->close();
@@ -140,18 +136,9 @@ void MainWindow::HandleMyListButton()
 void MainWindow::HandleSearchBooksButton(std::string s)
 {
 
-	QWidget* wgtMainMyList = new QWidget();
-	QHBoxLayout* hboxMainMyList = new QHBoxLayout(wgtMainMyList);
-	QWidget* wgtSubMyList;
-	QVBoxLayout* vboxSubMyList;
-	QPixmap pix("Images/defaultImage.png");
-	QLabel* label;
-
 	if (s != "")
 	{
-
 	}
-	//ui->searchBooksScrollArea->setWidget(wgtMainMyList);
 }
 
 
@@ -177,6 +164,10 @@ void MainWindow::StyleSheets()
 		"border-top-right-radius: 7px;"
 		"border-bottom-left-radius: 7px;"
 		"border-bottom-right-radius: 7px;");
+
+
+	
+
 }
 
 QPixmap MainWindow::DownloadImageFrom(const QString& url)
@@ -199,6 +190,10 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 	for (const auto& book : books)
 	{
 		BookSection* section = categories[book.mainCategory];
+
+		QSize  currentSize = this->normalGeometry().size();
+		section->resize(currentSize / 2);
+
 		BookPreview* bookPreview = new BookPreview(book, section);
 		
 		FileDownloader* coverDownloader = new FileDownloader(book.coverUrl, this);
