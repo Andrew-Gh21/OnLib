@@ -7,7 +7,10 @@ namespace data
 	{
 		Login = 1,
 		Register,
-		RequestDisplayBooks
+		RequestDisplayBooks,
+		Logout,
+		DeleteAccount,
+		LentBooks
 	};
 }
 

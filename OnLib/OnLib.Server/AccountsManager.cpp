@@ -73,3 +73,32 @@ void AccountsManager::Logout(uint64_t clientId)
 {
 	users.erase(clientId);
 }
+
+bool AccountsManager::DeleteUser(std::shared_ptr<net::ClientConnection> client, data::User input)
+{
+	constexpr static const char* query =
+		"select count(password) from user "
+		"where user.id=? and user.password = ?";
+
+	bool passwordMatch;
+	auto output = [&passwordMatch](bool match)
+	{
+		passwordMatch = match;
+	};
+
+	database << query << input.id << input.password
+		>> output;
+
+	if (passwordMatch)
+	{
+		constexpr static const char* queryDeleteUser =
+			"delete from user"
+			"where user.id=?";
+
+		database << queryDeleteUser << input.id;
+
+		return true;
+	}
+
+	return false;
+}

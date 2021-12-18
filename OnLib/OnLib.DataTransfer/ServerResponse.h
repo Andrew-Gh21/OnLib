@@ -12,7 +12,10 @@ namespace data
 		InvalidLogin,
 		SuccesfullRegister,
 		InvalidRegister,
-		DisplayBooksRecieved
+		DisplayBooksRecieved,
+		DeleteAccountSuccesful,
+		DeleteAccountFailure,
+		BorrowedBooks
 	};
 	
 }
