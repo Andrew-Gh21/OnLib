@@ -164,25 +164,6 @@ void MainWindow::StyleSheets()
 		"border-top-right-radius: 7px;"
 		"border-bottom-left-radius: 7px;"
 		"border-bottom-right-radius: 7px;");
-
-
-	
-
-}
-
-QPixmap MainWindow::DownloadImageFrom(const QString& url)
-{
-	QNetworkAccessManager nam;
-	QEventLoop loop;
-	QObject::connect(&nam, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-	QNetworkReply* reply = nam.get(QNetworkRequest(url));
-	loop.exec();
-
-	QPixmap pm;
-	pm.loadFromData(reply->readAll());
-
-	delete reply;
-	return pm;
 }
 
 void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)

@@ -41,6 +41,13 @@ RemoteClient::~RemoteClient()
 		processingThread.join();
 }
 
+void RemoteClient::RequestDisplayBooks()
+{
+	net::Message requestBooksMessage;
+	requestBooksMessage.header.messageType = static_cast<int32_t>(data::ClientRequest::RequestDisplayBooks);
+	Send(requestBooksMessage);
+}
+
 void RemoteClient::OnMessageRecieved(net::Message& msg)
 {
 	data::ServerResponse response = static_cast<data::ServerResponse>(msg.header.messageType);
@@ -51,10 +58,7 @@ void RemoteClient::OnMessageRecieved(net::Message& msg)
 		break;
 	case data::ServerResponse::SuccesfullLogin:
 	{
-		net::Message requestBooksMessage;
 		emit LoginSuccessfull();
-		requestBooksMessage.header.messageType = static_cast<int32_t>(data::ClientRequest::RequestDisplayBooks);
-		Send(requestBooksMessage);
 		break;
 	}
 	case data::ServerResponse::InvalidLogin:
@@ -76,7 +80,7 @@ void RemoteClient::OnMessageRecieved(net::Message& msg)
 	}
 	case data::ServerResponse::DisplayBooksRecieved:
 	{
-		std::vector<data::Book> books; // TODO
+		std::vector<data::Book> books;
 		net::Deserialize(msg, books, true);
 		emit DisplayBooksRecieved(books);
 		break;

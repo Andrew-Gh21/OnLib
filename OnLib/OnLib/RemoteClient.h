@@ -16,6 +16,7 @@ public:
 	RemoteClient(QObject* p);
 	~RemoteClient();
 
+	void RequestDisplayBooks();
 public slots:
 	void OnLoginRequest(const data::User& user);
 	void OnRegisterRequest(const data::User& user);

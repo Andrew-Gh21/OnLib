@@ -32,12 +32,6 @@ void LoginWindow::OnLoginFailure(const std::vector<data::LoginErrors>& errors)
     QMessageBox::warning(this, "Login Error", QString::fromStdString(errorsStream.str()));
 }
 
-void LoginWindow::OnLoginSucces()
-{
-    static_cast<MainWindow*>(parent())->showMaximized();
-    this->close();
-}
-
 void LoginWindow::OnRegisterSuccess()
 {
     QMessageBox::information(this, "Register Successfull", "You have successfully registered.");

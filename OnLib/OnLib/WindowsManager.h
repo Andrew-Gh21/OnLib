@@ -15,8 +15,11 @@ public:
     void Start();
 
 private:
-    void ConnectRemoteAndLogin() const;
-    void ConnectRemoteAndMain() const;
+    void ConnectRemoteAndLogin();
+    void ConnectRemoteAndMain();
+
+    void SwitchToMainWindow();
+    void SwitchToLoginWindow();
 private:
     std::unique_ptr<MainWindow> mainWindow;
     std::unique_ptr<LoginWindow> loginWindow;

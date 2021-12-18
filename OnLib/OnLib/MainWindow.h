@@ -34,7 +34,6 @@ private slots:
 private:
 	std::unordered_map<data::BookCategory, BookSection*> categories;
 	Ui::MainWindow* ui;
-	QPixmap DownloadImageFrom(const QString& url);
 	QAction* searchButtonWidgetAction;
 	QAction* searchLineEditWidgetAction;
 	QPushButton* searchButton;
