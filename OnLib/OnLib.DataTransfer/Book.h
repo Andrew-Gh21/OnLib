@@ -83,4 +83,44 @@ namespace net
 		Deserialize(message, book.isbn, true);
 		Deserialize(message, book.id);
 	}
+
+	template<>
+	inline void Serialize(Message& message, const data::LendBook& lendBook)
+	{
+		Serialize(message, lendBook.bookId);
+		Serialize(message, lendBook.isAvailable);
+		Serialize(message, std::cbegin(lendBook.title), std::cend(lendBook.title));
+		Serialize(message, std::cbegin(lendBook.coverUrl), std::cend(lendBook.coverUrl));
+		Serialize(message, std::cbegin(lendBook.lendDate), std::cend(lendBook.lendDate));
+		Serialize(message, std::cbegin(lendBook.returnDate), std::cend(lendBook.returnDate));
+
+		for (const auto& author : lendBook.authors)
+		{
+			Serialize(message, std::cbegin(author), std::cend(author));
+		}
+
+		Serialize(message, lendBook.authors.size());
+	}
+
+	template<>
+	inline void Deserialize(Message& message, data::LendBook& lendBook)
+	{
+		std::size_t authorsCount;
+		Deserialize(message, authorsCount);
+		auto inserter = std::back_inserter(lendBook.authors);
+
+		for (size_t i = 0; i < authorsCount; i++)
+		{
+			std::string author;
+			Deserialize(message, author, true);
+			*inserter++ = author;
+		}
+
+		Deserialize(message, lendBook.returnDate, true);
+		Deserialize(message, lendBook.lendDate, true);
+		Deserialize(message, lendBook.coverUrl, true);
+		Deserialize(message, lendBook.title, true);
+		Deserialize(message, lendBook.isAvailable);
+		Deserialize(message, lendBook.bookId);
+	}
 }

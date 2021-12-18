@@ -2,20 +2,23 @@
 
 bool AccountsManager::ValidateLogin(std::shared_ptr<net::ClientConnection> client, data::User input, std::vector<data::LoginErrors>& errors)
 {
-	std::optional<std::string> optionalPassword;
-	database << "select password from user where name = ?"
-		<< input.name
-		>> [&optionalPassword](std::optional<std::string>pass)
-	{
-		optionalPassword = pass;
-	};
+	bool passwordMatch;
+	bool userMatch;
+	constexpr static const char* queryMatchPassword = "select count(password) from user where name = ? and password =?";
+	constexpr static const char* queryMatchName = "select count(name) from user where name = ?";
 
-	if (!optionalPassword.has_value())
+	database << queryMatchPassword << input.password 
+		>> passwordMatch;
+
+	database << queryMatchName << input.password
+		>> userMatch;
+
+	if (userMatch != false)
 	{
 		errors.push_back(data::LoginErrors::InvalidUser);
 	}
 	
-	if (optionalPassword.has_value() && optionalPassword.value() != input.password)
+	if (passwordMatch != false)
 	{
 		errors.push_back(data::LoginErrors::InvalidPassword);
 	}
@@ -47,8 +50,10 @@ bool AccountsManager::ValidateRegister(std::shared_ptr<net::ClientConnection> cl
 	}
 
 	int count;
-	database << "select count(*)from user where name = ? " 
-			 << input.name >> count;
+	constexpr static const char* query = "select count(*)from user where name = ? ";
+
+	database << query << input.name 
+		>> count;
 
 	if (count == 1)
 	{
@@ -58,7 +63,8 @@ bool AccountsManager::ValidateRegister(std::shared_ptr<net::ClientConnection> cl
 	{
 		if (errors.empty())
 		{
-			database << "insert into user (name,password) values (?,?)" << input.name << input.password;
+			constexpr static const char* queryInsertion = "insert into user (name,password) values (?,?)";
+			database << queryInsertion << input.name << input.password;
 		}
 	}
 	return errors.empty();
@@ -81,13 +87,9 @@ bool AccountsManager::DeleteUser(std::shared_ptr<net::ClientConnection> client, 
 		"where user.id=? and user.password = ?";
 
 	bool passwordMatch;
-	auto output = [&passwordMatch](bool match)
-	{
-		passwordMatch = match;
-	};
 
 	database << query << input.id << input.password
-		>> output;
+		>> passwordMatch;
 
 	if (passwordMatch)
 	{
