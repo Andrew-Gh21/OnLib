@@ -30,6 +30,16 @@
     <layout class="QGridLayout" name="gridLayout_2">
      <item row="2" column="0">
       <widget class="QLabel" name="authors">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white;</string>
+       </property>
        <property name="text">
         <string>TextLabel</string>
        </property>
@@ -37,6 +47,17 @@
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="title">
+       <property name="font">
+        <font>
+         <family>Arial Black</family>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white;
+border-radius: 2px solid white;</string>
+       </property>
        <property name="text">
         <string>TextLabel</string>
        </property>
@@ -51,12 +72,30 @@
         </size>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
       </widget>
      </item>
      <item row="3" column="0">
       <widget class="QPushButton" name="lendButton">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #e6ffff;
+background-color: #003333;
+border: 2px solid #004d4d;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;</string>
+       </property>
        <property name="text">
         <string>PushButton</string>
        </property>

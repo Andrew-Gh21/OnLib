@@ -16,7 +16,7 @@ class MainWindow : public QMainWindow
 
 public:
 	explicit MainWindow(QWidget* parent = Q_NULLPTR);
-	~MainWindow();
+	~MainWindow() = default;
 
 public slots:
 	void AddBooksToSection(const std::vector<data::Book>& books);

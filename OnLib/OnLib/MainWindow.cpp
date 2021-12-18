@@ -54,6 +54,7 @@ MainWindow::MainWindow(QWidget* parent)
 void MainWindow::HandleLogOutButton()
 {
 	QMessageBox msgBox;
+
 	msgBox.setWindowTitle("Log out confirmation");
 	msgBox.setText(QString::fromStdString("Hello, , are you sure you want to log out?"));
 	msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
@@ -135,7 +136,6 @@ void MainWindow::HandleSearchBooksButton(std::string s)
 	}
 }
 
-
 void MainWindow::StyleSheets()
 {
 	searchLineEdit->setFixedSize(300, 30);
@@ -169,9 +169,4 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 
 		section->AddBook(bookPreview);
 	}
-}
-
-MainWindow::~MainWindow()
-{
-	delete ui;
 }

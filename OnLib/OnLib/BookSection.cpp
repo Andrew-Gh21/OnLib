@@ -12,7 +12,7 @@ BookSection::BookSection(const QString& section, QWidget *parent)
 	ui.sectionContent->setWidget(widget);
 	this->setMinimumSize(300,500);
 	this->adjustSize();
-
+\
 }
 
 BookSection::~BookSection()
