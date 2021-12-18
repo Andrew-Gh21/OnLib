@@ -36,7 +36,7 @@ public slots:
 
 private:
 	Ui::LoginWindow* ui;
-	MainWindow* mainWindow;
+	//MainWindow* mainWindow;
 	static std::unordered_map<data::LoginErrors, std::string> loginErrors;
 	static std::unordered_map<data::RegisterErrors, std::string> registerErrors;
 };
