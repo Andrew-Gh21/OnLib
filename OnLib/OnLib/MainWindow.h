@@ -25,7 +25,6 @@ private slots:
 	void HandleLogOutButton();
 	void HandleDeleteAccountButton();
 	void HandleSearchIconButton();
-	void HandleBackToMenuButton();
 	void HandleHomeButton();
 	void HandleMyListButton();
 	void HandleSearchBooksButton(std::string s);
@@ -36,6 +35,5 @@ private:
 	Ui::MainWindow* ui;
 	QAction* searchButtonWidgetAction;
 	QAction* searchLineEditWidgetAction;
-	QPushButton* searchButton;
 	QLineEdit* searchLineEdit;
 };
