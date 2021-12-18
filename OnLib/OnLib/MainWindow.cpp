@@ -30,20 +30,17 @@ MainWindow::MainWindow(QWidget* parent)
 		ui->genreVerticalLayout->addWidget(widget);
 	}
 
-
-	ui->iconToolBar->setFixedHeight(70);
+	ui->toolbar1->setFixedHeight(70);
 
 	connect(ui->actionLogOut, SIGNAL(triggered()), this, SLOT(HandleLogOutButton()));
 	connect(ui->actionDeleteAccount, SIGNAL(triggered()), this, SLOT(HandleDeleteAccountButton()));
 	connect(ui->actionHome, SIGNAL(triggered()), this, SLOT(HandleHomeButton()));
 	connect(ui->actionMyList, SIGNAL(triggered()), this, SLOT(HandleMyListButton()));
 
-	searchButton = new QPushButton("Search");
-	searchButtonWidgetAction = ui->toolBar2->addWidget(searchButton);
-	searchButtonWidgetAction->setVisible(false);
+	ui->actionSearchButton->setVisible(false);
 
 	searchLineEdit = new QLineEdit();
-	searchLineEditWidgetAction = ui->toolBar2->addWidget(searchLineEdit);
+	searchLineEditWidgetAction = ui->toolbar2->addWidget(searchLineEdit);
 	searchLineEditWidgetAction->setVisible(false);
 
 	StyleSheets();
@@ -103,16 +100,8 @@ void MainWindow::HandleSearchIconButton()
 	ui->stackedWidget->setCurrentIndex(1);
 	ui->actionSearchIcon->setVisible(false);
 
-	searchButtonWidgetAction->setVisible(true);
+	ui->actionSearchButton->setVisible(true);
 	searchLineEditWidgetAction->setVisible(true);
-}
-
-void MainWindow::HandleBackToMenuButton()
-{
-	ui->actionSearchIcon->setVisible(true);
-
-	searchLineEdit->setText("");
-	HandleSearchBooksButton("");
 }
 
 void MainWindow::HandleHomeButton()
@@ -120,8 +109,11 @@ void MainWindow::HandleHomeButton()
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->actionSearchIcon->setVisible(true);
 
-	searchButtonWidgetAction->setVisible(false);
+	ui->actionSearchButton->setVisible(false);
 	searchLineEditWidgetAction->setVisible(false);
+
+	searchLineEdit->setText("");
+	HandleSearchBooksButton("");
 }
 
 void MainWindow::HandleMyListButton()
@@ -129,13 +121,15 @@ void MainWindow::HandleMyListButton()
 	ui->stackedWidget->setCurrentIndex(2);
 	ui->actionSearchIcon->setVisible(true);
 
-	searchButtonWidgetAction->setVisible(false);
+	ui->actionSearchButton->setVisible(false);
 	searchLineEditWidgetAction->setVisible(false);
+
+	searchLineEdit->setText("");
+	HandleSearchBooksButton("");
 }
 
 void MainWindow::HandleSearchBooksButton(std::string s)
 {
-
 	if (s != "")
 	{
 	}
@@ -144,22 +138,13 @@ void MainWindow::HandleSearchBooksButton(std::string s)
 
 void MainWindow::StyleSheets()
 {
-	searchButton->setFixedSize(60, 30);
 	searchLineEdit->setFixedSize(300, 30);
 
 	searchLineEdit->setStyleSheet("color: black;"
 		"background-color: white;"
 		"selection-color: white;"
-		"border: 2px solid gray;"
+		"border: 2px solid #004d4d;"
 		"selection-background-color: black;"
-		"border-top-left-radius: 7px;"
-		"border-top-right-radius: 7px;"
-		"border-bottom-left-radius: 7px;"
-		"border-bottom-right-radius: 7px;");
-
-	searchButton->setStyleSheet("color: black;"
-		"background-color: white;"
-		"border: 2px solid gray;"
 		"border-top-left-radius: 7px;"
 		"border-top-right-radius: 7px;"
 		"border-bottom-left-radius: 7px;"
@@ -176,7 +161,7 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 		section->resize(currentSize / 2);
 
 		BookPreview* bookPreview = new BookPreview(book, section);
-		
+
 		FileDownloader* coverDownloader = new FileDownloader(book.coverUrl, this);
 		connect(coverDownloader, &FileDownloader::DownloadFinished, [coverDownloader, bookPreview]() {
 			bookPreview->BookCoverRecieved(coverDownloader->GetData());
