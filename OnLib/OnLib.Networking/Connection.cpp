@@ -158,6 +158,7 @@ namespace net
 				else
 				{
 					log(LogMessageType::Error, "Could not connect to server!");
+					socket.close();
 				}
 			});
 	}

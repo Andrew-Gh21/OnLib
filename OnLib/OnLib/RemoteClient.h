@@ -17,6 +17,7 @@ public:
 	~RemoteClient();
 
 	void RequestDisplayBooks();
+	void Send(const net::Message& msg) const override;
 public slots:
 	void OnLoginRequest(const data::User& user);
 	void OnRegisterRequest(const data::User& user);
@@ -27,6 +28,7 @@ signals:
 	void RegisterSuccesfull();
 	void RegisterInvalid(const std::vector<data::RegisterErrors>& errors);
 	void DisplayBooksRecieved(const std::vector<data::Book>& books);
+	void ConnectionLost() const;
 
 private:
 	void OnMessageRecieved(net::Message& msg);

@@ -192,7 +192,7 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="OnLib.cpp" />
     <ClCompile Include="RemoteClient.cpp" />
-    <ClCompile Include="WindowsManager.cpp" />
+    <ClCompile Include="ApplicationManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="LoginWindow.h" />
@@ -219,7 +219,7 @@
     <QtMoc Include="FileDownloader.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="WindowsManager.h" />
+    <QtMoc Include="ApplicationManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

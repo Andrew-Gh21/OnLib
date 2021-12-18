@@ -22,7 +22,7 @@ namespace net
 		bool Connect(const std::string& host, const uint16_t port);
 		void Disconnect();
 		bool IsConnected() const;
-		void Send(const Message& msg) const;
+		virtual void Send(const Message& msg) const;
 		BlockingQueue<OwnedMessage>& Incoming() { return messagesIn; }
 	protected:
 		asio::io_context context;

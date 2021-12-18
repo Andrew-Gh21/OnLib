@@ -1,11 +1,13 @@
-#include "WindowsManager.h"
+#include "ApplicationManager.h"
 
-WindowsManager::WindowsManager(std::unique_ptr<RemoteClient> client)
-	: remote(std::move(client))
+ApplicationManager::ApplicationManager(std::unique_ptr<RemoteClient> client, QApplication& application)
+	: remote(std::move(client)),
+	app(application)
 {
+	QObject::connect(remote.get(), &RemoteClient::ConnectionLost, this, &ApplicationManager::OnConnectionLost);
 }
 
-void WindowsManager::Start()
+void ApplicationManager::Start()
 {
 	loginWindow = std::make_unique<LoginWindow>();
 	ConnectRemoteAndLogin();
@@ -13,12 +15,12 @@ void WindowsManager::Start()
 	loginWindow->show();
 }
 
-void WindowsManager::ConnectRemoteAndLogin()
+void ApplicationManager::ConnectRemoteAndLogin()
 {
 	QObject::connect(loginWindow.get(), &LoginWindow::LoginButtonClicked, remote.get(), &RemoteClient::OnLoginRequest);
 	QObject::connect(loginWindow.get(), &LoginWindow::RegisterButtonClicked, remote.get(), &RemoteClient::OnRegisterRequest);
 	QObject::connect(remote.get(), &RemoteClient::LoginInvalid, loginWindow.get(), &LoginWindow::OnLoginFailure);
-	
+
 	QObject::connect(remote.get(), &RemoteClient::LoginSuccessfull, loginWindow.get(), [this]() {
 		SwitchToMainWindow();
 		remote->RequestDisplayBooks();
@@ -28,12 +30,12 @@ void WindowsManager::ConnectRemoteAndLogin()
 	QObject::connect(remote.get(), &RemoteClient::RegisterSuccesfull, loginWindow.get(), &LoginWindow::OnRegisterSuccess);
 }
 
-void WindowsManager::ConnectRemoteAndMain()
+void ApplicationManager::ConnectRemoteAndMain()
 {
 	QObject::connect(remote.get(), &RemoteClient::DisplayBooksRecieved, mainWindow.get(), &MainWindow::AddBooksToSection);
 }
 
-void WindowsManager::SwitchToMainWindow()
+void ApplicationManager::SwitchToMainWindow()
 {
 	loginWindow->hide();
 	loginWindow.reset();
@@ -43,7 +45,7 @@ void WindowsManager::SwitchToMainWindow()
 	mainWindow->showMaximized();
 }
 
-void WindowsManager::SwitchToLoginWindow()
+void ApplicationManager::SwitchToLoginWindow()
 {
 	mainWindow->hide();
 	mainWindow.reset();
@@ -52,4 +54,11 @@ void WindowsManager::SwitchToLoginWindow()
 	ConnectRemoteAndLogin();
 
 	loginWindow->show();
+}
+
+void ApplicationManager::OnConnectionLost()
+{
+	auto reply = QMessageBox::critical(nullptr, "Server connection", "Connection lost!");
+	app.quit();
+	std::exit(0);
 }

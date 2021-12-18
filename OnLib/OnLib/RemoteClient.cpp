@@ -48,6 +48,17 @@ void RemoteClient::RequestDisplayBooks()
 	Send(requestBooksMessage);
 }
 
+void RemoteClient::Send(const net::Message& msg) const
+{
+	if (IsConnected())
+	{
+		net::Client::Send(msg);
+		return;
+	}
+
+	emit ConnectionLost();
+}
+
 void RemoteClient::OnMessageRecieved(net::Message& msg)
 {
 	data::ServerResponse response = static_cast<data::ServerResponse>(msg.header.messageType);
