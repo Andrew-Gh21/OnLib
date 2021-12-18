@@ -68,9 +68,6 @@ LoginWindow::LoginWindow(QWidget* parent)
     connect(ui->signupButton, &QPushButton::released, this, &LoginWindow::HandleSignUpButton);
     connect(ui->backToLoginButton, &QPushButton::released, this, &LoginWindow::HandleBackToLoginButton);
     connect(ui->registerButton, &QPushButton::released, this, &LoginWindow::HandleRegisterButton);
-
-    //QPixmap pix("Images/login.png");
-    //ui->labelImage->setPixmap(pix);
 }
 
 void LoginWindow::HandleLoginButton()
