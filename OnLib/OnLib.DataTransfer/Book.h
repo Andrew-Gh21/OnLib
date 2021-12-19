@@ -17,7 +17,7 @@ namespace data
 		bool isAvailable;
 
 		LendBook() : bookId(), lendDate(), returnDate() {}
-		LendBook(uint64_t bookId, std::string lendDate, std::string returnDate) : bookId(bookId), lendDate(lendDate), returnDate(returnDate) {}
+		LendBook(uint64_t bookId, std::string lendDate, std::string returnDate, std::string title, std::string coverUrl) : bookId(bookId), lendDate(lendDate), returnDate(returnDate), title(title), coverUrl(coverUrl) {}
 	};
 
 	struct Book

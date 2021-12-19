@@ -104,3 +104,56 @@ bool AccountsManager::DeleteUser(std::shared_ptr<net::ClientConnection> client, 
 
 	return false;
 }
+
+bool AccountsManager::ChangePassword(std::shared_ptr<net::ClientConnection> client, data::User input , const std::string& newPassword)
+{
+
+	constexpr static const char* queryChangePassword =
+		"update user "
+		"set password = ?"
+		"where user.id = ?";
+
+	database << queryChangePassword << newPassword << input.id;
+
+	bool succesful;
+
+	constexpr static const char* queryVerify =
+		"select count(password) from user "
+		"where user.password= ? and user.id = ?";
+
+	database << queryVerify << newPassword << input.id
+		>> succesful;
+
+	if (succesful)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool AccountsManager::ChangeUserName(std::shared_ptr<net::ClientConnection> client, data::User input, const std::string& newName)
+{
+		constexpr static const char* queryChangeUserName =
+			"update user "
+			"set name = ?"
+			"where user.id = ?";
+
+		database << queryChangeUserName << newName << input.id;
+		
+		bool succesful;
+
+		constexpr static const char* queryVerify =
+			"select count(name) from user "
+			"where user.name= ? and user.id = ?";
+
+		database << queryVerify << newName << input.id
+			>>succesful ;
+
+		if (succesful)
+		{
+			return true;
+		}
+
+		return false;
+}

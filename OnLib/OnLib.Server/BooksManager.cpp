@@ -36,15 +36,24 @@ std::vector<data::Book> BooksManager::GetNewestFiveBooksFromEachCategory()
 std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
 {
 	std::vector<data::LendBook>lendedBooks;
-	constexpr static const char* query = "select * from user_book where user_id=?";
+	constexpr static const char* query =
+		"select user_id, book_id, lend_date, return_date, b.title, b.cover_url "
+		"from user_book "
+		"inner join book b on b.id = book_id "
+		"where user_id = ? ";
 
-	auto output = [&lendedBooks](uint64_t userId, uint64_t bookId, std::string lendDate, std::optional<std::string> returnDate)
+	auto output = [&lendedBooks](uint64_t userId, uint64_t bookId, std::string lendDate, std::optional<std::string> returnDate, std::string title, std::string coverUrl )
 	{
-		lendedBooks.push_back(data::LendBook(bookId, lendDate, returnDate ? *returnDate : ""));
+		lendedBooks.push_back(data::LendBook(bookId, lendDate, returnDate ? *returnDate : "", title, coverUrl));
 	};
 
 	database << query << userId
 		>> output;
+
+	for (data::LendBook& book : lendedBooks)
+	{
+		GetAuthors(book);
+	}
 
 	return lendedBooks;
 }
@@ -68,6 +77,22 @@ void BooksManager::GetAuthors(data::Book& book)
 	};
 
 	database << query << book.id
+		>> output;
+}
+
+void BooksManager::GetAuthors(data::LendBook& book)
+{
+	constexpr static const char* query =
+		"select a.name from author as a "
+		"inner join book_author ba on a.id = ba.author_id "
+		"where ba.book_id = ?";
+
+	auto output = [&book](std::string name)
+	{
+		book.authors.push_back(name);
+	};
+
+	database << query << book.bookId
 		>> output;
 }
 
@@ -100,3 +125,4 @@ void BooksManager::GetRating(data::Book& book)
 	database << query << book.id
 		>> output;
 }
+

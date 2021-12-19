@@ -19,6 +19,7 @@ public:
 	std::vector<data::LendBook>GetLendedBooks(uint64_t bookId);
 	void AddLendedBookToUser(uint64_t bookId, uint64_t userId);
 	void GetAuthors(data::Book& book);
+	void GetAuthors(data::LendBook& book);
 	void GetCategories(data::Book& book);
 	void GetRating(data::Book& book);
 };
