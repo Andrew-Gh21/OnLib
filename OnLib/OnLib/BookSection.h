@@ -3,6 +3,7 @@
 #include <QWidget>
 #include "ui_BookSection.h"
 #include "BookPreview.h"
+#include "MyListBookPreview.h"
 
 class BookSection : public QWidget
 {
@@ -13,6 +14,7 @@ public:
 	~BookSection();
 
 	void AddBook(BookPreview* book);
+	void AddBook(MyListBookPreview* book);
 
 
 private:

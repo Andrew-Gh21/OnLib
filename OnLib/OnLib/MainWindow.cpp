@@ -32,6 +32,12 @@ MainWindow::MainWindow(QWidget* parent)
 
 	ui->toolbar1->setFixedHeight(70);
 
+
+	BookSection* myListBookSection=new BookSection("My list",this);
+	ui->myListGridLayout->addWidget(myListBookSection);
+
+
+
 	connect(ui->actionLogOut, SIGNAL(triggered()), this, SLOT(HandleLogOutButton()));
 	connect(ui->actionDeleteAccount, SIGNAL(triggered()), this, SLOT(HandleDeleteAccountButton()));
 	connect(ui->actionHome, SIGNAL(triggered()), this, SLOT(HandleHomeButton()));
@@ -149,6 +155,7 @@ void MainWindow::StyleSheets()
 		"border-top-right-radius: 7px;"
 		"border-bottom-left-radius: 7px;"
 		"border-bottom-right-radius: 7px;");
+
 }
 
 void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)

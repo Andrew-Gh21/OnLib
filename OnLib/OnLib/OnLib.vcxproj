@@ -190,6 +190,7 @@
     <ClCompile Include="FileDownloader.cpp" />
     <ClCompile Include="LoginWindow.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="MyListBookPreview.cpp" />
     <ClCompile Include="OnLib.cpp" />
     <ClCompile Include="RemoteClient.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
@@ -206,6 +207,7 @@
     <QtUic Include="BookSection.ui" />
     <QtUic Include="LoginWindow.ui" />
     <QtUic Include="MainWindow.ui" />
+    <QtUic Include="MyListBookPreview.ui" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OnLib.DataTransfer\OnLib.DataTransfer.vcxproj">
@@ -220,6 +222,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ApplicationManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="MyListBookPreview.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
