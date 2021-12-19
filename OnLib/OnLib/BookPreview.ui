@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>350</width>
-    <height>399</height>
+    <height>413</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -25,27 +25,64 @@
   <property name="windowTitle">
    <string>BookPreview</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="2" column="0">
-      <widget class="QLabel" name="authors">
+   <item row="2" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="lendButton">
        <property name="font">
         <font>
-         <family>Arial</family>
-         <weight>75</weight>
-         <bold>true</bold>
+         <family>Franklin Gothic Demi</family>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <italic>true</italic>
+         <bold>false</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: white;</string>
+        <string notr="true">color: #e6ffff;
+background-color: #003333;
+border: 2px solid #004d4d;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;
+font: italic 10pt &quot;Franklin Gothic Demi&quot;;</string>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>PushButton</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
+     <item>
+      <widget class="QPushButton" name="detailsButton">
+       <property name="styleSheet">
+        <string notr="true">color: #e6ffff;
+background-color: #003333;
+border: 2px solid #004d4d;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;
+font: italic 10pt &quot;Franklin Gothic Demi&quot;;</string>
+       </property>
+       <property name="text">
+        <string>See details</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="2" column="0">
       <widget class="QLabel" name="title">
        <property name="font">
         <font>
@@ -71,13 +108,16 @@ border-radius: 2px solid white;</string>
          <height>300</height>
         </size>
        </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QPushButton" name="lendButton">
+      <widget class="QLabel" name="authors">
        <property name="font">
         <font>
          <family>Arial</family>
@@ -86,18 +126,10 @@ border-radius: 2px solid white;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: #e6ffff;
-background-color: #003333;
-border: 2px solid #004d4d;
-border-top-left-radius: 7px;
-border-top-right-radius: 7px;
-border-bottom-left-radius: 7px;
-border-bottom-right-radius: 7px;
-height: 30;
-width: 50;</string>
+        <string notr="true">color: white;</string>
        </property>
        <property name="text">
-        <string>PushButton</string>
+        <string>TextLabel</string>
        </property>
       </widget>
      </item>
