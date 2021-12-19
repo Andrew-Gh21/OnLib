@@ -103,8 +103,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>100</width>
-             <height>91</height>
+             <width>984</width>
+             <height>528</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_6">
@@ -120,8 +120,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>98</width>
-                   <height>28</height>
+                   <width>956</width>
+                   <height>506</height>
                   </rect>
                  </property>
                 </widget>
@@ -185,8 +185,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>100</width>
-             <height>87</height>
+             <width>990</width>
+             <height>528</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_8">
@@ -203,13 +203,58 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>80</width>
-                 <height>69</height>
+                 <width>972</width>
+                 <height>510</height>
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_10">
                 <item row="0" column="0">
                  <layout class="QGridLayout" name="myListGridLayout"/>
+                </item>
+               </layout>
+              </widget>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="bookDetailsPage">
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
+         <widget class="QScrollArea" name="bookDetailsPageScrollArea">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>988</width>
+             <height>526</height>
+            </rect>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_11">
+            <item row="0" column="0">
+             <widget class="QScrollArea" name="bookDetailsScrollAreaa">
+              <property name="widgetResizable">
+               <bool>true</bool>
+              </property>
+              <widget class="QWidget" name="scrollAreaWidgetContents_2">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>968</width>
+                 <height>506</height>
+                </rect>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_12">
+                <item row="0" column="0">
+                 <layout class="QGridLayout" name="bookDetailsGridLayout"/>
                 </item>
                </layout>
               </widget>

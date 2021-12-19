@@ -29,6 +29,7 @@ private slots:
 	void HandleMyListButton();
 	void HandleSearchBooksButton(std::string s);
 	void StyleSheets();
+
 	
 private:
 	std::unordered_map<data::BookCategory, BookSection*> categories;

@@ -109,6 +109,8 @@ void MainWindow::HandleSearchIconButton()
 
 	ui->actionSearchButton->setVisible(true);
 	searchLineEditWidgetAction->setVisible(true);
+
+
 }
 
 void MainWindow::HandleHomeButton()

@@ -185,6 +185,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BookDetails.cpp" />
     <ClCompile Include="BookPreview.cpp" />
     <ClCompile Include="BookSection.cpp" />
     <ClCompile Include="FileDownloader.cpp" />
@@ -203,6 +204,7 @@
     <QtMoc Include="RemoteClient.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="BookDetails.ui" />
     <QtUic Include="BookPreview.ui" />
     <QtUic Include="BookSection.ui" />
     <QtUic Include="LoginWindow.ui" />
@@ -225,6 +227,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MyListBookPreview.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="BookDetails.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
