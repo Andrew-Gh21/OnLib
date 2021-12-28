@@ -2,7 +2,6 @@
 #include <iostream>
 #include "LoginWindow.h"
 #include <QtWidgets>
-#include <QPixmap>
 #include "Book.h"
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -35,8 +34,6 @@ MainWindow::MainWindow(QWidget* parent)
 
 	BookSection* myListBookSection=new BookSection("My list",this);
 	ui->myListGridLayout->addWidget(myListBookSection);
-
-
 
 	connect(ui->actionLogOut, SIGNAL(triggered()), this, SLOT(HandleLogOutButton()));
 	connect(ui->actionDeleteAccount, SIGNAL(triggered()), this, SLOT(HandleDeleteAccountButton()));
@@ -109,8 +106,6 @@ void MainWindow::HandleSearchIconButton()
 
 	ui->actionSearchButton->setVisible(true);
 	searchLineEditWidgetAction->setVisible(true);
-
-
 }
 
 void MainWindow::HandleHomeButton()
@@ -157,7 +152,6 @@ void MainWindow::StyleSheets()
 		"border-top-right-radius: 7px;"
 		"border-bottom-left-radius: 7px;"
 		"border-bottom-right-radius: 7px;");
-
 }
 
 void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)

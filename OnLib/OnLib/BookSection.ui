@@ -28,6 +28,7 @@
      <property name="font">
       <font>
        <pointsize>12</pointsize>
+       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -48,7 +49,9 @@
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background:  #00b3b3;</string>
+      <string notr="true">background: #9FC8C7;
+border: 1 px solid;
+border-radius: 5px;</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -73,8 +76,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>430</width>
-        <height>252</height>
+        <width>428</width>
+        <height>247</height>
        </rect>
       </property>
       <property name="minimumSize">

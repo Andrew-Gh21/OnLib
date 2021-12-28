@@ -11,7 +11,7 @@ class BookSection : public QWidget
 
 public:
 	BookSection(const QString& section, QWidget *parent = Q_NULLPTR);
-	~BookSection();
+	~BookSection() = default;
 
 	void AddBook(BookPreview* book);
 	void AddBook(MyListBookPreview* book);

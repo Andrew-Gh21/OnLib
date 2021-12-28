@@ -11,7 +11,7 @@ class BookPreview : public QWidget
 
 public:
 	BookPreview(const data::Book& book, QWidget *parent = Q_NULLPTR);
-	~BookPreview();
+	~BookPreview() = default;
 
 	void BookCoverRecieved(QByteArray data);
 

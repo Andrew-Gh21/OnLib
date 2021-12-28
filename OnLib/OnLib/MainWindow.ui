@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">background-color: #D0ECE7;</string>
   </property>
   <property name="iconSize">
    <size>
@@ -68,8 +68,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>990</width>
-             <height>528</height>
+             <width>982</width>
+             <height>517</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_3">
@@ -103,8 +103,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>984</width>
-             <height>528</height>
+             <width>118</width>
+             <height>111</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_6">
@@ -120,8 +120,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>956</width>
-                   <height>506</height>
+                   <width>85</width>
+                   <height>85</height>
                   </rect>
                  </property>
                 </widget>
@@ -185,8 +185,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>990</width>
-             <height>528</height>
+             <width>107</width>
+             <height>107</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_8">
@@ -203,8 +203,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>972</width>
-                 <height>510</height>
+                 <width>85</width>
+                 <height>85</height>
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_10">
@@ -233,8 +233,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>988</width>
-             <height>526</height>
+             <width>109</width>
+             <height>109</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_11">
@@ -248,8 +248,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>968</width>
-                 <height>506</height>
+                 <width>85</width>
+                 <height>85</height>
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_12">
@@ -279,10 +279,15 @@
    </property>
    <property name="styleSheet">
     <string notr="true">spacing: 10px;
-color: #004d4d;</string>
+color: #004d4d;
+
+</string>
    </property>
    <property name="movable">
     <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::AllToolBarAreas</set>
    </property>
    <property name="iconSize">
     <size>
@@ -292,6 +297,9 @@ color: #004d4d;</string>
    </property>
    <property name="toolButtonStyle">
     <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
+   <property name="floatable">
+    <bool>true</bool>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -307,6 +315,7 @@ color: #004d4d;</string>
    <property name="font">
     <font>
      <pointsize>9</pointsize>
+     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -318,13 +327,17 @@ color: #004d4d;</string>
    </property>
    <property name="styleSheet">
     <string notr="true">spacing: 10px;
-color: #004d4d;</string>
+color: #004d4d;
+</string>
    </property>
    <property name="movable">
     <bool>false</bool>
    </property>
    <property name="toolButtonStyle">
     <enum>Qt::ToolButtonIconOnly</enum>
+   </property>
+   <property name="floatable">
+    <bool>true</bool>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -354,6 +367,7 @@ color: #004d4d;</string>
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -368,6 +382,7 @@ color: #004d4d;</string>
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -379,6 +394,7 @@ color: #004d4d;</string>
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -407,6 +423,7 @@ color: #004d4d;</string>
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -418,6 +435,7 @@ color: #004d4d;</string>
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -429,6 +447,7 @@ color: #004d4d;</string>
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <weight>50</weight>
      <bold>false</bold>
     </font>
    </property>

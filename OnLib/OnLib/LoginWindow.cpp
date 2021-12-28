@@ -2,7 +2,6 @@
 #include "MainWindow.h"
 #include <QMessageBox>
 #include<QRegularExpressionValidator>
-#include <QPixmap>
 #include <sstream>
 #include <iostream>
 
