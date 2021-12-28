@@ -31,7 +31,6 @@ MainWindow::MainWindow(QWidget* parent)
 
 	ui->toolbar1->setFixedHeight(70);
 
-
 	BookSection* myListBookSection=new BookSection("My list",this);
 	ui->myListGridLayout->addWidget(myListBookSection);
 

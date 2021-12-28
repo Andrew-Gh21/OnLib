@@ -81,6 +81,11 @@
           <pointsize>11</pointsize>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">selection-color: white;
+selection-background-color: black;
+border: 1px solid #99B6B4;</string>
+        </property>
         <property name="maxLength">
          <number>20</number>
         </property>
@@ -96,11 +101,14 @@
         </property>
         <property name="font">
          <font>
-          <family>Arial</family>
+          <family>Franklin Gothic Demi</family>
           <pointsize>12</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
+          <weight>50</weight>
+          <bold>false</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #4B4641;</string>
         </property>
         <property name="text">
          <string>Username:</string>
@@ -111,11 +119,14 @@
        <widget class="QLabel" name="passwordLabel">
         <property name="font">
          <font>
-          <family>Arial</family>
+          <family>Franklin Gothic Demi</family>
           <pointsize>12</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
+          <weight>50</weight>
+          <bold>false</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #4B4641;</string>
         </property>
         <property name="text">
          <string>Password:</string>
@@ -144,7 +155,7 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">min-width: 9em;
+         <string notr="true"> min-width: 9em;
 padding: 6px;
 color: black;</string>
         </property>
@@ -159,8 +170,8 @@ color: black;</string>
          <font>
           <family>Arial</family>
           <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
+          <weight>50</weight>
+          <bold>false</bold>
          </font>
         </property>
         <property name="text">
@@ -188,11 +199,14 @@ color: black;</string>
        <widget class="QLabel" name="confirmPasswordLabel">
         <property name="font">
          <font>
-          <family>Arial</family>
+          <family>Franklin Gothic Demi</family>
           <pointsize>12</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
+          <weight>50</weight>
+          <bold>false</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #4B4641;</string>
         </property>
         <property name="text">
          <string>Confirm password:</string>
@@ -211,6 +225,11 @@ color: black;</string>
          <font>
           <pointsize>11</pointsize>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">selection-color: white;
+selection-background-color: black;
+border: 1px solid #99B6B4;</string>
         </property>
         <property name="maxLength">
          <number>20</number>
@@ -232,6 +251,11 @@ color: black;</string>
          <font>
           <pointsize>11</pointsize>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">selection-color: white;
+selection-background-color: black;
+border: 1px solid #99B6B4;</string>
         </property>
         <property name="maxLength">
          <number>20</number>

@@ -21,7 +21,6 @@ std::unordered_map<data::RegisterErrors, std::string> LoginWindow::registerError
     {data::RegisterErrors::PassConfirmMismatch, "Password confirmation is not the same as the password"}
 };
 
-
 void LoginWindow::OnLoginFailure(const std::vector<data::LoginErrors>& errors)
 {
     std::stringstream errorsStream;
