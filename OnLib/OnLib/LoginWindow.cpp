@@ -1,7 +1,7 @@
 #include "LoginWindow.h"
 #include "MainWindow.h"
 #include <QMessageBox>
-#include<QRegularExpressionValidator>
+#include <QRegularExpressionValidator>
 #include <sstream>
 #include <iostream>
 
