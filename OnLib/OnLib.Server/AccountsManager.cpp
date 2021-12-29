@@ -4,8 +4,8 @@ bool AccountsManager::ValidateLogin(std::shared_ptr<net::ClientConnection> clien
 {
 	bool passwordMatch;
 	bool userMatch;
-	constexpr static const char* queryMatchPassword = "select count(password) from user where name = ? and password =?";
-	constexpr static const char* queryMatchName = "select count(name) from user where name = ?";
+	constexpr static const char* queryMatchPassword = "select count(password) from user where name = ? and password = ? ";
+	constexpr static const char* queryMatchName = "select count(name) from user where name = ? ";
 
 	database << queryMatchPassword << input.password 
 		>> passwordMatch;
@@ -50,7 +50,7 @@ bool AccountsManager::ValidateRegister(std::shared_ptr<net::ClientConnection> cl
 	}
 
 	int count;
-	constexpr static const char* query = "select count(*)from user where name = ? ";
+	constexpr static const char* query = "select count(*) from user where name = ? ";
 
 	database << query << input.name 
 		>> count;
@@ -63,7 +63,7 @@ bool AccountsManager::ValidateRegister(std::shared_ptr<net::ClientConnection> cl
 	{
 		if (errors.empty())
 		{
-			constexpr static const char* queryInsertion = "insert into user (name,password) values (?,?)";
+			constexpr static const char* queryInsertion = "insert into user (name,password) values ( ? , ? ) ";
 			database << queryInsertion << input.name << input.password;
 		}
 	}
@@ -84,7 +84,7 @@ bool AccountsManager::DeleteUser(std::shared_ptr<net::ClientConnection> client, 
 {
 	constexpr static const char* query =
 		"select count(password) from user "
-		"where user.id=? and user.password = ?";
+		"where user.id = ? and user.password = ? ";
 
 	bool passwordMatch;
 
@@ -94,8 +94,8 @@ bool AccountsManager::DeleteUser(std::shared_ptr<net::ClientConnection> client, 
 	if (passwordMatch)
 	{
 		constexpr static const char* queryDeleteUser =
-			"delete from user"
-			"where user.id=?";
+			"delete from user "
+			"where user.id = ? ";
 
 		database << queryDeleteUser << input.id;
 
@@ -110,8 +110,8 @@ bool AccountsManager::ChangePassword(std::shared_ptr<net::ClientConnection> clie
 
 	constexpr static const char* queryChangePassword =
 		"update user "
-		"set password = ?"
-		"where user.id = ?";
+		"set password = ? "
+		"where user.id = ? ";
 
 	database << queryChangePassword << newPassword << input.id;
 
@@ -119,7 +119,7 @@ bool AccountsManager::ChangePassword(std::shared_ptr<net::ClientConnection> clie
 
 	constexpr static const char* queryVerify =
 		"select count(password) from user "
-		"where user.password= ? and user.id = ?";
+		"where user.password = ? and user.id = ? ";
 
 	database << queryVerify << newPassword << input.id
 		>> succesful;
@@ -134,26 +134,38 @@ bool AccountsManager::ChangePassword(std::shared_ptr<net::ClientConnection> clie
 
 bool AccountsManager::ChangeUserName(std::shared_ptr<net::ClientConnection> client, data::User input, const std::string& newName)
 {
+	bool found;
+
+	constexpr static const char* queryVerifyIfAlreadyExists =
+		"select count(name) "
+		"from user "
+		"where user.name = ? ";
+
+	database << queryVerifyIfAlreadyExists << newName
+		>> found;
+
+	if (!found)
+	{
 		constexpr static const char* queryChangeUserName =
 			"update user "
-			"set name = ?"
-			"where user.id = ?";
+			"set name = ? "
+			"where user.id = ? ";
 
 		database << queryChangeUserName << newName << input.id;
-		
+
 		bool succesful;
 
 		constexpr static const char* queryVerify =
 			"select count(name) from user "
-			"where user.name= ? and user.id = ?";
+			"where user.name = ? and user.id = ?";
 
 		database << queryVerify << newName << input.id
-			>>succesful ;
+			>> succesful;
 
 		if (succesful)
 		{
 			return true;
 		}
-
-		return false;
+	}
+	return false;
 }
