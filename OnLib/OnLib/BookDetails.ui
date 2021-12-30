@@ -10,6 +10,12 @@
     <height>300</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>20</width>
+    <height>0</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -63,6 +69,47 @@
      </item>
      <item>
       <widget class="QPushButton" name="lendButton">
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton { color: white;
+background-color:  #188683;
+border: 1px solid #008080;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;
+}
+
+QPushButton:hover { color: white;
+background-color: #009999;
+border: 1px solid #008080;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;
+}
+
+QPushButton:pressed { color: white;
+background-color: #004d4d;
+border: 1px solid #008080;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;
+}
+</string>
+       </property>
        <property name="text">
         <string>PushButton</string>
        </property>

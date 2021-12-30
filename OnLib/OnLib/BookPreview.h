@@ -21,4 +21,5 @@ private:
 signals:
 	void BorrowPressed(uint64_t id);
 	void BookDetailsPressed(const data::Book book);
+	void BookReviewPressed(QRadioButton* rating,uint64_t id);
 };
