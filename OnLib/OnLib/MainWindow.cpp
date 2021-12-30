@@ -127,6 +127,9 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 		connect(bookPreview, &BookPreview::BorrowPressed, [this](uint64_t id) {
 			emit BorrowBookRequest(id);
 			});
+		connect(bookPreview, &BookPreview::BookDetailsPressed, [this](const data::Book book) {
+			emit BookDetailsRequest(book);
+			});
 
 		FileDownloader* coverDownloader = new FileDownloader(book.coverUrl, this);
 		connect(coverDownloader, &FileDownloader::DownloadFinished, [coverDownloader, bookPreview]() {

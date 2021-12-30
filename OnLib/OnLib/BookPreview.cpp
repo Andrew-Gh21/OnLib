@@ -12,7 +12,8 @@ BookPreview::BookPreview(const data::Book& book, QWidget *parent)
 	ui.authors->setText(QString::fromStdString(authorsStream.str()));
 	ui.lendButton->setText("Borrow book");
 
-
+	connect(ui.lendButton, &QPushButton::pressed, [this,book]() {emit BorrowPressed(book.id); });
+	connect(ui.detailsButton, &QPushButton::pressed, [this, book]() {emit BookDetailsPressed(book); });
 
 	this->setMinimumSize(this->sizeHint());
 	this->adjustSize();

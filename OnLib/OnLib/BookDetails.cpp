@@ -9,6 +9,8 @@ BookDetails::BookDetails(const data::Book& book, QWidget* parent)
 
 	ui.setupUi(this);
 	ui.title->setText(QString::fromStdString(book.title));
+	//ui.description->setText(QString::fromStdString(book.description));
+	ui.description->setText("Description");
 	ui.authors->setText(QString::fromStdString(authorsStream.str()));
 	ui.lendButton->setText("Borrow book");
 

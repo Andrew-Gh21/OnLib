@@ -20,4 +20,5 @@ private:
 	data::Book book;
 signals:
 	void BorrowPressed(uint64_t id);
+	void BookDetailsPressed(const data::Book book);
 };
