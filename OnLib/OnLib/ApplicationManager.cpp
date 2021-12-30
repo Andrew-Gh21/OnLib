@@ -4,7 +4,10 @@ ApplicationManager::ApplicationManager(std::unique_ptr<RemoteClient> client, QAp
 	: remote(std::move(client)),
 	app(application)
 {
-	QObject::connect(remote.get(), &RemoteClient::ConnectionLost, this, &ApplicationManager::OnConnectionLost);
+	connect(remote.get(), &RemoteClient::ConnectionLost, this, &ApplicationManager::OnConnectionLost);
+
+	connect(remote.get(), &RemoteClient::AccountDeleteFailure, this, &ApplicationManager::OnAccountDeleteFailure);
+	connect(remote.get(), &RemoteClient::AccountDeleteSuccess, this, &ApplicationManager::OnAccountDeleteSuccess);
 }
 
 void ApplicationManager::Start()
@@ -15,25 +18,44 @@ void ApplicationManager::Start()
 	loginWindow->show();
 }
 
+void ApplicationManager::OnAccountDeleteSuccess()
+{
+	SwitchToLoginWindow();
+	QMessageBox::information(loginWindow.get(), "Account Removal", "You successfully deleted your account");
+}
+
+void ApplicationManager::OnAccountDeleteFailure()
+{
+	QMessageBox::critical(mainWindow.get(), "Account Removal", "Account deletion failure. You inserted an invalid password");
+}
+
 void ApplicationManager::ConnectRemoteAndLogin()
 {
-	QObject::connect(loginWindow.get(), &LoginWindow::LoginButtonClicked, remote.get(), &RemoteClient::OnLoginRequest);
-	QObject::connect(loginWindow.get(), &LoginWindow::RegisterButtonClicked, remote.get(), &RemoteClient::OnRegisterRequest);
-	QObject::connect(remote.get(), &RemoteClient::LoginInvalid, loginWindow.get(), &LoginWindow::OnLoginFailure);
+	connect(loginWindow.get(), &LoginWindow::LoginButtonClicked, remote.get(), &RemoteClient::OnLoginRequest);
+	connect(loginWindow.get(), &LoginWindow::RegisterButtonClicked, remote.get(), &RemoteClient::OnRegisterRequest);
+	connect(remote.get(), &RemoteClient::LoginInvalid, loginWindow.get(), &LoginWindow::OnLoginFailure);
 
-	QObject::connect(remote.get(), &RemoteClient::LoginSuccessfull, loginWindow.get(), [this]() {
+	connect(remote.get(), &RemoteClient::LoginSuccessfull, loginWindow.get(), [this]() {
 		SwitchToMainWindow();
 		remote->RequestDisplayBooks();
 		});
 
-	QObject::connect(remote.get(), &RemoteClient::RegisterInvalid, loginWindow.get(), &LoginWindow::OnRegisterFailure);
-	QObject::connect(remote.get(), &RemoteClient::RegisterSuccesfull, loginWindow.get(), &LoginWindow::OnRegisterSuccess);
+	connect(remote.get(), &RemoteClient::RegisterInvalid, loginWindow.get(), &LoginWindow::OnRegisterFailure);
+	connect(remote.get(), &RemoteClient::RegisterSuccesfull, loginWindow.get(), &LoginWindow::OnRegisterSuccess);
 }
 
 void ApplicationManager::ConnectRemoteAndMain()
 {
-	QObject::connect(remote.get(), &RemoteClient::DisplayBooksRecieved, mainWindow.get(), &MainWindow::AddBooksToSection);
-	QObject::connect(remote.get(), &RemoteClient::BorrowedBooksRecieved, mainWindow.get(), &MainWindow::AddBorrowedBooks);
+	connect(remote.get(), &RemoteClient::DisplayBooksRecieved, mainWindow.get(), &MainWindow::AddBooksToSection);
+	connect(remote.get(), &RemoteClient::BorrowedBooksRecieved, mainWindow.get(), &MainWindow::AddBorrowedBooks);
+
+	connect(mainWindow.get(), &MainWindow::LogOutRequest, [this]() {
+		SwitchToLoginWindow();
+		remote->OnLogoutRequest();
+		});
+
+	connect(mainWindow.get(), &MainWindow::DeleteAccountRequest, remote.get(), &RemoteClient::OnDeleteAccountRequest);
+	connect(mainWindow.get(), &MainWindow::SearchRequest, remote.get(), &RemoteClient::OnSearchRequest);
 }
 
 void ApplicationManager::SwitchToMainWindow()

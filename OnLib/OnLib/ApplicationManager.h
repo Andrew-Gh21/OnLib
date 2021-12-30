@@ -17,6 +17,8 @@ public:
 
 public slots:
     void OnConnectionLost();
+    void OnAccountDeleteSuccess();
+    void OnAccountDeleteFailure();
 
 private:
     void ConnectRemoteAndLogin();

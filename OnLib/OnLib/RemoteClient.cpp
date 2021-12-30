@@ -35,6 +35,26 @@ void RemoteClient::OnRegisterRequest(const data::User& user)
 	Send(msg);
 }
 
+void RemoteClient::OnLogoutRequest()
+{
+	net::Message msg;
+	msg.header.messageType = static_cast<uint16_t>(data::ClientRequest::Logout);
+	Send(msg);
+}
+
+void RemoteClient::OnDeleteAccountRequest(const std::string& password)
+{
+	net::Message msg;
+	msg.header.messageType = static_cast<uint16_t>(data::ClientRequest::DeleteAccount);
+	net::Serialize(msg, std::cbegin(password), std::cend(password));
+	Send(msg);
+}
+
+void RemoteClient::OnSearchRequest(const std::string& search)
+{
+	// TODO
+}
+
 RemoteClient::~RemoteClient()
 {
 	if (processingThread.joinable())
@@ -110,6 +130,12 @@ void RemoteClient::OnMessageRecieved(net::Message& msg)
 		emit BorrowedBooksRecieved(books);
 		break;
 	}
+	case data::ServerResponse::DeleteAccountSuccesful:
+		emit AccountDeleteSuccess();
+		break;
+	case data::ServerResponse::DeleteAccountFailure:
+		emit AccountDeleteFailure();
+		break;
 	default:
 		break;
 	}

@@ -87,11 +87,18 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 	}
 	case data::ClientRequest::DeleteAccount:
 	{
+		std::string password;
+		net::Deserialize(message, password, true);
+
 		net::Message response;
-		data::ServerResponse result = accountsManager.DeleteUser(client->GetId())
+		data::ServerResponse result = accountsManager.DeleteUser(client->GetId(), password)
 			? data::ServerResponse::DeleteAccountSuccesful : data::ServerResponse::DeleteAccountFailure;
 		response.header.messageType = static_cast<uint16_t>(result);
 		MessageClient(client, response);
+
+		if (result == data::ServerResponse::DeleteAccountSuccesful)
+			accountsManager.Logout(client->GetId());
+
 		break;
 	}
 	default:

@@ -24,14 +24,10 @@ public slots:
 signals:
 	void BorrowBookRequest(uint64_t id);
 	void LogOutRequest();
-	void DeleteAccountRequest(QString password);
-	void SearchRequest(QString text);
-
-
+	void DeleteAccountRequest(const std::string& password);
+	void SearchRequest(const std::string& text);
 
 private slots:
-	//void HandleLogOutButton();
-	//void HandleDeleteAccountButton();
 	void HandleSearchIconButton();
 	void HandleHomeButton();
 	void HandleMyListButton();

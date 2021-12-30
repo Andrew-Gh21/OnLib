@@ -72,6 +72,7 @@ bool AccountsManager::ValidateRegister(std::shared_ptr<net::ClientConnection> cl
 
 void AccountsManager::Login(uint64_t clientId, data::User user)
 {
+	database << "select id from user where name = ?" << user.name >> user.id;
 	users.insert(std::make_pair(clientId, user));
 }
 
@@ -80,7 +81,7 @@ void AccountsManager::Logout(uint64_t clientId)
 	users.erase(clientId);
 }
 
-bool AccountsManager::DeleteUser(uint64_t clientId)
+bool AccountsManager::DeleteUser(uint64_t clientId, const std::string& password)
 {
 	constexpr static const char* query =
 		"select count(password) from user "
@@ -89,7 +90,7 @@ bool AccountsManager::DeleteUser(uint64_t clientId)
 	auto input = users[clientId];
 	bool passwordMatch;
 
-	database << query << input.id << input.password
+	database << query << input.id << password
 		>> passwordMatch;
 
 	if (passwordMatch)

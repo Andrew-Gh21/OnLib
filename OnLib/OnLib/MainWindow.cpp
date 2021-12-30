@@ -31,11 +31,11 @@ MainWindow::MainWindow(QWidget* parent)
 
 	ui->toolbar1->setFixedHeight(70);
 
-	BookSection* myListBookSection=new BookSection("My list",this);
+	BookSection* myListBookSection = new BookSection("My list", this);
 	ui->myListGridLayout->addWidget(myListBookSection);
 
 	connect(ui->actionLogOut, &QAction::triggered, [this]() {emit LogOutRequest(); });
-	connect(ui->actionDeleteAccount, &QAction::triggered, [this]() {emit DeleteAccountRequest(QInputDialog::getText(this, "Confirm password", "Password:", QLineEdit::Password, "")); });
+	connect(ui->actionDeleteAccount, &QAction::triggered, [this]() {emit DeleteAccountRequest(QInputDialog::getText(this, "Confirm password", "Password:", QLineEdit::Password, "").toStdString()); });
 	connect(ui->actionHome, SIGNAL(triggered()), this, SLOT(HandleHomeButton()));
 	connect(ui->actionMyList, SIGNAL(triggered()), this, SLOT(HandleMyListButton()));
 	connect(ui->actionSearchIcon, &QAction::triggered, [this]() {emit HandleSearchIconButton(); });
@@ -62,7 +62,7 @@ void MainWindow::HandleSearchIconButton()
 	ui->actionSearchButton->setVisible(true);
 	searchLineEditWidgetAction->setVisible(true);
 
-	emit SearchRequest(searchLineEditWidgetAction->text());
+	emit SearchRequest(searchLineEditWidgetAction->text().toStdString());
 }
 
 
@@ -123,7 +123,7 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 
 		BookPreview* bookPreview = new BookPreview(book, section);
 		section->AddBook(bookPreview);
-		
+
 		connect(bookPreview, &BookPreview::BorrowPressed, [this](uint64_t id) {
 			emit BorrowBookRequest(id);
 			});

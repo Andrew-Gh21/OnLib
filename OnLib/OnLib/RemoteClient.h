@@ -19,15 +19,24 @@ public:
 	void RequestDisplayBooks();
 	void RequestBorrowedBooks();
 	void Send(const net::Message& msg) const override;
+
 public slots:
 	void OnLoginRequest(const data::User& user);
 	void OnRegisterRequest(const data::User& user);
+	void OnLogoutRequest();
+	void OnDeleteAccountRequest(const std::string& password);
+	void OnSearchRequest(const std::string& search);
 
 signals:
 	void LoginSuccessfull();
 	void LoginInvalid(const std::vector<data::LoginErrors>& errors);
+
 	void RegisterSuccesfull();
 	void RegisterInvalid(const std::vector<data::RegisterErrors>& errors);
+
+	void AccountDeleteSuccess();
+	void AccountDeleteFailure();
+
 	void ConnectionLost() const;
 
 	void DisplayBooksRecieved(const std::vector<data::Book>& books);
