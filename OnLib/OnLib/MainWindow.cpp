@@ -54,52 +54,6 @@ MainWindow::MainWindow(QWidget* parent)
 	this->setMinimumWidth(700);
 }
 
-void MainWindow::HandleLogOutButton()
-{
-	QMessageBox msgBox;
-
-	msgBox.setWindowTitle("Log out confirmation");
-	msgBox.setText(QString::fromStdString("Hello, , are you sure you want to log out?"));
-	msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-	msgBox.setDefaultButton(QMessageBox::No);
-
-	int result = msgBox.exec();
-	switch (result) {
-	case QMessageBox::Yes:
-		this->close();
-		LoginWindow* window = new LoginWindow;
-		window->show();
-		break;
-	}
-}
-
-void MainWindow::HandleDeleteAccountButton()
-{
-	bool ok;
-	emit DeleteAccountRequest(QInputDialog::getText(this, "Confirm password", "Password:", QLineEdit::Password, "", &ok));
-	/*if (QInputDialog::getText(this, "Confirm password", "Password:", QLineEdit::Password, "", &ok) == QString::fromStdString("password"))
-	{
-		if (ok)
-		{
-			this->close();
-			LoginWindow* window = new LoginWindow;
-			window->show();
-			QMessageBox msgBox;
-			msgBox.setText("Your account was deleted succesfully.");
-			msgBox.exec();
-		}
-	}
-	else
-	{
-		if (ok)
-		{
-			QMessageBox msgBox;
-			msgBox.setText("Incorrect password, try again later.");
-			msgBox.exec();
-		}*/
-	//}
-}
-
 void MainWindow::HandleSearchIconButton()
 {
 	ui->stackedWidget->setCurrentIndex(1);
@@ -110,6 +64,7 @@ void MainWindow::HandleSearchIconButton()
 
 	emit SearchRequest(searchLineEditWidgetAction->text());
 }
+
 
 void MainWindow::HandleHomeButton()
 {
@@ -163,21 +118,34 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 	{
 		BookSection* section = categories[book.mainCategory];
 
-		QSize  currentSize = this->normalGeometry().size();
+		QSize currentSize = this->normalGeometry().size();
 		section->resize(currentSize / 2);
 
 		BookPreview* bookPreview = new BookPreview(book, section);
+		section->AddBook(bookPreview);
+		
+		connect(bookPreview, &BookPreview::BorrowPressed, [this](uint64_t id) {
+			emit BorrowBookRequest(id);
+			});
 
 		FileDownloader* coverDownloader = new FileDownloader(book.coverUrl, this);
 		connect(coverDownloader, &FileDownloader::DownloadFinished, [coverDownloader, bookPreview]() {
 			bookPreview->BookCoverRecieved(coverDownloader->GetData());
 			});
-		connect(bookPreview, &BookPreview::BorrowPressed, [this](uint64_t id) {
-			emit BorrowBookRequest(id);
+	}
+}
+
+void MainWindow::AddBorrowedBooks(const std::vector<data::LendBook>& books)
+{
+	for (const auto& book : books)
+	{
+		MyListBookPreview* preview = new MyListBookPreview(book, this);
+
+		ui->myListGridLayout->addWidget(preview);
+
+		FileDownloader* coverDownloader = new FileDownloader(book.coverUrl, this);
+		connect(coverDownloader, &FileDownloader::DownloadFinished, [coverDownloader, preview]() {
+			preview->BookCoverRecieved(coverDownloader->GetData());
 			});
-
-
-		section->AddBook(bookPreview);
-
 	}
 }

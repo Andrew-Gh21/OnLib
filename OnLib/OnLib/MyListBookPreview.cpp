@@ -1,7 +1,7 @@
 #include "MyListBookPreview.h"
 #include <sstream>
 
-MyListBookPreview::MyListBookPreview(const data::Book& book, QWidget* parent)
+MyListBookPreview::MyListBookPreview(const data::LendBook& book, QWidget* parent)
 	: QWidget(parent)
 {
 	std::ostringstream authorsStream;

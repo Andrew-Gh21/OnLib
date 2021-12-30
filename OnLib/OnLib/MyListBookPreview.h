@@ -9,7 +9,7 @@ class MyListBookPreview : public QWidget
 	Q_OBJECT
 
 public:
-	MyListBookPreview(const data::Book& book, QWidget* parent = Q_NULLPTR);
+	MyListBookPreview(const data::LendBook& book, QWidget* parent = Q_NULLPTR);
 	~MyListBookPreview();
 
 	void BookCoverRecieved(QByteArray data);

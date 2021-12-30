@@ -20,6 +20,7 @@ public:
 
 public slots:
 	void AddBooksToSection(const std::vector<data::Book>& books);
+	void AddBorrowedBooks(const std::vector<data::LendBook>& books);
 signals:
 	void BorrowBookRequest(uint64_t id);
 	void LogOutRequest();
@@ -29,8 +30,8 @@ signals:
 
 
 private slots:
-	void HandleLogOutButton();
-	void HandleDeleteAccountButton();
+	//void HandleLogOutButton();
+	//void HandleDeleteAccountButton();
 	void HandleSearchIconButton();
 	void HandleHomeButton();
 	void HandleMyListButton();

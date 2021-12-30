@@ -33,6 +33,7 @@ void ApplicationManager::ConnectRemoteAndLogin()
 void ApplicationManager::ConnectRemoteAndMain()
 {
 	QObject::connect(remote.get(), &RemoteClient::DisplayBooksRecieved, mainWindow.get(), &MainWindow::AddBooksToSection);
+	QObject::connect(remote.get(), &RemoteClient::BorrowedBooksRecieved, mainWindow.get(), &MainWindow::AddBorrowedBooks);
 }
 
 void ApplicationManager::SwitchToMainWindow()

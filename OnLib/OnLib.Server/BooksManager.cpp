@@ -136,7 +136,7 @@ bool BooksManager::CheckIfAvailable(const std::string& date)
 	constexpr static double parserToDays = 60 * 60 * 24;
 
 	std::time_t currentTime = std::time(0);
-	std::time_t rawtime;
+	std::time_t rawtime = std::time(0);
 	std::tm* timestamp = new std::tm;
 	std::tm* time1 = new std::tm();
 	localtime_s(timestamp, &currentTime);
