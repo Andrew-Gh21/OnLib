@@ -21,9 +21,10 @@ public:
 	bool ValidateRegister(std::shared_ptr<net::ClientConnection> client, data::User input,std::vector<data::RegisterErrors>&errors);
 	void Login(uint64_t clientId, data::User user);
 	void Logout(uint64_t clientId);
-	bool DeleteUser(std::shared_ptr<net::ClientConnection> client, data::User input);
+	bool DeleteUser(uint64_t clientId);
 	bool ChangePassword(std::shared_ptr<net::ClientConnection> client, data::User input, const std::string& newPassword);
 	bool ChangeUserName(std::shared_ptr<net::ClientConnection> client, data::User input, const std::string& newName);
 	uint64_t GetUserId(uint64_t clientId) const noexcept { return users.at(clientId).id; }
+	data::User GetUser(uint64_t clientId) const noexcept { return users.at(clientId); }
 };
 

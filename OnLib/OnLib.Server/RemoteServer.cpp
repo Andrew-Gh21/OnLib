@@ -54,7 +54,7 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 		SendLoginResponse(client, userData);
 		break;
 	}
-		
+
 	case data::ClientRequest::Register:
 	{
 		data::User userData;
@@ -80,6 +80,20 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 		MessageClient(client, response);
 		break;
 	}
+	case data::ClientRequest::Logout:
+	{
+		accountsManager.Logout(client->GetId());
+		break;
+	}
+	case data::ClientRequest::DeleteAccount:
+	{
+		net::Message response;
+		data::ServerResponse result = accountsManager.DeleteUser(client->GetId())
+			? data::ServerResponse::DeleteAccountSuccesful : data::ServerResponse::DeleteAccountFailure;
+		response.header.messageType = static_cast<uint16_t>(result);
+		MessageClient(client, response);
+		break;
+	}
 	default:
 		log(LogMessageType::Warning, "User " + std::to_string(client->GetId()) + " sent an invalid message. Disconnecting!");
 		client->Disconnect();
@@ -93,7 +107,7 @@ void RemoteServer::SendLoginResponse(Client client, data::User data)
 	std::vector<data::LoginErrors> errors;
 
 	bool logInSuccesfull = accountsManager.ValidateLogin(client, data, errors);
-	response.header.messageType = static_cast<uint8_t>(logInSuccesfull ? 
+	response.header.messageType = static_cast<uint8_t>(logInSuccesfull ?
 		data::ServerResponse::SuccesfullLogin : data::ServerResponse::InvalidLogin);
 
 	if (logInSuccesfull)
