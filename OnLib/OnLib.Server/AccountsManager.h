@@ -24,5 +24,6 @@ public:
 	bool DeleteUser(std::shared_ptr<net::ClientConnection> client, data::User input);
 	bool ChangePassword(std::shared_ptr<net::ClientConnection> client, data::User input, const std::string& newPassword);
 	bool ChangeUserName(std::shared_ptr<net::ClientConnection> client, data::User input, const std::string& newName);
+	uint64_t GetUserId(uint64_t clientId) const noexcept { return users.at(clientId).id; }
 };
 

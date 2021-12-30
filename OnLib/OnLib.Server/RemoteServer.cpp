@@ -71,6 +71,15 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 		MessageClient(client, response);
 		break;
 	}
+	case data::ClientRequest::RequestLentBooks:
+	{
+		auto borrowed = booksManager.GetLendedBooks(accountsManager.GetUserId(client->GetId()));
+		net::Message response;
+		response.header.messageType = static_cast<uint16_t>(data::ServerResponse::BorrowedBooksRecieved);
+		net::Serialize(message, std::cbegin(borrowed), std::cend(borrowed));
+		MessageClient(client, response);
+		break;
+	}
 	default:
 		log(LogMessageType::Warning, "User " + std::to_string(client->GetId()) + " sent an invalid message. Disconnecting!");
 		client->Disconnect();

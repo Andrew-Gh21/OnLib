@@ -10,7 +10,7 @@ namespace data
 		RequestDisplayBooks,
 		Logout,
 		DeleteAccount,
-		LentBooks
+		RequestLentBooks
 	};
 }
 

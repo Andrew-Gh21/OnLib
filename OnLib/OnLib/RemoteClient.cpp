@@ -48,6 +48,13 @@ void RemoteClient::RequestDisplayBooks()
 	Send(requestBooksMessage);
 }
 
+void RemoteClient::RequestBorrowedBooks()
+{
+	net::Message requestBooksMessage;
+	requestBooksMessage.header.messageType = static_cast<int32_t>(data::ClientRequest::RequestLentBooks);
+	Send(requestBooksMessage);
+}
+
 void RemoteClient::Send(const net::Message& msg) const
 {
 	if (IsConnected())
@@ -94,6 +101,13 @@ void RemoteClient::OnMessageRecieved(net::Message& msg)
 		std::vector<data::Book> books;
 		net::Deserialize(msg, books, true);
 		emit DisplayBooksRecieved(books);
+		break;
+	}
+	case data::ServerResponse::BorrowedBooksRecieved:
+	{
+		std::vector<data::LendBook> books;
+		net::Deserialize(msg, books, true);
+		emit BorrowedBooksRecieved(books);
 		break;
 	}
 	default:

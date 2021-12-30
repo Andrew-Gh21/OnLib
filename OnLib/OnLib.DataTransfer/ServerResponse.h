@@ -15,7 +15,7 @@ namespace data
 		DisplayBooksRecieved,
 		DeleteAccountSuccesful,
 		DeleteAccountFailure,
-		BorrowedBooks
+		BorrowedBooksRecieved
 	};
 	
 }
