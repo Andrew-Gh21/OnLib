@@ -23,6 +23,6 @@ public:
 	void GetAuthors(data::LendBook& book);
 	void GetCategories(data::Book& book);
 	void GetRating(data::Book& book);
-	bool checkIfAvailable(const std::string& date);
+	bool CheckIfAvailable(const std::string& date);
 };
 

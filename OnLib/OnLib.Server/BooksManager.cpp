@@ -54,7 +54,7 @@ std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
 	{
 		GetAuthors(book);
 
-		if (checkIfAvailable(book.lendDate))
+		if (CheckIfAvailable(book.lendDate))
 		{
 			book.isAvailable = true;
 		}
@@ -131,25 +131,25 @@ void BooksManager::GetRating(data::Book& book)
 		>> output;
 }
 
-bool BooksManager::checkIfAvailable(const std::string& date)
+bool BooksManager::CheckIfAvailable(const std::string& date)
 {
+	constexpr static double parserToDays = 60 * 60 * 24;
+
 	std::time_t currentTime = std::time(0);
 	std::time_t rawtime;
 	std::tm* timestamp = new std::tm;
 	std::tm* time1 = new std::tm();
 	localtime_s(timestamp, &currentTime);
 
-	std::string day1(date.begin(), date.begin() + 2);
-	std::string luna1(date.begin() + 3, date.begin() + 5);
-	std::string an1(date.begin() + 6, date.end());
-	time1->tm_year = stoi(an1) + 100;
-	time1->tm_mon = stoi(luna1) - 1;
-	time1->tm_mday = stoi(day1);
-	rawtime = mktime(time1);
+	std::string day(date.begin(), date.begin() + 2);
+	std::string month(date.begin() + 3, date.begin() + 5);
+	std::string year(date.begin() + 6, date.end());
+	time1->tm_year = std::stoi(year) + 100;
+	time1->tm_mon = std::stoi(month) - 1;
+	time1->tm_mday = std::stoi(day);
 
-	if (difftime(currentTime, rawtime) / (60 * 60 * 24) <= 14)
+	if (std::difftime(currentTime, rawtime) / (parserToDays) <= 14)
 		return true;
 
 	return false;
 }
-
