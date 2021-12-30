@@ -34,10 +34,12 @@ MainWindow::MainWindow(QWidget* parent)
 	BookSection* myListBookSection=new BookSection("My list",this);
 	ui->myListGridLayout->addWidget(myListBookSection);
 
-	connect(ui->actionLogOut, SIGNAL(triggered()), this, SLOT(HandleLogOutButton()));
-	connect(ui->actionDeleteAccount, SIGNAL(triggered()), this, SLOT(HandleDeleteAccountButton()));
+	connect(ui->actionLogOut, &QAction::triggered, [this]() {emit LogOutRequest(); });
+	connect(ui->actionDeleteAccount, &QAction::triggered, [this]() {emit DeleteAccountRequest(QInputDialog::getText(this, "Confirm password", "Password:", QLineEdit::Password, "")); });
 	connect(ui->actionHome, SIGNAL(triggered()), this, SLOT(HandleHomeButton()));
 	connect(ui->actionMyList, SIGNAL(triggered()), this, SLOT(HandleMyListButton()));
+	connect(ui->actionSearchIcon, &QAction::triggered, [this]() {emit HandleSearchIconButton(); });
+
 
 	ui->actionSearchButton->setVisible(false);
 
@@ -47,7 +49,6 @@ MainWindow::MainWindow(QWidget* parent)
 
 	StyleSheets();
 
-	connect(ui->actionSearchIcon, SIGNAL(triggered()), this, SLOT(HandleSearchIconButton()));
 
 	this->setMinimumHeight(600);
 	this->setMinimumWidth(700);
@@ -75,7 +76,8 @@ void MainWindow::HandleLogOutButton()
 void MainWindow::HandleDeleteAccountButton()
 {
 	bool ok;
-	if (QInputDialog::getText(this, "Confirm password", "Password:", QLineEdit::Password, "", &ok) == QString::fromStdString("password"))
+	emit DeleteAccountRequest(QInputDialog::getText(this, "Confirm password", "Password:", QLineEdit::Password, "", &ok));
+	/*if (QInputDialog::getText(this, "Confirm password", "Password:", QLineEdit::Password, "", &ok) == QString::fromStdString("password"))
 	{
 		if (ok)
 		{
@@ -94,8 +96,8 @@ void MainWindow::HandleDeleteAccountButton()
 			QMessageBox msgBox;
 			msgBox.setText("Incorrect password, try again later.");
 			msgBox.exec();
-		}
-	}
+		}*/
+	//}
 }
 
 void MainWindow::HandleSearchIconButton()
@@ -105,6 +107,8 @@ void MainWindow::HandleSearchIconButton()
 
 	ui->actionSearchButton->setVisible(true);
 	searchLineEditWidgetAction->setVisible(true);
+
+	emit SearchRequest(searchLineEditWidgetAction->text());
 }
 
 void MainWindow::HandleHomeButton()
@@ -168,7 +172,12 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 		connect(coverDownloader, &FileDownloader::DownloadFinished, [coverDownloader, bookPreview]() {
 			bookPreview->BookCoverRecieved(coverDownloader->GetData());
 			});
+		connect(bookPreview, &BookPreview::BorrowPressed, [this](uint64_t id) {
+			emit BorrowBookRequest(id);
+			});
+
 
 		section->AddBook(bookPreview);
+
 	}
 }

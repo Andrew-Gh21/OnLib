@@ -20,6 +20,13 @@ public:
 
 public slots:
 	void AddBooksToSection(const std::vector<data::Book>& books);
+signals:
+	void BorrowBookRequest(uint64_t id);
+	void LogOutRequest();
+	void DeleteAccountRequest(QString password);
+	void SearchRequest(QString text);
+
+
 
 private slots:
 	void HandleLogOutButton();
@@ -37,4 +44,5 @@ private:
 	QAction* searchButtonWidgetAction;
 	QAction* searchLineEditWidgetAction;
 	QLineEdit* searchLineEdit;
+
 };

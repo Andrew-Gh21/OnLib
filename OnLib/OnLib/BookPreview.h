@@ -17,4 +17,7 @@ public:
 
 private:
 	Ui::BookPreview ui;
+	data::Book book;
+signals:
+	void BorrowPressed(uint64_t id);
 };
