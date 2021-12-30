@@ -1,8 +1,7 @@
 #include "LoginWindow.h"
 #include "MainWindow.h"
 #include <QMessageBox>
-#include<QRegularExpressionValidator>
-#include <QPixmap>
+#include <QRegularExpressionValidator>
 #include <sstream>
 #include <iostream>
 
@@ -21,7 +20,6 @@ std::unordered_map<data::RegisterErrors, std::string> LoginWindow::registerError
     {data::RegisterErrors::EmptyField, "Please fill all the fields before registering"},
     {data::RegisterErrors::PassConfirmMismatch, "Password confirmation is not the same as the password"}
 };
-
 
 void LoginWindow::OnLoginFailure(const std::vector<data::LoginErrors>& errors)
 {

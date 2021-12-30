@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>350</width>
-    <height>436</height>
+    <height>437</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -16,8 +16,18 @@
     <height>16777215</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <family>Franklin Gothic Demi</family>
+    <weight>50</weight>
+    <bold>false</bold>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">color: white;</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
@@ -66,18 +76,45 @@
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QPushButton" name="readBookButton">
+         <property name="font">
+          <font>
+           <family>Franklin Gothic Demi</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="styleSheet">
-          <string notr="true">color: #e6ffff;
-background-color: #00802b;
-border: 2px solid #004d4d;
+          <string notr="true">QPushButton { color: white;
+background-color:  #188683;
+border: 1px solid #008080;
 border-top-left-radius: 7px;
 border-top-right-radius: 7px;
 border-bottom-left-radius: 7px;
 border-bottom-right-radius: 7px;
 height: 30;
 width: 50;
-font: italic 10pt &quot;Franklin Gothic Demi&quot;;
+}
 
+QPushButton:hover { color: white;
+background-color: #009999;
+border: 1px solid #008080;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;
+}
+
+QPushButton:pressed { color: white;
+background-color: #004d4d;
+border: 1px solid #008080;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;
+}
 </string>
          </property>
          <property name="text">
@@ -87,36 +124,94 @@ font: italic 10pt &quot;Franklin Gothic Demi&quot;;
        </item>
        <item>
         <widget class="QPushButton" name="extendReturnDateButton">
+         <property name="font">
+          <font>
+           <family>Franklin Gothic Demi</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="styleSheet">
-          <string notr="true">color: #e6ffff;
-background-color:  #00802b;
-border: 2px solid #004d4d;
+          <string notr="true">QPushButton { color: white;
+background-color:  #188683;
+border: 1px solid #008080;
 border-top-left-radius: 7px;
 border-top-right-radius: 7px;
 border-bottom-left-radius: 7px;
 border-bottom-right-radius: 7px;
 height: 30;
 width: 50;
-font: italic 10pt &quot;Franklin Gothic Demi&quot;;</string>
+}
+
+QPushButton:hover { color: white;
+background-color: #009999;
+border: 1px solid #008080;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;
+}
+
+QPushButton:pressed { color: white;
+background-color: #004d4d;
+border: 1px solid #008080;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;
+}
+</string>
          </property>
          <property name="text">
-          <string>Extend return date</string>
+          <string>Extend date</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="returnBookButton">
+         <property name="font">
+          <font>
+           <family>Franklin Gothic Demi</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <property name="styleSheet">
-          <string notr="true">color: #e6ffff;
-background-color: #ff8080;
-border: 2px solid #004d4d;
+          <string notr="true">QPushButton { color: white;
+background-color:  #188683;
+border: 1px solid #008080;
 border-top-left-radius: 7px;
 border-top-right-radius: 7px;
 border-bottom-left-radius: 7px;
 border-bottom-right-radius: 7px;
 height: 30;
 width: 50;
-font: italic 10pt &quot;Franklin Gothic Demi&quot;;</string>
+}
+
+QPushButton:hover { color: white;
+background-color: #009999;
+border: 1px solid #008080;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;
+}
+
+QPushButton:pressed { color: white;
+background-color: #004d4d;
+border: 1px solid #008080;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;
+}
+</string>
          </property>
          <property name="text">
           <string>Return book</string>

@@ -6,13 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>350</width>
-    <height>413</height>
+    <width>268</width>
+    <height>415</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
-    <width>350</width>
+    <width>0</width>
     <height>0</height>
    </size>
   </property>
@@ -32,51 +38,151 @@
    <item row="2" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
       <widget class="QPushButton" name="lendButton">
        <property name="font">
         <font>
          <family>Franklin Gothic Demi</family>
-         <pointsize>10</pointsize>
+         <pointsize>9</pointsize>
          <weight>50</weight>
-         <italic>true</italic>
+         <italic>false</italic>
          <bold>false</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: #e6ffff;
-background-color: #003333;
-border: 2px solid #004d4d;
+        <string notr="true">QPushButton { color: white;
+background-color:  #188683;
+border: 1px solid #008080;
 border-top-left-radius: 7px;
 border-top-right-radius: 7px;
 border-bottom-left-radius: 7px;
 border-bottom-right-radius: 7px;
 height: 30;
 width: 50;
-font: italic 10pt &quot;Franklin Gothic Demi&quot;;</string>
+}
+
+QPushButton:hover { color: white;
+background-color: #009999;
+border: 1px solid #008080;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;
+}
+
+QPushButton:pressed { color: white;
+background-color: #004d4d;
+border: 1px solid #008080;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;
+}
+</string>
        </property>
        <property name="text">
-        <string>PushButton</string>
+        <string>Borrow book</string>
        </property>
       </widget>
      </item>
      <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
       <widget class="QPushButton" name="detailsButton">
+       <property name="font">
+        <font>
+         <family>Franklin Gothic Demi</family>
+         <pointsize>9</pointsize>
+        </font>
+       </property>
        <property name="styleSheet">
-        <string notr="true">color: #e6ffff;
-background-color: #003333;
-border: 2px solid #004d4d;
+        <string notr="true">QPushButton { color: white;
+background-color:  #188683;
+border: 1px solid #008080;
 border-top-left-radius: 7px;
 border-top-right-radius: 7px;
 border-bottom-left-radius: 7px;
 border-bottom-right-radius: 7px;
 height: 30;
 width: 50;
-font: italic 10pt &quot;Franklin Gothic Demi&quot;;</string>
+}
+
+QPushButton:hover { color: white;
+background-color: #009999;
+border: 1px solid #008080;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;
+}
+
+QPushButton:pressed { color: white;
+background-color: #004d4d;
+border: 1px solid #008080;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+border-bottom-left-radius: 7px;
+border-bottom-right-radius: 7px;
+height: 30;
+width: 50;
+}
+</string>
        </property>
        <property name="text">
         <string>See details</string>
        </property>
       </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>

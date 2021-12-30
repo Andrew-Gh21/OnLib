@@ -1,6 +1,7 @@
 #pragma once
 #include <unordered_map>
 #include <cstdint>
+#include <iomanip>
 #include <regex>
 
 #include "Connection.h"
@@ -22,5 +23,6 @@ public:
 	void GetAuthors(data::LendBook& book);
 	void GetCategories(data::Book& book);
 	void GetRating(data::Book& book);
+	bool checkIfAvailable(const std::string& date);
 };
 
