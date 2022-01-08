@@ -35,6 +35,112 @@
    <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="reviewLayout">
+     <item>
+      <widget class="QLabel" name="reviewLabel">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white;
+border-radius: 2px solid white;</string>
+       </property>
+       <property name="text">
+        <string>Review</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="review1">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white;
+border-radius: 2px solid white;</string>
+       </property>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="review2">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white;
+border-radius: 2px solid white;</string>
+       </property>
+       <property name="text">
+        <string>2</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="review3">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white;
+border-radius: 2px solid white;</string>
+       </property>
+       <property name="text">
+        <string>3</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="review4">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white;
+border-radius: 2px solid white;</string>
+       </property>
+       <property name="text">
+        <string>4</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="review5">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white;
+border-radius: 2px solid white;</string>
+       </property>
+       <property name="text">
+        <string>5</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
    <item row="2" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -188,23 +294,47 @@ width: 50;
    </item>
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="0">
-      <widget class="QLabel" name="cover">
-       <property name="minimumSize">
-        <size>
-         <width>150</width>
-         <height>300</height>
-        </size>
+     <item row="4" column="0">
+      <widget class="QLabel" name="ratingLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">color: white;
+border-radius: 2px solid white;</string>
        </property>
        <property name="text">
-        <string/>
+        <string>Rating: </string>
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="4" column="1">
+      <widget class="QLabel" name="rating">
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white;
+border-radius: 2px solid white;</string>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0" colspan="2">
       <widget class="QLabel" name="authors">
        <property name="font">
         <font>
@@ -221,7 +351,7 @@ width: 50;
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="2" column="0" colspan="2">
       <widget class="QLabel" name="title">
        <property name="font">
         <font>
@@ -239,51 +369,17 @@ border-radius: 2px solid white;</string>
        </property>
       </widget>
      </item>
-    </layout>
-   </item>
-   <item row="1" column="0">
-    <layout class="QHBoxLayout" name="reviewLayout">
-     <item>
-      <widget class="QLabel" name="label">
+     <item row="0" column="0" colspan="2">
+      <widget class="QLabel" name="cover">
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>300</height>
+        </size>
+       </property>
        <property name="styleSheet">
-        <string notr="true">color: white;
-border-radius: 2px solid white;</string>
+        <string notr="true"/>
        </property>
-       <property name="text">
-        <string>Review</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="review1">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="review2">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="review3">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="review4">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="radioButton_3">
        <property name="text">
         <string/>
        </property>
