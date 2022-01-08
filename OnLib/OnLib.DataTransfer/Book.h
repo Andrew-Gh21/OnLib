@@ -12,12 +12,19 @@ namespace data
 		std::string lendDate;
 		std::string returnDate;
 		std::string title;
+		std::string description;
 		std::string coverUrl;
 		std::vector<std::string>authors;
 		bool isAvailable;
 
 		LendBook() : bookId(), lendDate(), returnDate() {}
-		LendBook(uint64_t bookId, std::string lendDate, std::string returnDate, std::string title, std::string coverUrl) : bookId(bookId), lendDate(lendDate), returnDate(returnDate), title(title), coverUrl(coverUrl) {}
+		LendBook(uint64_t bookId, 
+			const std::string& lendDate, 
+			const std::string& returnDate, 
+			const std::string& title, 
+			const std::string& description, 
+			const std::string& coverUrl) 
+			: bookId(bookId), lendDate(lendDate), returnDate(returnDate), title(title), description(description), coverUrl(coverUrl) {}
 	};
 
 	struct Book
@@ -25,6 +32,7 @@ namespace data
 		uint64_t id;
 		std::string isbn;
 		std::string title;
+		std::string description;
 		std::string coverUrl;
 		BookCategory mainCategory;
 		std::vector<BookCategory> otherCategories;
@@ -32,8 +40,23 @@ namespace data
 		float rating;
 
 		Book();
-		Book(uint64_t id, const std::string& isbn, const std::string& title, const std::string& coverUrl, BookCategory mainCategory, const std::vector<BookCategory>& otherCategories, const std::vector<std::string>& authors, float rating);
-		Book(uint64_t id, const std::string& isbn, const std::string& title, const std::string& coverUrl, BookCategory mainCategory, float rating);
+
+		Book(uint64_t id, 
+			const std::string& isbn, 
+			const std::string& title, 
+			const std::string& coverUrl, 
+			BookCategory mainCategory, 
+			const std::vector<BookCategory>& otherCategories, 
+			const std::vector<std::string>& authors, 
+			float rating);
+
+		Book(uint64_t id, 
+			const std::string& isbn, 
+			const std::string& title, 
+			const std::string& description,
+			const std::string& coverUrl, 
+			BookCategory mainCategory, 
+			float rating);
 
 	};
 
@@ -47,6 +70,7 @@ namespace net
 		Serialize(message, book.id);
 		Serialize(message, std::cbegin(book.isbn), std::cend(book.isbn));
 		Serialize(message, std::cbegin(book.title), std::cend(book.title));
+		Serialize(message, std::cbegin(book.description), std::cend(book.description));
 		Serialize(message, std::cbegin(book.coverUrl), std::cend(book.coverUrl));
 		Serialize(message, book.mainCategory);
 		Serialize(message, std::cbegin(book.otherCategories), std::cend(book.otherCategories));
@@ -79,6 +103,7 @@ namespace net
 		Deserialize(message, book.otherCategories, true);
 		Deserialize(message, book.mainCategory);
 		Deserialize(message, book.coverUrl, true);
+		Deserialize(message, book.description, true);
 		Deserialize(message, book.title, true);
 		Deserialize(message, book.isbn, true);
 		Deserialize(message, book.id);
@@ -90,6 +115,7 @@ namespace net
 		Serialize(message, lendBook.bookId);
 		Serialize(message, lendBook.isAvailable);
 		Serialize(message, std::cbegin(lendBook.title), std::cend(lendBook.title));
+		Serialize(message, std::cbegin(lendBook.description), std::cend(lendBook.description));
 		Serialize(message, std::cbegin(lendBook.coverUrl), std::cend(lendBook.coverUrl));
 		Serialize(message, std::cbegin(lendBook.lendDate), std::cend(lendBook.lendDate));
 		Serialize(message, std::cbegin(lendBook.returnDate), std::cend(lendBook.returnDate));
@@ -119,6 +145,7 @@ namespace net
 		Deserialize(message, lendBook.returnDate, true);
 		Deserialize(message, lendBook.lendDate, true);
 		Deserialize(message, lendBook.coverUrl, true);
+		Deserialize(message, lendBook.description, true);
 		Deserialize(message, lendBook.title, true);
 		Deserialize(message, lendBook.isAvailable);
 		Deserialize(message, lendBook.bookId);

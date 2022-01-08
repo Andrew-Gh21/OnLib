@@ -10,8 +10,8 @@ data::Book::Book(uint64_t id, const std::string& isbn, const std::string& title,
 {
 }
 
-data::Book::Book(uint64_t id, const std::string& isbn, const std::string& title, const std::string& coverUrl, BookCategory mainCategory, float rating)
-    : id(id), isbn(isbn), title(title), coverUrl(coverUrl), mainCategory(mainCategory), rating(rating)
+data::Book::Book(uint64_t id, const std::string& isbn, const std::string& title, const std::string& description, const std::string& coverUrl, BookCategory mainCategory, float rating)
+    : id(id), isbn(isbn), title(title), description(description), coverUrl(coverUrl), mainCategory(mainCategory), rating(rating)
 {
 }
 
