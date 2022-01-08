@@ -51,6 +51,9 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 	{
 		data::User userData;
 		net::Deserialize(message, userData);
+		std::transform(userData.name.begin(), userData.name.end(), userData.name.begin(), 
+			[](char c) {return std::tolower(c); });
+
 		SendLoginResponse(client, userData);
 		break;
 	}
@@ -59,6 +62,9 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 	{
 		data::User userData;
 		net::Deserialize(message, userData);
+		std::transform(userData.name.begin(), userData.name.end(), userData.name.begin(),
+			[](char c) {return std::tolower(c); });
+
 		SendRegisterResponse(client, userData);
 		break;
 	}

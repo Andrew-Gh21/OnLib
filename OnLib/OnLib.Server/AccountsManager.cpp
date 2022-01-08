@@ -4,21 +4,21 @@ bool AccountsManager::ValidateLogin(std::shared_ptr<net::ClientConnection> clien
 {
 	bool passwordMatch;
 	bool userMatch;
-	constexpr static const char* queryMatchPassword = "select count(password) from user where name = ? and password = ? ";
-	constexpr static const char* queryMatchName = "select count(name) from user where name = ? ";
+	constexpr static const char* queryMatchName = "select count(*) from user where name = ? ";
+	constexpr static const char* queryMatchPassword = "select count(*) from user where name = ? and password = ? ";
 
-	database << queryMatchPassword << input.password 
-		>> passwordMatch;
-
-	database << queryMatchName << input.password
+	database << queryMatchName << input.name
 		>> userMatch;
 
-	if (userMatch != false)
+	database << queryMatchPassword << input.name << input.password
+		>> passwordMatch;
+
+	if (userMatch == false)
 	{
 		errors.push_back(data::LoginErrors::InvalidUser);
 	}
 	
-	if (passwordMatch != false)
+	if (passwordMatch == false)
 	{
 		errors.push_back(data::LoginErrors::InvalidPassword);
 	}
