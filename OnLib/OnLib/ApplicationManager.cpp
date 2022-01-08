@@ -56,6 +56,7 @@ void ApplicationManager::ConnectRemoteAndMain()
 
 	connect(mainWindow.get(), &MainWindow::DeleteAccountRequest, remote.get(), &RemoteClient::OnDeleteAccountRequest);
 	connect(mainWindow.get(), &MainWindow::SearchRequest, remote.get(), &RemoteClient::OnSearchRequest);
+	connect(mainWindow.get(), &MainWindow::RefreshButtonPressed, remote.get(), &RemoteClient::OnRefreshRequest);
 }
 
 void ApplicationManager::SwitchToMainWindow()

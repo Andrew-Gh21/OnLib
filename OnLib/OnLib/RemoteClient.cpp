@@ -55,6 +55,12 @@ void RemoteClient::OnSearchRequest(const std::string& search)
 	// TODO
 }
 
+void RemoteClient::OnRefreshRequest()
+{
+	//RequestBorrowedBooks();
+	RequestDisplayBooks();
+}
+
 RemoteClient::~RemoteClient()
 {
 	if (processingThread.joinable())

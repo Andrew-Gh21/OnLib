@@ -27,6 +27,7 @@ signals:
 	void LogOutRequest();
 	void DeleteAccountRequest(const std::string& password);
 	void SearchRequest(const std::string& text);
+	void RefreshButtonPressed();
 
 private slots:
 	void HandleSearchIconButton();
@@ -39,6 +40,7 @@ private slots:
 	
 private:
 	std::unordered_map<data::BookCategory, BookSection*> categories;
+	std::vector<QWidget*> visibleBooks;
 	Ui::MainWindow* ui;
 	QAction* searchButtonWidgetAction;
 	QAction* searchLineEditWidgetAction;

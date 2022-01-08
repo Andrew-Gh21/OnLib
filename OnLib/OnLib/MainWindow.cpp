@@ -100,6 +100,16 @@ void MainWindow::HandleRefreshButton()
 	this->repaint();
 	this->centralWidget()->repaint();
 	ui->stackedWidget->repaint();
+
+	for (QWidget* book : visibleBooks)
+	{
+		book->hide();
+		book->deleteLater();
+	}
+
+	visibleBooks.clear();
+
+	emit RefreshButtonPressed();
 }
 
 void MainWindow::StyleSheets()
@@ -129,6 +139,8 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 		BookPreview* bookPreview = new BookPreview(book, section);
 		section->AddBook(bookPreview);
 
+		visibleBooks.push_back(bookPreview);
+
 		connect(bookPreview, &BookPreview::BorrowPressed, [this](uint64_t id) {
 			emit BorrowBookRequest(id);
 			});
@@ -150,6 +162,8 @@ void MainWindow::AddBorrowedBooks(const std::vector<data::LendBook>& books)
 		MyListBookPreview* preview = new MyListBookPreview(book, this);
 
 		ui->myListGridLayout->addWidget(preview);
+
+		visibleBooks.push_back(preview);
 
 		FileDownloader* coverDownloader = new FileDownloader(book.coverUrl, this);
 		connect(coverDownloader, &FileDownloader::DownloadFinished, [coverDownloader, preview]() {

@@ -26,6 +26,7 @@ public slots:
 	void OnLogoutRequest();
 	void OnDeleteAccountRequest(const std::string& password);
 	void OnSearchRequest(const std::string& search);
+	void OnRefreshRequest();
 
 signals:
 	void LoginSuccessfull();
