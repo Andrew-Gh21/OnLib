@@ -25,7 +25,7 @@ std::vector<data::Book> BooksManager::GetNewestFiveBooksFromEachCategory()
 
 	for (auto& book : books)
 	{
-		GetAuthors(book);
+		GetAuthors(book.id, book.authors);
 		GetCategories(book);
 		GetRating(book);
 	}
@@ -47,12 +47,13 @@ std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
 		lendedBooks.push_back(data::LendBook(bookId, lendDate, returnDate ? *returnDate : "", title, description, coverUrl));
 	};
 
-	database << query << userId
+	database << query
+		<< userId
 		>> output;
 
 	for (data::LendBook& book : lendedBooks)
 	{
-		GetAuthors(book);
+		GetAuthors(book.bookId,book.authors);
 
 		if (CheckIfAvailable(book.lendDate))
 		{
@@ -66,38 +67,24 @@ std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
 void BooksManager::AddLendedBookToUser(uint64_t bookId, uint64_t userId)
 {
 	constexpr static const char* query = "insert into user_book values (?,?,?,?)";
-	database << query << userId << bookId << std::string() << std::string();
+	database << query
+		<< userId << bookId << std::string() << std::string();
 }
 
-void BooksManager::GetAuthors(data::Book& book)
+void BooksManager::GetAuthors(uint64_t bookId,std::vector<std::string>& authors)
 {
 	constexpr static const char* query =
 		"select a.name from author as a "
 		"inner join book_author ba on a.id = ba.author_id "
 		"where ba.book_id = ?";
 
-	auto output = [&book](std::string name)
+	auto output = [&authors](std::string name)
 	{
-		book.authors.push_back(name);
+		authors.push_back(name);
 	};
 
-	database << query << book.id
-		>> output;
-}
-
-void BooksManager::GetAuthors(data::LendBook& book)
-{
-	constexpr static const char* query =
-		"select a.name from author as a "
-		"inner join book_author ba on a.id = ba.author_id "
-		"where ba.book_id = ?";
-
-	auto output = [&book](std::string name)
-	{
-		book.authors.push_back(name);
-	};
-
-	database << query << book.bookId
+	database << query
+		<< bookId
 		>> output;
 }
 
@@ -112,7 +99,8 @@ void BooksManager::GetCategories(data::Book& book)
 		book.otherCategories.push_back(static_cast<data::BookCategory>(categoryId - 1));
 	};
 
-	database << query << book.id << static_cast<uint64_t>(book.mainCategory)
+	database << query
+		<< book.id << static_cast<uint64_t>(book.mainCategory)
 		>> output;
 }
 
@@ -127,8 +115,20 @@ void BooksManager::GetRating(data::Book& book)
 		book.rating = rating;
 	};
 
-	database << query << book.id
+	database << query
+		<< book.id
 		>> output;
+}
+
+void BooksManager::ReturnBook(uint64_t bookId, uint64_t userId)
+{
+	constexpr static const char* query =
+		"update user_book "
+		"set return_date = ? "
+		"where user_id = ? and book_id = ? ";
+
+	database << query
+		<< LogMessage::GetTime() << userId << bookId;
 }
 
 bool BooksManager::CheckIfAvailable(const std::string& date)
@@ -156,18 +156,22 @@ bool BooksManager::CheckIfAvailable(const std::string& date)
 
 void BooksManager::Rate(uint64_t bookId, uint64_t userId, int rating)
 {
+	constexpr static const char* select = "select count(*) from book_rating where book_id = ? and user_id = ? ";
+	constexpr static const char* insert = "insert into book_rating(book_id, user_id, rating) values (?, ?, ?) ";
 	bool rated;
-	database << "select count(*) from book_rating where book_id = ? and user_id = ?"
+	
+	database << select
 		<< bookId << userId 
 		>> rated;
 
 	if (rated)
 	{
-		database << "update book_rating set rating = ? where book_id = ? and user_id = ?"
+		constexpr static const char* update = "update book_rating set rating = ? where book_id = ? and user_id = ? ";
+		database << update
 			<< rating << bookId << userId;
 		return;
 	}
 
-	database << "insert into book_rating(book_id, user_id, rating) values (?, ?, ?)"
+	database << insert
 		<< bookId << userId << rating;
 }

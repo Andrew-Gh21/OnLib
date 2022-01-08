@@ -24,7 +24,7 @@ namespace data
 			const std::string& title, 
 			const std::string& description, 
 			const std::string& coverUrl) 
-			: bookId(bookId), lendDate(lendDate), returnDate(returnDate), title(title), description(description), coverUrl(coverUrl) {}
+			: bookId(bookId), lendDate(lendDate), returnDate(returnDate), title(title), description(description), coverUrl(coverUrl),isAvailable(false) {}
 	};
 
 	struct Book
