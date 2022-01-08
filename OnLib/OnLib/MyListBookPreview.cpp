@@ -15,13 +15,13 @@ MyListBookPreview::MyListBookPreview(const data::LendBook& book, QWidget* parent
 	this->adjustSize();
 }
 
-MyListBookPreview::~MyListBookPreview()
-{
-}
-
 void MyListBookPreview::BookCoverRecieved(QByteArray data)
 {
 	QPixmap cover;
 	cover.loadFromData(data);
 	ui.cover->setPixmap(cover.scaled(ui.cover->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+}
+
+MyListBookPreview::~MyListBookPreview()
+{
 }
