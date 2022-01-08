@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
-    <height>300</height>
+    <width>534</width>
+    <height>385</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -76,8 +76,8 @@ border-radius: 5px;</string>
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>428</width>
-        <height>247</height>
+        <width>512</width>
+        <height>332</height>
        </rect>
       </property>
       <property name="minimumSize">

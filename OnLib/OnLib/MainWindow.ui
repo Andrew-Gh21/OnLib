@@ -45,7 +45,7 @@
        <enum>QFrame::NoFrame</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="homePage">
        <layout class="QGridLayout" name="gridLayout">
@@ -104,7 +104,7 @@
              <x>0</x>
              <y>0</y>
              <width>975</width>
-             <height>517</height>
+             <height>513</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_6">
@@ -121,7 +121,7 @@
                    <x>0</x>
                    <y>0</y>
                    <width>942</width>
-                   <height>491</height>
+                   <height>487</height>
                   </rect>
                  </property>
                 </widget>

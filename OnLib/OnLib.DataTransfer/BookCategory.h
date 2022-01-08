@@ -4,7 +4,7 @@ namespace data
     enum class BookCategory : uint64_t
     {
         SF,
-        Romantic,
+        Romance,
         Action,
         Comedy
     };

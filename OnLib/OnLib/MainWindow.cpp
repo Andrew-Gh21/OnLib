@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget* parent)
 	categories =
 	{
 		{data::BookCategory::SF, new BookSection("SF",this)},
-		{data::BookCategory::Romantic, new BookSection("Romantic",this)},
+		{data::BookCategory::Romance, new BookSection("Romance",this)},
 		{data::BookCategory::Action, new BookSection("Action",this)},
 		{data::BookCategory::Comedy, new BookSection("Comedy",this)}
 	};
@@ -133,11 +133,13 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 	{
 		BookSection* section = categories[book.mainCategory];
 
-		QSize currentSize = this->normalGeometry().size();
-		section->resize(currentSize / 2);
+		QSize currentSize = this->size();
+		section->setMinimumSize(currentSize.width() - 100, currentSize.height() - 200);
 
 		BookPreview* bookPreview = new BookPreview(book, section);
 		section->AddBook(bookPreview);
+		QSize size = bookPreview->size();
+		bookPreview->resize(size.width(), size.height());
 
 		visibleBooks.push_back(bookPreview);
 
