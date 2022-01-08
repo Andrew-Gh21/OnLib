@@ -30,6 +30,8 @@ public slots:
 	void OnBookRated(int rating, uint64_t bookId);
 
 signals:
+	void ExceptionThrown(const std::exception& e);
+
 	void LoginSuccessfull();
 	void LoginInvalid(const std::vector<data::LoginErrors>& errors);
 

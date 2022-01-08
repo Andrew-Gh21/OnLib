@@ -97,10 +97,6 @@ void MainWindow::HandleSearchBooksButton(std::string s)
 
 void MainWindow::HandleRefreshButton()
 {
-	this->repaint();
-	this->centralWidget()->repaint();
-	ui->stackedWidget->repaint();
-
 	for (QWidget* book : visibleBooks)
 	{
 		book->hide();

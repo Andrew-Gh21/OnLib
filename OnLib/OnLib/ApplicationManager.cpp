@@ -8,6 +8,10 @@ ApplicationManager::ApplicationManager(std::unique_ptr<RemoteClient> client, QAp
 
 	connect(remote.get(), &RemoteClient::AccountDeleteFailure, this, &ApplicationManager::OnAccountDeleteFailure);
 	connect(remote.get(), &RemoteClient::AccountDeleteSuccess, this, &ApplicationManager::OnAccountDeleteSuccess);
+
+	connect(remote.get(), &RemoteClient::ExceptionThrown, [this](const std::exception& e) {
+		QMessageBox::critical(nullptr, "Exception in remote client", e.what());
+		});
 }
 
 void ApplicationManager::Start()

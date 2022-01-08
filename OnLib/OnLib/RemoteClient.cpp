@@ -14,7 +14,14 @@ RemoteClient::RemoteClient(QObject* parent) :
 		{
 			while (true)
 			{
-				ProcessMessages(-1, true);
+				try
+				{
+					ProcessMessages(-1, true);
+				}
+				catch (std::exception& e)
+				{
+					emit ExceptionThrown(e);
+				}
 			}
 		});
 }
