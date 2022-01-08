@@ -57,7 +57,16 @@ int main()
 
 	while (true)
 	{
-		server.ProcessMessages(-1, true);
+		try
+		{
+			server.ProcessMessages(-1, true);
+		}
+		catch (std::exception& e)
+		{
+			LogMessage msg;
+			msg << e.what();
+			multiLogger.Send(msg, LogSeverity::Crititical);
+		}
 	}
 
 	return 0;
