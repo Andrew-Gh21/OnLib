@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget* parent)
 	connect(ui->actionHome, SIGNAL(triggered()), this, SLOT(HandleHomeButton()));
 	connect(ui->actionMyList, SIGNAL(triggered()), this, SLOT(HandleMyListButton()));
 	connect(ui->actionSearchIcon, &QAction::triggered, [this]() {emit HandleSearchIconButton(); });
-
+	connect(ui->actionRefresh, SIGNAL(triggered()), this, SLOT(HandleRefreshButton()));
 
 	ui->actionSearchButton->setVisible(false);
 
@@ -48,7 +48,6 @@ MainWindow::MainWindow(QWidget* parent)
 	searchLineEditWidgetAction->setVisible(false);
 
 	StyleSheets();
-
 
 	this->setMinimumHeight(600);
 	this->setMinimumWidth(700);
@@ -64,7 +63,6 @@ void MainWindow::HandleSearchIconButton()
 
 	emit SearchRequest(searchLineEditWidgetAction->text().toStdString());
 }
-
 
 void MainWindow::HandleHomeButton()
 {
@@ -95,6 +93,13 @@ void MainWindow::HandleSearchBooksButton(std::string s)
 	if (s != "")
 	{
 	}
+}
+
+void MainWindow::HandleRefreshButton()
+{
+	this->repaint();
+	this->centralWidget()->repaint();
+	ui->stackedWidget->repaint();
 }
 
 void MainWindow::StyleSheets()

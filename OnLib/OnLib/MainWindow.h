@@ -33,6 +33,7 @@ private slots:
 	void HandleHomeButton();
 	void HandleMyListButton();
 	void HandleSearchBooksButton(std::string s);
+	void HandleRefreshButton();
 	void StyleSheets();
 
 	
