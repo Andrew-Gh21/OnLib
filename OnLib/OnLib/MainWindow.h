@@ -28,6 +28,7 @@ signals:
 	void DeleteAccountRequest(const std::string& password);
 	void SearchRequest(const std::string& text);
 	void RefreshButtonPressed();
+	void BookRated(int rating, uint64_t bookId);
 
 private slots:
 	void HandleSearchIconButton();

@@ -101,6 +101,14 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 
 		break;
 	}
+	case data::ClientRequest::RateBook:
+	{
+		int rating;
+		uint64_t bookId;
+		message >> bookId >> rating;
+		booksManager.Rate(bookId, accountsManager.GetUserId(client->GetId()), rating);
+		break;
+	}
 	default:
 		log(LogMessageType::Warning, "User " + std::to_string(client->GetId()) + " sent an invalid message. Disconnecting!");
 		client->Disconnect();

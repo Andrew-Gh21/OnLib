@@ -61,6 +61,14 @@ void RemoteClient::OnRefreshRequest()
 	RequestDisplayBooks();
 }
 
+void RemoteClient::OnBookRated(int rating, uint64_t bookId)
+{
+	net::Message rateRequestMsg;
+	rateRequestMsg.header.messageType = static_cast<int32_t>(data::ClientRequest::RateBook);
+	rateRequestMsg << rating << bookId;
+	Send(rateRequestMsg);
+}
+
 RemoteClient::~RemoteClient()
 {
 	if (processingThread.joinable())

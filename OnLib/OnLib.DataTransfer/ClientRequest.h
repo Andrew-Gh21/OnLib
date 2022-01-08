@@ -10,7 +10,8 @@ namespace data
 		RequestDisplayBooks,
 		Logout,
 		DeleteAccount,
-		RequestLentBooks
+		RequestLentBooks,
+		RateBook
 	};
 }
 

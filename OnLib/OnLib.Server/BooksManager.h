@@ -24,5 +24,6 @@ public:
 	void GetCategories(data::Book& book);
 	void GetRating(data::Book& book);
 	bool CheckIfAvailable(const std::string& date);
+	void Rate(uint64_t bookId, uint64_t userId, int rating);
 };
 

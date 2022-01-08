@@ -27,6 +27,7 @@ public slots:
 	void OnDeleteAccountRequest(const std::string& password);
 	void OnSearchRequest(const std::string& search);
 	void OnRefreshRequest();
+	void OnBookRated(int rating, uint64_t bookId);
 
 signals:
 	void LoginSuccessfull();

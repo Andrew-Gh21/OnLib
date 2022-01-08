@@ -153,3 +153,21 @@ bool BooksManager::CheckIfAvailable(const std::string& date)
 
 	return false;
 }
+
+void BooksManager::Rate(uint64_t bookId, uint64_t userId, int rating)
+{
+	bool rated;
+	database << "select count(*) from book_rating where book_id = ? and user_id = ?"
+		<< bookId << userId 
+		>> rated;
+
+	if (rated)
+	{
+		database << "update book_rating set rating = ? where book_id = ? and user_id = ?"
+			<< rating << bookId << userId;
+		return;
+	}
+
+	database << "insert into book_rating(book_id, user_id, rating) values (?, ?, ?)"
+		<< bookId << userId << rating;
+}

@@ -148,6 +148,8 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 			emit BookDetailsRequest(book);
 			});
 
+		connect(bookPreview, &BookPreview::BookReviewPressed, [this](int rating, uint64_t bookId) {emit BookRated(rating, bookId); });
+
 		FileDownloader* coverDownloader = new FileDownloader(book.coverUrl, this);
 		connect(coverDownloader, &FileDownloader::DownloadFinished, [coverDownloader, bookPreview]() {
 			bookPreview->BookCoverRecieved(coverDownloader->GetData());
