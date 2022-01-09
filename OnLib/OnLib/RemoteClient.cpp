@@ -20,7 +20,7 @@ RemoteClient::RemoteClient(QObject* parent) :
 				}
 				catch (std::exception& e)
 				{
-					emit ExceptionThrown(e);
+					//emit ExceptionThrown(e);
 				}
 			}
 		});

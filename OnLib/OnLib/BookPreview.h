@@ -12,14 +12,13 @@ class BookPreview : public QWidget
 public:
 	BookPreview(const data::Book& book, QWidget *parent = Q_NULLPTR);
 	~BookPreview() = default;
+	Ui::BookPreview ui;
 
 	void BookCoverRecieved(QByteArray data);
 
 private:
-	Ui::BookPreview ui;
 	data::Book book;
 signals:
 	void BorrowPressed(uint64_t id);
-	void BookDetailsPressed(const data::Book book);
 	void BookReviewPressed(int rating,uint64_t id);
 };

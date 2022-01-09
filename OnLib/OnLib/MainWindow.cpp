@@ -6,6 +6,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include "FileDownloader.h"
+#include "BookDetails.h"
 
 MainWindow::MainWindow(QWidget* parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow)
@@ -142,9 +143,11 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 		connect(bookPreview, &BookPreview::BorrowPressed, [this](uint64_t id) {
 			emit BorrowBookRequest(id);
 			});
-		connect(bookPreview, &BookPreview::BookDetailsPressed, [this](const data::Book book) {
-			emit BookDetailsRequest(book);
-			});
+
+
+		connect(bookPreview->ui.detailsButton, &QPushButton::clicked, [this, book] {SeeBookDetails(book); });
+
+
 
 		connect(bookPreview, &BookPreview::BookReviewPressed, [this](int rating, uint64_t bookId) {emit BookRated(rating, bookId); });
 
@@ -153,6 +156,23 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 			bookPreview->BookCoverRecieved(coverDownloader->GetData());
 			});
 	}
+}
+
+void MainWindow::SeeBookDetails(const data::Book book)
+{
+	QLayoutItem* child;
+	while (ui->bookDetailsGridLayout->count() != 0) {
+		child = ui->bookDetailsGridLayout->takeAt(0);
+		if (child->widget() != 0) {
+			delete child->widget();
+		}
+
+		delete child;
+	}
+
+	ui->stackedWidget->setCurrentIndex(3);
+	BookDetails* bookDetails = new BookDetails(book);
+	ui->bookDetailsGridLayout->addWidget(bookDetails);
 }
 
 void MainWindow::AddBorrowedBooks(const std::vector<data::LendBook>& books)

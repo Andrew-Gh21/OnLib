@@ -14,7 +14,6 @@ BookPreview::BookPreview(const data::Book& book, QWidget *parent)
 	ui.rating->setText(QString::number(book.rating));
 
 	connect(ui.lendButton, &QPushButton::pressed, [this,book]() {emit BorrowPressed(book.id); });
-	connect(ui.detailsButton, &QPushButton::pressed, [this, book]() {emit BookDetailsPressed(book); });
 
 	connect(ui.review1, &QPushButton::pressed, [this, book]() {emit BookReviewPressed(1, book.id); });
 	connect(ui.review2, &QPushButton::pressed, [this, book]() {emit BookReviewPressed(2, book.id); });
@@ -28,6 +27,7 @@ BookPreview::BookPreview(const data::Book& book, QWidget *parent)
 
 void BookPreview::BookCoverRecieved(QByteArray data)
 {
+
 	QPixmap cover;
 	cover.loadFromData(data);
 	ui.cover->setPixmap(cover.scaled(ui.cover->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));

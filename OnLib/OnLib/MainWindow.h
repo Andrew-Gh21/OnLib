@@ -17,13 +17,13 @@ class MainWindow : public QMainWindow
 public:
 	explicit MainWindow(QWidget* parent = Q_NULLPTR);
 	~MainWindow() = default;
+	void SeeBookDetails(const data::Book book);
 
 public slots:
 	void AddBooksToSection(const std::vector<data::Book>& books);
 	void AddBorrowedBooks(const std::vector<data::LendBook>& books);
 signals:
 	void BorrowBookRequest(uint64_t id);
-	void BookDetailsRequest(const data::Book book);
 	void LogOutRequest();
 	void DeleteAccountRequest(const std::string& password);
 	void SearchRequest(const std::string& text);
