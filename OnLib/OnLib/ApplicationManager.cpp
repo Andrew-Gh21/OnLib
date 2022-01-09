@@ -39,13 +39,14 @@ void ApplicationManager::ConnectRemoteAndLogin()
 	connect(loginWindow.get(), &LoginWindow::RegisterButtonClicked, remote.get(), &RemoteClient::OnRegisterRequest);
 	connect(remote.get(), &RemoteClient::LoginInvalid, loginWindow.get(), &LoginWindow::OnLoginFailure);
 
+	connect(remote.get(), &RemoteClient::RegisterInvalid, loginWindow.get(), &LoginWindow::OnRegisterFailure);
+	connect(remote.get(), &RemoteClient::RegisterSuccesfull, loginWindow.get(), &LoginWindow::OnRegisterSuccess);
+
 	connect(remote.get(), &RemoteClient::LoginSuccessfull, loginWindow.get(), [this]() {
 		SwitchToMainWindow();
 		remote->RequestDisplayBooks();
+		remote->RequestBorrowedBooks();
 		});
-
-	connect(remote.get(), &RemoteClient::RegisterInvalid, loginWindow.get(), &LoginWindow::OnRegisterFailure);
-	connect(remote.get(), &RemoteClient::RegisterSuccesfull, loginWindow.get(), &LoginWindow::OnRegisterSuccess);
 }
 
 void ApplicationManager::ConnectRemoteAndMain()
@@ -62,6 +63,7 @@ void ApplicationManager::ConnectRemoteAndMain()
 	connect(mainWindow.get(), &MainWindow::SearchRequest, remote.get(), &RemoteClient::OnSearchRequest);
 	connect(mainWindow.get(), &MainWindow::RefreshButtonPressed, remote.get(), &RemoteClient::OnRefreshRequest);
 	connect(mainWindow.get(), &MainWindow::BookRated, remote.get(), &RemoteClient::OnBookRated);
+	connect(mainWindow.get(), &MainWindow::BorrowBookRequest, remote.get(), &RemoteClient::OnBookBorrowRequest);
 }
 
 void ApplicationManager::SwitchToMainWindow()

@@ -62,6 +62,6 @@ int main(int argc, char* argv[])
     ApplicationManager manager(std::move(remote), app);
     manager.Start();
 
-	app.exit(app.exec());
+	app.exec();
 	return 0;
 }

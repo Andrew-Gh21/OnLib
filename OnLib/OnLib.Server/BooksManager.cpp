@@ -66,9 +66,9 @@ std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
 
 void BooksManager::AddLendedBookToUser(uint64_t bookId, uint64_t userId)
 {
-	constexpr static const char* query = "insert into user_book values (?,?,?,?)";
+	constexpr static const char* query = "insert into user_book values (?,?,datetime('now'),null)";
 	database << query
-		<< userId << bookId << std::string() << std::string();
+		<< userId << bookId;
 }
 
 void BooksManager::GetAuthors(uint64_t bookId,std::vector<std::string>& authors)

@@ -82,7 +82,7 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 		auto borrowed = booksManager.GetLendedBooks(accountsManager.GetUserId(client->GetId()));
 		net::Message response;
 		response.header.messageType = static_cast<uint16_t>(data::ServerResponse::BorrowedBooksRecieved);
-		net::Serialize(message, std::cbegin(borrowed), std::cend(borrowed));
+		net::Serialize(response, std::cbegin(borrowed), std::cend(borrowed));
 		MessageClient(client, response);
 		break;
 	}
@@ -113,6 +113,13 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 		uint64_t bookId;
 		message >> bookId >> rating;
 		booksManager.Rate(bookId, accountsManager.GetUserId(client->GetId()), rating);
+		break;
+	}
+	case data::ClientRequest::BorrowBook:
+	{
+		uint64_t bookId;
+		message >> bookId;
+		booksManager.AddLendedBookToUser(bookId, accountsManager.GetUserId(client->GetId()));
 		break;
 	}
 	default:

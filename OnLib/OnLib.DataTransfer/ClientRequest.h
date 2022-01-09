@@ -11,7 +11,8 @@ namespace data
 		Logout,
 		DeleteAccount,
 		RequestLentBooks,
-		RateBook
+		RateBook,
+		BorrowBook
 	};
 }
 

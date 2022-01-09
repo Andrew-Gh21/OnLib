@@ -64,8 +64,8 @@ void RemoteClient::OnSearchRequest(const std::string& search)
 
 void RemoteClient::OnRefreshRequest()
 {
-	//RequestBorrowedBooks();
 	RequestDisplayBooks();
+	RequestBorrowedBooks();
 }
 
 void RemoteClient::OnBookRated(int rating, uint64_t bookId)
@@ -74,6 +74,14 @@ void RemoteClient::OnBookRated(int rating, uint64_t bookId)
 	rateRequestMsg.header.messageType = static_cast<int32_t>(data::ClientRequest::RateBook);
 	rateRequestMsg << rating << bookId;
 	Send(rateRequestMsg);
+}
+
+void RemoteClient::OnBookBorrowRequest(uint64_t bookId)
+{
+	net::Message borrowRequest;
+	borrowRequest.header.messageType = static_cast<int32_t>(data::ClientRequest::BorrowBook);
+	borrowRequest << bookId;
+	Send(borrowRequest);
 }
 
 RemoteClient::~RemoteClient()
