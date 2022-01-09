@@ -17,6 +17,16 @@ private:
 
 public:
 	AccountsManager(sqlite::database& db) :database(db) {};
+	AccountsManager() = default;
+
+	AccountsManager(const AccountsManager& aux) = default;
+	AccountsManager& operator=(const AccountsManager& aux) = default;
+
+	AccountsManager(AccountsManager&& aux) = default;
+	AccountsManager& operator=(AccountsManager&& aux) = default;
+
+	~AccountsManager() = default;
+
 	bool ValidateLogin(std::shared_ptr<net::ClientConnection> client, data::User input, std::vector<data::LoginErrors>& errors);
 	bool ValidateRegister(std::shared_ptr<net::ClientConnection> client, data::User input,std::vector<data::RegisterErrors>&errors);
 	void Login(uint64_t clientId, data::User user);

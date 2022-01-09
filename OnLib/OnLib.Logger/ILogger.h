@@ -43,6 +43,13 @@ protected:
 public:
 
 	ILogger();
+	ILogger(const ILogger& aux) = default;
+	ILogger& operator=(const ILogger& aux) = default;
+
+	ILogger(ILogger&& aux) = default;
+	ILogger& operator=(ILogger&& aux) = default;
+
+	~ILogger() = default;
 
 	void SetPriority(LogSeverity newPriority);
 
