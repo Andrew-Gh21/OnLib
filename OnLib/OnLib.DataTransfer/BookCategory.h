@@ -3,7 +3,7 @@ namespace data
 {
     enum class BookCategory : uint64_t
     {
-        SF,
+        SF = 1,
         Romance,
         Action,
         Comedy

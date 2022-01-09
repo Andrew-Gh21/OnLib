@@ -17,7 +17,6 @@ namespace data
 		std::vector<std::string>authors;
 		bool isAvailable;
 
-		LendBook() : bookId(), lendDate(), returnDate() {}
 		LendBook(uint64_t bookId, 
 			const std::string& lendDate, 
 			const std::string& returnDate, 
@@ -25,6 +24,16 @@ namespace data
 			const std::string& description, 
 			const std::string& coverUrl) 
 			: bookId(bookId), lendDate(lendDate), returnDate(returnDate), title(title), description(description), coverUrl(coverUrl),isAvailable(false) {}
+		
+		LendBook() = default;
+
+		LendBook(const LendBook& aux) = default;
+		LendBook& operator=(const LendBook& aux) = default;
+
+		LendBook(LendBook&& aux) = default;
+		LendBook& operator=(LendBook&& aux) = default;
+
+		~LendBook() = default;
 	};
 
 	struct Book
@@ -39,7 +48,7 @@ namespace data
 		std::vector<std::string>authors;
 		float rating;
 
-		Book();
+		Book() = default;
 
 		Book(uint64_t id, 
 			const std::string& isbn, 
@@ -58,6 +67,13 @@ namespace data
 			BookCategory mainCategory, 
 			float rating);
 
+		Book(const Book& aux) = default;
+		Book& operator=(const Book& aux) = default;
+
+		Book(Book&& aux) = default;
+		Book& operator=(Book&& aux) = default;
+
+		~Book() = default;
 	};
 
 }

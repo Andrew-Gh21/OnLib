@@ -17,6 +17,15 @@ private:
 	sqlite::database& database;
 public:
 	BooksManager(sqlite::database& db) :database(db) {};
+	BooksManager() = default;
+
+	BooksManager(const BooksManager& aux) = default;
+	BooksManager& operator=(const BooksManager& aux) = default;
+
+	BooksManager(BooksManager&& aux) = default;
+	BooksManager& operator=(BooksManager&& aux) = default;
+
+	~BooksManager() = default;
 
 	std::vector<data::Book> GetNewestFiveBooksFromEachCategory();
 	std::vector<data::LendBook>GetLendedBooks(uint64_t userId);

@@ -12,6 +12,14 @@ namespace data
 
 		User() : id(0), name(), password() {}
 		User(uint64_t id, const std::string& name, const std::string& password) : id(id), name(name), password(password) {}
+
+		User(const User& aux) = default;
+		User& operator=(const User& aux) = default;
+
+		User(User&& aux) = default;
+		User& operator=(User&& aux) = default;
+
+		~User() = default;
 	};
 };
 
