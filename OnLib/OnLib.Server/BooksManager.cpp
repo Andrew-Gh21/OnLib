@@ -16,7 +16,7 @@ std::vector<data::Book> BooksManager::GetNewestFiveBooksFromEachCategory()
 	auto output = [&books](uint64_t id, std::string isbn, std::string title,
 		std::string description, std::string coverUrl, std::string addedDate, uint64_t categoryId)
 	{
-		data::Book book(id, isbn, title, description, coverUrl, static_cast<data::BookCategory>(categoryId - 1), 0);
+		data::Book book(id, isbn, title, description, coverUrl, static_cast<data::BookCategory>(categoryId), 0);
 		books.push_back(std::move(book));
 	};
 
