@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget* parent)
 
 	ui->toolbar1->setFixedHeight(70);
 
-	BookSection* myListBookSection = new BookSection("My list", this);
+	myListBookSection = new BookSection("My list", this);
 	ui->myListGridLayout->addWidget(myListBookSection);
 
 	connect(ui->actionLogOut, &QAction::triggered, [this]() {emit LogOutRequest(); });
@@ -185,6 +185,7 @@ void MainWindow::AddBorrowedBooks(const std::vector<data::LendBook>& books)
 		MyListBookPreview* preview = new MyListBookPreview(book, this);
 
 		ui->myListGridLayout->addWidget(preview);
+		myListBookSection->AddBook(preview);
 
 		visibleBooks.push_back(preview);
 
