@@ -175,3 +175,27 @@ void BooksManager::Rate(uint64_t bookId, uint64_t userId, int rating)
 	database << insert
 		<< bookId << userId << rating;
 }
+
+void BooksManager::Search()
+{
+	sqlite3* db;
+
+	if (sqlite3_enable_load_extension(db, 1) != SQLITE_OK)
+	{
+		std::cerr << "Error in enabling extension loading";
+	}
+	if (sqlite3_load_extension(db, "spellfix.dll", "sqlite3_spellfix_init", NULL) != SQLITE_OK)
+	{
+		std::cerr << "Error in loading extension";
+	}
+
+	constexpr static const char* createSpellFix =
+		"CREATE VIRTUAL TABLE auxiliar USING spellfix1 (title , author, isbn)";
+
+
+
+	if (sqlite3_enable_load_extension(db, 0) != SQLITE_OK)
+	{
+		std::cerr << "Error in disabling extension loading";
+	}
+}
