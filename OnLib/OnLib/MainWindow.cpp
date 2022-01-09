@@ -145,7 +145,6 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 			});
 
 
-		connect(bookPreview->ui.detailsButton, &QPushButton::clicked, [this, book] {SeeBookDetails(book); });
 
 
 
@@ -155,10 +154,13 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 		connect(coverDownloader, &FileDownloader::DownloadFinished, [coverDownloader, bookPreview]() {
 			bookPreview->BookCoverRecieved(coverDownloader->GetData());
 			});
+
+		connect(bookPreview->ui.detailsButton, &QPushButton::clicked, [this, book,bookPreview] {SeeBookDetails(book, bookPreview->ui.cover->pixmap()); });
+
 	}
 }
 
-void MainWindow::SeeBookDetails(const data::Book book)
+void MainWindow::SeeBookDetails(const data::Book book, QPixmap cover)
 {
 	QLayoutItem* child;
 	while (ui->bookDetailsGridLayout->count() != 0) {
@@ -172,6 +174,7 @@ void MainWindow::SeeBookDetails(const data::Book book)
 
 	ui->stackedWidget->setCurrentIndex(3);
 	BookDetails* bookDetails = new BookDetails(book);
+	bookDetails->ui.cover->setPixmap(cover.scaled(bookDetails->ui.cover->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
 	ui->bookDetailsGridLayout->addWidget(bookDetails);
 }
 

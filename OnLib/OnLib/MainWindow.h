@@ -17,7 +17,7 @@ class MainWindow : public QMainWindow
 public:
 	explicit MainWindow(QWidget* parent = Q_NULLPTR);
 	~MainWindow() = default;
-	void SeeBookDetails(const data::Book book);
+	void SeeBookDetails(const data::Book book, QPixmap cover);
 
 public slots:
 	void AddBooksToSection(const std::vector<data::Book>& books);

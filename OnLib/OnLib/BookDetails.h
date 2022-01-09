@@ -10,10 +10,9 @@ class BookDetails : public QWidget
 public:
 	BookDetails(const data::Book& book, QWidget* parent = Q_NULLPTR);
 	~BookDetails();
-
+	Ui::BookDetails ui;
 	void BookCoverRecieved(QByteArray data);
 
-private:
-	Ui::BookDetails ui;
+
 };
 
