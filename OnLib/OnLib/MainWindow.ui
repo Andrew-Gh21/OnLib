@@ -68,8 +68,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>990</width>
-             <height>524</height>
+             <width>982</width>
+             <height>518</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_3">
@@ -103,8 +103,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>984</width>
-             <height>524</height>
+             <width>975</width>
+             <height>518</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_6">
@@ -120,8 +120,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>956</width>
-                   <height>502</height>
+                   <width>942</width>
+                   <height>492</height>
                   </rect>
                  </property>
                 </widget>
@@ -185,8 +185,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>100</width>
-             <height>30</height>
+             <width>982</width>
+             <height>518</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_8">
@@ -211,8 +211,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>89</height>
+             <width>980</width>
+             <height>516</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_11">
@@ -226,8 +226,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>98</width>
-                 <height>28</height>
+                 <width>956</width>
+                 <height>492</height>
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_12">
@@ -296,6 +296,7 @@ color: #004d4d;
    <property name="font">
     <font>
      <pointsize>9</pointsize>
+     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -348,6 +349,7 @@ color: #004d4d;
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -362,6 +364,7 @@ color: #004d4d;
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -373,6 +376,7 @@ color: #004d4d;
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -401,6 +405,7 @@ color: #004d4d;
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -412,6 +417,7 @@ color: #004d4d;
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -423,6 +429,7 @@ color: #004d4d;
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <weight>50</weight>
      <bold>false</bold>
     </font>
    </property>
@@ -434,6 +441,7 @@ color: #004d4d;
    <property name="font">
     <font>
      <pointsize>10</pointsize>
+     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>

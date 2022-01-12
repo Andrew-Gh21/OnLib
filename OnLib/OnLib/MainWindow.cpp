@@ -160,7 +160,7 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 	}
 }
 
-void MainWindow::SeeBookDetails(const data::Book book, QPixmap cover)
+void MainWindow::SeeBookDetails(const data::Book &book, QPixmap cover)
 {
 	QLayoutItem* child;
 	while (ui->bookDetailsGridLayout->count() != 0) {
@@ -176,6 +176,7 @@ void MainWindow::SeeBookDetails(const data::Book book, QPixmap cover)
 	BookDetails* bookDetails = new BookDetails(book);
 	bookDetails->ui.cover->setPixmap(cover.scaled(bookDetails->ui.cover->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
 	ui->bookDetailsGridLayout->addWidget(bookDetails);
+	connect(bookDetails->ui.backButton, &QPushButton::clicked, [this] {ui->stackedWidget->setCurrentIndex(0); });
 }
 
 void MainWindow::AddBorrowedBooks(const std::vector<data::LendBook>& books)

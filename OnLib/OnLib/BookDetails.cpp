@@ -9,8 +9,7 @@ BookDetails::BookDetails(const data::Book& book, QWidget* parent)
 
 	ui.setupUi(this);
 	ui.title->setText(QString::fromStdString(book.title));
-	//ui.description->setText(QString::fromStdString(book.description));
-	ui.description->setText("Description");
+	ui.description->setText(QString::fromStdString(book.description));
 	ui.authors->setText(QString::fromStdString(authorsStream.str()));
 	ui.lendButton->setText("Borrow book");
 
@@ -22,9 +21,3 @@ BookDetails::~BookDetails()
 {
 }
 
-void BookDetails::BookCoverRecieved(QByteArray data)
-{
-	QPixmap cover;
-	cover.loadFromData(data);
-	ui.cover->setPixmap(cover.scaled(ui.cover->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-}
