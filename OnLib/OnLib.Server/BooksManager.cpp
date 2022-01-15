@@ -197,7 +197,7 @@ bool BooksManager::SetupSearchExtension(std::string& errorMsg)
 		return false;
 	}
 
-	database << "CREATE VIRTUAL TABLE demo USING spellfix1;";
+	database << "CREATE VIRTUAL TABLE IF NOT EXISTS demo USING spellfix1;";
 	database << "insert into demo(word, rank) select title, id from book;";
 
 	return true;
