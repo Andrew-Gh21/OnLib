@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget* parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
+
 	ui->stackedWidget->setCurrentIndex(0);
 
 	QIcon icon("Images/online-library.png");
@@ -64,6 +65,10 @@ void MainWindow::HandleSearchIconButton()
 	ui->actionSearchButton->setVisible(true);
 	searchLineEditWidgetAction->setVisible(true);
 
+	searchSection = new BookSection("", this);
+	searchSection->setMinimumHeight(this->height() - 300);
+	searchSection->repaint();
+
 	//emit SearchRequest(searchLineEditWidgetAction->text().toStdString());
 }
 
@@ -76,7 +81,6 @@ void MainWindow::HandleHomeButton()
 	searchLineEditWidgetAction->setVisible(false);
 
 	searchLineEdit->setText("");
-	HandleSearchBooksButton("");
 }
 
 void MainWindow::HandleMyListButton()
@@ -88,14 +92,6 @@ void MainWindow::HandleMyListButton()
 	searchLineEditWidgetAction->setVisible(false);
 
 	searchLineEdit->setText("");
-	HandleSearchBooksButton("");
-}
-
-void MainWindow::HandleSearchBooksButton(std::string s)
-{
-	if (s != "")
-	{
-	}
 }
 
 void MainWindow::HandleRefreshButton()
@@ -131,10 +127,13 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 	for (const auto& book : books)
 	{
 		BookSection* section = categories[book.mainCategory];
+
 		QSize currentSize = this->size();
 		section->setMinimumSize(currentSize.width() - 100, currentSize.height() - 200);
+
 		BookPreview* bookPreview = new BookPreview(book, section) ;
 		section->AddBook(bookPreview) ;
+
 		QSize size = bookPreview->size();
 		bookPreview->resize(size.width(), size.height());
 
@@ -213,7 +212,6 @@ void MainWindow::AddBorrowedBooks(const std::vector<data::LendBook>& books)
 
 		preview->setMinimumWidth(300);
 		myListSection->AddBook(preview);
-
 		myListBookSection->AddBook(preview);
 
 		visibleBooks.push_back(preview);
@@ -240,8 +238,13 @@ void MainWindow::AddSearchedBooks(const std::vector<data::Book>& books)
 
 	for (const auto& book : books)
 	{
-		BookPreview* bookPreview = new BookPreview(book, ui->searchPage);
-		ui->searchPageGridLayout->addWidget(bookPreview);
+		BookPreview* bookPreview = new BookPreview(book, searchSection);
+
+		bookPreview->setMinimumWidth(300);
+		searchSection->AddBook(bookPreview);
+
+		ui->searchPageGridLayout->addWidget(searchSection);
+
 		searchBooks.push_back(bookPreview);
 
 		connect(bookPreview, &BookPreview::BorrowPressed, [this](uint64_t id) {
@@ -256,6 +259,7 @@ void MainWindow::AddSearchedBooks(const std::vector<data::Book>& books)
 			});
 
 		connect(bookPreview->ui.detailsButton, &QPushButton::clicked, [this, book, bookPreview] {SeeBookDetails(book, bookPreview->ui.cover->pixmap()); });
-
 	}
+
+	
 }
