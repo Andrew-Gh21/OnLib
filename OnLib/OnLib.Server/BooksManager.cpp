@@ -178,7 +178,7 @@ void BooksManager::Rate(uint64_t bookId, uint64_t userId, int rating)
 
 void BooksManager::Search()
 {
-	sqlite3* db;
+	/*sqlite3* db;
 
 	if (sqlite3_enable_load_extension(db, 1) != SQLITE_OK)
 	{
@@ -197,5 +197,5 @@ void BooksManager::Search()
 	if (sqlite3_enable_load_extension(db, 0) != SQLITE_OK)
 	{
 		std::cerr << "Error in disabling extension loading";
-	}
+	}*/
 }

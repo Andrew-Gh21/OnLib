@@ -130,23 +130,14 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 	{
 		BookSection* section = categories[book.mainCategory];
 
-		QSize currentSize = this->size();
-		section->setMinimumSize(currentSize.width() - 100, currentSize.height() - 200);
-
 		BookPreview* bookPreview = new BookPreview(book, section);
 		section->AddBook(bookPreview);
-		QSize size = bookPreview->size();
-		bookPreview->resize(size.width(), size.height());
 
 		visibleBooks.push_back(bookPreview);
 
 		connect(bookPreview, &BookPreview::BorrowPressed, [this](uint64_t id) {
 			emit BorrowBookRequest(id);
 			});
-
-
-
-
 
 		connect(bookPreview, &BookPreview::BookReviewPressed, [this](int rating, uint64_t bookId) {emit BookRated(rating, bookId); });
 
@@ -155,8 +146,13 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 			bookPreview->BookCoverRecieved(coverDownloader->GetData());
 			});
 
-		connect(bookPreview->ui.detailsButton, &QPushButton::clicked, [this, book,bookPreview] {SeeBookDetails(book, bookPreview->ui.cover->pixmap()); });
+		connect(bookPreview->ui.detailsButton, &QPushButton::clicked, [this, book, bookPreview] {SeeBookDetails(book, bookPreview->ui.cover->pixmap()); });
+	}
 
+	for (const auto& [category, widget] : categories)
+	{
+		widget->setMinimumHeight(this->height() - 200);
+		widget->repaint();
 	}
 }
 
