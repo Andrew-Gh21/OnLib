@@ -59,7 +59,10 @@ void RemoteClient::OnDeleteAccountRequest(const std::string& password)
 
 void RemoteClient::OnSearchRequest(const std::string& search)
 {
-	// TODO
+	net::Message msg;
+	msg.header.messageType = static_cast<uint16_t>(data::ClientRequest::SearchBooks);
+	net::Serialize(msg, std::cbegin(search), std::cend(search));
+	Send(msg);
 }
 
 void RemoteClient::OnRefreshRequest()
@@ -173,6 +176,12 @@ void RemoteClient::OnMessageRecieved(net::Message& msg)
 	case data::ServerResponse::DeleteAccountFailure:
 		emit AccountDeleteFailure();
 		break;
+	case data::ServerResponse::SearchedBooksRecieved:
+	{
+		std::vector<data::Book> books;
+		net::Deserialize(msg, books, true);
+		emit SearchedBooksRecieved(books);
+	}
 	default:
 		break;
 	}

@@ -23,6 +23,7 @@ public:
 public slots:
 	void AddBooksToSection(const std::vector<data::Book>& books);
 	void AddBorrowedBooks(const std::vector<data::LendBook>& books);
+	void AddSearchedBooks(const std::vector<data::Book>& books);
 signals:
 	void BorrowBookRequest(uint64_t id);
 	void ReturnBookRequest(uint64_t bookId);
@@ -44,6 +45,7 @@ private slots:
 private:
 	std::unordered_map<data::BookCategory, BookSection*> categories;
 	std::vector<QWidget*> visibleBooks;
+	std::vector<QWidget*> searchBooks;
 	Ui::MainWindow* ui;
 	QAction* searchButtonWidgetAction;
 	QAction* searchLineEditWidgetAction;

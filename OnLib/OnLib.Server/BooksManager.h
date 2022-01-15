@@ -36,6 +36,7 @@ public:
 	void ReturnBook(uint64_t bookId, uint64_t userId);
 	bool CheckIfAvailable(const std::string& date);
 	void Rate(uint64_t bookId, uint64_t userId, int rating);
-	void Search();
+	bool SetupSearchExtension(std::string& errorMsg);
+	std::vector<data::Book> Search(const std::string& keyword);
 };
 

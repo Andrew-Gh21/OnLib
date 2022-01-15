@@ -1,5 +1,6 @@
 #include "BooksManager.h"
 
+#include <sstream>
 
 std::vector<data::Book> BooksManager::GetNewestFiveBooksFromEachCategory()
 {
@@ -176,26 +177,56 @@ void BooksManager::Rate(uint64_t bookId, uint64_t userId, int rating)
 		<< bookId << userId << rating;
 }
 
-void BooksManager::Search()
+bool BooksManager::SetupSearchExtension(std::string& errorMsg)
 {
-	sqlite3* db;
-
-	if (sqlite3_enable_load_extension(db, 1) != SQLITE_OK)
+	if (sqlite3_enable_load_extension(database.connection().get(), 1) != SQLITE_OK)
 	{
-		std::cerr << "Error in enabling extension loading";
-	}
-	if (sqlite3_load_extension(db, "spellfix.dll", "sqlite3_spellfix_init", NULL) != SQLITE_OK)
-	{
-		std::cerr << "Error in loading extension";
+		errorMsg = "Error in enabling extension loading";
+		return false;
 	}
 
-	constexpr static const char* createSpellFix =
-		"CREATE VIRTUAL TABLE auxiliar USING spellfix1 (title , author, isbn)";
-
-
-
-	if (sqlite3_enable_load_extension(db, 0) != SQLITE_OK)
+	if (sqlite3_load_extension(database.connection().get(), "spellfix.dll", "sqlite3_spellfix_init", NULL) != SQLITE_OK)
 	{
-		std::cerr << "Error in disabling extension loading";
+		errorMsg = "Error in loading extension";
+		return false;
 	}
+
+	if (sqlite3_enable_load_extension(database.connection().get(), 0) != SQLITE_OK)
+	{
+		errorMsg = "Error in disabling extension loading";
+		return false;
+	}
+
+	database << "CREATE VIRTUAL TABLE demo USING spellfix1;";
+	database << "insert into demo(word, rank) select title, id from book;";
+
+	return true;
+}
+
+std::vector<data::Book> BooksManager::Search(const std::string& keyword)
+{
+	std::stringstream stream;
+	std::vector<data::Book> books;
+
+	auto output = [&books](uint64_t id, std::string isbn, std::string title,
+		std::string description, std::string coverUrl, std::string addedDate, uint64_t categoryId)
+	{
+		data::Book book(id, isbn, title, description, coverUrl, static_cast<data::BookCategory>(categoryId), 0);
+		books.push_back(std::move(book));
+	};
+
+	stream << "SELECT b.id, b.isbn, b.title, b.description, b.cover_url, b.added_date, c.id AS category_id FROM book AS b"
+		" INNER JOIN category AS c ON b.main_category_id = c.id"
+		" WHERE b.id IN (SELECT d.rank FROM demo AS d WHERE editdist3(d.word, '" << keyword << "') / 100 < 10)";
+
+	database << stream.str() >> output;
+
+	for (auto& book : books)
+	{
+		GetAuthors(book.id, book.authors);
+		GetCategories(book);
+		GetRating(book);
+	}
+
+	return books;
 }

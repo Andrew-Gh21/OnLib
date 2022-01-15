@@ -19,6 +19,11 @@ RemoteServer::RemoteServer(uint16_t port, const MultiLogger& logger, const sqlit
 		logger.Send(message, convertor[type]);
 
 	};
+
+	std::string message;
+	LogMessage msg;
+	if (!booksManager.SetupSearchExtension(message))
+		logger.Send(msg << message, LogSeverity::Error);
 }
 
 void RemoteServer::OnClientValidated(Client client)
@@ -129,6 +134,14 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 		booksManager.ReturnBook(bookId, accountsManager.GetUserId(client->GetId()));
 		break;
 	}
+	case data::ClientRequest::SearchBooks:
+	{
+		std::string keyword;
+		net::Deserialize(message, keyword, true);
+		auto books = booksManager.Search(keyword);
+		SendSearchResponse(client, books);
+		break;
+	}
 	default:
 		log(LogMessageType::Warning, "User " + std::to_string(client->GetId()) + " sent an invalid message. Disconnecting!");
 		client->Disconnect();
@@ -169,5 +182,13 @@ void RemoteServer::SendRegisterResponse(Client client, data::User data)
 	if (!registerSuccessfull)
 		net::Serialize(response, std::cbegin(errors), std::cend(errors));
 
+	MessageClient(client, response);
+}
+
+void RemoteServer::SendSearchResponse(Client client, const std::vector<data::Book>& books)
+{
+	net::Message response;
+	response.header.messageType = static_cast<uint8_t>(data::ServerResponse::SearchedBooksRecieved);
+	net::Serialize(response, std::cbegin(books), std::cend(books));
 	MessageClient(client, response);
 }

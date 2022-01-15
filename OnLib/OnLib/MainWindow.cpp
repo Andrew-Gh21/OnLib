@@ -35,18 +35,19 @@ MainWindow::MainWindow(QWidget* parent)
 	myListBookSection = new BookSection("My list", this);
 	ui->myListGridLayout->addWidget(myListBookSection);
 
+	ui->actionSearchButton->setVisible(false);
+
+	searchLineEdit = new QLineEdit();
+	searchLineEditWidgetAction = ui->toolbar2->addWidget(searchLineEdit);
+	searchLineEditWidgetAction->setVisible(false);
+
 	connect(ui->actionLogOut, &QAction::triggered, [this]() {emit LogOutRequest(); });
 	connect(ui->actionDeleteAccount, &QAction::triggered, [this]() {emit DeleteAccountRequest(QInputDialog::getText(this, "Confirm password", "Password:", QLineEdit::Password, "").toStdString()); });
 	connect(ui->actionHome, SIGNAL(triggered()), this, SLOT(HandleHomeButton()));
 	connect(ui->actionMyList, SIGNAL(triggered()), this, SLOT(HandleMyListButton()));
 	connect(ui->actionSearchIcon, &QAction::triggered, [this]() {emit HandleSearchIconButton(); });
 	connect(ui->actionRefresh, SIGNAL(triggered()), this, SLOT(HandleRefreshButton()));
-
-	ui->actionSearchButton->setVisible(false);
-
-	searchLineEdit = new QLineEdit();
-	searchLineEditWidgetAction = ui->toolbar2->addWidget(searchLineEdit);
-	searchLineEditWidgetAction->setVisible(false);
+	connect(ui->actionSearchButton, &QAction::triggered, [this]() {emit SearchRequest(searchLineEdit->text().toStdString()); });
 
 	StyleSheets();
 
@@ -62,7 +63,7 @@ void MainWindow::HandleSearchIconButton()
 	ui->actionSearchButton->setVisible(true);
 	searchLineEditWidgetAction->setVisible(true);
 
-	emit SearchRequest(searchLineEditWidgetAction->text().toStdString());
+	//emit SearchRequest(searchLineEditWidgetAction->text().toStdString());
 }
 
 void MainWindow::HandleHomeButton()
@@ -144,10 +145,6 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 			emit BorrowBookRequest(id);
 			});
 
-
-
-
-
 		connect(bookPreview, &BookPreview::BookReviewPressed, [this](int rating, uint64_t bookId) {emit BookRated(rating, bookId); });
 
 		FileDownloader* coverDownloader = new FileDownloader(book.coverUrl, this);
@@ -196,5 +193,37 @@ void MainWindow::AddBorrowedBooks(const std::vector<data::LendBook>& books)
 		connect(coverDownloader, &FileDownloader::DownloadFinished, [coverDownloader, preview]() {
 			preview->BookCoverRecieved(coverDownloader->GetData());
 			});
+	}
+}
+
+void MainWindow::AddSearchedBooks(const std::vector<data::Book>& books)
+{
+	for (QWidget* book : searchBooks)
+	{
+		book->hide();
+		book->deleteLater();
+	}
+
+	searchBooks.clear();
+
+	for (const auto& book : books)
+	{
+		BookPreview* bookPreview = new BookPreview(book, ui->searchPage);
+		ui->searchPageGridLayout->addWidget(bookPreview);
+		searchBooks.push_back(bookPreview);
+
+		connect(bookPreview, &BookPreview::BorrowPressed, [this](uint64_t id) {
+			emit BorrowBookRequest(id);
+			});
+
+		connect(bookPreview, &BookPreview::BookReviewPressed, [this](int rating, uint64_t bookId) {emit BookRated(rating, bookId); });
+
+		FileDownloader* coverDownloader = new FileDownloader(book.coverUrl, this);
+		connect(coverDownloader, &FileDownloader::DownloadFinished, [coverDownloader, bookPreview]() {
+			bookPreview->BookCoverRecieved(coverDownloader->GetData());
+			});
+
+		connect(bookPreview->ui.detailsButton, &QPushButton::clicked, [this, book, bookPreview] {SeeBookDetails(book, bookPreview->ui.cover->pixmap()); });
+
 	}
 }

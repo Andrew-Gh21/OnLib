@@ -53,6 +53,7 @@ void ApplicationManager::ConnectRemoteAndMain()
 {
 	connect(remote.get(), &RemoteClient::DisplayBooksRecieved, mainWindow.get(), &MainWindow::AddBooksToSection);
 	connect(remote.get(), &RemoteClient::BorrowedBooksRecieved, mainWindow.get(), &MainWindow::AddBorrowedBooks);
+	connect(remote.get(), &RemoteClient::SearchedBooksRecieved, mainWindow.get(), &MainWindow::AddSearchedBooks);
 
 	connect(mainWindow.get(), &MainWindow::LogOutRequest, [this]() {
 		SwitchToLoginWindow();

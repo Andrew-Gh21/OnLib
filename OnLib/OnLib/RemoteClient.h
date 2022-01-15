@@ -46,6 +46,7 @@ signals:
 
 	void DisplayBooksRecieved(const std::vector<data::Book>& books);
 	void BorrowedBooksRecieved(const std::vector<data::LendBook>& books);
+	void SearchedBooksRecieved(const std::vector<data::Book>& books);
 private:
 	void OnMessageRecieved(net::Message& msg);
 	void ProcessMessages(std::size_t maxCount, bool wait);

@@ -13,7 +13,8 @@ namespace data
 		RequestLentBooks,
 		RateBook,
 		BorrowBook,
-		ReturnBook
+		ReturnBook,
+		SearchBooks
 	};
 }
 

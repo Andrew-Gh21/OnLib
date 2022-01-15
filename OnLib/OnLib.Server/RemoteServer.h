@@ -36,6 +36,7 @@ protected:
 private:
 	void SendLoginResponse(Client client, data::User data);
 	void SendRegisterResponse(Client client, data::User data);
+	void SendSearchResponse(Client client, const std::vector<data::Book>& books);
 private:
 	MultiLogger logger;
 	AccountsManager accountsManager;
