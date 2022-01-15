@@ -67,9 +67,42 @@ std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
 
 void BooksManager::AddLendedBookToUser(uint64_t bookId, uint64_t userId)
 {
-	constexpr static const char* query = "insert into user_book values (?,?,datetime('now'),null)";
-	database << query
-		<< userId << bookId;
+	bool alreadyBorrowed = false;
+	constexpr static const char* checkIfBorrowed =
+		"select count(*) from user_book "
+		"where user_id = ? and book_id = ? and return_date is null ";
+
+	database << checkIfBorrowed
+		<< userId << bookId
+		>> alreadyBorrowed;
+
+	if (!alreadyBorrowed)
+	{
+		const std::vector<data::LendBook> userBorrowedBooks = GetLendedBooks(userId);
+
+		if (userBorrowedBooks.size() < 5)
+		{
+			bool hasUnavailableBooks = false;
+
+			for (auto &book : userBorrowedBooks)
+			{
+				if (!book.isAvailable)
+				{
+					hasUnavailableBooks = true;
+					break;
+				}
+			}
+
+			if (!hasUnavailableBooks)
+			{
+				constexpr static const char* query =
+					"insert into user_book (user_id, book_id, lend_date, return_date) "
+					"values (?,?,?,null) ";
+				database << query
+					<< userId << bookId << LogMessage::GetTime();
+			}
+		}
+	}
 }
 
 void BooksManager::GetAuthors(uint64_t bookId,std::vector<std::string>& authors)
