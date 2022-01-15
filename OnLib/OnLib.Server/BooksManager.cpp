@@ -178,6 +178,7 @@ void BooksManager::Rate(uint64_t bookId, uint64_t userId, int rating)
 }
 
 bool BooksManager::SetupSearchExtension(std::string& errorMsg)
+{
 	if (sqlite3_enable_load_extension(database.connection().get(), 1) != SQLITE_OK)
 	{
 		errorMsg = "Error in enabling extension loading";
