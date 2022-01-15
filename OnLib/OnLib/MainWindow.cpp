@@ -180,6 +180,23 @@ void MainWindow::SeeBookDetails(const data::Book &book, QPixmap cover)
 	connect(bookDetails->ui.backButton, &QPushButton::clicked, [this] {ui->stackedWidget->setCurrentIndex(0); });
 }
 
+void MainWindow::SeeBookText(const data::LendBook& book)
+{
+	QLayoutItem* child;
+	while (ui->bookDetailsGridLayout->count() != 0) {
+		child = ui->bookDetailsGridLayout->takeAt(0);
+		if (child->widget() != 0) {
+			delete child->widget();
+		}
+
+		delete child;
+	}
+
+	ui->stackedWidget->setCurrentIndex(4);
+	ui->text->setText("This page will display book content.");
+	connect(ui->backHomeButton, &QPushButton::clicked, [this] {ui->stackedWidget->setCurrentIndex(0); });
+}
+
 void MainWindow::AddBorrowedBooks(const std::vector<data::LendBook>& books)
 {
 	BookSection* myListSection = new BookSection("My list", this);
@@ -203,6 +220,7 @@ void MainWindow::AddBorrowedBooks(const std::vector<data::LendBook>& books)
 		connect(coverDownloader, &FileDownloader::DownloadFinished, [coverDownloader, preview]() {
 			preview->BookCoverRecieved(coverDownloader->GetData());
 			});
+		connect(preview->ui.readBookButton, &QPushButton::clicked, [this,book] {SeeBookText(book); });
 	}
 }
 

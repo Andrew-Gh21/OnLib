@@ -19,7 +19,7 @@ public:
 	BookSection* myListBookSection;
 	~MainWindow() = default;
 	void SeeBookDetails(const data::Book &book, QPixmap cover);
-
+	void SeeBookText(const data::LendBook& book);
 public slots:
 	void AddBooksToSection(const std::vector<data::Book>& books);
 	void AddBorrowedBooks(const std::vector<data::LendBook>& books);
