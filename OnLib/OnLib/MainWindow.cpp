@@ -178,6 +178,10 @@ void MainWindow::SeeBookDetails(const data::Book &book, QPixmap cover)
 	bookDetails->ui.cover->setPixmap(cover.scaled(bookDetails->ui.cover->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
 	ui->bookDetailsGridLayout->addWidget(bookDetails);
 	connect(bookDetails->ui.backButton, &QPushButton::clicked, [this] {ui->stackedWidget->setCurrentIndex(0); });
+
+	connect(bookDetails, &BookDetails::BorrowPressed, [this](uint64_t id) {
+		emit BorrowBookRequest(id);
+		});
 }
 
 void MainWindow::SeeBookText(const data::LendBook& book)

@@ -10,6 +10,10 @@ MyListBookPreview::MyListBookPreview(const data::LendBook& _book, QWidget* paren
 	ui.setupUi(this);
 	ui.title->setText(QString::fromStdString(book.title));
 	ui.authors->setText(QString::fromStdString(authorsStream.str()));
+	if(book.isAvailable)
+	ui.returnDate->setText(QString::fromStdString("Borrowed at:"+book.lendDate));
+	else
+	ui.returnDate->setText(QString::fromStdString("Borrowed at:" + book.lendDate+" you didn't returned it on time"));
 
 	this->setMinimumSize(this->sizeHint());
 	this->adjustSize();
