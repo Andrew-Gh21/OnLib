@@ -25,6 +25,7 @@ public slots:
 	void AddBorrowedBooks(const std::vector<data::LendBook>& books);
 signals:
 	void BorrowBookRequest(uint64_t id);
+	void ReturnBookRequest(uint64_t bookId);
 	void LogOutRequest();
 	void DeleteAccountRequest(const std::string& password);
 	void SearchRequest(const std::string& text);

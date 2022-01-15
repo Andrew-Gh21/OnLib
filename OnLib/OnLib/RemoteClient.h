@@ -29,6 +29,7 @@ public slots:
 	void OnRefreshRequest();
 	void OnBookRated(int rating, uint64_t bookId);
 	void OnBookBorrowRequest(uint64_t bookId);
+	void OnBookReturnRequest(uint64_t bookId);
 signals:
 	void ExceptionThrown(const std::exception& e);
 

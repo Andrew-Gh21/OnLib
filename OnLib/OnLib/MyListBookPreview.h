@@ -14,7 +14,11 @@ public:
 
 	void BookCoverRecieved(QByteArray data);
 
+signals:
+	void ReturnButtonPressed(uint64_t bookId);
+
 private:
 	Ui::MyListBookPreview ui;
+	data::LendBook book;
 };
 

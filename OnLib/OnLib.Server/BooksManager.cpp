@@ -40,7 +40,7 @@ std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
 		"select user_id, book_id, lend_date, return_date, b.title, b.description, b.cover_url "
 		"from user_book "
 		"inner join book b on b.id = book_id "
-		"where user_id = ? ";
+		"where user_id = ? and return_date is null";
 
 	auto output = [&lendedBooks](uint64_t userId, uint64_t bookId, std::string lendDate, std::optional<std::string> returnDate, std::string title, std::string description, std::string coverUrl)
 	{

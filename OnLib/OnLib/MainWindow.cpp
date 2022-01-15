@@ -190,6 +190,8 @@ void MainWindow::AddBorrowedBooks(const std::vector<data::LendBook>& books)
 
 		visibleBooks.push_back(preview);
 
+		connect(preview, &MyListBookPreview::ReturnButtonPressed, [this](uint64_t id) {emit ReturnBookRequest(id); });
+
 		FileDownloader* coverDownloader = new FileDownloader(book.coverUrl, this);
 		connect(coverDownloader, &FileDownloader::DownloadFinished, [coverDownloader, preview]() {
 			preview->BookCoverRecieved(coverDownloader->GetData());

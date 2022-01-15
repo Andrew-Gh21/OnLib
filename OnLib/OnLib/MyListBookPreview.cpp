@@ -1,8 +1,8 @@
 #include "MyListBookPreview.h"
 #include <sstream>
 
-MyListBookPreview::MyListBookPreview(const data::LendBook& book, QWidget* parent)
-	: QWidget(parent)
+MyListBookPreview::MyListBookPreview(const data::LendBook& _book, QWidget* parent)
+	: QWidget(parent), book(_book)
 {
 	std::ostringstream authorsStream;
 	std::copy(std::cbegin(book.authors), std::cend(book.authors), std::ostream_iterator<std::string>(authorsStream));
@@ -13,6 +13,8 @@ MyListBookPreview::MyListBookPreview(const data::LendBook& book, QWidget* parent
 
 	this->setMinimumSize(this->sizeHint());
 	this->adjustSize();
+
+	connect(ui.returnBookButton, &QAbstractButton::pressed, [this]() {emit ReturnButtonPressed(book.bookId); });
 }
 
 void MyListBookPreview::BookCoverRecieved(QByteArray data)

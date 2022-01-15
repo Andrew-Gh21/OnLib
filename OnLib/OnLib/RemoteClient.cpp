@@ -84,6 +84,14 @@ void RemoteClient::OnBookBorrowRequest(uint64_t bookId)
 	Send(borrowRequest);
 }
 
+void RemoteClient::OnBookReturnRequest(uint64_t bookId)
+{
+	net::Message returnRequest;
+	returnRequest.header.messageType = static_cast<int32_t>(data::ClientRequest::ReturnBook);
+	returnRequest << bookId;
+	Send(returnRequest);
+}
+
 RemoteClient::~RemoteClient()
 {
 	if (processingThread.joinable())

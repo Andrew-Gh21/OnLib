@@ -122,6 +122,13 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 		booksManager.AddLendedBookToUser(bookId, accountsManager.GetUserId(client->GetId()));
 		break;
 	}
+	case data::ClientRequest::ReturnBook:
+	{
+		uint64_t bookId;
+		message >> bookId;
+		booksManager.ReturnBook(bookId, accountsManager.GetUserId(client->GetId()));
+		break;
+	}
 	default:
 		log(LogMessageType::Warning, "User " + std::to_string(client->GetId()) + " sent an invalid message. Disconnecting!");
 		client->Disconnect();
