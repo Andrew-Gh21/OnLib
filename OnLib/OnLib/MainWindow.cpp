@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget* parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
+	ui->stackedWidget->setCurrentIndex(0);
 
 	QIcon icon("Images/online-library.png");
 	MainWindow::setWindowIcon(icon);
@@ -130,9 +131,12 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 	for (const auto& book : books)
 	{
 		BookSection* section = categories[book.mainCategory];
-
-		BookPreview* bookPreview = new BookPreview(book, section);
-		section->AddBook(bookPreview);
+		QSize currentSize = this->size();
+		section->setMinimumSize(currentSize.width() - 100, currentSize.height() - 200);
+		BookPreview* bookPreview = new BookPreview(book, section) ;
+		section->AddBook(bookPreview) ;
+		QSize size = bookPreview->size();
+		bookPreview->resize(size.width(), size.height());
 
 		visibleBooks.push_back(bookPreview);
 
