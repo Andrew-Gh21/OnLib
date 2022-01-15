@@ -27,9 +27,7 @@ BookPreview::BookPreview(const data::Book& book, QWidget *parent)
 
 void BookPreview::BookCoverRecieved(QByteArray data)
 {
-
 	QPixmap cover;
 	cover.loadFromData(data);
 	ui.cover->setPixmap(cover.scaled(ui.cover->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
 }
-

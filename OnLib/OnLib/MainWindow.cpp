@@ -178,11 +178,17 @@ void MainWindow::SeeBookDetails(const data::Book &book, QPixmap cover)
 
 void MainWindow::AddBorrowedBooks(const std::vector<data::LendBook>& books)
 {
+	BookSection* myListSection = new BookSection("My list", this);
+	myListSection->setMinimumHeight(this->height() - 400);
+	myListSection->repaint();
+
 	for (const auto& book : books)
 	{
-		MyListBookPreview* preview = new MyListBookPreview(book, this);
+		MyListBookPreview* preview = new MyListBookPreview(book, myListSection);
 
-		ui->myListGridLayout->addWidget(preview);
+		preview->setMinimumWidth(300);
+		myListSection->AddBook(preview);
+
 		myListBookSection->AddBook(preview);
 
 		visibleBooks.push_back(preview);
