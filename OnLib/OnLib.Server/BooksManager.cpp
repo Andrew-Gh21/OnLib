@@ -39,16 +39,16 @@ std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
 	constexpr static double parserToDays = 60.0 * 60.0 * 24.0;
 
 	constexpr static const char* query =
-		"select user_id, book_id, lend_date, return_date, b.title, b.description, b.cover_url "
+		"select user_id, book_id, lend_date, return_date, limit_date, b.title, b.description, b.cover_url "
 		"from user_book "
 		"inner join book b on b.id = book_id "
 		"where user_id = ? and return_date is null";
 
-	std::vector<data::LendBook>lendedBooks;
+	std::vector<data::LendBook> lendedBooks;
 
-	auto output = [&lendedBooks](uint64_t userId, uint64_t bookId, std::string lendDate, /*std::string limitDate,*/ std::optional<std::string> returnDate, std::string title, std::string description, std::string coverUrl)
+	auto output = [&lendedBooks](uint64_t userId, uint64_t bookId, std::string lendDate, std::string limitDate, std::optional<std::string> returnDate, std::string title, std::string description, std::string coverUrl)
 	{
-		lendedBooks.push_back(data::LendBook(bookId, lendDate, /*limitDate,*/ returnDate ? *returnDate : "", title, description, coverUrl));
+		lendedBooks.push_back(data::LendBook(bookId, lendDate, limitDate, returnDate ? *returnDate : "", title, description, coverUrl));
 	};
 
 	database << query
@@ -58,7 +58,7 @@ std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
 	for (data::LendBook& book : lendedBooks)
 	{
 		GetAuthors(book.bookId, book.authors);
-		book.isAvailable = CheckIfAvailable(book.lendDate);
+		book.isAvailable = CheckIfAvailable(book.limitDate);
 	}
 
 	return lendedBooks;
@@ -67,16 +67,17 @@ std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
 void BooksManager::AddLendedBookToUser(uint64_t bookId, uint64_t userId)
 {
 	constexpr static const char* queryInsertBook =
-		"insert into user_book (user_id, book_id, lend_date) "
-		"values (?,?,?) ";
+		"insert into user_book (user_id, book_id, lend_date, limit_date) "
+		"values (?,?,?,?) ";
 
 	if (!CanLendBook(bookId, userId))
 		return;
 
-	std::string time = LogMessage::GetTime();
+	auto current = DateUtils::GetCurrentLocalTime();
+	std::string limit = DateUtils::TimeToString("%d/%m/%g %T", DateUtils::AddDays(current, 14));
 
 	database << queryInsertBook
-		<< userId << bookId << time /*<< AddFourteenDays(time)*/;
+		<< userId << bookId << DateUtils::TimeToString("%d/%m/%g %T", current) << limit;
 }
 
 bool BooksManager::CanLendBook(uint64_t bookId, uint64_t userId)
@@ -98,7 +99,7 @@ bool BooksManager::CanLendBook(uint64_t bookId, uint64_t userId)
 
 	const std::vector<data::LendBook> userBorrowedBooks = GetLendedBooks(userId);
 
-	if (userBorrowedBooks.size() > MAX_BOOKS_PER_USER)
+	if (userBorrowedBooks.size() >= MAX_BOOKS_PER_USER)
 		return false;
 
 	bool hasLateBooks = std::any_of(std::cbegin(userBorrowedBooks), std::cend(userBorrowedBooks), [](const data::LendBook& book) {
@@ -165,50 +166,21 @@ void BooksManager::ReturnBook(uint64_t bookId, uint64_t userId)
 		"where user_id = ? and book_id = ? ";
 
 	database << query
-		<< LogMessage::GetTime() << userId << bookId;
+		<< DateUtils::TimeToString("%d/%m/%g %T", DateUtils::GetCurrentLocalTime()) << userId << bookId;
 }
 
 bool BooksManager::CheckIfAvailable(const std::string& date)
 {
-	constexpr static double parserToDays = 60.0 * 60.0 * 24.0;
+	std::tm currentTime = DateUtils::GetCurrentLocalTime();
+	std::tm limitTime = DateUtils::GetTimeFromString(date);
 
-	std::time_t currentTime = std::time(0);
-	std::time_t rawtime = std::time(0);
-	std::tm* timestamp = new std::tm;
-	std::tm* time = new std::tm();
-	localtime_s(timestamp, &currentTime);
-
-	std::string day(date.begin(), date.begin() + 2);
-	std::string month(date.begin() + 3, date.begin() + 5);
-	std::string year(date.begin() + 6, date.end());
-	time->tm_year = std::stoi(year) + 100;
-	time->tm_mon = std::stoi(month) - 1;
-	time->tm_mday = std::stoi(day);
-
-	if (std::difftime(currentTime, mktime(time)) / (parserToDays) <= 14)
-		return true;
-
-	return false;
+	return std::difftime(std::mktime(&limitTime), std::mktime(&currentTime)) > 0;
 }
 
 std::string BooksManager::AddFourteenDays(const std::string& date)
 {
-	constexpr static double fourteenDays = 14.0 * 24.0 * 60.0 * 60.0;
-	std::tm* time = new std::tm();
-	std::string day(date.begin(), date.begin() + 2);
-	std::string month(date.begin() + 3, date.begin() + 5);
-	std::string year(date.begin() + 6, date.end());
-	time->tm_year = std::stoi(year) + 100;
-	time->tm_mon = std::stoi(month) - 1;
-	time->tm_mday = std::stoi(day);
-
-	std::tm* finalTime{};
-	time_t t = mktime(time) + fourteenDays;
-	localtime_s(finalTime, &t);
-
-	char buffer[40];
-	strftime(buffer, 40, "%d/%m/%g %T", finalTime);
-	return std::string(buffer);
+	std::tm currentTime = DateUtils::GetTimeFromString(date);
+	return DateUtils::TimeToString("%d/%m/%g %T", DateUtils::AddDays(currentTime, 14));
 }
 
 void BooksManager::Rate(uint64_t bookId, uint64_t userId, int rating)
@@ -263,7 +235,7 @@ bool BooksManager::SetupSearchExtension(std::string& errorMsg)
 void BooksManager::ExtendDate(uint64_t bookId, uint64_t userId)
 {
 	constexpr static const char* getDate =
-		"select id , limit_date from user_book "
+		"select id, lend_date, limit_date from user_book "
 		"where user_id = ? and book_id = ? and return_date is null ";
 
 	constexpr static const char* updateDate =
@@ -272,21 +244,30 @@ void BooksManager::ExtendDate(uint64_t bookId, uint64_t userId)
 		"where id = ? ";
 
 	uint64_t id;
-	std::string date;
+	std::string lendDate, limitDate;
 
-	auto output = [&id, &date](uint64_t idAux, std::string dateAux)
+	auto output = [&id, &lendDate, &limitDate](uint64_t _id, std::string _lendDate, std::string _limitDate)
 	{
-		id = idAux;
-		date = dateAux;
+		id = _id;
+		lendDate = _lendDate;
+		limitDate = _limitDate;
+	};
+
+	auto canExtendDate = [&](const std::tm& lend, const std::tm limit) -> bool {
+		return DateUtils::GetDaysBetween(lend, limit) < 42;
 	};
 
 	database << getDate
 		<< userId << bookId
 		>> output;
 
+	auto limit = DateUtils::GetTimeFromString(limitDate);
+
+	if(!canExtendDate(DateUtils::GetTimeFromString(lendDate), limit))
+		return;
 
 	database << updateDate
-		<< date << id;
+		<< DateUtils::TimeToString("%d/%m/%g %T", DateUtils::AddDays(limit, 14)) << id;
 }
 
 std::vector<data::Book> BooksManager::Search(const std::string& keyword)

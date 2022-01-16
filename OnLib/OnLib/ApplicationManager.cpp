@@ -66,6 +66,7 @@ void ApplicationManager::ConnectRemoteAndMain()
 	connect(mainWindow.get(), &MainWindow::BookRated, remote.get(), &RemoteClient::OnBookRated);
 	connect(mainWindow.get(), &MainWindow::BorrowBookRequest, remote.get(), &RemoteClient::OnBookBorrowRequest);
 	connect(mainWindow.get(), &MainWindow::ReturnBookRequest, remote.get(), &RemoteClient::OnBookReturnRequest);
+	connect(mainWindow.get(), &MainWindow::ExtendDateRequest, remote.get(), &RemoteClient::OnBookExtendDateRequest);
 }
 
 void ApplicationManager::SwitchToMainWindow()

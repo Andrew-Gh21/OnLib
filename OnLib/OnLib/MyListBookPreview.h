@@ -16,6 +16,7 @@ public:
 
 signals:
 	void ReturnButtonPressed(uint64_t bookId);
+	void ExtendButtonPressed(uint64_t bookId);
 
 public:
 	Ui::MyListBookPreview ui;

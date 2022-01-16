@@ -12,3 +12,11 @@
 
 15/01/22 14:10:51      [Info] :: Server started
 
+16/01/22 17:48:49      [Info] :: Server started
+
+16/01/22 17:49:02      [Info] :: Client connected!
+
+16/01/22 17:49:02      [Info] :: Client validated!
+
+16/01/22 17:49:25     [Error] :: Could not start read header routine. Connection closed!
+

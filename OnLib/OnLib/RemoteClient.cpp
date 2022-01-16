@@ -97,6 +97,15 @@ void RemoteClient::OnBookReturnRequest(uint64_t bookId)
 	OnRefreshRequest();
 }
 
+void RemoteClient::OnBookExtendDateRequest(uint64_t bookId)
+{
+	net::Message extendRequest;
+	extendRequest.header.messageType = data::EnumToNumber(data::ClientRequest::ExtendReturnDate);
+	extendRequest << bookId;
+	Send(extendRequest);
+	OnRefreshRequest();
+}
+
 RemoteClient::~RemoteClient()
 {
 	if (processingThread.joinable())

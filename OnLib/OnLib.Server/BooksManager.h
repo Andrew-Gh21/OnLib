@@ -10,6 +10,7 @@
 #include "Book.h"
 #include "Enums.h"
 #include "sqlite_modern_cpp.h"
+#include "DateUtils.h"
 
 class BooksManager
 {

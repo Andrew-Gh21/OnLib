@@ -31,6 +31,7 @@ namespace data
 		RateBook,
 		BorrowBook,
 		ReturnBook,
+		ExtendReturnDate,
 		SearchBooks
 	};
 

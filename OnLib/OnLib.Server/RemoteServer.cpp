@@ -142,6 +142,13 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 		SendSearchResponse(client, books);
 		break;
 	}
+	case data::ClientRequest::ExtendReturnDate:
+	{
+		uint64_t bookId;
+		message >> bookId;
+		booksManager.ExtendDate(bookId, accountsManager.GetUserId(client->GetId()));
+		break;
+	}
 	default:
 		log(LogMessageType::Warning, "User " + std::to_string(client->GetId()) + " sent an invalid message. Disconnecting!");
 		client->Disconnect();

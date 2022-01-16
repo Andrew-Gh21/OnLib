@@ -28,6 +28,7 @@ public slots:
 signals:
 	void BorrowBookRequest(uint64_t id);
 	void ReturnBookRequest(uint64_t bookId);
+	void ExtendDateRequest(uint64_t bookId);
 	void SearchRequest(const std::string& text);
 	void BookRated(int rating, uint64_t bookId);
 	

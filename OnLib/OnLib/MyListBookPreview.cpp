@@ -10,16 +10,18 @@ MyListBookPreview::MyListBookPreview(const data::LendBook& _book, QWidget* paren
 	ui.setupUi(this);
 	ui.title->setText(QString::fromStdString(book.title));
 	ui.authors->setText(QString::fromStdString(authorsStream.str()));
+	ui.limitDateLabel->setText(QString::fromStdString(book.limitDate));
 	
 	ui.returnDate->setText(QString::fromStdString(book.isAvailable ?
-		"Borrowed at:" + book.lendDate :
-		"Borrowed at:" + book.lendDate + " you didn't returned it on time"
+		"Borrowed at: " + book.lendDate :
+		"Borrowed at: " + book.lendDate + " you didn't returned it on time"
 	));
 
 	this->setMinimumSize(this->sizeHint());
 	this->adjustSize();
 
 	connect(ui.returnBookButton, &QAbstractButton::pressed, [this]() {emit ReturnButtonPressed(book.bookId); });
+	connect(ui.extendReturnDateButton, &QAbstractButton::pressed, [this]() {emit ExtendButtonPressed(book.bookId); });
 }
 
 void MyListBookPreview::BookCoverRecieved(QByteArray data)
