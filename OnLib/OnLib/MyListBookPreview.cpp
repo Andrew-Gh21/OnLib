@@ -10,7 +10,8 @@ MyListBookPreview::MyListBookPreview(const data::LendBook& _book, QWidget* paren
 	ui.setupUi(this);
 	ui.title->setText(QString::fromStdString(book.title));
 	ui.authors->setText(QString::fromStdString(authorsStream.str()));
-	ui.limitDateLabel->setText(QString::fromStdString(book.limitDate));
+	ui.limitDateLabel->setText("Must be returned until:" + QString::fromStdString(book.limitDate));
+	ui.readBookButton->setEnabled(book.isAvailable);
 	
 	ui.returnDate->setText(QString::fromStdString(book.isAvailable ?
 		"Borrowed at: " + book.lendDate :

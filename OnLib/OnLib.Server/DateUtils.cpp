@@ -37,7 +37,7 @@ std::tm DateUtils::GetCurrentLocalTime()
 
 int DateUtils::GetDaysBetween(const std::tm& first, const std::tm& second)
 {
-	return std::difftime(std::mktime((std::tm*)&first), std::mktime((std::tm*)&second)) / (60.0 * 60.0 * 24.0);
+	return std::abs(std::difftime(std::mktime((std::tm*)&first), std::mktime((std::tm*)&second)) / (60.0 * 60.0 * 24.0));
 }
 
 double DateUtils::DaysToSeconds(int days)
