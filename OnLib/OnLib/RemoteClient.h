@@ -2,7 +2,6 @@
 
 #include "Networking.h"
 #include "../OnLib.DataTransfer/User.h"
-#include "Errors.h"
 #include <qobject.h>
 #include <vector>
 #include <Book.h>

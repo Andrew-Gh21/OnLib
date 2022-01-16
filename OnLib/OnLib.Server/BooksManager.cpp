@@ -37,12 +37,14 @@ std::vector<data::Book> BooksManager::GetNewestFiveBooksFromEachCategory()
 std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
 {
 	constexpr static double parserToDays = 60.0 * 60.0 * 24.0;
-	std::vector<data::LendBook>lendedBooks;
+
 	constexpr static const char* query =
 		"select user_id, book_id, lend_date, return_date, b.title, b.description, b.cover_url "
 		"from user_book "
 		"inner join book b on b.id = book_id "
 		"where user_id = ? and return_date is null";
+
+	std::vector<data::LendBook>lendedBooks;
 
 	auto output = [&lendedBooks](uint64_t userId, uint64_t bookId, std::string lendDate, /*std::string limitDate,*/ std::optional<std::string> returnDate, std::string title, std::string description, std::string coverUrl)
 	{
@@ -55,12 +57,8 @@ std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
 
 	for (data::LendBook& book : lendedBooks)
 	{
-		GetAuthors(book.bookId,book.authors);
-
-		if (CheckIfAvailable(book.lendDate))
-		{
-			book.isAvailable = true;
-		}
+		GetAuthors(book.bookId, book.authors);
+		book.isAvailable = CheckIfAvailable(book.lendDate);
 	}
 
 	return lendedBooks;
@@ -68,48 +66,49 @@ std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
 
 void BooksManager::AddLendedBookToUser(uint64_t bookId, uint64_t userId)
 {
-	bool alreadyBorrowed = false;
+	constexpr static const char* queryInsertBook =
+		"insert into user_book (user_id, book_id, lend_date) "
+		"values (?,?,?) ";
+
+	if (!CanLendBook(bookId, userId))
+		return;
+
+	std::string time = LogMessage::GetTime();
+
+	database << queryInsertBook
+		<< userId << bookId << time /*<< AddFourteenDays(time)*/;
+}
+
+bool BooksManager::CanLendBook(uint64_t bookId, uint64_t userId)
+{
 	constexpr static const char* checkIfBorrowed =
 		"select count(*) from user_book "
 		"where user_id = ? and book_id = ? and return_date is null ";
+
+	constexpr static int MAX_BOOKS_PER_USER = 5;
+
+	bool alreadyBorrowed = false;
 
 	database << checkIfBorrowed
 		<< userId << bookId
 		>> alreadyBorrowed;
 
-	if (!alreadyBorrowed)
-	{
-		const std::vector<data::LendBook> userBorrowedBooks = GetLendedBooks(userId);
+	if (alreadyBorrowed)
+		return false;
 
-		if (userBorrowedBooks.size() < 5)
-		{
-			bool hasUnavailableBooks = false;
+	const std::vector<data::LendBook> userBorrowedBooks = GetLendedBooks(userId);
 
-			for (auto &book : userBorrowedBooks)
-			{
-				if (!book.isAvailable)
-				{
-					hasUnavailableBooks = true;
-					break;
-				}
-			}
+	if (userBorrowedBooks.size() > MAX_BOOKS_PER_USER)
+		return false;
 
-			if (!hasUnavailableBooks)
-			{
-				constexpr static const char* query =
-					"insert into user_book (user_id, book_id, lend_date, return_date) "
-					"values (?,?,?,null) ";
+	bool hasLateBooks = std::any_of(std::cbegin(userBorrowedBooks), std::cend(userBorrowedBooks), [](const data::LendBook& book) {
+		return book.isAvailable == false;
+		});
 
-				std::string time = LogMessage::GetTime();
-
-				database << query
-					<< userId << bookId << time /*<< AddFourteenDays(time)*/;
-			}
-		}
-	}
+	return !hasLateBooks;
 }
 
-void BooksManager::GetAuthors(uint64_t bookId,std::vector<std::string>& authors)
+void BooksManager::GetAuthors(uint64_t bookId, std::vector<std::string>& authors)
 {
 	constexpr static const char* query =
 		"select a.name from author as a "
@@ -134,11 +133,11 @@ void BooksManager::GetCategories(data::Book& book)
 
 	auto output = [&book](uint64_t categoryId)
 	{
-		book.otherCategories.push_back(static_cast<data::BookCategory>(categoryId - 1));
+		book.otherCategories.push_back(static_cast<data::BookCategory>(categoryId));
 	};
 
 	database << query
-		<< book.id << static_cast<uint64_t>(book.mainCategory)
+		<< book.id << data::EnumToNumber(book.mainCategory)
 		>> output;
 }
 
@@ -202,10 +201,10 @@ std::string BooksManager::AddFourteenDays(const std::string& date)
 	time->tm_year = std::stoi(year) + 100;
 	time->tm_mon = std::stoi(month) - 1;
 	time->tm_mday = std::stoi(day);
-	
-	std::tm* finalTime {};
+
+	std::tm* finalTime{};
 	time_t t = mktime(time) + fourteenDays;
-	localtime_s(finalTime,&t);
+	localtime_s(finalTime, &t);
 
 	char buffer[40];
 	strftime(buffer, 40, "%d/%m/%g %T", finalTime);
@@ -216,15 +215,16 @@ void BooksManager::Rate(uint64_t bookId, uint64_t userId, int rating)
 {
 	constexpr static const char* select = "select count(*) from book_rating where book_id = ? and user_id = ? ";
 	constexpr static const char* insert = "insert into book_rating(book_id, user_id, rating) values (?, ?, ?) ";
+	constexpr static const char* update = "update book_rating set rating = ? where book_id = ? and user_id = ? ";
+
 	bool rated;
-	
+
 	database << select
-		<< bookId << userId 
+		<< bookId << userId
 		>> rated;
 
 	if (rated)
 	{
-		constexpr static const char* update = "update book_rating set rating = ? where book_id = ? and user_id = ? ";
 		database << update
 			<< rating << bookId << userId;
 		return;
@@ -265,6 +265,12 @@ void BooksManager::ExtendDate(uint64_t bookId, uint64_t userId)
 	constexpr static const char* getDate =
 		"select id , limit_date from user_book "
 		"where user_id = ? and book_id = ? and return_date is null ";
+
+	constexpr static const char* updateDate =
+		"update user_book "
+		"set limit_date = ? "
+		"where id = ? ";
+
 	uint64_t id;
 	std::string date;
 
@@ -276,12 +282,8 @@ void BooksManager::ExtendDate(uint64_t bookId, uint64_t userId)
 
 	database << getDate
 		<< userId << bookId
-		>>output;
+		>> output;
 
-	constexpr static const char* updateDate =
-		"update user_book "
-		"set limit_date = ? "
-		"where id = ? ";
 
 	database << updateDate
 		<< date << id;

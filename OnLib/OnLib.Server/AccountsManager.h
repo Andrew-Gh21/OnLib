@@ -11,10 +11,6 @@
 
 class AccountsManager
 {
-private:
-	std::unordered_map<uint64_t, data::User>users;
-	sqlite::database& database;
-
 public:
 	AccountsManager(sqlite::database& db) :database(db) {};
 	AccountsManager() = default;
@@ -27,14 +23,21 @@ public:
 
 	~AccountsManager() = default;
 
-	bool ValidateLogin(std::shared_ptr<net::ClientConnection> client, data::User input, std::vector<data::LoginErrors>& errors);
-	bool ValidateRegister(std::shared_ptr<net::ClientConnection> client, data::User input,std::vector<data::RegisterErrors>&errors);
+	bool ValidateLogin(std::shared_ptr<net::ClientConnection> client, const data::User& input, std::vector<data::LoginErrors>& errors);
+	bool ValidateRegister(std::shared_ptr<net::ClientConnection> client, const data::User& input, std::vector<data::RegisterErrors>&errors);
+
+	void SaveRegisterDetails(const data::User& user);
+
 	void Login(uint64_t clientId, data::User user);
 	void Logout(uint64_t clientId);
+
 	bool DeleteUser(uint64_t clientId, const std::string& password);
-	bool ChangePassword(std::shared_ptr<net::ClientConnection> client, data::User input, const std::string& newPassword);
-	bool ChangeUserName(std::shared_ptr<net::ClientConnection> client, data::User input, const std::string& newName);
+
 	uint64_t GetUserId(uint64_t clientId) const noexcept { return users.at(clientId).id; }
 	data::User GetUser(uint64_t clientId) const noexcept { return users.at(clientId); }
+
+private:
+	std::unordered_map<uint64_t, data::User>users;
+	sqlite::database& database;
 };
 

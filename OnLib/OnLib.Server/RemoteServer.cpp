@@ -149,7 +149,7 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 	}
 }
 
-void RemoteServer::SendLoginResponse(Client client, data::User data)
+void RemoteServer::SendLoginResponse(Client client, const data::User& data)
 {
 	net::Message response;
 	std::vector<data::LoginErrors> errors;
@@ -170,16 +170,19 @@ void RemoteServer::SendLoginResponse(Client client, data::User data)
 	MessageClient(client, response);
 }
 
-void RemoteServer::SendRegisterResponse(Client client, data::User data)
+void RemoteServer::SendRegisterResponse(Client client, const data::User& data)
 {
 	net::Message response;
 	std::vector<data::RegisterErrors> errors;
 
 	bool registerSuccessfull = accountsManager.ValidateRegister(client, data, errors);
+
 	response.header.messageType = data::EnumToNumber(registerSuccessfull ?
 		data::ServerResponse::SuccesfullRegister : data::ServerResponse::InvalidRegister);
 
-	if (!registerSuccessfull)
+	if (registerSuccessfull)
+		accountsManager.SaveRegisterDetails(data);
+	else
 		net::Serialize(response, std::cbegin(errors), std::cend(errors));
 
 	MessageClient(client, response);

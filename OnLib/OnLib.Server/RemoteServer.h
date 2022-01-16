@@ -32,9 +32,10 @@ protected:
 	void OnMessageRecieved(Client client, net::Message& message) override;
 
 private:
-	void SendLoginResponse(Client client, data::User data);
-	void SendRegisterResponse(Client client, data::User data);
+	void SendLoginResponse(Client client, const data::User& data);
+	void SendRegisterResponse(Client client, const data::User& data);
 	void SendSearchResponse(Client client, const std::vector<data::Book>& books);
+
 private:
 	MultiLogger logger;
 	AccountsManager accountsManager;

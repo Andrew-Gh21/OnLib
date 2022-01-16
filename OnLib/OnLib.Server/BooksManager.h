@@ -13,8 +13,6 @@
 
 class BooksManager
 {
-private:
-	sqlite::database& database;
 public:
 	BooksManager(sqlite::database& db) :database(db) {};
 	BooksManager() = default;
@@ -26,19 +24,28 @@ public:
 	BooksManager& operator=(BooksManager&& aux) = default;
 
 	~BooksManager() = default;
+	
+	bool SetupSearchExtension(std::string& errorMsg);
+
+	void AddLendedBookToUser(uint64_t bookId, uint64_t userId);
+	bool CanLendBook(uint64_t bookId, uint64_t userId);
+
+	std::string AddFourteenDays(const std::string& date);
+	
+	void ReturnBook(uint64_t bookId, uint64_t userId);
+	void ExtendDate(uint64_t bookId, uint64_t userId);
+	void Rate(uint64_t bookId, uint64_t userId, int rating);
+	std::vector<data::Book> Search(const std::string& keyword);
+	
+	bool CheckIfAvailable(const std::string& date);
 
 	std::vector<data::Book> GetNewestFiveBooksFromEachCategory();
-	std::vector<data::LendBook>GetLendedBooks(uint64_t userId);
-	void AddLendedBookToUser(uint64_t bookId, uint64_t userId);
+	std::vector<data::LendBook> GetLendedBooks(uint64_t userId);
 	void GetAuthors(uint64_t bookId, std::vector<std::string>& authors);
 	void GetCategories(data::Book& book);
 	void GetRating(data::Book& book);
-	void ReturnBook(uint64_t bookId, uint64_t userId);
-	bool CheckIfAvailable(const std::string& date);
-	std::string AddFourteenDays(const std::string& date);
-	void ExtendDate(uint64_t bookId, uint64_t userId);
-	void Rate(uint64_t bookId, uint64_t userId, int rating);
-	bool SetupSearchExtension(std::string& errorMsg);
-	std::vector<data::Book> Search(const std::string& keyword);
+
+private:
+	sqlite::database& database;
 };
 
