@@ -73,24 +73,6 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 		SendRegisterResponse(client, userData);
 		break;
 	}
-	case data::ClientRequest::RequestDisplayBooks:
-	{
-		std::vector<data::Book> displayBooks = booksManager.GetNewestFiveBooksFromEachCategory();
-		net::Message response;
-		response.header.messageType = data::EnumToNumber(data::ServerResponse::DisplayBooksRecieved);
-		net::Serialize(response, std::cbegin(displayBooks), std::cend(displayBooks));
-		MessageClient(client, response);
-		break;
-	}
-	case data::ClientRequest::RequestLentBooks:
-	{
-		auto borrowed = booksManager.GetLendedBooks(accountsManager.GetUserId(client->GetId()));
-		net::Message response;
-		response.header.messageType = data::EnumToNumber(data::ServerResponse::BorrowedBooksRecieved);
-		net::Serialize(response, std::cbegin(borrowed), std::cend(borrowed));
-		MessageClient(client, response);
-		break;
-	}
 	case data::ClientRequest::Logout:
 	{
 		accountsManager.Logout(client->GetId());
@@ -110,6 +92,24 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 		if (result == data::ServerResponse::DeleteAccountSuccesful)
 			accountsManager.Logout(client->GetId());
 
+		break;
+	}
+	case data::ClientRequest::RequestDisplayBooks:
+	{
+		std::vector<data::Book> displayBooks = booksManager.GetNewestFiveBooksFromEachCategory();
+		net::Message response;
+		response.header.messageType = data::EnumToNumber(data::ServerResponse::DisplayBooksRecieved);
+		net::Serialize(response, std::cbegin(displayBooks), std::cend(displayBooks));
+		MessageClient(client, response);
+		break;
+	}
+	case data::ClientRequest::RequestLentBooks:
+	{
+		auto borrowed = booksManager.GetLendedBooks(accountsManager.GetUserId(client->GetId()));
+		net::Message response;
+		response.header.messageType = data::EnumToNumber(data::ServerResponse::BorrowedBooksRecieved);
+		net::Serialize(response, std::cbegin(borrowed), std::cend(borrowed));
+		MessageClient(client, response);
 		break;
 	}
 	case data::ClientRequest::RateBook:
