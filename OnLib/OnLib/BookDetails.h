@@ -8,7 +8,7 @@ class BookDetails : public QWidget
 	Q_OBJECT
 
 public:
-	BookDetails(const data::Book& book, QWidget* parent = Q_NULLPTR);
+	BookDetails(const data::Book& _book, QWidget* parent = Q_NULLPTR);
 	~BookDetails();
 
 signals:
@@ -16,5 +16,6 @@ signals:
 
 public:
 	Ui::BookDetails ui;
+	data::Book book;
 };
 
