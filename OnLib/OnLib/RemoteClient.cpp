@@ -76,6 +76,7 @@ void RemoteClient::OnBookRated(int rating, uint64_t bookId)
 	rateRequestMsg.header.messageType = data::EnumToNumber(data::ClientRequest::RateBook);
 	rateRequestMsg << rating << bookId;
 	Send(rateRequestMsg);
+	OnRefreshRequest();
 }
 
 void RemoteClient::OnBookBorrowRequest(uint64_t bookId)
@@ -84,6 +85,7 @@ void RemoteClient::OnBookBorrowRequest(uint64_t bookId)
 	borrowRequest.header.messageType = data::EnumToNumber(data::ClientRequest::BorrowBook);
 	borrowRequest << bookId;
 	Send(borrowRequest);
+	OnRefreshRequest();
 }
 
 void RemoteClient::OnBookReturnRequest(uint64_t bookId)
@@ -92,6 +94,7 @@ void RemoteClient::OnBookReturnRequest(uint64_t bookId)
 	returnRequest.header.messageType = data::EnumToNumber(data::ClientRequest::ReturnBook);
 	returnRequest << bookId;
 	Send(returnRequest);
+	OnRefreshRequest();
 }
 
 RemoteClient::~RemoteClient()

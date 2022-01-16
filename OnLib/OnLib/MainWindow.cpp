@@ -48,7 +48,7 @@ MainWindow::MainWindow(QWidget* parent)
 	connect(ui->actionHome, SIGNAL(triggered()), this, SLOT(HandleHomeButton()));
 	connect(ui->actionMyList, SIGNAL(triggered()), this, SLOT(HandleMyListButton()));
 	connect(ui->actionSearchIcon, &QAction::triggered, [this]() {emit HandleSearchIconButton(); });
-	connect(ui->actionRefresh, SIGNAL(triggered()), this, SLOT(HandleRefreshButton()));
+	connect(ui->actionRefresh, &QAction::triggered, [this]() {emit RefreshButtonPressed(); });
 	connect(ui->actionSearchButton, &QAction::triggered, [this]() {emit SearchRequest(searchLineEdit->text().toStdString()); });
 
 	StyleSheets();
@@ -92,19 +92,6 @@ void MainWindow::HandleMyListButton()
 	searchLineEdit->setText("");
 }
 
-void MainWindow::HandleRefreshButton()
-{
-	for (QWidget* book : visibleBooks)
-	{
-		book->hide();
-		book->deleteLater();
-	}
-
-	visibleBooks.clear();
-
-	emit RefreshButtonPressed();
-}
-
 void MainWindow::StyleSheets()
 {
 	searchLineEdit->setFixedSize(300, 30);
@@ -122,6 +109,14 @@ void MainWindow::StyleSheets()
 
 void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 {
+	for (QWidget* book : visibleBooks)
+	{
+		book->hide();
+		book->deleteLater();
+	}
+
+	visibleBooks.clear();
+
 	for (const auto& book : books)
 	{
 		BookSection* section = categories[book.mainCategory];

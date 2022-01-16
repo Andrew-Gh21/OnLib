@@ -40,7 +40,6 @@ private slots:
 	void HandleSearchIconButton();
 	void HandleHomeButton();
 	void HandleMyListButton();
-	void HandleRefreshButton();
 	void StyleSheets();
 
 public:
