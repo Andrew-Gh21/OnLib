@@ -68,8 +68,6 @@ void MainWindow::HandleSearchIconButton()
 	searchSection = new BookSection("", this);
 	searchSection->setMinimumHeight(this->height() - 300);
 	searchSection->repaint();
-
-	//emit SearchRequest(searchLineEditWidgetAction->text().toStdString());
 }
 
 void MainWindow::HandleHomeButton()
@@ -260,6 +258,4 @@ void MainWindow::AddSearchedBooks(const std::vector<data::Book>& books)
 
 		connect(bookPreview->ui.detailsButton, &QPushButton::clicked, [this, book, bookPreview] {SeeBookDetails(book, bookPreview->ui.cover->pixmap()); });
 	}
-
-	
 }

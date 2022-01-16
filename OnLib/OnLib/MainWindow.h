@@ -16,23 +16,25 @@ class MainWindow : public QMainWindow
 
 public:
 	explicit MainWindow(QWidget* parent = Q_NULLPTR);
-	BookSection* myListBookSection;
-	BookSection* searchSection;
 	~MainWindow() = default;
 	void SeeBookDetails(const data::Book &book, QPixmap cover);
 	void SeeBookText(const data::LendBook& book);
+
 public slots:
 	void AddBooksToSection(const std::vector<data::Book>& books);
 	void AddBorrowedBooks(const std::vector<data::LendBook>& books);
 	void AddSearchedBooks(const std::vector<data::Book>& books);
+
 signals:
 	void BorrowBookRequest(uint64_t id);
 	void ReturnBookRequest(uint64_t bookId);
+	void SearchRequest(const std::string& text);
+	void BookRated(int rating, uint64_t bookId);
+	
 	void LogOutRequest();
 	void DeleteAccountRequest(const std::string& password);
-	void SearchRequest(const std::string& text);
+
 	void RefreshButtonPressed();
-	void BookRated(int rating, uint64_t bookId);
 
 private slots:
 	void HandleSearchIconButton();
@@ -40,6 +42,10 @@ private slots:
 	void HandleMyListButton();
 	void HandleRefreshButton();
 	void StyleSheets();
+
+public:
+	BookSection* myListBookSection;
+	BookSection* searchSection;
 
 private:
 	std::unordered_map<data::BookCategory, BookSection*> categories;

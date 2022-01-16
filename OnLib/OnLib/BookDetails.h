@@ -10,10 +10,11 @@ class BookDetails : public QWidget
 public:
 	BookDetails(const data::Book& book, QWidget* parent = Q_NULLPTR);
 	~BookDetails();
-	Ui::BookDetails ui;
+
 signals:
 	void BorrowPressed(uint64_t id);
 
-
+public:
+	Ui::BookDetails ui;
 };
 

@@ -11,13 +11,14 @@ class MyListBookPreview : public QWidget
 public:
 	MyListBookPreview(const data::LendBook& book, QWidget* parent = Q_NULLPTR);
 	~MyListBookPreview();	
-	Ui::MyListBookPreview ui;
-
 
 	void BookCoverRecieved(QByteArray data);
 
 signals:
 	void ReturnButtonPressed(uint64_t bookId);
+
+public:
+	Ui::MyListBookPreview ui;
 
 private:
 	data::LendBook book;

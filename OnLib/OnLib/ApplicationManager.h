@@ -26,6 +26,7 @@ private:
 
     void SwitchToMainWindow();
     void SwitchToLoginWindow();
+
 private:
     std::unique_ptr<MainWindow> mainWindow;
     std::unique_ptr<LoginWindow> loginWindow;

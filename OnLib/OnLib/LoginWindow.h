@@ -18,11 +18,13 @@ class LoginWindow : public QMainWindow
 
 public:
 	explicit LoginWindow(QWidget* parent = Q_NULLPTR);
+	~LoginWindow();
+
+private:
 	void HandleLoginButton();
 	void HandleSignUpButton();
 	void HandleRegisterButton();
 	void HandleBackToLoginButton();
-	~LoginWindow();
 
 signals:
 	void LoginButtonClicked(data::User user);
