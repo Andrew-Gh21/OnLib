@@ -37,6 +37,9 @@ MainWindow::MainWindow(QWidget* parent)
 	myListBookSection = new BookSection("My list", this);
 	ui->myListGridLayout->addWidget(myListBookSection);
 
+	searchSection = new BookSection("", this);
+	ui->searchPageGridLayout->addWidget(searchSection);
+
 	ui->actionSearchButton->setVisible(false);
 
 	searchLineEdit = new QLineEdit();
@@ -160,6 +163,13 @@ void MainWindow::AddBooksToSection(const std::vector<data::Book>& books)
 
 void MainWindow::SeeBookDetails(const data::Book &book, QPixmap cover)
 {
+	ui->actionSearchIcon->setVisible(true);
+
+	ui->actionSearchButton->setVisible(false);
+	searchLineEditWidgetAction->setVisible(false);
+
+	searchLineEdit->setText("");
+
 	QLayoutItem* child;
 	while (ui->bookDetailsGridLayout->count() != 0) {
 		child = ui->bookDetailsGridLayout->takeAt(0);
