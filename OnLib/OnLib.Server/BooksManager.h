@@ -8,7 +8,7 @@
 
 #include "ILogger.h"
 #include "Book.h"
-#include "Errors.h"
+#include "Enums.h"
 #include "sqlite_modern_cpp.h"
 
 class BooksManager

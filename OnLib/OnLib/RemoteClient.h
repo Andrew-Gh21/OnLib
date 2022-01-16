@@ -5,8 +5,8 @@
 #include "Errors.h"
 #include <qobject.h>
 #include <vector>
-#include "ClientRequest.h"
 #include <Book.h>
+#include "Enums.h"
 
 class RemoteClient : public QObject, public net::Client
 {

@@ -6,7 +6,7 @@
 
 #include "../OnLib.DataTransfer/User.h"
 #include <vector>
-#include "Errors.h"
+#include "Enums.h"
 
 namespace Ui {
 	class LoginWindow;

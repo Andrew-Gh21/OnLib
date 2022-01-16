@@ -29,7 +29,7 @@ RemoteServer::RemoteServer(uint16_t port, const MultiLogger& logger, const sqlit
 void RemoteServer::OnClientValidated(Client client)
 {
 	net::Message msg;
-	msg.header.messageType = static_cast<uint16_t>(data::ServerResponse::ValidationSuccessfull);
+	msg.header.messageType = data::EnumToNumber(data::ServerResponse::ValidationSuccessfull);
 	client->Send(msg);
 }
 
@@ -77,7 +77,7 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 	{
 		std::vector<data::Book> displayBooks = booksManager.GetNewestFiveBooksFromEachCategory();
 		net::Message response;
-		response.header.messageType = static_cast<uint16_t>(data::ServerResponse::DisplayBooksRecieved);
+		response.header.messageType = data::EnumToNumber(data::ServerResponse::DisplayBooksRecieved);
 		net::Serialize(response, std::cbegin(displayBooks), std::cend(displayBooks));
 		MessageClient(client, response);
 		break;
@@ -86,7 +86,7 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 	{
 		auto borrowed = booksManager.GetLendedBooks(accountsManager.GetUserId(client->GetId()));
 		net::Message response;
-		response.header.messageType = static_cast<uint16_t>(data::ServerResponse::BorrowedBooksRecieved);
+		response.header.messageType = data::EnumToNumber(data::ServerResponse::BorrowedBooksRecieved);
 		net::Serialize(response, std::cbegin(borrowed), std::cend(borrowed));
 		MessageClient(client, response);
 		break;
@@ -104,7 +104,7 @@ void RemoteServer::OnMessageRecieved(Client client, net::Message& message)
 		net::Message response;
 		data::ServerResponse result = accountsManager.DeleteUser(client->GetId(), password)
 			? data::ServerResponse::DeleteAccountSuccesful : data::ServerResponse::DeleteAccountFailure;
-		response.header.messageType = static_cast<uint16_t>(result);
+		response.header.messageType = data::EnumToNumber(result);
 		MessageClient(client, response);
 
 		if (result == data::ServerResponse::DeleteAccountSuccesful)
@@ -155,7 +155,7 @@ void RemoteServer::SendLoginResponse(Client client, data::User data)
 	std::vector<data::LoginErrors> errors;
 
 	bool logInSuccesfull = accountsManager.ValidateLogin(client, data, errors);
-	response.header.messageType = static_cast<uint8_t>(logInSuccesfull ?
+	response.header.messageType = data::EnumToNumber(logInSuccesfull ?
 		data::ServerResponse::SuccesfullLogin : data::ServerResponse::InvalidLogin);
 
 	if (logInSuccesfull)
@@ -176,7 +176,7 @@ void RemoteServer::SendRegisterResponse(Client client, data::User data)
 	std::vector<data::RegisterErrors> errors;
 
 	bool registerSuccessfull = accountsManager.ValidateRegister(client, data, errors);
-	response.header.messageType = static_cast<uint8_t>(registerSuccessfull ?
+	response.header.messageType = data::EnumToNumber(registerSuccessfull ?
 		data::ServerResponse::SuccesfullRegister : data::ServerResponse::InvalidRegister);
 
 	if (!registerSuccessfull)
@@ -188,7 +188,7 @@ void RemoteServer::SendRegisterResponse(Client client, data::User data)
 void RemoteServer::SendSearchResponse(Client client, const std::vector<data::Book>& books)
 {
 	net::Message response;
-	response.header.messageType = static_cast<uint8_t>(data::ServerResponse::SearchedBooksRecieved);
+	response.header.messageType = data::EnumToNumber(data::ServerResponse::SearchedBooksRecieved);
 	net::Serialize(response, std::cbegin(books), std::cend(books));
 	MessageClient(client, response);
 }

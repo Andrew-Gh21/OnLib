@@ -3,7 +3,7 @@
 #include <QMainWindow>
 #include "ui_MainWindow.h"
 #include<unordered_map>
-#include "../OnLib.DataTransfer/BookCategory.h"
+#include "../OnLib.DataTransfer/Enums.h"
 #include "BookSection.h"
 
 namespace Ui {

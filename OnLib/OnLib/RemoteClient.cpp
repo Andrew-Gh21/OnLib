@@ -1,5 +1,4 @@
 #include "RemoteClient.h"
-#include "ServerResponse.h"
 #include <iostream>
 
 RemoteClient::RemoteClient(QObject* parent) :
@@ -29,7 +28,7 @@ RemoteClient::RemoteClient(QObject* parent) :
 void RemoteClient::OnLoginRequest(const data::User& user)
 {
 	net::Message msg;
-	msg.header.messageType = static_cast<uint16_t>(data::ClientRequest::Login);
+	msg.header.messageType = data::EnumToNumber(data::ClientRequest::Login);
 	net::Serialize(msg, user);
 	Send(msg);
 }
@@ -37,7 +36,7 @@ void RemoteClient::OnLoginRequest(const data::User& user)
 void RemoteClient::OnRegisterRequest(const data::User& user)
 {
 	net::Message msg;
-	msg.header.messageType = static_cast<uint16_t>(data::ClientRequest::Register);
+	msg.header.messageType = data::EnumToNumber(data::ClientRequest::Register);
 	net::Serialize(msg, user);
 	Send(msg);
 }
@@ -45,14 +44,14 @@ void RemoteClient::OnRegisterRequest(const data::User& user)
 void RemoteClient::OnLogoutRequest()
 {
 	net::Message msg;
-	msg.header.messageType = static_cast<uint16_t>(data::ClientRequest::Logout);
+	msg.header.messageType = data::EnumToNumber(data::ClientRequest::Logout);
 	Send(msg);
 }
 
 void RemoteClient::OnDeleteAccountRequest(const std::string& password)
 {
 	net::Message msg;
-	msg.header.messageType = static_cast<uint16_t>(data::ClientRequest::DeleteAccount);
+	msg.header.messageType = data::EnumToNumber(data::ClientRequest::DeleteAccount);
 	net::Serialize(msg, std::cbegin(password), std::cend(password));
 	Send(msg);
 }
@@ -60,7 +59,7 @@ void RemoteClient::OnDeleteAccountRequest(const std::string& password)
 void RemoteClient::OnSearchRequest(const std::string& search)
 {
 	net::Message msg;
-	msg.header.messageType = static_cast<uint16_t>(data::ClientRequest::SearchBooks);
+	msg.header.messageType = data::EnumToNumber(data::ClientRequest::SearchBooks);
 	net::Serialize(msg, std::cbegin(search), std::cend(search));
 	Send(msg);
 }
@@ -74,7 +73,7 @@ void RemoteClient::OnRefreshRequest()
 void RemoteClient::OnBookRated(int rating, uint64_t bookId)
 {
 	net::Message rateRequestMsg;
-	rateRequestMsg.header.messageType = static_cast<int32_t>(data::ClientRequest::RateBook);
+	rateRequestMsg.header.messageType = data::EnumToNumber(data::ClientRequest::RateBook);
 	rateRequestMsg << rating << bookId;
 	Send(rateRequestMsg);
 }
@@ -82,7 +81,7 @@ void RemoteClient::OnBookRated(int rating, uint64_t bookId)
 void RemoteClient::OnBookBorrowRequest(uint64_t bookId)
 {
 	net::Message borrowRequest;
-	borrowRequest.header.messageType = static_cast<int32_t>(data::ClientRequest::BorrowBook);
+	borrowRequest.header.messageType = data::EnumToNumber(data::ClientRequest::BorrowBook);
 	borrowRequest << bookId;
 	Send(borrowRequest);
 }
@@ -90,7 +89,7 @@ void RemoteClient::OnBookBorrowRequest(uint64_t bookId)
 void RemoteClient::OnBookReturnRequest(uint64_t bookId)
 {
 	net::Message returnRequest;
-	returnRequest.header.messageType = static_cast<int32_t>(data::ClientRequest::ReturnBook);
+	returnRequest.header.messageType = data::EnumToNumber(data::ClientRequest::ReturnBook);
 	returnRequest << bookId;
 	Send(returnRequest);
 }
@@ -104,14 +103,14 @@ RemoteClient::~RemoteClient()
 void RemoteClient::RequestDisplayBooks()
 {
 	net::Message requestBooksMessage;
-	requestBooksMessage.header.messageType = static_cast<int32_t>(data::ClientRequest::RequestDisplayBooks);
+	requestBooksMessage.header.messageType = data::EnumToNumber(data::ClientRequest::RequestDisplayBooks);
 	Send(requestBooksMessage);
 }
 
 void RemoteClient::RequestBorrowedBooks()
 {
 	net::Message requestBooksMessage;
-	requestBooksMessage.header.messageType = static_cast<int32_t>(data::ClientRequest::RequestLentBooks);
+	requestBooksMessage.header.messageType = data::EnumToNumber(data::ClientRequest::RequestLentBooks);
 	Send(requestBooksMessage);
 }
 
@@ -181,6 +180,7 @@ void RemoteClient::OnMessageRecieved(net::Message& msg)
 		std::vector<data::Book> books;
 		net::Deserialize(msg, books, true);
 		emit SearchedBooksRecieved(books);
+		break;
 	}
 	default:
 		break;

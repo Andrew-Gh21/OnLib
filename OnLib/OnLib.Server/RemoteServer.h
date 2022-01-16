@@ -5,10 +5,8 @@
 #pragma comment(lib, "sqlite3.lib")
 #include "sqlite_modern_cpp.h"
 
-#include "ClientRequest.h"
-#include "ServerResponse.h"
 #include "User.h"
-#include "Errors.h"
+#include "Enums.h"
 #include "AccountsManager.h"
 #include "BooksManager.h"
 
