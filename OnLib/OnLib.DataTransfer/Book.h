@@ -11,6 +11,7 @@ namespace data
 		uint64_t bookId;
 		std::string lendDate;
 		std::string returnDate;
+		//std::string limitDate;
 		std::string title;
 		std::string description;
 		std::string coverUrl;
@@ -19,11 +20,12 @@ namespace data
 
 		LendBook(uint64_t bookId, 
 			const std::string& lendDate, 
-			const std::string& returnDate, 
+			const std::string& returnDate,
+			/*const std::string& limitDate,*/
 			const std::string& title, 
 			const std::string& description, 
 			const std::string& coverUrl) 
-			: bookId(bookId), lendDate(lendDate), returnDate(returnDate), title(title), description(description), coverUrl(coverUrl),isAvailable(false) {}
+			: bookId(bookId), lendDate(lendDate), returnDate(returnDate), /*limitDate(limitDate),*/ title(title), description(description), coverUrl(coverUrl),isAvailable(false) {}
 		
 		LendBook() = default;
 
@@ -134,6 +136,7 @@ namespace net
 		Serialize(message, std::cbegin(lendBook.description), std::cend(lendBook.description));
 		Serialize(message, std::cbegin(lendBook.coverUrl), std::cend(lendBook.coverUrl));
 		Serialize(message, std::cbegin(lendBook.lendDate), std::cend(lendBook.lendDate));
+		/*Serialize(message, std::cbegin(lendBook.limitDate), std::cend(lendBook.limitDate));*/
 		Serialize(message, std::cbegin(lendBook.returnDate), std::cend(lendBook.returnDate));
 
 		for (const auto& author : lendBook.authors)
@@ -159,6 +162,7 @@ namespace net
 		}
 
 		Deserialize(message, lendBook.returnDate, true);
+		/*Deserialize(message, lendBook.limitDate, true);*/
 		Deserialize(message, lendBook.lendDate, true);
 		Deserialize(message, lendBook.coverUrl, true);
 		Deserialize(message, lendBook.description, true);

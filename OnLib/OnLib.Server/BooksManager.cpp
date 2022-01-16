@@ -36,6 +36,7 @@ std::vector<data::Book> BooksManager::GetNewestFiveBooksFromEachCategory()
 
 std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
 {
+	constexpr static double parserToDays = 60.0 * 60.0 * 24.0;
 	std::vector<data::LendBook>lendedBooks;
 	constexpr static const char* query =
 		"select user_id, book_id, lend_date, return_date, b.title, b.description, b.cover_url "
@@ -43,9 +44,9 @@ std::vector<data::LendBook> BooksManager::GetLendedBooks(uint64_t userId)
 		"inner join book b on b.id = book_id "
 		"where user_id = ? and return_date is null";
 
-	auto output = [&lendedBooks](uint64_t userId, uint64_t bookId, std::string lendDate, std::optional<std::string> returnDate, std::string title, std::string description, std::string coverUrl)
+	auto output = [&lendedBooks](uint64_t userId, uint64_t bookId, std::string lendDate, /*std::string limitDate,*/ std::optional<std::string> returnDate, std::string title, std::string description, std::string coverUrl)
 	{
-		lendedBooks.push_back(data::LendBook(bookId, lendDate, returnDate ? *returnDate : "", title, description, coverUrl));
+		lendedBooks.push_back(data::LendBook(bookId, lendDate, /*limitDate,*/ returnDate ? *returnDate : "", title, description, coverUrl));
 	};
 
 	database << query
@@ -98,8 +99,11 @@ void BooksManager::AddLendedBookToUser(uint64_t bookId, uint64_t userId)
 				constexpr static const char* query =
 					"insert into user_book (user_id, book_id, lend_date, return_date) "
 					"values (?,?,?,null) ";
+
+				std::string time = LogMessage::GetTime();
+
 				database << query
-					<< userId << bookId << LogMessage::GetTime();
+					<< userId << bookId << time /*<< AddFourteenDays(time)*/;
 			}
 		}
 	}
@@ -172,20 +176,40 @@ bool BooksManager::CheckIfAvailable(const std::string& date)
 	std::time_t currentTime = std::time(0);
 	std::time_t rawtime = std::time(0);
 	std::tm* timestamp = new std::tm;
-	std::tm* time1 = new std::tm();
+	std::tm* time = new std::tm();
 	localtime_s(timestamp, &currentTime);
 
 	std::string day(date.begin(), date.begin() + 2);
 	std::string month(date.begin() + 3, date.begin() + 5);
 	std::string year(date.begin() + 6, date.end());
-	time1->tm_year = std::stoi(year) + 100;
-	time1->tm_mon = std::stoi(month) - 1;
-	time1->tm_mday = std::stoi(day);
+	time->tm_year = std::stoi(year) + 100;
+	time->tm_mon = std::stoi(month) - 1;
+	time->tm_mday = std::stoi(day);
 
-	if (std::difftime(currentTime, rawtime) / (parserToDays) <= 14)
+	if (std::difftime(currentTime, mktime(time)) / (parserToDays) <= 14)
 		return true;
 
 	return false;
+}
+
+std::string BooksManager::AddFourteenDays(const std::string& date)
+{
+	constexpr static double fourteenDays = 14.0 * 24.0 * 60.0 * 60.0;
+	std::tm* time = new std::tm();
+	std::string day(date.begin(), date.begin() + 2);
+	std::string month(date.begin() + 3, date.begin() + 5);
+	std::string year(date.begin() + 6, date.end());
+	time->tm_year = std::stoi(year) + 100;
+	time->tm_mon = std::stoi(month) - 1;
+	time->tm_mday = std::stoi(day);
+	
+	std::tm* finalTime {};
+	time_t t = mktime(time) + fourteenDays;
+	localtime_s(finalTime,&t);
+
+	char buffer[40];
+	strftime(buffer, 40, "%d/%m/%g %T", finalTime);
+	return std::string(buffer);
 }
 
 void BooksManager::Rate(uint64_t bookId, uint64_t userId, int rating)
@@ -234,6 +258,33 @@ bool BooksManager::SetupSearchExtension(std::string& errorMsg)
 	database << "insert into demo(word, rank) select title, id from book;";
 
 	return true;
+}
+
+void BooksManager::ExtendDate(uint64_t bookId, uint64_t userId)
+{
+	constexpr static const char* getDate =
+		"select id , limit_date from user_book "
+		"where user_id = ? and book_id = ? and return_date is null ";
+	uint64_t id;
+	std::string date;
+
+	auto output = [&id, &date](uint64_t idAux, std::string dateAux)
+	{
+		id = idAux;
+		date = dateAux;
+	};
+
+	database << getDate
+		<< userId << bookId
+		>>output;
+
+	constexpr static const char* updateDate =
+		"update user_book "
+		"set limit_date = ? "
+		"where id = ? ";
+
+	database << updateDate
+		<< date << id;
 }
 
 std::vector<data::Book> BooksManager::Search(const std::string& keyword)
