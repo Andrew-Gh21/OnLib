@@ -67,10 +67,6 @@ void MainWindow::HandleSearchIconButton()
 
 	ui->actionSearchButton->setVisible(true);
 	searchLineEditWidgetAction->setVisible(true);
-
-	searchSection = new BookSection("", this);
-	searchSection->setMinimumHeight(this->height() - 300);
-	searchSection->repaint();
 }
 
 void MainWindow::HandleHomeButton()
